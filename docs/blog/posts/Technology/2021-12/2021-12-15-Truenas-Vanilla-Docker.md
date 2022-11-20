@@ -1,6 +1,6 @@
 ---
 title: "TrueNAS Scale - Use Vanilla Docker"
-date: 2022-11-19
+date: 2021-12-15
 # authors:
 #   - xo
 categories:
