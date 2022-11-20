@@ -78,6 +78,7 @@ plugins:
         - Development
         - Kubernetes
         - Home-Automation
+        - Technology
       pagination: true
       pagination_per_page: 10
       pagination_url_format: "page/{page}"
@@ -100,7 +101,7 @@ plugins:
   - glightbox:  ## https://github.com/blueswen/mkdocs-glightbox#usage
       touchNavigation: true
       zoomable: true
-markdown_extensions:
+markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/extensions/tilde/
   - meta
   - toc:
       permalink: true
@@ -109,6 +110,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tilde
   - pymdownx.tabbed:
       alternate_style: true 
   - footnotes
