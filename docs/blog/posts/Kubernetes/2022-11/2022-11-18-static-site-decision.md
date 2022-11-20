@@ -39,6 +39,7 @@ By making the move to a 100% static website- This removes nearly all potentially
     1. The file system is also COMPLETELY read-only.
     2. Somebody would need to exploit both a zero-day vulnerability against NGINX, as well as a zero-day privilege escalation against the underlying container, and finally, a container-escape elevation.
     3. Gaining access to the container itself, without going a container-escape, wouldn't help too much- as these containers are extremely locked down network-wise as well. They can access the internet, and they can respond to responses from the proxy server (for which you are reading this article through).
+3. Lastly- since there is no database, no middletiers, etc... There is nothing to host!
 
 ## Performance
 
@@ -56,7 +57,9 @@ And- since wordpress is a very dynamic site, its content is not suitable for off
 
 However- in the future, this website can be easily hosted by either [CloudFlare Pages](https://pages.cloudflare.com/){target=_blank} or [Github Pages](https://pages.github.com/){target=_blank} for basically free.
 
-Until then however- I have multiple copies distributed amongsty my Kubernetes cluster to keep everything online.
+~~Until then however- I have multiple copies distributed amongsty my Kubernetes cluster to keep everything online.~~
+
+*Correction*- This website is hosted by [CloudFlare Pages](https://pages.cloudflare.com/){target=_blank}.
 
 ## Other reasons?
 
