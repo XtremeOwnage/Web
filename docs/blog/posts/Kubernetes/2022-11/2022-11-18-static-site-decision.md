@@ -81,6 +81,5 @@ You can expect a lot of my old content to continue to be ported over into this n
 
 One notable thing missing, is the ability to subscribe to new posts. If you want to be notified when a new post is available, I would recommend subscribing to this site's [RSS FEED](/feed_rss_created.xml) in your favorite feeder.
 
-Lastly- I don't have analystics enabled currently. I might not turn then back on, I personally don't like being tracked on the web... so, I wouldn't expect you to like being tracked either. As such- I cannot see how many people are viewing this content, nor can I gauge your reactions.
 
-So- if you do find my content useful- let me know on Reddit, Discord, Facebook, etc.... Links are at the top of the page, left of the search box.
+If you do find my content useful- let me know on Reddit, Discord, Facebook, etc.... Links are at the top of the page, left of the search box.
