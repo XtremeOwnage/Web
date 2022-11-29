@@ -1,9 +1,9 @@
-name: build docs
+name: Build Docs - DEV
 on:
   push:
     branches:
-      - master 
-      - main
+      - dev
+      - dev/*
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,4 +14,4 @@ jobs:
           python-version: 3.11.x
       - run: pip install git+https://${{ secrets.GH_TOKEN }}@github.com/XtremeOwnage/mkdocs-material-insiders.git
       - run: pip install -r requirements.txt
-      - run: mkdocs gh-deploy --force
+      - run: mkdocs gh-deploy --force -b gh-pages-dev
