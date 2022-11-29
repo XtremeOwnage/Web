@@ -109,7 +109,11 @@ markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/exte
   - admonition
   - pymdownx.tabbed
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tilde
   - pymdownx.tabbed:
       alternate_style: true 
