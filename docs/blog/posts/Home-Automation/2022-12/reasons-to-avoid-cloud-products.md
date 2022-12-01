@@ -74,6 +74,13 @@ As a long-time user of tp-link plugs, I would recommend blocking your IOT device
 * <https://www.reddit.com/r/TPLinkKasa/comments/k26v9l/psa_tp_link_is_shutting_down_local_api_access/>{target=_blank}
 * <https://community.tp-link.com/us/home/forum/topic/154951>{target=_blank}
 
+#### Dark Sky shutting down
+
+Dark sky has been [acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/){target=_blank}, and will be shutting down.
+
+* <https://blog.darksky.net/dark-sky-has-a-new-home/>{target=_blank}
+* <https://alerts.home-assistant.io/#dark_sky.markdown>{target=_blank}
+
 ### 2021
 
 #### Xiomi / Yeelight removes local LAN control
@@ -121,6 +128,15 @@ Wink has had a few outage this year, lasting **WEEKS** at a time…. I don’t k
 
 * <https://www.androidpolice.com/2021/02/01/wink-has-been-down-for-a-week-and-counting/>{target=_blank}
 * <https://www.reviewgeek.com/122521/wink-smart-homes-are-broken-again-why-are-people-still-paying/>{target=_blank}
+
+#### Logitech / Logi Circle Api 
+
+Logitech is no longer accepting applications for access to the Logi Circle API.
+
+For existing users that have already obtained an API key, the Logi Circle API will continue to function. However, you may not be able to update your redirect URI.
+
+* <https://alerts.home-assistant.io/#logi_circle.markdown>{target=_blank}
+
 
 #### Insteon shuts down, without notification, overnight.
 
