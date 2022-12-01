@@ -53,6 +53,7 @@ theme:
 
 nav:
   - Home: index.md
+  - Tags: pages/tags.md
   - Blog:
     - blog/index.md
 
@@ -98,6 +99,7 @@ plugins:
       lang: en
   - tags:
       enabled: true
+      tags_file: pages/tags.md
   - glightbox:  ## https://github.com/blueswen/mkdocs-glightbox#usage
       touchNavigation: true
       zoomable: true
