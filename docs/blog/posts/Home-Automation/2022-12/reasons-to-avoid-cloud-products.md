@@ -176,6 +176,21 @@ This is why I **ALWAYS** recommend isolating IOT/Security devices on a dedicated
 
 * <https://www.androidcentral.com/accessories/smart-home/security-researcher-says-eufy-has-a-big-security-problem>{target=_blank}
 
+#### Fordpass blocking users
+
+I was unable to find any official response or statement regarding this issue- but, there are reports of users popping up having been blocked/banner from using the ford-pass API with home assistant.
+
+It would appear, this is due to an issue with the third party integration, however, it is posted here for awareness.
+
+* <https://www.macheforum.com/site/threads/psa-unauthorized-api-use-can-disable-your-fordpass-account.13893/>{target=_blank}
+* <https://www.reddit.com/r/homeassistant/comments/z92gvb/fordpass_users_fyi/>{target=_blank}
+* <https://github.com/itchannel/fordpass-ha/issues/214>{target=_blank}
+* <https://github.com/itchannel/fordpass-ha/issues/203>{target=_blank}
+
+See [Disclaimer](https://github.com/itchannel/fordpass-ha#disclaimer){target=_blank} at the bottom of the third-party github integration:
+
+
+
 ## On-Going Issues
 
 On-going issues are categorized as issues which are frequently on-going, or repeating. 
