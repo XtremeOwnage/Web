@@ -201,6 +201,10 @@ To clarify, the company previously claimed, user data was only stored locally. I
 This is why I **ALWAYS** recommend isolating IOT/Security devices on a dedicated vlan, without any internet/external access whatsoever.
 
 * <https://www.androidcentral.com/accessories/smart-home/security-researcher-says-eufy-has-a-big-security-problem>{target=_blank}
+* <https://arstechnica.com/gadgets/2022/12/more-eufy-camera-flaws-found-including-remote-unencrypted-feed-viewing/>{target=_blank}
+* <https://www.androidpolice.com/more-eufy-security-issues/>{target=_blank}
+* <https://www.youtube.com/watch?v=a_rAXF_btvE>{target=_blank}
+
 
 #### Fordpass blocking users
 
