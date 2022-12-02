@@ -110,9 +110,9 @@ Samsungs deprecated its old smartthings hubs. For anyone who owned one, the only
 
 ### 2022
 
-#### Life360 Sells Percision Location Data for Tens of Millions
+#### Life360 Sells Precise Location Data for Tens of Millions
 
-Life360 caught selling percision location data for tens of millions of adults **AND children**
+Life360 caught selling precise location data for tens of millions of adults **AND children**
 
 * <https://isharingsoft.com/why-life360-is-bad-for-privacy>{target=_blank}
 * <https://themarkup.org/privacy/2021/12/06/the-popular-family-safety-app-life360-is-selling-precise-location-data-on-its-tens-of-millions-of-user>{target=_blank}
@@ -241,7 +241,7 @@ Need an example?
 
     [Source](https://appleinsider.com/articles/22/01/28/life360-to-stop-selling-precise-location-data-of-users){target=_blank}
 
-    [See More](#life360-sells-percision-location-data-for-tens-of-millions)
+    [See More](#life360-sells-precise-location-data-for-tens-of-millions)
 
 ### Amazon Ring / Blink / etc.
 
