@@ -211,6 +211,8 @@ This issue can impact any large service provider, internet circuit, etc.
 
 * <https://www.mercurynews.com/2021/12/08/how-amazon-outage-left-smart-homes-not-so-smart-after-all/>{target=_blank}
 * <https://awsmaniac.com/aws-outages/>{target=_blank}
+* <https://twitter.com/goveeofficial/status/1331776827321241600>{target=_blank}
+
 
 ### Tuya
 
