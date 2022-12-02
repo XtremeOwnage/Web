@@ -248,6 +248,12 @@ Like Tuya, MyQ garage door openers are riddled with cloud issues.
 
 Do yourself a favor. Save a few bucks, and use one of [these options](https://xtremeownage.com/2020/07/29/diy-garage-door-opener-home-assistant/){target=_blank}
 
+MyQ also switched to a subscription model, in order to use external automation via IFTTT/Google/etc.
+
+* <https://decortweaks.com/does-chamberlain-myq-require-a-subscription/>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/cb2oxb/myq_premium_services_are_free_at_the_moment/>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/8l735z/when_did_myq_become_subscription_based_wtf/>{target=_blank}
+
 
 ### Your PERSONAL Internet / Network
 
