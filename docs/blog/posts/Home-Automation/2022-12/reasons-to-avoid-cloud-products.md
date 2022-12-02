@@ -44,6 +44,23 @@ Plumlife went out of business. No communication. Just up and out.
 * <https://apps.apple.com/us/app/plum-app/id1056257719?see-all=reviews>{target=_blank}
 * <https://pitchbook.com/profiles/company/94732-57>{target=_blank}
 
+#### Skydrop switches to subscription model.
+
+* <https://community.smartthings.com/t/skydrop-going-subscription/164792>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/bufzto/skydrop_introduces_a_new_monthly_subscription_to/>{target=_blank}
+* <https://community.smartthings.com/t/skydrop-going-subscription/164792/47>{target=_blank}
+
+#### Lowes / Iris shutdown
+
+* <https://www.techhive.com/article/583676/lowes-will-shut-down-its-iris-by-lowes-smart-home-platform.html>{target=_blank}
+* <https://support.firstalert.com/s/article/Now-that-the-Lowe-s-IRIS-platform-is-being-shut-down-what-will-happen-to-my-First-Alert-IRIS-alarms>{target=_blank}
+* <https://www.theverge.com/2019/2/2/18208407/lowes-iris-smart-home-platform-shutting-down-march-2019>{target=_blank}
+
+#### Leeo Smart Alert shutdown.
+
+* <https://www.gearbrain.com/leeo-smart-alert-shuts-down-2641145583.html>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/cwthjn/leeo_service_may_shut_down/>{target=_blank}
+
 ### 2020
 
 #### Belkin / Wemo products discontinued.
@@ -61,6 +78,7 @@ Just uh, imagine being on vacation for two weeks, and your animals starving beca
 #### Wink transitions to paid service
 
 * <https://www.consumerreports.org/smart-home/wink-tells-users-pay-up-or-we-will-disable-smart-home-hub/>{target=_blank}
+* <https://www.techhive.com/article/3542631/wink-users-revolt-following-its-sudden-shift-to-a-subscription-model.html >{target=_blank}
 
 #### IFTTT moves torwards subscription model
 
@@ -110,9 +128,9 @@ Samsungs deprecated its old smartthings hubs. For anyone who owned one, the only
 
 ### 2022
 
-#### Life360 Sells Percision Location Data for Tens of Millions
+#### Life360 Sells Precise Location Data for Tens of Millions
 
-Life360 caught selling percision location data for tens of millions of adults **AND children**
+Life360 caught selling precise location data for tens of millions of adults **AND children**
 
 * <https://isharingsoft.com/why-life360-is-bad-for-privacy>{target=_blank}
 * <https://themarkup.org/privacy/2021/12/06/the-popular-family-safety-app-life360-is-selling-precise-location-data-on-its-tens-of-millions-of-user>{target=_blank}
@@ -211,6 +229,8 @@ This issue can impact any large service provider, internet circuit, etc.
 
 * <https://www.mercurynews.com/2021/12/08/how-amazon-outage-left-smart-homes-not-so-smart-after-all/>{target=_blank}
 * <https://awsmaniac.com/aws-outages/>{target=_blank}
+* <https://twitter.com/goveeofficial/status/1331776827321241600>{target=_blank}
+
 
 ### Tuya
 
@@ -219,6 +239,21 @@ I am not even going to go into the details. However, there are nearly [daily red
 As well, Tuya may be changing to a subscription model soon… SO, you will have to pay someone else to use the products you purchased. 
 
 Just- do yourself a favor... avoid Tuya if at all possible.
+
+### MyQ
+
+Like Tuya, MyQ garage door openers are riddled with cloud issues.
+
+[Google Search](https://www.google.com/search?q=reddit.com+myq&rlz=1C1FKPE_enUS932US932){target=_blank}
+
+Do yourself a favor. Save a few bucks, and use one of [these options](https://xtremeownage.com/2020/07/29/diy-garage-door-opener-home-assistant/){target=_blank}
+
+MyQ also switched to a subscription model, in order to use external automation via IFTTT/Google/etc.
+
+* <https://decortweaks.com/does-chamberlain-myq-require-a-subscription/>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/cb2oxb/myq_premium_services_are_free_at_the_moment/>{target=_blank}
+* <https://www.reddit.com/r/homeautomation/comments/8l735z/when_did_myq_become_subscription_based_wtf/>{target=_blank}
+
 
 ### Your PERSONAL Internet / Network
 
@@ -241,7 +276,7 @@ Need an example?
 
     [Source](https://appleinsider.com/articles/22/01/28/life360-to-stop-selling-precise-location-data-of-users){target=_blank}
 
-    [See More](#life360-sells-percision-location-data-for-tens-of-millions)
+    [See More](#life360-sells-precise-location-data-for-tens-of-millions)
 
 ### Amazon Ring / Blink / etc.
 
