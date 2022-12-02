@@ -36,6 +36,14 @@ When google acquired nest, the "works with nest" program was discontinued.
 
 * <https://www.digitaltrends.com/home/best-buy-shuts-down-insignia-line-smart-home-products/>{target=_blank}
 
+#### Plumlife out of business, without notice.
+
+Plumlife went out of business. No communication. Just up and out.
+
+* <https://www.reddit.com/r/homeautomation/comments/fptxqf/plumlife_is_dead_if_you_own_plum_lightpads_they/>{target=_blank}
+* <https://apps.apple.com/us/app/plum-app/id1056257719?see-all=reviews>{target=_blank}
+* <https://pitchbook.com/profiles/company/94732-57>{target=_blank}
+
 ### 2020
 
 #### Belkin / Wemo products discontinued.
