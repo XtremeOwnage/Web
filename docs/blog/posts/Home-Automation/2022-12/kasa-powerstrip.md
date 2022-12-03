@@ -10,13 +10,19 @@ tags:
 image: /assets/icons/cloud-slash.png
 ---
 
-# Using Kasa powerstrip as PDU.
+# Using Kasa HS300 powerstrip as a PDU.
 
-Using a Tp-link kasa HS300 as a low-cost switchable PDU.
+Using a Tp-link kasa HS300 as a low-cost switchable PDU. This product has features for per-outlet power monitoring as well.
 
 ![](assets/kasa-strip-labeled.webp)
 
 <!-- more -->
+
+## Products Used
+
+This article is centered around the [Tp-link Kasa HS300 (Amazon)](https://amzn.to/3Buk5Hx){target=_blank}
+
+![](assets/amazon-hs-300.png)
 
 ## Setup / Installation
 
@@ -36,6 +42,13 @@ After the device successfully connects to your network, you can leverage the Kas
 
 As well, since this is on an isolated IOT network, there is no need or reason to click the remote control. We are going to leverage this device in full local-only.
 
+#### Update Firmware!
+
+!!! warning
+    Update your firmware! My [HS300](https://amzn.to/3Buk5Hx){target=_blank} came with a pretty early firmware version. I noticed it would not reconnect to the wifi after being disconnected... This would be a huge issue...
+
+    After updating to firmware 1.0.12, it appears this issue may have been resolved.
+
 ### Step 2. Label / Name outlets
 
 If you don't have a label maker, I would recommend the [Dymo 100H (Amazon)](https://amzn.to/3UuiXdr){target=_blank}, it has been working great for the last few years.
@@ -54,17 +67,17 @@ However, my cage screws were a tad too wide/tall to fit into the power strip. So
 
 The unmodified screw is on the right. Doesn't look very pretty, however, it does get the job done.
 
-![](assets/screw-comparison.webp)
+![](assets/screw-comparison.png)
 
 Next, I installed a cage-nut, and screwed what was left of the screw into the nut.
 
-![](assets/cage-screw-mounted.webp)
+![](assets/cage-screw-mounted.png)
 
 Finally, I just needed to mount the strip to the screws. (There are two screws holding the strip in place.)
 
 (Ignore the hanging fibre... and cords. its on the to-do list...)
 
-![](assets/kasa-strip-mounted.webp)
+![](assets/kasa-strip-mounted.png)
 
 I used a few zip-ties to secure the power cord to the rack.
 
@@ -90,3 +103,65 @@ At this point, I went ahead and customized the entity names, display names, and 
 
 ![](assets/hass-kasa-customized_names.png)
 
+### All done! Setup dashboards / reports / etc.
+
+I was actually quite surprised to notice the HS300 does PER-plug consumption metrics.
+
+I expected, only consumption to be measured at the strip-level, however, having per-plug metrics is fantastic!
+
+Now- when somebody is wondering the power consumption of each of my SFF/MFF servers, I have concrete numbers!
+
+![](assets/kasa-metrics.png)
+
+#### Home Assistant Features
+
+##### Data Exposed
+
+* Per-plug Current (amps)
+* Per-plug Consumption (watts)
+    * Current Consumption
+    * Today's Consumption
+    * Total Consumption
+* Per-plug voltage (volts)
+
+##### Controls/Switches Exposed
+
+* Per-plug power
+    * ie- each plug, can be individually toggled on/off.
+* LED Status
+    * You can disable the LEDs. Useful if you don't want a bunch of LEDs lighting up a room.
+
+##### Other Features
+
+This unit **DOES** integrate with the built-in energy dashboards, out of the box, without additional configuration or customized sensors.
+
+## My thoughts / Opinions
+
+Overall- I am quite satisfied with the [HS300](https://amzn.to/3Buk5Hx){target=_blank}. It exceeded my expectations by providing per-plug current/voltage metrics.
+
+I will note, I did have a lot of issues before updating to the latest firmware version, after it disconnected from the Wifi, I had to power-cycle the entire PDU to get it to reconnect.
+
+I have heard complaints of the PDU power-cycling after updates, but, during my testing- The firmware update did not cause any of the loads to be power cycled.
+
+WIth that said, I would recommend this product. The price is good. Ideally, I would leverage a [used enterprise APC PDU from e-bay](https://ebay.us/bSAxHF){target=_blank}, however, I am quite pleased with the performance of this unit. In the future, I may acquire a dedicated APC unit to review, and repurpose this unit.
+
+Home assistant integration was effortless, with no issues at all here. 
+
+As a bonus- since my Home Assistant automatically exports metrics to the prometheus instance hosted on my Kubernetes cluster, I was able to effortlessly graph these metrics in grafana.
+
+![](assets/grafana-pdu-metrics.png)
+
+
+### Disclaimers
+
+!!! success "Not Sponsored"
+    This is **NOT** a sponsered post. This is was not endorsed, affiliated, or sponsered in any way by tp-link.
+
+    All hardware, time, and tools was provided solely by me.
+
+!!! info "Affiliate Links Used"
+    This post **DOES** include Amazon affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.
+
+    You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.
+
+    I do not display advertisements on this site. As such, the only compensation from this service, comes from affiliate links. I do not ask for, or even accept donations. 
