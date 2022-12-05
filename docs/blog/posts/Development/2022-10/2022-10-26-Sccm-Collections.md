@@ -8,7 +8,7 @@ tags:
   - SCCM
 ---
 
-# SCCM – Parsing Collection Maintenance Windows from C#
+# SCCM – Parsing Collection Maintenance Windows from C-Sharp
 
 ## Introduction
 
