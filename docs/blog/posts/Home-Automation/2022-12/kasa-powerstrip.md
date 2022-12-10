@@ -7,6 +7,7 @@ categories:
 tags:
     - Energy Monitoring
     - Homelab
+    - Review
 image: blog/assets/Home-Automation/2022-12/assets/kasa-strip-labeled.webp
 ---
 

@@ -5,6 +5,7 @@ categories:
   - Technology
 tags:
   - Solar
+  - Review
 ---
 
 # EG4 Rack Review
