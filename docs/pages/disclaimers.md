@@ -1,4 +1,4 @@
-# About
+# Disclaimers / FAQs / etc
 
 This page is used to store disclaimers used throughout this website.
 
