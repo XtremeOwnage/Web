@@ -6,7 +6,7 @@ categories:
     - Technology
 tags:
     - Alarm
-    - Home-Assistant
+    - Z-Wave
 #image: blog/assets/Home-Automation/2022-12/assets/kasa-strip-labeled.webp
 ---
 

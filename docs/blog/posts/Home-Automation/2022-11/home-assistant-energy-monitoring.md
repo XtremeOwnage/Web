@@ -4,7 +4,7 @@ date: 2022-11-29
 categories:
   - Home-Automation
 tags:
-  - energy monitoring
+  - Energy Monitoring
 image: /assets/images/Home-Assistant-Banner-300x158.png
 ---
 
