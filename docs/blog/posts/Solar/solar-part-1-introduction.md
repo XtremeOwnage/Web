@@ -1,6 +1,6 @@
 ---
 title: "Home Solar Project - Part 1 - Introduction"
-date: 2022-12-10
+date: 2022-12-08
 categories:
   - Technology
 tags:
