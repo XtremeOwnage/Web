@@ -148,6 +148,54 @@ Also- Why the 2022 model specifically? Because the 2023 model doubled in price, 
 
 $39,974 MSRP / 98 Kwh battery = 407$ per Kwh.
 
+### Lead-Acid (Car Batteries / Golf car batteries)
+
+#### ~100$ / Kwh
+
+Overall, lead-acid is **THE CHEAPEST** `upfront` option for energy storage. Emphasis on `upfront`.
+
+If that is the case, why were they not considered / used?
+
+The quick and easy anwser- LiFePo4 will generally last 20-30 years, Lead-acid will typically need replacement around 5 years. 
+
+In the long-term(10-30 years), LiFePO4 is cheaper.
+
+Typical lead-acid batteries will quickly lose capacity when discharged below 50%, and will only be able to provide < 50 full cycles. Deep-cycle batteries designed for this, and are typically rated up to around 6 years.
+
+As such, for a typical starting battery, this means only half of the stated capacity is available.
+
+For deep cycle batteries, assuming full discharge cycles every day- you will get between 1-5 years of use on average. 
+
+A typical Lithium Iron Phospate battery, is generally good for 3,000 or more full discharge cycles.
+
+### Nickle Iron
+
+#### ~1,000$ / kwh
+
+[Nickle-Iron](https://en.wikipedia.org/wiki/Nickel%E2%80%93iron_battery){target=_blank}, also known as the Edison battery, technology dates back over 100 years ago. It was orignally developed in 1901 by Thomas Edison.
+
+* [Buy Iron Edison Batteries](https://ironedison.com/shop/batteries/nickel-iron/nickel-iron-ni-fe-battery/){target=_blank}
+
+Pricing is based on 1,040$ per 800ah 1.2v cell from the above link. 
+
+```
+800ah * 1.2v = 960wh per 1,040$ cell = ~$1,000 per 1kwh of capacity.
+```
+
+##### Why, is it being included?
+
+Because it has a typical life expectancy measured in decades. There are 50 year old NickleIron batteries still in use in the train industry. These batteries are extremely durable, and servicable.
+
+##### What are the downsides?
+
+* Constant maintenance is required. You will frequently need to top off the water level in the cells.
+* Power density. These batteries are large and heavy, and have a lower power density compared to other options.
+* Expensive. For- some reason, despite using commonly available elements, and century old technology, these batteries are quite expensive.
+* Efficiency. These batteries have high self-discharge rate, charge slowly, and release energy slowly.
+
+More or less, everything about these batteries is a downside, other then, extremely high cycle endurance.
+
+
 ## What did I choose?
 
 In the end, I went with the EG4-LL batteries.
