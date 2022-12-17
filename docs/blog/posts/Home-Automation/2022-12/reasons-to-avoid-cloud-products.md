@@ -192,7 +192,7 @@ Imagine having your own camera footage used against you, to incrimate you of a c
 * <https://www.politico.com/news/2022/07/13/amazon-gave-ring-videos-to-police-without-owners-permission-00045513>{target=_blank}
 * <https://www.markey.senate.gov/news/press-releases/senator-markey-renews-investigation-into-amazon-rings-surveillance-practices-and-cooperation-with-police>{target=_blank}
 
-#### Eufy uploading unencrypted user images without consent
+#### Anker / Eufy uploading unencrypted user images without consent
 
 This, would be a rather interesting thing to hear..... for a camera you purchased which doesn't send data to the cloud. Right?
 
@@ -204,6 +204,13 @@ This is why I **ALWAYS** recommend isolating IOT/Security devices on a dedicated
 * <https://arstechnica.com/gadgets/2022/12/more-eufy-camera-flaws-found-including-remote-unencrypted-feed-viewing/>{target=_blank}
 * <https://www.androidpolice.com/more-eufy-security-issues/>{target=_blank}
 * <https://www.youtube.com/watch?v=a_rAXF_btvE>{target=_blank}
+
+#### Anker / Eufy rollsback privacy promises
+
+After the above issue, I suppose the resolution to this issue, was to remove privacy promises....
+
+* <https://www.theverge.com/2022/12/16/23512952/anker-eufy-delete-promises-camera-privacy-encryption-authentication>{target=_blank}
+* <https://www.androidpolice.com/eufy-removes-privacy-language/>{target=_blank}
 
 
 #### Fordpass blocking users
