@@ -6,6 +6,7 @@ categories:
     - Technology
 tags:
     - NVR
+    - NTP
 ---
 
 # Set Custom NTP for Reolink Cameras
