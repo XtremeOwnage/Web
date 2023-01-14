@@ -92,7 +92,9 @@ If, anyone does have any ideas (That aren't already listed on Dell's troubleshoo
 
 ## Next Steps
 
-A replacement PSU can cost around 100$ a piece, even on eBay. A replacement mainboard, could potentially be in the same ballpark.
+~~A replacement PSU can cost around 100$ a piece, even on eBay.~~ A replacement mainboard, could potentially be in the same ballpark.
+
+*Edit- I ended up finding a replacement PSU for 20$ shipped. If, the PSU fixes the server, at least I will have backup hardware if this ever happens again....*
 
 So- Instead of potentially wasting a few hundred bucks attempting to guess to which component is having issues- 
 
