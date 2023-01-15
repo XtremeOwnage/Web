@@ -13,6 +13,7 @@ Installation of my [home solar project](./../../../pages/Solar-Project.md).
 
 <!-- more -->
 
+
 ## Finished Product
 
 I will start this post out with the finished product, and save a few pictures of the installation for later on.
@@ -57,7 +58,7 @@ The inverter does offer a nice display, which will show all of the critical deta
 
 ![](assets/Solar-Producing.webP)
 
-Regarding the 1.72kw of solar production- its a cloudy day, in the middle of winter. Temps are below freezing. Given- this panels are rated at 5kw, this is pretty good output.
+Do note, at the time of writing this, the PV is disconnected until the proper approvals and inspections from my utility are acquired.
 
 #### Main / Backup Panel
 
