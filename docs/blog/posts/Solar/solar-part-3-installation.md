@@ -1,6 +1,6 @@
 ---
 title: "Home Solar Project - Part 3 - Installation"
-date: 2022-12-09
+date: 2023-01-14
 categories:
   - Technology
 tags:
@@ -171,3 +171,16 @@ We tested...
 3. Communication was working properly between the various components.
 
 The remaining crew members were able to make pretty quick work of the remaining items, and left around noon after validating the system was working as expected. 
+
+
+## The overall experience?
+
+While- I cannot remember names to save my life- The entire crew was very pleasent to work with.
+
+I had a LOT of questions, they were able to anwser all of the questions. As well, we were able to easily handle a few on the fly modifications as required for this project.
+
+The crew showed up on time, and was hard at work all day, until late in the evening. Power was only cut on the 2nd day, when the mains were being relocated.
+
+When crew members were inside of the house- they were very considerate of the surroundings. They knocked before entering the house, despite me telling them the door is open.
+
+Overall- a very nice experience. I would highly recommend. 
