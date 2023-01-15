@@ -9,7 +9,7 @@ tags:
 
 # Home Solar Project - Project Installation
 
-Installation of my solar project.
+Installation of my [home solar project](./../../../pages/Solar-Project.md).
 
 <!-- more -->
 
@@ -177,10 +177,14 @@ The remaining crew members were able to make pretty quick work of the remaining 
 
 While- I cannot remember names to save my life- The entire crew was very pleasent to work with.
 
-I had a LOT of questions, they were able to anwser all of the questions. As well, we were able to easily handle a few on the fly modifications as required for this project.
+I had a lot of questions, they were able to anwser all of the questions. As well, we were able to easily handle a few on the fly modifications as required for this project.
 
 The crew showed up on time, and was hard at work all day, until late in the evening. Power was only cut on the 2nd day, when the mains were being relocated.
 
 When crew members were inside of the house- they were very considerate of the surroundings. They knocked before entering the house, despite me telling them the door is open.
 
-Overall- a very nice experience. I would highly recommend. 
+And, note once did any of the members present any bad attitude at all, even after crawling around in my attic all day pulling wire. (It is not a very pleasant place.)
+
+Lastly- there was no mess left behind. Everywhere they went- was swept clean. No trash was left behind.
+
+Overall- a very good experience. I would highly recommend. 5/5
