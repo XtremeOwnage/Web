@@ -8,6 +8,7 @@ categories:
 tags:
   - Homelab
   - PC Builds
+image: "https://static.xtremeownage.com/blog/assets/Technology/2023-01/assets/r720%20on%20wall.webP"
 ---
 
 # Death of my r720XD
