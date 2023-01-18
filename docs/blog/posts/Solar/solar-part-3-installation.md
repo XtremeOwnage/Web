@@ -39,12 +39,12 @@ On the back wall- starting from left to right-
 
 1. Solark-12k inverter.
 2. The top-middle box, is the critical loads panel.
-  * Everything in this panel, is fed directly from the inverter. In the event of grid loss, this panel will be switched over to battery/inverter in around 4ms.
+    * Everything in this panel, is fed directly from the inverter. In the event of grid loss, this panel will be switched over to battery/inverter in around 4ms.
 3. The far right box, is my main panel.
-  * This panel, will also be fed in the event grid power is lost. However, it takes slightly longer for the ATS to redirect power to here.
+    * This panel, will also be fed in the event grid power is lost. However, it takes slightly longer for the ATS to redirect power to here.
 4. The small grey box under the channel, on the left, is a "passthrough" box. This allows cables to travel under the house, to a box on the exterior/back wall of the house.
 5. The small white-ish box under the channel on the right, is the "tigo optimizer"
-  * It talks to the panel, collects data, and... "does stuff"
+    * It talks to the panel, collects data, and... "does stuff"
 
 #### Inverter
 
@@ -78,10 +78,10 @@ Going over the exterior wall- From left to right (Ignore the bottom, for now.)
 
 1. Solar rapid-shutdown switch. This switch will disable all solar production. Required by code.
 2. Automatic transfer switch.
-  * It will switch between grid power, when available, and inverter output when grid is unavailable. Completely automatic in both directions.
+    * It will switch between grid power, when available, and inverter output when grid is unavailable. Completely automatic in both directions.
 3. Grid-disconnect switch.
-  * This will disconnect the entire house from the grid. Also- required by code. 
-  * Useful to have when working on the electrical system. Before- completely killing energy required calling the electrical company to come out and remove the meter.
+    * This will disconnect the entire house from the grid. Also- required by code. 
+    * Useful to have when working on the electrical system. Before- completely killing energy required calling the electrical company to come out and remove the meter.
 4. Meter. Measures energy bi-directionally.
 
 The crooked box on the right, is the OLD ADSL box from my ISP, which needs to be removed from the side of my house.
@@ -165,9 +165,9 @@ The crew finished up programming the inverters/optimizers/panels. Everything was
 
 We tested...
 1. To ensure the automatic transfer switched worked as expected.
-  * The critical loads remained powered the entire time.
-  * When a generator is connected, it would automatically start charging the batteries, and provide passthrough to the home.
-  * The automatic transfer switch automatically reset when grid power was restored.
+    * The critical loads remained powered the entire time.
+    * When a generator is connected, it would automatically start charging the batteries, and provide passthrough to the home.
+    * The automatic transfer switch automatically reset when grid power was restored.
 2. Ensured all of the breakers were correctly labeled.
 3. Communication was working properly between the various components.
 
