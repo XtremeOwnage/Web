@@ -184,7 +184,7 @@ The crew showed up on time, and was hard at work all day, until late in the even
 
 When crew members were inside of the house- they were very considerate of the surroundings. They knocked before entering the house, despite me telling them the door is open.
 
-And, note once did any of the members present any bad attitude at all, even after crawling around in my attic all day pulling wire. (It is not a very pleasant place.)
+And, not once did any of the members present any bad attitude at all, even after crawling around in my attic all day pulling wire. (It is not a very pleasant place.)
 
 Lastly- there was no mess left behind. Everywhere they went- was swept clean. No trash was left behind.
 
