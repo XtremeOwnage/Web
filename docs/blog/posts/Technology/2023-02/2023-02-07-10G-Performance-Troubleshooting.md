@@ -22,10 +22,10 @@ This is a simple guide, with a few methods you can leverage to troubleshoot netw
 
 For this experiment, I have 4 servers which will be used for testing.
 
-1. Opnsense - HP Z240 ([Dual port 10G Intel X540-T2](https://ebay.us/UmvExa){target=_blank)
-2. TrueNAS - Dell R730 ([Dual port 10G Dell X540 / 099GTM Daughterboard](https://ebay.us/q0d1te){target=_blank)
-3. Kube01 - Optiplex 7060 i7-8700 ([10G ConnectX-3 MCX311A-XCAT](https://ebay.us/PhtRHc){target=_blank})
-4. Kube05 - HP Z240 i5-6500 ([10G ConnectX-3 MCX311A-XCAT](https://ebay.us/PhtRHc){target=_blank})
+1. Opnsense - HP Z240 [Dual port 10G Intel X540-T2](https://ebay.us/UmvExa){target=_blank}
+2. TrueNAS - Dell R730 [Dual port 10G Dell X540 / 099GTM Daughterboard](https://ebay.us/q0d1te){target=_blank}
+3. Kube01 - Optiplex 7060 i7-8700 [10G ConnectX-3 MCX311A-XCAT](https://ebay.us/PhtRHc){target=_blank}
+4. Kube05 - HP Z240 i5-6500 [10G ConnectX-3 MCX311A-XCAT](https://ebay.us/PhtRHc){target=_blank}
 
 All nodes are connected to a [10G Unifi Aggregation Switch](https://amzn.to/3YnHkvM){target=_blank}
 
