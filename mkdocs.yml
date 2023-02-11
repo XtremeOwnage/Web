@@ -53,7 +53,7 @@ theme:
 
 nav:
   - Home: index.md
-  - Projects: pages/Projects.md
+  - Projects: pages/Projects
   - Tags: pages/tags.md
   - Blog:
     - blog/index.md

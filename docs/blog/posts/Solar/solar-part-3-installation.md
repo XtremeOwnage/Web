@@ -9,7 +9,7 @@ tags:
 
 # Home Solar Project - Project Installation
 
-Installation of my [home solar project](./../../../pages/Solar-Project.md).
+Installation of my [home solar project](/pages/Projects/Solar-Project).
 
 <!-- more -->
 
