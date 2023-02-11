@@ -113,5 +113,5 @@ Speaking of my Array- it is setting on the bookshelf.
 
 In the future, you can look forward to...
 
-1. Seeing if we can push the [40GBe ethernet project](https://xtremeownage.com/2022/04/29/my-40gbe-nas-journey/){target=_blank} even faster!
+1. Seeing if we can push the [40GBe ethernet project](./../../../../pages/Projects/40G-NAS.md){target=_blank} even faster!
 2. Comparing energy usage of the r720XD versus a newer r730XD.
