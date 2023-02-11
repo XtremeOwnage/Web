@@ -282,3 +282,7 @@ The "fast" metrics, have update intervals in the seconds. If you wish to build a
 After, waiting an hour or two- you should be presented with a working energy dashboard.
 
 ![Working Energy Dashboard](assets/Finished-Energy-Dashboard.png)
+
+Here is a screenshot of solar-assistant's home page
+
+![](assets/solar-assistant-main-page.webP)
