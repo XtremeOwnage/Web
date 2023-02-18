@@ -15,3 +15,4 @@ As new posts and content are created in the future regarding this project, the b
 * [Part 4 - Data collection and monitoring](./../../blog/posts/Solar/solar-part-4-monitoring.md)
     * [4.1 - Installing Solar Assistant](./../../blog/posts/Solar/solar-assistant.md)
         * This is used to collect data from both the inverter, and the batteries. The collected data is provided via MQTT in real time.
+* [Next Steps?](./../../blog/posts/Solar/solar-part-5-next-steps.md)
