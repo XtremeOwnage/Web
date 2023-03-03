@@ -226,6 +226,19 @@ It would appear, this is due to an issue with the third party integration, howev
 
 See [Disclaimer](https://github.com/itchannel/fordpass-ha#disclaimer){target=_blank} at the bottom of the third-party github integration:
 
+### 2023
+
+#### Ring requiring subscription to arm your alarm
+
+Did you spend a few hundred bucks building your own ring alarm? Did you expect to own your hardware?
+
+Well, hopefully you pay your subscription to be able to arm your system!
+
+* <https://www.theverge.com/2023/3/3/23623523/ring-alarm-camera-features-subscription>{target=_blank}
+
+If you are a user of home-assistant, there IS an easy fix to this. Just- remove the ring cloud from your ring products. The hardware itself, uses z-wave.
+
+[Full Local Ring Alarm - How To](./../2022-04/home-assistant-alarm.md){target=_blank}
 
 
 ## On-Going Issues
