@@ -20,11 +20,11 @@ This post, describes how to install a soft-start, which will allow your compress
 
 ## Introduction
 
-The day my system was fully installed, one of the tests I performed, was attempting to start the A/C comrpessor fully off-grid. 
+The day my system was fully installed, one of the tests I performed, was attempting to start the A/C compressor off-grid. 
 
 Well, when I tested this, there were a lot of horrible noises, dimming lights, and beeping noises. It wasn't a very successful test.
 
-There is, actually a pretty easy / simple way to resolve this, by using a soft-start capacitor. 
+There is, actually a pretty easy / simple way to resolve this, by using a soft-start cap.
 
 For this test, I went with a unit produced by Micro-air, rated for up to a 6-ton compressor.
 
@@ -36,9 +36,9 @@ If you have a permanently installed 30kwh Generator, you likely don't need to wo
 
 But, if your generator is ranted for under 12,000 watts, this will likely help you.
 
-As well, if you are running on solar in general, this will likely help you quite a bit.
+As well, if plan on running a large A/C compressor, off-grid on solar alone- this will help you. Without it- my unit wouldn't successfully start on solar/battery alone.
 
-Lastly, these units will improve the efficiency and lengthen the life of your compressor's motor. 
+Lastly, these units will improve the efficiency and lengthen the life of your compressor's motor by reducing the inrush current when starting the motor.
 
 ### Parts / Tools Needed.
 
@@ -78,7 +78,7 @@ At a minimum, you will need wire cutters, a crimping tool, and a multi-meter.
 
 ##### Hardware to mount easy-start unit.
 
-To mount my unit, I visited my local hardware store and picked up some 1/4" nuts, bolts, washers, and lock washers. If you take this option, make sure you also have a suitable drillbit.
+To mount my unit, I visited my local hardware store and picked up some 1/4" nuts, bolts, washers, and lock washers. If you take this option, make sure you also have a suitable drillbit. Overall, it costed around $1.50 to buy the hardware I needed.
 
 You can also use [1/4" stainless self-tapping screws](https://amzn.to/3YvOnCo){target=_blank}
 
@@ -156,6 +156,10 @@ To summerize the connections-
 3. Connect the "White" wire from the soft-start, to the right side of the contactor.
 4. The "Yellow" wire from the soft-start, will need to connect to the "HERM" terminal of your capacitor. For my unit, there was a purple wire connected to one of the spots on this terminal.
 
+For, anyone confused as to what is what- here is a slightly annotated diagram.
+
+![Annotations added to components](assets-soft-start/annotated-parts.webP)
+
 !!! warning
     If any of these steps are confusing or you are not 100% absolutely sure on what to do, you should stop what you are doing and call a licensed electrician or HVAC professional.
 
@@ -176,9 +180,7 @@ Here is my install after performing the required connections
 
 After crimping the proper spade connectors on, making the connections and ensuring everything was securely fastened, I added new zip-ties to keep all of the wires from moving around.
 
-For, anyone confused as to what is what- here is a slightly annotated diagram.
 
-![Annotations added to components](assets-soft-start/annotated-electronics.webP)
 
 The last piece here, is to reinstall the cover.
 
@@ -187,3 +189,47 @@ The last piece here, is to reinstall the cover.
 Note, I left the cable long by design. This allows the cover to still be removed, and placed on the ground.
 
 If, this long cable bothers you, you are free to cut your cable to a shorter length.
+
+## Testing
+
+### Letting the unit "Learn"
+
+My unit recommends at least 5 starts while connected to the grid for the unit to "learn".
+
+So, over the course of a few hours, I let the unit run normally while it collected data.
+
+Start 1:
+
+![](./assets-soft-start/start-1.webP)
+
+And- after letting the unit work normally for a while-
+
+Start 7:
+
+![](./assets-soft-start/start-5.webP)
+
+Compared to the nearly 80 amp start surge this unit was drawing before installing this unit, 35 amps is a massive improvement. 
+
+Since- the unit has now completed its recommended learning period, lets see if it works on solar!
+
+### Testing Off-Grid
+
+The testing plan was pretty simple.
+
+I flipped the grid disconnect breaker off. After doing this, my automatic transfer switch will shift all of the loads in my house to run on the inverter using a combination of battery power and solar energy.
+
+Afterwards, I just needed to turn the A/C compressor on.
+
+<iframe width="626" height="1112" src="https://www.youtube.com/embed/VgmHhiBG_z0" title="Starting AC Compressor on Solar" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+And- as you can see in my poorly edited video, it works!
+
+## Conclusion?
+
+Overall, it took me around 45 minutes to install this unit. I took my time, and triple-checked all of the connections.
+
+The installation process was easy, and the unit worked as expected with nothing else needed.
+
+After letting the unit "learn" 5 starts, it had no issues at all starting up the compressor off-grid.
+
+In addition to now being able to run my A/C compressor off-grid, this unit should also extend the lifetime of my compressor's motor due to a reduction in the startup surge.
