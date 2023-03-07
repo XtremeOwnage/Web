@@ -190,6 +190,8 @@ After crimping the proper spade connectors on, making the connections and ensuri
 
 The last piece here, is to reinstall the cover.
 
+<sub>Don't forget to admire [Project Racecar](https://xtremeownage.com/category/automotive/because-racecar/){target=_blank} in the background! Its ugly, but, its the heart that counts!!</sub>
+
 ![Cover reinstalled with unit mounted](assets-soft-start/cover-reinstalled.webP)
 
 Note, I left the cable long by design. This allows the cover to still be removed, and placed on the ground.
