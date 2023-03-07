@@ -16,3 +16,5 @@ As new posts and content are created in the future regarding this project, the b
     * [4.1 - Installing Solar Assistant](./../../blog/posts/Solar/solar-assistant.md)
         * This is used to collect data from both the inverter, and the batteries. The collected data is provided via MQTT in real time.
 * [Next Steps?](./../../blog/posts/Solar/solar-part-5-next-steps.md)
+* [Installing A/C Soft-Start](./../../blog/posts/Solar/ac-soft-start.md)
+    * Installing a soft-start for my A/C compressor, to allow it to easily start when running off-grid.

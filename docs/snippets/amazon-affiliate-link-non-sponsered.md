@@ -1,4 +1,4 @@
-!!! info "Affiliate Links Used"
+!!! info "Amazon Affiliate Links Used"
     This post **DOES** include Amazon affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.
 
     You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.

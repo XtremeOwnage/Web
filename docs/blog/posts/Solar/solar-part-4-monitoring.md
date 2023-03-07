@@ -2,7 +2,7 @@
 title: "Home Solar Project - Part 3 - Monitoring"
 date: 2023-02-17
 categories:
-  - Technology
+  - Solar
 tags:
   - Solar
   - Energy Monitoring
