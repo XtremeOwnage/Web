@@ -2,7 +2,7 @@
 title: "Solar-Assistant with Solark 12k"
 date: 2023-01-23
 categories:
-  - Technology
+  - Solar
 tags:
   - Solar
   - Home-Automation

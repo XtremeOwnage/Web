@@ -2,7 +2,7 @@
 title: "Home Solar Project - Part 3 - Installation"
 date: 2023-01-14
 categories:
-  - Technology
+  - Solar
 tags:
   - Solar
 ---
