@@ -26,7 +26,7 @@ Well, when I tested this, there were a lot of horrible noises, dimming lights, a
 
 There is in fact a pretty simple way to resolve this: With the use of a soft-starter
 
-For this test, I went with the EasyStart 368-X72-Blue by Micro-Air, rated for a 4 – 6 ton compressor.
+For this test, I went with the EasyStart [368-X72-Blue by Micro-Air](https://amzn.to/41PGM4c){target=_blank}, rated for a 4 – 6 ton compressor.
 
 ### Why you might want to do this:
 
