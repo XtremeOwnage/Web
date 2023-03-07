@@ -246,13 +246,15 @@ After validating this unit did work as expected, and allowed me to run my A/C co
 
 So, I gave Micro-air a call and they were able to send over some documentation to help me answer a few questions.
 
-### Question 1. How does this unit compare to installing a start-capacitor?
-
-For terminology, the inclusion of a start-capacitor is referred to a hard-start.
-
-The short answer- 
+### How does this unit compare to installing a start-capacitor?
 
 A start-capacitor will actually INCREASE the amperage during compressor startup, but, will reduce the amount of time it takes to start.
+
+Terminology:
+
+1. Normal Start - This is referred to as an A/C compressor starting without the assistance of either a starting capacitor, or soft start module.
+2. Hard Start - This is when you are using a starting capacitor with your compressor motor.
+3. Soft Start - This refers to the Easystart soft start unit referenced in this article. 
 
 For the longer answer, here are a few relevant slides I obtained from Micro-air.
 
@@ -261,10 +263,6 @@ For the longer answer, here are a few relevant slides I obtained from Micro-air.
 ![](./assets-soft-start/micro-air-presentation-11-more-about-hard-starts.webP)
 
 Here is a  graphical representation of the various methods to start an A/C compressor.
-
-Normal Start refers to the compressor starting without either a start-capacitor, or easy-start unit.
-Hard start, refers to the use of a starting capacitor.
-And, easy-start refers to using the Micro-air easy-start unit used in the above installation.
 
 ![](./assets-soft-start/start-type-comparison.webP)
 
