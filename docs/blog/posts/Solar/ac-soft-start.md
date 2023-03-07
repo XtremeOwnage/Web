@@ -12,9 +12,9 @@ tags:
 
 Starting your A/C compressor generates a massive inrush current. Many inverters will have issues getting the motor spinning.
 
-In the case of my 3.5Ton unit, the starting current can be upwards of 60 amps @ 220v.
+In the case of my 3.5 Ton unit, the L.R.A. (Locked rotor amps) is 112.0 amps @ 220v (24,640 watts). This is far more current then my inverter can provide. This is the amount of amperage which it can potentially take to start the compressor motor.
 
-This post, describes how to install a soft-start, which will allow your compressor to easily start off-grid, or via a smaller generator.
+This post, describes how to install a soft start, which will allow your compressor to easily start off-grid using your solar array with inverter and batteries, or via a smaller generator.
 
 <!-- more -->
 
@@ -24,33 +24,33 @@ The day my system was fully installed, one of the tests I performed, was attempt
 
 Well, when I tested this, there were a lot of horrible noises, dimming lights, and beeping noises. It wasn't a very successful test.
 
-There is, actually a pretty easy / simple way to resolve this, by using a soft-start cap.
+There is in fact a pretty simple way to resolve this: With the use of a soft-starter
 
-For this test, I went with a unit produced by Micro-air, rated for up to a 6-ton compressor.
+For this test, I went with the EasyStart 368-X72-Blue by Micro-Air, rated for a 4 – 6 ton compressor.
 
 ### Why you might want to do this:
 
-IF, you intend on running your A/C comrpessor either via generator power, or via off-grid solar, there is a good chance your inverter or generator will have issues starting it, without dimming lights.
+IF, you intend on running your A/C compressor either via generator power, or via off-grid solar, there is a good chance your inverter or generator will have issues starting it, without dimming lights.
 
 If you have a permanently installed 30kwh Generator, you likely don't need to worry about this.
 
-But, if your generator is ranted for under 12,000 watts, this will likely help you.
+But, if your generator is rated for under 12,000 watts, this will likely help you.
 
-As well, if plan on running a large A/C compressor, off-grid on solar alone- this will help you. Without it- my unit wouldn't successfully start on solar/battery alone.
+As well, if you are planning on running a large A/C compressor, off-grid on solar alone- this will help you. Without it- my unit wouldn't successfully start without having energy from the grid.
 
 Lastly, these units will improve the efficiency and lengthen the life of your compressor's motor by reducing the inrush current when starting the motor.
 
 ### Parts / Tools Needed.
 
-#### Soft-start
+#### Soft start
 
-[Micro-Air 368 Soft-Start (Max 6-ton, 220v)](https://amzn.to/41PGM4c){target=_blank}, [Manufacturer Link](https://www.microair.net/collections/easystart-soft-starters/products/easystart-368-6-ton-soft-start-motor-starter-for-115-and-230v-ac-motors?variant=22060231884884){target=_blank}
+[Micro-Air 368 Soft Start (Max 6-ton, 220v)](https://amzn.to/41PGM4c){target=_blank}, [Manufacturer Link](https://www.microair.net/collections/easystart-soft-starters/products/easystart-368-6-ton-soft-start-motor-starter-for-115-and-230v-ac-motors?variant=22060231884884){target=_blank}
 
-This is the unit I went with. I ordered through the exact same link, as it had next-day delivary. If you order through the manufactuer, you may save 20$, however, you don't get next day shipping!
+This is the unit I went with. I ordered through the exact same link, as it had next-day delivery. If you order through the manufacturer, you may save 20$, however, you don't get next day shipping!
 
-For RVs, see the 364.
+For RVs and other 110v applications, see the [EasyStart 364-X20-IP](https://amzn.to/3mwi0pR){target=_blank} or the 364-X36-Blue
 
-[Micro-Air 364 Soft-start (For RVs, 110v)](https://amzn.to/3JfFiJl){target=_blank}
+Micro-air does offer a model selector to identify a unit properly sized for your compressor [HERE](https://www.micro-air.com/tools/easystart/modelselectorv3/step1.cfm){target=_blank}. As well, they may offer better pricing than Amazon.
 
 #### Tools Needed
 
@@ -67,7 +67,7 @@ For RVs, see the 364.
     * [Klein D248-8 Pliers](https://amzn.to/3kM1DVq){target=_blank} This is the high quality option that will last you forever.
     * [Cheap Pliers](https://amzn.to/3ZeZtg5){target=_blank} These work too. All depends on what kinda tools you want to buy.
 5. Spade connectors. In my case, 12AWG was the proper size. You may need 10, 12, or 14AWG depending on your installation.
-    * [12-10 AWG Spde Connectors](https://amzn.to/3ZMjDhv){target=_blank}
+    * [12-10 AWG Spade Connectors](https://amzn.to/3ZMjDhv){target=_blank}
 6. Wire Nuts. I needed a single, 12AWG wire-nut. I picked it up from my local hardware store for 10 cents.
     * [Wire Nuts](https://amzn.to/3SQ9lKK){target=_blank} if you prefer Amazon.
 
@@ -78,7 +78,7 @@ At a minimum, you will need wire cutters, a crimping tool, and a multi-meter.
 
 ##### Hardware to mount easy-start unit.
 
-To mount my unit, I visited my local hardware store and picked up some 1/4" nuts, bolts, washers, and lock washers. If you take this option, make sure you also have a suitable drillbit. Overall, it costed around $1.50 to buy the hardware I needed.
+To mount my unit, I visited my local hardware store and picked up some 1/4" nuts, bolts, washers, and lock washers. If you take this option, make sure you also have a suitable drill bit. Overall, it costed around $1.50 to buy the hardware I needed.
 
 You can also use [1/4" stainless self-tapping screws](https://amzn.to/3YvOnCo){target=_blank}
 
@@ -89,7 +89,7 @@ A [Center punch](https://amzn.to/3ZooW6U){target=_blank} comes in handy for mark
 !!! danger
     The electrical wiring inside of your A/C unit can **kill you**. Even when the power is disconnected, there can be residual energy stored in its start capacitor. This can kill you.
 
-    If you are not qualified to work on electrical circuits, you should call a licensed electrician, or HVAC specalist to perform the installation for you.
+    If you are not qualified to work on electrical circuits, you should call a licensed electrician, or HVAC specialist to perform the installation for you.
 
     I am not responsible for injury, death, or loss of property which may occur. This unit works well for me, however, your results may vary.
 
@@ -105,7 +105,7 @@ In the example of mine, you would want to flip the breaker downwards, so that it
 
 Look for where the power cables come into the A/C unit. You should see a corner/side panel which can be easily removed with a few screws. Remove it.
 
-Next up, you will need to identify a suitable location to mount the soft-start unit.
+Next up, you will need to identify a suitable location to mount the soft start unit.
 
 ![Identify suitable mounting location](assets-soft-start/identify-location.webP)
 
@@ -149,12 +149,18 @@ After reading over the installation manual, here is my annotated wiring diagram.
 
 ![My annotate wiring diagram](./assets-soft-start/wiring-diagram-annotated.webP)
 
-To summerize the connections-
+Here is a slide from one of Micro-Air's installation manuals showing the same steps:
+
+The red Xs on the right are noting to remove any existing start capacitor and relay as those will not work with this unit.
+
+![Residential Installation - Step 7 Slide](./assets-soft-start/micro-air-manual-step-7.webP)
+
+To summarize the connections-
 
 1. Black wire connects to a spare location on the left side of the contactor.
-2. Remove the "Red" wire from the right side of the contactor, going to the compressor. Then, wirenut it togather with the "Brown" wire from the soft-start. Note, Your compressor wire may not be red.
-3. Connect the "White" wire from the soft-start, to the right side of the contactor.
-4. The "Yellow" wire from the soft-start, will need to connect to the "HERM" terminal of your capacitor. For my unit, there was a purple wire connected to one of the spots on this terminal.
+2. Remove the "Red" wire from the right side of the contactor, going to the compressor. Then, wire nut it together with the "Brown" wire from the soft start. Note, Your compressor wire may not be red.
+3. Connect the "White" wire from the soft start, to the right side of the contactor.
+4. The "Yellow" wire from the soft start, will need to connect to the "HERM" terminal of your capacitor. For my unit, there was a purple wire connected to one of the spots on this terminal.
 
 For, anyone confused as to what is what- here is a slightly annotated diagram.
 
@@ -233,3 +239,48 @@ The installation process was easy, and the unit worked as expected with nothing 
 After letting the unit "learn" 5 starts, it had no issues at all starting up the compressor off-grid.
 
 In addition to now being able to run my A/C compressor off-grid, this unit should also extend the lifetime of my compressor's motor due to a reduction in the startup surge.
+
+## How does this unit work? 
+
+After validating this unit did work as expected, and allowed me to run my A/C compressor on inverter alone- I was curious to know the specifics of how this unit worked.
+
+So, I gave Micro-air a call and they were able to send over some documentation to help me answer a few questions.
+
+### Question 1. How does this unit compare to installing a start-capacitor?
+
+For terminology, the inclusion of a start-capacitor is referred to a hard-start.
+
+The short answer- 
+
+A start-capacitor will actually INCREASE the amperage during compressor startup, but, will reduce the amount of time it takes to start.
+
+For the longer answer, here are a few relevant slides I obtained from Micro-air.
+
+![](./assets-soft-start/micro-air-presentation-10-easystart-vs-hardstart.webP)
+
+![](./assets-soft-start/micro-air-presentation-11-more-about-hard-starts.webP)
+
+Here is a  graphical representation of the various methods to start an A/C compressor.
+
+Normal Start refers to the compressor starting without either a start-capacitor, or easy-start unit.
+Hard start, refers to the use of a starting capacitor.
+And, easy-start refers to using the Micro-air easy-start unit used in the above installation.
+
+![](./assets-soft-start/start-type-comparison.webP)
+
+The gist of the above comparison- A start capacitor gives a bigger "kick" when starting the motor, to get it running faster. The easy-start unit causes the unit to start more slowly, with greatly reduced amperage.
+
+### What are some other benefits this unit can provide?
+
+Using two of the provided slides-
+
+![](./assets-soft-start/microair-easystart-7-compressor-protection.webP)
+
+![](./assets-soft-start/microair-easystart-5-top-benefits.webP)
+
+To summarize-
+
+1. Checks for many potential fault conditions, and offers protections for your A/C compressor.
+2. Built-in short-cycle protection. This will prevent your A/C compressor from being cycled too quickly. This can be handy if your thermostat / HVAC control board does not have short-cycle protection built-in. Short cycling your compressor can damage it.
+3. You will need a smaller generator/inverter to properly start your A/C compressor. 
+4. This unit also provides bluetooth diagnostics. If you run into any issues, you can upload the diagnostics to Micro-air, and they will be happy to assist you with identifying and resolving the issue.
