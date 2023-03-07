@@ -272,7 +272,7 @@ The gist of the above comparison- A start capacitor gives a bigger "kick" when s
 
 ### What are some other benefits this unit can provide?
 
-Using two of the provided slides-
+Using a few of the provided slides-
 
 ![](./assets-soft-start/microair-easystart-7-compressor-protection.webP)
 
@@ -284,3 +284,14 @@ To summarize-
 2. Built-in short-cycle protection. This will prevent your A/C compressor from being cycled too quickly. This can be handy if your thermostat / HVAC control board does not have short-cycle protection built-in. Short cycling your compressor can damage it.
 3. You will need a smaller generator/inverter to properly start your A/C compressor. 
 4. This unit also provides bluetooth diagnostics. If you run into any issues, you can upload the diagnostics to Micro-air, and they will be happy to assist you with identifying and resolving the issue.
+5. No more dimming lights when your A/C kicks on.
+
+
+## Disclaimers
+
+!!! success "Not Sponsored"
+    This post is not sponsored or affiliated by Micro-air, and I received no compensation for publishing this.
+
+    All hardware, time, and tools was provided and paid for out of my pocket.
+
+--8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
