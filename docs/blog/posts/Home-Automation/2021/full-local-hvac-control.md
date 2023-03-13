@@ -207,7 +207,7 @@ Make sure your relays are configured for “Switch”
 
 You can also set auto-on/off timers if desired. However, I plan to manage this via the thermostat template.
 
-~~I don’t plan on writing an article for the minor differences to convert from the old entities to the new… Its mostly just updating entity names.~~ I lied- if you want to see some of the updates, then check out “[Fireplace Automation – Part 3](https://xtremeownage.com/2021/10/30/fireplace-automation-part-3/){target=_blank}″
+~~I don’t plan on writing an article for the minor differences to convert from the old entities to the new… Its mostly just updating entity names.~~ I lied- if you want to see some of the updates, then check out “[Fireplace Automation – Part 3](./fireplace-automation-part-3.md){target=_blank}″
 
 Have fun!
 
