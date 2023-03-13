@@ -1,6 +1,6 @@
 ---
 title: "Programmable Thermostat GUI"
-date: 2022-12-15
+date: 2022-03-25
 categories:
 - Home-Automation
 - Technology
