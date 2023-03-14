@@ -74,3 +74,5 @@ If your new sensors do not show up, check your logs for errors.
 ## Summary
 
 This was intended to be a very simple guide on how to split a number into multiple sensors.
+
+The use-case for needing to do this- is to create a dedicated sensor for power going INTO battery storage, or coming IN from the grid, and then, having a sensor for power LEAVING my house or battery.
