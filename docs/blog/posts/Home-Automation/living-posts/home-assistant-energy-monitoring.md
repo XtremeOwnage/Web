@@ -20,7 +20,7 @@ To note- you don't have to use home assistant with these products. But, these pr
 
 !!! error "Warning"
     Mains voltage is dangerous. Incorrect handling of mains voltage can cause injury or death.
-    You should ideally have a licensed electrican install any of the devices listed in this article.
+    You should ideally have a licensed electrician install any of the devices listed in this article.
 
     I am not responsible for any death, injury, or loss of property incurred.
 
@@ -30,6 +30,7 @@ Products will be split into these categories.
 
 1. [Products which provide per device/circuit entire-home monitoring, typically from sensors located in your mains panel.](#per-circuit-monitoring)
 2. [Products which only monitor energy entering or leaving the home, typically through CT clamps on the mains.](#mains-monitoring)
+3. [Smart Plugs and/or Devices with build in reporting](#Individual-Device-Monitoring)
 
 
 ### Per Circuit Monitoring
@@ -192,6 +193,95 @@ Links:
 * [Product Link](https://www.iammeter.com/){target=_blank}
 * [Native Home Assistant Integration](https://www.home-assistant.io/integrations/iammeter/){target=_blank}
 
+
+
+### Individual Device Monitoring
+
+This section is dedicated to plugs and strips with energy monitoring, and devices which report their own energy consumption.
+
+#### Kasa HS300
+
+![](./assets-energy-monitoring/amazon-hs-300.png)
+
+The Tp-link Kasa is a 6-port power strip with individually controlled and metered outlets.
+
+I have been using these units for some time now, and I can personally say- they work very nicely.
+
+I do recommend isolating these devices from the internet, and using home assistant to control them. They do work fully local when used this way.
+
+You can read my personal review / installation here: [Using Kasa HS300 as Rack Mounted PDU](./../2022/kasa-powerstrip.md){target=_blank}
+
+Links:
+
+* [Purchase on Amazon](https://amzn.to/3Buk5Hx){target=_blank}
+* [Native Home Assistant Integration](https://www.home-assistant.io/integrations/tplink/){target=_blank}
+
+#### Sonoff S31
+
+![](./assets-energy-monitoring/sonoff-s31-amazon.webP)
+
+The Sonoff S31 is a low cost plug, which can report back energy utilization as well. This plug is UTL certified, and rated for up to 15 amps.
+
+As a bonus, you CAN flash these plugs with either esphome or tasmota.
+
+!!! warning
+    Do not get the S40 plugs expecting them to be an upgraded version of the S31!
+
+    The S40 plugs cannot be flashed to esphome or tasmota.
+
+Links:
+
+* [Purchase on Amazon](https://amzn.to/3mUiRkl){target=_blank}
+* [Manufacturer Website](https://itead.cc/product/sonoff-s31/){target=_blank}
+* [Esphome Configuration](https://www.esphome-devices.com/devices/Sonoff-S31){target=_blank}
+* [Tasmota Configuration](https://tasmota.github.io/docs/devices/Sonoff-S31/){taget=_blank}
+* [Here is a guide I found for flashing these](https://www.adventurousway.com/blog/sonoff-s31){target=_blank}
+
+#### Zooz Zen15
+
+![](./assets-energy-monitoring/zooz-zen15-amazon.webP)
+
+This product, is advertised as a smart plug capable of handling large 110v appliances. 
+
+If you have ever tried to control your air-compressor with a typical smart relay, you will understand why this is important.
+
+Due to this product's pricing, It is best suited for controlling large appliances such as Microwaves, Air conditioners, etc. I wouldn't advise using this for a lamp.
+
+Note, this product also leverages z-wave. As such, make sure you have a z-wave network! This also means, it works completely local, with no internet dependency at all.
+
+Links:
+
+* [Purchase on Amazon](https://amzn.to/3JFfhn3){target=_blank}
+* [Manufacturer Website](https://www.getzooz.com/zooz-zen15-power-switch/){target=_blank}
+
+#### Shelly 1PM
+
+![](./assets-energy-monitoring/shelly-1pm-amazon.webP)
+
+The Shelly 1PM is a small form "smart switch" intended to be mounted either inside of devices, or small enough to be mounted in a typical 1 gang switch box.
+
+These devices can easily be flashed to either Esphome or Tasmota, using the exposed serial pins.
+
+I have personally, used these for years. Without a single complaint.
+
+Links:
+
+* [Purchase on Amazon](https://amzn.to/3ZR9zEm){target=_blank}
+* [Manufacturer Website](https://www.shelly.cloud/en/products/shop/shelly-plus-1-pm-2-pack/shelly-plus-1-pm){target=_blank}
+
+#### Shelly 2.5
+
+![](./assets-energy-monitoring/shelly-25-amazon.webP)
+
+Need two inputs and outputs? The Shelly 2.5, like the Shelly 1PM, also has power monitoring. But, the 2.5 has two inputs, and two outputs.
+
+Also, like the Shelly 1PM, these units can be flashed to esphome or tasmota very easily.
+
+I have two of these still in use, with no issues to report.
+
+Links: 
+
+* [Purchase on Amazon](https://amzn.to/3ZYZpB8){target=_blank}
 
 ### My Personal Recommendations
 

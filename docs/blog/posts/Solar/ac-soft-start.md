@@ -44,11 +44,18 @@ Lastly, these units will improve the efficiency and lengthen the life of your co
 
 #### Soft start
 
-[Micro-Air 368 Soft Start (Max 6-ton, 220v)](https://amzn.to/41PGM4c){target=_blank}, [Manufacturer Link](https://www.microair.net/collections/easystart-soft-starters/products/easystart-368-6-ton-soft-start-motor-starter-for-115-and-230v-ac-motors?variant=22060231884884){target=_blank}
+[Micro-Air ASY-368-X72-BLUE (Max 6-ton, 220v)](https://amzn.to/41PGM4c){target=_blank}, [Manufacturer Link](https://www.microair.net/collections/easystart-soft-starters/products/easystart-368-6-ton-soft-start-motor-starter-for-115-and-230v-ac-motors?variant=22060231884884){target=_blank}
+
+[MicroAir ASY-368-X48 (2 - 3.5 ton, 220v)](https://amzn.to/3IXSd1c){target=_blank} 
 
 This is the unit I went with. I ordered through the exact same link, as it had next-day delivery. If you order through the manufacturer, you may save 20$, however, you don't get next day shipping!
 
 For RVs and other 110v applications, see the [EasyStart 364-X20-IP](https://amzn.to/3mwi0pR){target=_blank} or the 364-X36-Blue
+
+!!! info
+    To note- the properly sized unit for my compressor motor is the ASY-368-X48.
+    
+    However, since I plan on installing a larger compressor in the future, I went with the ASY-368-X72-BLUE which is oversized for my unit.
 
 Micro-air does offer a model selector to identify a unit properly sized for your compressor [HERE](https://www.micro-air.com/tools/easystart/modelselectorv3/step1.cfm){target=_blank}. As well, they may offer better pricing than Amazon.
 
@@ -67,7 +74,8 @@ Micro-air does offer a model selector to identify a unit properly sized for your
     * [Klein D248-8 Pliers](https://amzn.to/3kM1DVq){target=_blank} This is the high quality option that will last you forever.
     * [Cheap Pliers](https://amzn.to/3ZeZtg5){target=_blank} These work too. All depends on what kinda tools you want to buy.
 5. Spade connectors. In my case, 12AWG was the proper size. You may need 10, 12, or 14AWG depending on your installation.
-    * [12-10 AWG Spade Connectors](https://amzn.to/3ZMjDhv){target=_blank}
+    * [12-10 AWG Spade Connectors](https://amzn.to/3ZCAl32){target=_blank}
+    * Note- Make sure to get connectors rated for up to 600 volts.
 6. Wire Nuts. I needed a single, 12AWG wire-nut. I picked it up from my local hardware store for 10 cents.
     * [Wire Nuts](https://amzn.to/3SQ9lKK){target=_blank} if you prefer Amazon.
 
@@ -121,7 +129,7 @@ Do note, I did use lock washers here. Since the A/C unit vibrates a lot, I felt 
 
 After removing the access panel cover, My unit was a mess covered with spiders, spider webs, dust, etc.
 
-I used my leaf blower to clean up everything a bit.
+I personally used my leaf blower to clean up everything a bit. I'd recommend instead, using a brush and/or vacuum... as a leaf blower can potentially blow dirt and other debris into your components. 
 
 Before cleaning-
 
@@ -153,6 +161,8 @@ Here is a slide from one of Micro-Air's installation manuals showing the same st
 
 The red Xs on the right are noting to remove any existing start capacitor and relay as those will not work with this unit.
 
+If any of the start components are found- all connections and wires to them must be removed! Otherwise, this unit will not function correctly and you could potentially cause damage.
+
 ![Residential Installation - Step 7 Slide](./assets-soft-start/micro-air-manual-step-7.webP)
 
 To summarize the connections-
@@ -161,6 +171,7 @@ To summarize the connections-
 2. Remove the "Red" wire from the right side of the contactor, going to the compressor. Then, wire nut it together with the "Brown" wire from the soft start. Note, Your compressor wire may not be red.
 3. Connect the "White" wire from the soft start, to the right side of the contactor.
 4. The "Yellow" wire from the soft start, will need to connect to the "HERM" terminal of your capacitor. For my unit, there was a purple wire connected to one of the spots on this terminal.
+5. IF, you have an existing start capacitor and start relay, it must be removed.
 
 For, anyone confused as to what is what- here is a slightly annotated diagram.
 
