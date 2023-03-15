@@ -43,7 +43,7 @@ To do this, we will leverage home-assistant's [template sensor](https://www.home
   - name: battery_power_in
     unit_of_measurement: "W"
     state_class: measurement
-    device_class: energy
+    device_class: power
     state: >
         {% if states('sensor.battery_power')|float >= 0 %}
           {{ states('sensor.battery_power') }}
@@ -53,7 +53,7 @@ To do this, we will leverage home-assistant's [template sensor](https://www.home
   - name: battery_power_out
     unit_of_measurement: "W"
     state_class: measurement
-    device_class: energy
+    device_class: power
     state: >
         {% if states('sensor.battery_power')|float < 0 %}
           {{ states('sensor.battery_power') | float  * -1  }}
