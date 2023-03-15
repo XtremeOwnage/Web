@@ -269,6 +269,19 @@ Links:
 * [Purchase on Amazon](https://amzn.to/3ZR9zEm){target=_blank}
 * [Manufacturer Website](https://www.shelly.cloud/en/products/shop/shelly-plus-1-pm-2-pack/shelly-plus-1-pm){target=_blank}
 
+#### Shelly 2.5
+
+![](./assets-energy-monitoring/shelly-25-amazon.webP)
+
+Need two inputs and outputs? The Shelly 2.5, like the Shelly 1PM, also has power monitoring. But, the 2.5 has two inputs, and two outputs.
+
+Also, like the Shelly 1PM, these units can be flashed to esphome or tasmota very easily.
+
+I have two of these still in use, with no issues to report.
+
+Links: 
+
+* [Purchase on Amazon](https://amzn.to/3ZYZpB8){target=_blank}
 
 ### My Personal Recommendations
 
