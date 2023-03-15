@@ -253,6 +253,23 @@ Links:
 
 * [Purchase on Amazon](https://amzn.to/3JFfhn3){target=_blank}
 * [Manufacturer Website](https://www.getzooz.com/zooz-zen15-power-switch/){target=_blank}
+
+#### Shelly 1PM
+
+![](./assets-energy-monitoring/shelly-1pm-amazon.webP)
+
+The Shelly 1PM is a small form "smart switch" intended to be mounted either inside of devices, or small enough to be mounted in a typical 1 gang switch box.
+
+These devices can easily be flashed to either Esphome or Tasmota, using the exposed serial pins.
+
+I have personally, used these for years. Without a single complaint.
+
+Links:
+
+* [Purchase on Amazon](https://amzn.to/3ZR9zEm){target=_blank}
+* [Manufacturer Website](https://www.shelly.cloud/en/products/shop/shelly-plus-1-pm-2-pack/shelly-plus-1-pm){target=_blank}
+
+
 ### My Personal Recommendations
 
 For my personal recommendations- I present to you, a flow-chart.
