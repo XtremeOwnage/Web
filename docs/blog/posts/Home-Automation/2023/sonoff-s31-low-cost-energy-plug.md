@@ -63,6 +63,10 @@ I personally, will be running esphome on my plugs.
 
 For a more detailed disassembly, please see [THIS POST](https://www.adventurousway.com/blog/sonoff-s31){target=_blank} I found on the internet. I will be skimming over the basics.
 
+If you like videos:
+
+* [Video - Open Source Home](https://www.youtube.com/watch?v=iffe_rM4Fgg){target=_blank}
+
 #### Step 1. Remove grey end cap
 
 To remove the endcap, squeeze a knife, or sharp edge between the grey cap, and the white body. 
