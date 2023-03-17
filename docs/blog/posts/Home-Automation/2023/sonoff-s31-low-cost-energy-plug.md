@@ -45,6 +45,7 @@ The [Sonoff S31](https://amzn.to/3yPSq1T){target=_blank}, is a pretty low-cost w
 ### Some tools required
 
 To connect to the UART pins, you will either need to solder on jumper wires, OR, you can use test hooks.
+
 * A soldering iron.
 * [Test Hooks](https://www.amazon.com/gp/product/B08M5Z5YFG){target=_blank}
     * These can be used instead of soldering wires onto the pins.
