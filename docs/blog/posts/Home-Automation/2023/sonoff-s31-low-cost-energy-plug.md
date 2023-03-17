@@ -31,7 +31,8 @@ The [Sonoff S31](https://amzn.to/3yPSq1T){target=_blank}, is a pretty low-cost w
 
 ### Cons
 
-1. Some soldering is required to flash these with open source firmware.
+1. Some soldering may required to flash these with open source firmware.
+    * If you use test-pins (linked below), you can flash these devices without soldering.
 2. Some technical ability is required, to flash these with open source firmware. 
 
 ## Where to get it?
