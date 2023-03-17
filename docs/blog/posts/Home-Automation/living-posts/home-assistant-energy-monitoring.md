@@ -236,6 +236,8 @@ Links:
 * [Esphome Configuration](https://www.esphome-devices.com/devices/Sonoff-S31){target=_blank}
 * [Tasmota Configuration](https://tasmota.github.io/docs/devices/Sonoff-S31/){taget=_blank}
 * [Here is a guide I found for flashing these](https://www.adventurousway.com/blog/sonoff-s31){target=_blank}
+* [Here is my post for these](./../2023/sonoff-s31-low-cost-energy-plug.md){target=_blank}
+
 
 #### Zooz Zen15
 
