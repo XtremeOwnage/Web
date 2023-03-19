@@ -46,9 +46,9 @@ The [Sonoff S31](https://amzn.to/3yPSq1T){target=_blank}, is a pretty low-cost w
 
 To connect to the UART pins, you will either need to solder on jumper wires, OR, you can use test hooks.
 
-* A soldering iron.
+* ~~A soldering iron~~
 * [Test Hooks](https://www.amazon.com/gp/product/B08M5Z5YFG){target=_blank}
-    * These can be used instead of soldering wires onto the pins.
+    * These can be used instead of soldering wires onto the pins. I strongly recommend this route. It is much faster, and there is a greatly reduced chance of lifting a pad.
 * A phillips #1 bit. Make sure you have a #1, otherwise, its easy to strip out the screws.
 * A Serial Adapter. I have been using this [DSD Tech Adapter](https://amzn.to/3n3vbP0){target=_blank} for the past few years, with no issues. It supports 3v and 5v.
 
@@ -84,7 +84,9 @@ After the screws have been loosed enough, you can pull the unit out of the body.
 
 ![](./assets/sonoff-s31/1-first-unit-disassembled.webP)
 
-#### Step 2. Solder on wires
+#### Connect to serial adapter 
+
+##### The hard way - Via Soldering
 
 !!! warning
     Do **NOT** solder on a header like I did in the following image. If you do, you run a higher risk of pulling one of the pads.
@@ -94,6 +96,24 @@ After the screws have been loosed enough, you can pull the unit out of the body.
     Ask me how I know....
 
 ![](./assets/sonoff-s31/2-solder-pins.webP)
+
+##### The easy way - with test leads
+
+This occurred after I initially published this post, however, I picked up another 4 pack of these plugs.. along with, test leads.
+
+With test leads, just place the leads on the pads.
+
+![](./assets/sonoff-s31/bulk-flash-round-2.webP)
+
+Closeup on leads attached to pads.
+
+![](./assets/sonoff-s31/test-leads-attached.webP)
+
+Closeup on serial adapter.
+
+![](./assets/sonoff-s31/serial-adapter-closeup.webP)
+
+This method was much faster, without the risk of lifting a pad. I was able to disassemble, flash, and reassemble 4 units in under 10 minutes.
 
 #### Step 3. Connect your serial adapter
 
@@ -148,6 +168,8 @@ I spent a while trying to get the corners on successfully, until I realized I wa
 
 So- if you are having issues putting the end caps back into place, Just- check the corner.
 
+![](./assets/sonoff-s31/all-done.webP)
+
 ### Add it to home assistant
 
 In Home Assistant, goto integrations.
@@ -160,11 +182,10 @@ I used one of these plugs for monitoring the energy consumption of my deep freez
 
 ![](./assets/sonoff-s31/home-assistant.webP)
 
-## Help! I lifted a pad!
+## History
 
-Your only hope now- is waiting for sonooff to release DIY mode for the S31.
-
-As of right now (3/17/2023), it does not appear DIY mode is yet enabled for the S31, which would allow flashing custom firmware OTA.
+* 2023-03-17 - Post initially published. Flashed 4 units via flashing.
+* 2023-03-19 - Second 4-pack arrived. Flashed more more units, using test-leads instead. Much faster.
 
 ## Disclaimers
 
