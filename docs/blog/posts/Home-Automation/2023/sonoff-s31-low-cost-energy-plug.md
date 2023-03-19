@@ -51,6 +51,9 @@ To connect to the UART pins, you will either need to solder on jumper wires, OR,
     * These can be used instead of soldering wires onto the pins. I strongly recommend this route. It is much faster, and there is a greatly reduced chance of lifting a pad.
 * A phillips #1 bit. Make sure you have a #1, otherwise, its easy to strip out the screws.
 * A Serial Adapter. I have been using this [DSD Tech Adapter](https://amzn.to/3n3vbP0){target=_blank} for the past few years, with no issues. It supports 3v and 5v.
+* (Optional) Label maker, or sharpie.
+    * Used to mark identifiers on the plugs. 
+    * [Dymo LetraTag 100H](https://amzn.to/42r6rQW){target=_blank} I recommend this unit. Has been going strong for years for me. 
 
 ### Firmware Links
 
@@ -168,7 +171,17 @@ I spent a while trying to get the corners on successfully, until I realized I wa
 
 So- if you are having issues putting the end caps back into place, Just- check the corner.
 
+#### Step 7. Label them (Optional)
+
+I personally prefer labeling my units to make it easier to identify them at a glance.
+
+Since, I include a static IP in each of the ESPHome configurations I push out, I choose to identify them via IP address.
+
+I don't use the device name, because these units do occasionally get re-allocated for other purposes.
+
 ![](./assets/sonoff-s31/all-done.webP)
+
+If you are looking for a label maker, I have nothing but positive to say regarding my [DYMO 100H](https://amzn.to/42r6rQW){target=_blank}. Even the refills are cheap for it. 
 
 ### Add it to home assistant
 
