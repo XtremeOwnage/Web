@@ -13,7 +13,7 @@ tags:
 
 Everyone wants to monitor energy consumption. Everyone wants to automate their home.
 
-The [Sonoff S31](https://amzn.to/3yPSq1T){target=_blank}, is a pretty low-cost way of doing this.
+The [Sonoff S31](https://amzn.to/3FxeRwz){target=_blank}, is a pretty low-cost way of doing this.
 
 ![](./../living-posts/assets-energy-monitoring/sonoff-s31-amazon.webP)
 
@@ -37,7 +37,7 @@ The [Sonoff S31](https://amzn.to/3yPSq1T){target=_blank}, is a pretty low-cost w
 
 ## Where to get it?
 
-* [Amazon](https://amzn.to/3yPSq1T){target=_blank}
+* [Amazon](https://amzn.to/3FxeRwz){target=_blank}
 * [Sonoff](https://sonoff.tech/product/smart-plugs/s31-s31lite/){target=_blank}
 
 ## How To Flash it.
