@@ -231,7 +231,7 @@ As a bonus, you CAN flash these plugs with either esphome or tasmota.
 
 Links:
 
-* [Purchase on Amazon](https://amzn.to/3mUiRkl){target=_blank}
+* [Purchase on Amazon](https://amzn.to/3FxeRwz){target=_blank}
 * [Manufacturer Website](https://itead.cc/product/sonoff-s31/){target=_blank}
 * [Esphome Configuration](https://www.esphome-devices.com/devices/Sonoff-S31){target=_blank}
 * [Tasmota Configuration](https://tasmota.github.io/docs/devices/Sonoff-S31/){taget=_blank}
