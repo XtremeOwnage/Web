@@ -43,6 +43,9 @@ First- is this section in the configuration:
 esp8266:
   early_pin_init: false
 ```
+
+References:
+
 * [Esphome - esp8266 component documentation](https://esphome.io/components/esp8266.html){target=_blank}
 * [Original Github issue](https://github.com/esphome/issues/issues/3263){target=_blank}
 
@@ -163,6 +166,7 @@ wifi:
   manual_ip:
     static_ip: ${ip_address}
     gateway: ${gateway}
+    # All of my IOT subnets are /24. I didn't see a need to make this a variable / substitution. 
     subnet: 255.255.255.0
 
   ap:
@@ -194,13 +198,15 @@ time:
 #    timezone: YourTimezoneHere.
   # I use NTP, rather than home assistant, as I have been configuring my devices to be able to work stand-alone without home-assistant, if needed.
   - platform: sntp
-    servers: 1.2.3.4 # Put your NTP server here. Or, use the above home-assistant configuration.
-    timezone: YourTimezoneHere
+    servers: ${ntp_server_ip}
+    timezone: ${timezone}
 
 # This section is optional. However, I configure all of my devices to also use MQTT, along with home assistant directly. 
 # MQTT allows me to easily integrate them into other systems.
 mqtt:
-  broker: 1.2.3.4 # Put your MQTT server IP here.
+  broker: ${mqtt_pass}
+  username: ${mqtt_user}
+  password: ${mqtt_pass}
   discovery: false
   log_topic:
     topic: esphome/logs/${devicename}
@@ -227,6 +233,15 @@ wifi_pass: ""
 
 backup_wifi_ssid: ""
 backup_wifi_pass: ""
+
+# NTP Server IP, if you use NTP instead of home assistant for time. 
+ntp_server_ip: 1.2.3.4
+timezone: YourTimezoneHere
+
+# MQTT Server IP, if you use MQTT.
+mqtt_ip: 1.2.3.4
+mqtt_user: ""
+mqtt_pass: ""
 ```
 
 ### Device-specific configuration
@@ -378,7 +393,7 @@ The same with my uptime sensor.
     device_class: duration
 ```
 
-``` yaml title="sensor-uptime.yaml"
+``` yaml title="sensor-wifi-signal.yaml"
   - platform: wifi_signal
     name: "WiFi Signal"
     update_interval: 60s
