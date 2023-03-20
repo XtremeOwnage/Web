@@ -11,9 +11,11 @@ tags:
 
 # Using ESPHome on critical devices, such as networking gear
 
+![](./assets/esphome-confirm-restart-button.png)
+
 In an effort to monitor the consumption of everything- I ran across an unusual problem.
 
-When connecting my core switch to a esphome flashed smart switch, I noticed two things-
+When connecting my core switch to a ESPHome flashed smart switch, I noticed two things-
 
 1. It is very easy to accidentally turn the switch off.
     * This is a problem, because you cannot turn it back on remotely! Since, wifi connects to the core switch.
@@ -25,7 +27,7 @@ So, I set out to see how I could customize my configuration to be suitable for m
 I will be implementing:
 
 1. A button to power-cycle the core switch.
-2. Configuration to prevent the relay from toggling during firmware updates / esphome restarts.
+2. Configuration to prevent the relay from toggling during firmware updates / ESPHome restarts.
 3. Removing toggle switches.
 
 <!-- more -->
@@ -44,7 +46,7 @@ esp8266:
 * [Esphome - esp8266 component documentation](https://esphome.io/components/esp8266.html){target=_blank}
 * [Original Github issue](https://github.com/esphome/issues/issues/3263){target=_blank}
 
-Second- is setting the `restore_mode` for the gpio switch.
+Second- is setting the `restore_mode` for the GPIO switch.
 
 ``` yaml
 switch:
@@ -118,6 +120,17 @@ button:
             - switch.turn_on: relay
 ```
 
+Here is the end result:
+
+![](./assets/esphome-confirm-restart-no-restart.png)
+
+Notice, clicking the `Power Cycle` button does not actually cycle the device.
+
+BUT, after switching the confirm on, it does successfully power cycle the device.
+
+![](./assets/esphome-confirm-restart-restarted.png)
+
+Overall, this worked flawlessly.
 
 ## Final Configurations
 
