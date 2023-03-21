@@ -32,6 +32,15 @@ I will be implementing:
 
 <!-- more -->
 
+What are some of the use cases for doing this:
+
+* Using a plug to monitor the energy consumption and status certain appliances, that you don't want to accidentally turn off.
+    * A fridge
+    * A deep freezer
+* Using a smart plug on network equipment and servers.
+    * Being able to power-cycle your router, switch, server, etc.
+    * Ensuring you are able to successfully power-cycle the device hosting your wifi.
+
 
 ## How to prevent the switch from cycling during restarts?
 
