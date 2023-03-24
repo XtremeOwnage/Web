@@ -150,3 +150,56 @@ Here is the planned network diagram:
     Since, the link between the two switches is 10Gigabit, and the internet speed is 1Gigabit MAX, there are no concerns of bottlenecks here.
 
 ## Preparing / Modifying / Installing the Brocade ICX-6450-48-P
+
+
+
+
+## R730XD Power Reduction
+
+
+
+### Running Powertop
+
+`powertop --auto-tune`
+
+### Removing unused HDDs
+
+HDDs already had power savings enabled, allowing them to spin down.
+
+2TB + 3TB removed = 14 watts saved.
+
+
+
+### Replacing boot pool drives.
+
+Pair of 10k SAS, replaced with mixed-vendor 250G 2.5" SATA SSD
+
+### Optimizing Fans
+
+`racadm set system.thermalsettings.ThirdPartyPCIFanResponse 0`
+`racadm set system.thermalsettings.FanSpeedOffset 255`
+`racadm set system.thermalsettings.FanSpeedLowOffsetVal 0`
+`racadm set system.thermalsettings.ThermalProfile 2`
+
+https://www.reddit.com/r/homelab/comments/120x6hr/comment/jdjk6eg/?utm_source=share&utm_medium=web2x&context=3
+
+Dell Fan: https://www.dell.com/support/manuals/en-us/idrac9-lifecycle-controller-v3.3-series/idrac_3.30.30.30_ug/modifying-thermal-settings-using-racadm?guid=guid-af4b39bf-49c3-4f12-a20d-9488b37eeb8f&lang=en-us
+Manually setting fan speed: https://angrysysadmins.tech/index.php/2022/01/grassyloki/idrac-7-8-lower-fan-noise-on-dell-servers/
+
+### Summary
+
+![](./assets/2023-network-revamp/r730xd-power-savings.png)
+
+1. Base power consumption
+    * 238w average
+2. CPU Replacement
+    * 2x E5-2680v3 replaced with SINGLE E5-2667v4. BIOS Power Settings Optimized. 
+    * -28 watts, 210w average.
+3. Lowered memory frequency. No change.
+4. 14 watts saved - Removed two HDDs from server, which were not in a pool.
+    * Surprising, since these HDDs were set to maximum power savings with spin-down enabled. 
+    * -14 watts, 196w average
+5. Removed second power supply.
+    * -14 watts, 182w average.
+6. Manually setting fan speed.
+    * 14 watts, 168w average.
