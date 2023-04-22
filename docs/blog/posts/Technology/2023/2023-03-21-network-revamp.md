@@ -361,6 +361,40 @@ In addition to saving energy, this also cleaned up some room in my rack.
 
 ![](assets/2023-network-revamp/kube05-replaced.webP)
 
+## Firewall Updates
+
+### Replacing Opnsense Hardware - 31 watts saved
+
+At the start of this project, my firewall ran on a HP Z240, i5-6500/8g. 
+
+It also had a quad 1G NIC, and a dual port Intel X540-T2 10G NIC. 
+
+All said and done, it used around 35-45 watts, very consistently. 
+
+![](assets/2023-network-revamp/opnsense-energy-utilization.webP)
+
+So- I felt there was room for improving this.
+
+I had an extra Optiplex laying around with a i5-8500T and 8G of ram. I felt this would make a great replacement.
+
+This new optiplex barely sips energy, averaging around 8-11 watts.
+
+### Optimizing network layout
+
+Since, the new optiplex does not have 10G connectivity, and is limited to only 1G of throughput- I decided to re-architect the network to prevent this from being a bottleneck.
+
+So- I added an existing Edgerouter I had for handling the IOT/Security/Management VLANS, and I moved the LAN/SERVER traffic over to the new Brocade.
+
+Here- is a diagram showing the flow of data:
+
+![](assets/2023-network-revamp/logical-diagram.webP)
+
+Another benefit of this approach, when updating/rebooting the primary firewall, only WAN/VPN traffic is affected now.
+
+OSPF is leveraged between Opnsense, the Edgerouter, and the Brocade for distributing routes. Each device announces its own subnets, and redistributes to the other devices.
+
+As such, adding/removing vlans/subnets is quite easy. 
+
 ## Overall?
 
 Overall- success.
