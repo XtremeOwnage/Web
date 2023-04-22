@@ -385,7 +385,7 @@ Since, the new optiplex does not have 10G connectivity, and is limited to only 1
 
 So- I added an existing Edgerouter I had for handling the IOT/Security/Management VLANS, and I moved the LAN/SERVER traffic over to the new Brocade.
 
-Here- is a diagram showing the flow of data:
+Here- is a logical diagram showing the flow of data:
 
 ![](assets/2023-network-revamp/logical-diagram.webP)
 
@@ -400,3 +400,11 @@ As such, adding/removing vlans/subnets is quite easy.
 Overall- success.
 
 Under 500w.
+
+Here is the daily average power utilization for my server rack:
+
+![](assets/2023-network-revamp/daily-average-server.webP)
+
+(This post is still a work-in-progress.)
+
+But, as of 4/20, average rack utilization is around 450w.
