@@ -22,6 +22,13 @@ This is intended to be a “living” post which will be updated as I add more i
 
 This section will go over major issues reported, by year. Major issues are categorized as massive privacy breaches, discontinued / depreciated services, and extended outages.
 
+### 2016
+
+#### Staples Connect - Discontinued
+
+* <https://www.retaildive.com/news/staples-replacing-connect-with-third-party-smart-home-system/423867/>{target=_blank}
+* <http://www.thedigitalmediazone.com/2016/06/04/staples-disconnect/>{target=_blank}
+
 ### 2019
 
 #### Google/Nest - Works with nest discontinued
