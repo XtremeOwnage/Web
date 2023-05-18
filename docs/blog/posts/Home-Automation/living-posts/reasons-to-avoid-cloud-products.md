@@ -240,6 +240,16 @@ If you are a user of home-assistant, there IS an easy fix to this. Just- remove 
 
 [Full Local Ring Alarm - How To](./../2022-04/home-assistant-alarm.md){target=_blank}
 
+#### Belkin / Wemo - Massive Vulnerability
+
+If, you didn't take note from the Belkin / Wemo issues reported in [2020](#2020), a massive new vulnerability has been discovered.
+
+And... Belkin / Wemo has no intentions on fixing it. This should be a big sign, to not buy anymore products from Belkin...
+
+* <https://thehackernews.com/2023/05/serious-unpatched-vulnerability.html>
+* <https://9to5mac.com/2023/05/16/wemo-smart-plug-security-flaw-no-patch-coming/>
+* <https://www.hackster.io/news/sternum-researchers-find-a-serious-security-flaw-in-belkin-s-wemo-mini-which-will-remain-unpatched-e6f2255c164d>
+
 
 ## On-Going Issues
 
