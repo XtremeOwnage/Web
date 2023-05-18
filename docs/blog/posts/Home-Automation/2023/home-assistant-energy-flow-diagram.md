@@ -77,7 +77,9 @@ For my office light switch, I leverage a [Shelly 1PM](https://amzn.to/3ZR9zEm){t
 
 For the Entry and Porch lights (Double-switch box), I use a [Shelly 2.5](https://amzn.to/3ZYZpB8){target=_blank}.
 
-Lastly, all of my other lights are  [Inovelli Red](https://inovelli.com/collections/inovelli-red-series){target=_blank} z-wave dimmer switches which self-reports consumption data.
+All of my other lights are  [Inovelli Red](https://inovelli.com/collections/inovelli-red-series){target=_blank} z-wave dimmer switches which self-reports consumption data.
+
+Lastly, I use [Flashed Sonoff S31s](./sonoff-s31-low-cost-energy-plug.md){target=_blank} for collecting data from single-devices. Link goes to my post on how to flash them.
 
 ## Creating the visualization
 
