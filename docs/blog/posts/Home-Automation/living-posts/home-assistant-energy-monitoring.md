@@ -129,7 +129,7 @@ Per-circuit monitoring, with support up to 16x 50amp circuits.
 This is THE most cost-effective option for per-circuit energy monitoring. For around 120$ shipped, including 8 50amp CT clamps for individual circuits, and 2x mains clamps- you cannot beat the price. But- this price, comes with a catch.
 
 !!! warning "Warning, Potentially Cloud-Reliant"
-    Out of the box, as shipped, this product is 100% depedant on Emporia's cloud. More below.
+    Out of the box, as shipped, this product is 100% dependant on Emporia's cloud. More below.
 
 !!! information "How to flash with ESP Home for Local Control"
     If you do not wish to be dependant on the vendor's cloud, which without notice, can stop working- A reddit user has created a guide on how to flash this device to leverage ESP Home, for full local control.
@@ -137,6 +137,8 @@ This is THE most cost-effective option for per-circuit energy monitoring. For ar
     If you are not a DIY friendly user, I would recommend another product. However, if you are not scared of soldering, and flashing firmware- 
 
     [View the guide HERE](https://gist.github.com/flaviut/93a1212c7b165c7674693a45ad52c512){target=_blank}
+
+    [May 2023 - Updated Guide HERE](https://github.com/emporia-vue-local/esphome)
 
 Overall- I am against any product which relies on a vendor's servers to function. I am a very strong proponent of full, local control. As such, unless you plan on flashing this device to ESP Home using the links provided- I would recommend another product. However- if you do flash to Esp home, the price / functionality is unbeatable by anything else on this list.
 
