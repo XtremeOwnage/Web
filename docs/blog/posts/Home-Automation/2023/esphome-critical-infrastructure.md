@@ -7,6 +7,7 @@ categories:
 tags:
     - Home Assistant
     - Homelab
+    - ESPHome
 ---
 
 # Using ESPHome on critical devices, such as networking gear
