@@ -228,7 +228,7 @@ See [Disclaimer](https://github.com/itchannel/fordpass-ha#disclaimer){target=_bl
 
 ### 2023
 
-#### Ring requiring subscription to arm your alarm
+#### Amazon / Ring - Ring requiring subscription to arm your alarm
 
 Did you spend a few hundred bucks building your own ring alarm? Did you expect to own your hardware?
 
@@ -249,6 +249,17 @@ And... Belkin / Wemo has no intentions on fixing it. This should be a big sign, 
 * <https://thehackernews.com/2023/05/serious-unpatched-vulnerability.html>
 * <https://9to5mac.com/2023/05/16/wemo-smart-plug-security-flaw-no-patch-coming/>
 * <https://www.hackster.io/news/sternum-researchers-find-a-serious-security-flaw-in-belkin-s-wemo-mini-which-will-remain-unpatched-e6f2255c164d>
+
+### Amazon / Ring - Employees spying on customers using ring cameras
+
+Massive privacy breach, where internal Amazon employees were found guilty of spying on women using ring cameras. 
+
+* <https://www.reuters.com/legal/us-ftc-sues-amazoncoms-ring-2023-05-31/>
+* <https://www.theguardian.com/technology/2023/may/31/amazon-ring-doorbell-spying-ftc>
+* <https://abcnews.go.com/Technology/ring-security-cameras-gave-employee-full-access-customer/story?id=99737142>
+* <https://www.itpro.com/security/privacy/amazons-ring-agrees-to-dollar58m-settlement-over-alleged-use-of-its-cameras-to-spy-on-female-customers>
+* <https://metro.co.uk/2023/06/01/amazons-ring-camera-used-to-spy-on-customers-18879700/>
+
 
 
 ## On-Going Issues
