@@ -4,6 +4,33 @@ This is a quick page detailing a few of my "Common" components I leverage for ES
 
 Since, I am running over 30 ESPhome devices, I component-ize my configurations as much as possible to improve maintainability. 
 
+## Directory Structure
+
+For my esphome, to attempt to keep everything somewhat organized- I use a unique layout.
+
+I keep configurations for commonly used sections, under a `common` folder. I also have a `devices` folder, which containers commonly reused device-specific configurations. Ie- for the 12 or so sonoff S13s I have with mostly identical configurations. 
+
+``` bash
+├── Projects Go Here!
+├── common
+│   ├── button-restart.yaml
+│   ├── button-safemode.yaml
+│   ├── common.yaml
+│   ├── config-api.yaml
+│   ├── config-mqtt.yaml
+│   ├── config-ota.yaml
+│   ├── config-time.yaml
+│   ├── config-wifi.yaml
+│   ├── config-wifi_no_powersave.yaml
+│   ├── sensor-uptime.yaml
+│   └── sensor-wifi-signal.yaml
+├── devices
+│   ├── sonoff-s13-reset-only.yaml
+│   └── sonoff-s13.yaml
+├── secrets.yaml
+├── my-device.yaml
+
+```
 ## Common
 
 ### common.yaml
@@ -21,6 +48,33 @@ I do it this way, to keep everything in my device-specific configuration files v
 <<: !include config-mqtt.yaml
 
 logger:
+```
+
+## Secrets
+
+### secrets.yaml
+
+This is the standard Esphome Secrets file.
+
+``` yaml title="secrets.yaml"
+ota_pass: "Password for OTA updates"
+fallback_pass: "Password for Fallback AP"
+encryption_key: "Your ESPHome Encryption key."
+
+wifi_ssid: "Your Wifi SSID"
+wifi_pass: "Your Wifi Password"
+domain: ".iot.yourdomain.com"
+
+# NTP Server IP
+## See the config-time section on this post. This is not required.
+ntp_server_ip: 192.168.1.1
+timezone: America/Chicago
+
+# MQTT Server IP
+# Put YOUR Mqtt information here, IF, you want to use MQTT with your esphome devices. This is not required, and only comes in handy if you want to tie in external automation using MQTT.
+mqtt_ip: 192.168.1.1 
+mqtt_user: ""
+mqtt_pass: ""
 ```
 
 ## Config
@@ -134,6 +188,19 @@ This, just adds a "restart" button which will restart my device via home-assista
     icon: "mdi:restart"
     entity_category: diagnostic
 ```
+
+### button-safemode
+
+This adds a [Safe Mode Button](https://esphome.io/components/button/safe_mode.html){target=_blank}, which will reboot the esphome device into [Safe Mode](https://esphome.io/components/ota.html#config-ota){target=_blank}
+
+``` yaml title="button-safemode.yaml"
+  - platform: safe_mode
+    name: Safe Mode Boot
+    icon: "mdi:restart"
+    entity_category: diagnostic
+```
+
+I don't think I have never had a reason to click or use this button, however, it does exist.
 
 ## Sensors
 
