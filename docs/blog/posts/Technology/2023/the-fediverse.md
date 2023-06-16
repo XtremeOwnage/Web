@@ -40,6 +40,14 @@ So, it is possible, for example, a user on lemmyonline.com, to read a post on le
 3. Joining a bigger instance MIGHT seem like the best thing to do, HOWEVER, you are likely to have a better user experience on a smaller, less loaded instance. This is due to less load.
 4. I won't force you to join my instance. However, I do recommend you pick an instance with high uptime. [List of Instances](https://lemmy.fediverse.observer/list){target=_blank}
 
+#### What if I want to host my own instance?
+
+You can!
+
+Follow the [Official Documentation for Lemmy](https://join-lemmy.org/docs/en/users/01-getting-started.html){target=_blank}
+
+Do note, you WILL need a valid domain, and https certificate for federation to work. (Federation does not work without TLS)
+
 ### How to join mastadon?
 
 [JoinMastodon](https://joinmastodon.org/){target=_blank}
