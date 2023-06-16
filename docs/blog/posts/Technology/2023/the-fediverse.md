@@ -156,3 +156,5 @@ Over 75% of reddit subs went private in order to protest the changes.
 ### 5. Spez replaces moderators who were apart of the protest.
 
 [nbcnews.com](https://www.nbcnews.com/tech/tech-news/reddit-protest-blackout-ceo-steve-huffman-moderators-rcna89544)
+
+Will try and dig up some of the archive links from reddit posts which were deleted...
