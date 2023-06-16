@@ -7,6 +7,7 @@ categories:
 tags:
     - Home Assistant
     - Energy Monitoring
+    - ESPHome
 ---
 
 # Sonoff S31 - Low Cost Energy Monitoring
