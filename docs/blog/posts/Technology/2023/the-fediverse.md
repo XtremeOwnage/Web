@@ -177,6 +177,8 @@ Over 75% of reddit subs went private in order to protest the changes.
 
 Will try and dig up some of the archive links from reddit posts which were deleted...
 
+* <https://lemmyonline.com/post/2180>
+
 
 
 ### Better News
