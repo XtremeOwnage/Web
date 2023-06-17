@@ -23,6 +23,24 @@ KBin and Lemmy, for example, works in the same way as reddit.
 
 ALL of these applications are interconnected.
 
+## Useful Links
+
+Here is a section of useful links, and locations.
+
+### Tools
+
+* [Lemmy Community-Browser](https://browse.feddit.de/)
+* <https://fediverse.party/>
+* [Lemmy Stats / The Federation](https://the-federation.info/)
+* [Lemmy Stats / Fediverse](https://lemmy.fediverse.observer/dailystats)
+* [Lemmy Server List (Shows uptime) / Fediverse](https://lemmy.fediverse.observer/list)
+
+### Places to join
+
+* <https://join-lemmy.org/>
+* <https://joinmastodon.org/>
+* [My Self-Hosted Lemmy Instance](https://lemmyonline.com/)
+
 ## How to Join 
 
 ### How to join lemmy?
@@ -158,3 +176,11 @@ Over 75% of reddit subs went private in order to protest the changes.
 [nbcnews.com](https://www.nbcnews.com/tech/tech-news/reddit-protest-blackout-ceo-steve-huffman-moderators-rcna89544)
 
 Will try and dig up some of the archive links from reddit posts which were deleted...
+
+
+
+### Better News
+
+The verge has created a consolidated news thread of all of the events occurring. I would highly recommending giving it a read. It is far more up to date as opposed to my post here.
+
+* <https://www.theverge.com/2023/6/8/23754780/reddit-api-updates-changes-news-announcements>
