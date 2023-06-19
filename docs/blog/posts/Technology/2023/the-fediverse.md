@@ -35,6 +35,10 @@ Here is a section of useful links, and locations.
 * [Lemmy Stats / Fediverse](https://lemmy.fediverse.observer/dailystats)
 * [Lemmy Server List (Shows uptime) / Fediverse](https://lemmy.fediverse.observer/list)
 
+
+* [Lemmy Account Migrator](https://github.com/wescode/lemmy_migrate){target=_blank}
+    * Python Script - This migrates your subscribed communities from one instance, to another.
+
 ### Places to join
 
 * <https://join-lemmy.org/>
