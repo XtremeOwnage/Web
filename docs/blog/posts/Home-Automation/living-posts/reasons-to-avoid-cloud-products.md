@@ -238,7 +238,7 @@ Well, hopefully you pay your subscription to be able to arm your system!
 
 If you are a user of home-assistant, there IS an easy fix to this. Just- remove the ring cloud from your ring products. The hardware itself, uses z-wave.
 
-[Full Local Ring Alarm - How To](./../2022-04/home-assistant-alarm.md){target=_blank}
+[Full Local Ring Alarm - How To](./../2022/home-assistant-alarm.md){target=_blank}
 
 #### Belkin / Wemo - Massive Vulnerability
 
@@ -327,7 +327,7 @@ Need an example?
 
 While, there are “supported” integrations for these products in home-assistant, I caution you to tread lightly. Here is an email chain between myself and blink customer support from 2020.
 
-![](assets/blink-email.png)
+![](./../2022/assets/blink-email.png)
 
 Blink stating **any 3rd party automation** is against their TOS. For the record, Home-Assistant, Hubitat, HomeSeer.... are all 3rd party integrations.
 
