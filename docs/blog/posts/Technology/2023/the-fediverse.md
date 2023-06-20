@@ -23,6 +23,8 @@ KBin and Lemmy, for example, works in the same way as reddit.
 
 ALL of these applications are interconnected.
 
+If- you are out of the loop as to why everyone is looking for alternatives- see... [The end of reddit](2023-06-19-end-of-reddit.md)
+
 ## Useful Links
 
 Here is a section of useful links, and locations.
@@ -34,6 +36,7 @@ Here is a section of useful links, and locations.
 * [Lemmy Stats / The Federation](https://the-federation.info/)
 * [Lemmy Stats / Fediverse](https://lemmy.fediverse.observer/dailystats)
 * [Lemmy Server List (Shows uptime) / Fediverse](https://lemmy.fediverse.observer/list)
+* [History of Lemmy](https://join-lemmy.org/docs/en/users/07-history-of-lemmy.html)
 
 
 * [Lemmy Account Migrator](https://github.com/wescode/lemmy_migrate){target=_blank}
@@ -82,6 +85,8 @@ Again, it is completely possible for a user on mastadon, to post onto a lemmy se
 The easy answer, you don't 
 
 At this current time, you would need to create a new account, on a new server.
+
+You can use the [Lemmy Account Migrator](https://github.com/wescode/lemmy_migrate){target=_blank} to migrate your subscriptions to your new server.
 
 ## How do I see other content?? I can't see any of the communities I want to see.
 ## How do I subscribe to communities from other instances?
@@ -144,49 +149,3 @@ If the above steps aren't working for you-
 
 1. Make sure you are logged in
 2. Here are some more in-depth details on how to subscribe to remote communities [StackExchange](https://webapps.stackexchange.com/questions/170872/how-can-i-subscribe-to-a-remote-community-on-lemmy){target=_blank}
-
-## Why is everyone leaving reddit all of a sudden?
-
-Hint, this isn't due to the Apollo app. It never was. Apollo just happens to be one of the bigger applications affected- and the most vocal.
-
-### 1. Reddit announced API changes, which would break/end most all 3rd party applications.
-
-In addition, NSFW content, will no longer be available for 3rd-party applications.
-
-### 2. Reddit did an AMA to address the changes.
-
-[AMA Link](https://www.reddit.com/r/reddit/comments/145bram/addressing_the_community_about_changes_to_our_api/){target=_blank}
-
-However, during this AMA, basically none of the questions were answered. 
-
-And, during this process, spez was even caught copy and pasting from an answers sheet. [Archive Link](https://archive.ph/X6EJq){target=_blank}
-
-He, of course, editing the reply. hence the archive link.
-
-### 3. Reddit goes offline to protest changes.
-
-Over 75% of reddit subs went private in order to protest the changes.
-
-[Futurism.com](https://futurism.com/the-byte/reddit-rebellion-ceo){target=_blank}
-[BBC.com](https://www.bbc.com/news/technology-65855608){target=_blank}
-
-### 4. Spez, refers to the moderators as noise, and says this protest will pass.
-
-[YouTube Link - Louis Rossmann](https://www.youtube.com/watch?v=ZOm_UKGyrZg){target=_blank}
-[Mac Rumors](https://www.macrumors.com/2023/06/13/reddit-ceo-blackouts-no-revenue-impact/){target=_blank}
-
-### 5. Spez replaces moderators who were apart of the protest.
-
-[nbcnews.com](https://www.nbcnews.com/tech/tech-news/reddit-protest-blackout-ceo-steve-huffman-moderators-rcna89544)
-
-Will try and dig up some of the archive links from reddit posts which were deleted...
-
-* <https://lemmyonline.com/post/2180>
-
-
-
-### Better News
-
-The verge has created a consolidated news thread of all of the events occurring. I would highly recommending giving it a read. It is far more up to date as opposed to my post here.
-
-* <https://www.theverge.com/2023/6/8/23754780/reddit-api-updates-changes-news-announcements>
