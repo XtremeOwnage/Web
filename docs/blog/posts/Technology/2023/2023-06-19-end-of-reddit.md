@@ -57,6 +57,8 @@ This of course, happened after reddit claimed it wouldn't be forcibly re-opening
 Will try and dig up some of the archive links from reddit posts which were deleted...
 
 * <https://lemmyonline.com/post/2180>
+* [Removed as moderator of /r/Celebrities after 14 years](https://lemmy.world/post/316878)
+
 
 ### Users are reporting their deleted posts, are becoming undeleted.
 
