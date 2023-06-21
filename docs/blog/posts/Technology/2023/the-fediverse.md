@@ -37,6 +37,7 @@ Here is a section of useful links, and locations.
 * [Lemmy Stats / Fediverse](https://lemmy.fediverse.observer/dailystats)
 * [Lemmy Server List (Shows uptime) / Fediverse](https://lemmy.fediverse.observer/list)
 * [History of Lemmy](https://join-lemmy.org/docs/en/users/07-history-of-lemmy.html)
+* [Subreddit Migration Finder](https://sub.rehab/)
 
 
 * [Lemmy Account Migrator](https://github.com/wescode/lemmy_migrate){target=_blank}

@@ -116,3 +116,8 @@ I would highly recommending giving it a read.
 It is far more up to date as opposed to my post here, as they are actually paid to keep it current, and accurate. (I don't get compensated for this. I don't take your donations either.)
 
 * <https://www.theverge.com/2023/6/8/23754780/reddit-api-updates-changes-news-announcements>
+
+
+## Where have my favorite subs went to?
+
+* <https://sub.rehab/>
