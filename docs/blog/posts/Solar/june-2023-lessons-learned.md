@@ -19,9 +19,11 @@ While- this doesn't sound like a huge deal- do note, I was able to maintain clim
 
 <!-- more -->
 
+
 ## What happened?
 
 ** Add content here.
+
 
 The night of the event- Around an hour before, after hearing lots of the weather reports on the radio- I felt it would be smart to start charging the batteries up. 
 
