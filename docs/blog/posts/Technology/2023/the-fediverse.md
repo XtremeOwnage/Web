@@ -25,6 +25,10 @@ ALL of these applications are interconnected.
 
 If- you are out of the loop as to why everyone is looking for alternatives- see... [The end of reddit](2023-06-19-end-of-reddit.md)
 
+Here, is a useful infographic to explain some of the concepts.
+
+![](./assets-fediverse/fediverse-infograph.webp)
+
 ## Useful Links
 
 Here is a section of useful links, and locations.
