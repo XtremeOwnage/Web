@@ -61,9 +61,11 @@ Disclaimer- I have not tested any of these options, nor am I providing endorseme
     * Jerboa
         * [Github](https://github.com/dessalines/jerboa)
         * [Google Play Store](https://play.google.com/store/apps/details?id=com.jerboa)
-    * [Liftoff]
+    * Liftoff
         * [Github](https://github.com/liftoff-app/liftoff)
     * Lemmy itself, functions as a progressive web application. (Click menu, save to desktop)
+
+Here is also a [Kbin post](https://kbin.social/m/kbinMeta/t/73564) containing a much more thorough list of options, including IOS options.
 
 Note- There is a rumor Sync for reddit will support the fediverse as on June 30th. Unconfirmed. 
 ## How to Join 
