@@ -53,6 +53,19 @@ Here is a section of useful links, and locations.
 * <https://joinmastodon.org/>
 * [My Self-Hosted Lemmy Instance](https://lemmyonline.com/)
 
+### Mobile Applications
+
+Disclaimer- I have not tested any of these options, nor am I providing endorsements. 
+
+* Android
+    * Jerboa
+        * [Github](https://github.com/dessalines/jerboa)
+        * [Google Play Store](https://play.google.com/store/apps/details?id=com.jerboa)
+    * [Liftoff]
+        * [Github](https://github.com/liftoff-app/liftoff)
+    * Lemmy itself, functions as a progressive web application. (Click menu, save to desktop)
+
+Note- There is a rumor Sync for reddit will support the fediverse as on June 30th. Unconfirmed. 
 ## How to Join 
 
 ### How to join lemmy?
