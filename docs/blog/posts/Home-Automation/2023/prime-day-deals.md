@@ -26,7 +26,7 @@ If, you need reasons as to why required cloud services are bad, see [Reasons to 
 
 ### Smart Plugs
 
-#### Sonoff S31
+#### [Wifi] Sonoff S31
 
 These are my absolute favorite smart plug at this point in time. I have 30 of these laying around. I use them for turning things on and off. I use them for tracking energy consumption.
 
@@ -44,7 +44,7 @@ Note-
 
 Do NOT buy the S40s! They do not run esp chips, and cannot be flashed!!!!
 
-#### Sonoff S31 Lite
+#### [Wifi] Sonoff S31 Lite
 
 If you don't need energy monitoring, and want to save a few bucks over the S31, you can instead opt for the S31 Lite.
 
@@ -61,7 +61,7 @@ Note-
 
 Do NOT buy the S40s! They do not run esp chips, and cannot be flashed!!!!
 
-#### Kasa HS103 - Smart Plug
+#### [Wifi] Kasa HS103 - Smart Plug
 
 Generic 15 amp smart plug. No energy monitoring.
 
@@ -73,7 +73,7 @@ Native home assistant integration.
 
 * [Amazon](https://amzn.to/46Imb4k){target=_blank}
 
-#### Kasa KP405 - Outdoor Watertight Dimmer
+#### [Wifi] Kasa KP405 - Outdoor Watertight Dimmer
 
 These plugs are quite handy for outdoor use. I have one I use for controlling yard decorations during christmas time. 
 
@@ -83,9 +83,15 @@ Native home assistant integration.
 
 * [Kasa KP405](https://amzn.to/3NNUvSZ){target=_blank}
 
+#### [Z-Wave] Zooz ZEN05 Outdoor Plug
+
+Outdoor IP65 rated single-socket smart plug, using z-wave.
+
+* [Amazon - Zooz ZEN05](https://amzn.to/44k87wp){target=_blank}
+
 ### Powerstrips
 
-#### Kasa HS300
+#### [Wifi] Kasa HS300
 
 6 socket, individually controllable powerstrip with per-plug energy monitoring. 
 
@@ -100,7 +106,7 @@ I have 5 of these around for various use-cases, and can say, they work pretty ni
 
 ### Other
 
-#### Sonoff
+#### [Wifi] Sonoff
 
 All of these products can be flashed to esphome. These are also quite small, and will easily fit inside of a normal outlet box, or switch box.
 
@@ -130,10 +136,48 @@ I have been running the older variants for years. The new "Plus" models are base
 * [Shelly Plus Addon](https://amzn.to/46K2BVf){target=_blank}
     * You can connect sensors up to this. It doesn't control or switch loads. But- you can connect temp sensors to it.
 
+#### [Z-Wave] Zooz 800-series Z-Wave Stick
+
+My current z-wave stick is a zooz 700 series. It has been rock solid so far, with no issues to speak of. BUT, you can get a 800 series stick pretty cheap right now.
+
+* [Amazon](https://amzn.to/3O6ULxQ){target=_blank}
+
+##### Why 800 series over 700 series?
+
+If you are curious to know the difference between 700 series, and 800 series- I was too. [Here are the differences](https://community.silabs.com/s/share/a5U8Y000000bwgaUAA/zwave-500-vs-700-vs-800-why-use-the-new-800-series-for-smart-home-devices?language=en_US){target=_blank}
+
+Differences:
+
+1. Longer max range. (1.5+ miles vs 1 mile)
+2. S2 + [Secure Vault.](https://www.silabs.com/security/secure-vault){target=_blank}. (Its more secure... somehow.)
+
+The TLDR; if you already have a 700-series stick, I don't think it is worth upgrading. But, if you are on a 500 series stick, I'd consider upgrading.
+
+
+#### [Z-Wave] Aeotec Z-Stick 7 Plus
+
+If, you need a z-wave hub, Aeotec has an option on sale.
+
+These work natively with home assistant. 
+
+* [Amazon](https://amzn.to/3DaNoiK){target=_blank}
+
+#### [Z-Wave] Zooz Remote Control Switch
+
+Z-wave by design, works 100% locally, and doesn't have the capability of talking to the internet even if it wanted to. 
+
+Do note- Z-wave does require you to have a z-wave hub.
+
+!!! info 
+    Note- this is NOT a light switch. Instead, this is a battery-operated z-wave remote-control button, which looks like a light switch.
+
+    This is generally used to control other z-wave based devices using scenes.
+
+* [Amazon](https://amzn.to/3JSDoyk){target=_blank}
 
 ### Light Switches
 
-#### Kasa HS200 - Light Switch
+#### [Wifi] Kasa HS200 - Light Switch
 
 While, all new switches I replace are generally z-wave based, or something running esphome- I do have one of these in my hallway, and it has been in place since 2020.
 
@@ -151,7 +195,7 @@ Do note, I am ONLY going to recommend things that will work 100% locally, with h
 
 So, no ring doorbells.
 
-#### Ring Alarm - 14 piece kit
+#### [Z-Wave] Ring Alarm - 14 piece kit
 
 All of these components will work with a proper z-wave setup, WITHOUT having a ring/amazon account. 
 
@@ -171,7 +215,7 @@ Do note- if you isolate these devices from the internet (HIGHLY recommended), th
 
 Having ran my fire tablet as a kiosk for over a year, I would highly recommend one. Just- make sure to keep it 100% isolated from the internet!!!!
 
-#### Fire Tablet
+#### [Wifi] Fire Tablet
 
 * [Amazon - HD 10](https://amzn.to/3XOnVos)
 * [Amazon - HD 8](https://amzn.to/44lt5en)
@@ -180,7 +224,7 @@ Having ran my fire tablet as a kiosk for over a year, I would highly recommend o
 
 ### Weather / Temp / Environment Monitoring
 
-#### Acurite
+#### [433mhz] Acurite
 
 Most of the acurite hardware works over 433mhz.
 
