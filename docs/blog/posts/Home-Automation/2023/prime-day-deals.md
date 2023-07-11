@@ -180,6 +180,12 @@ Do note- Z-wave does require you to have a z-wave hub.
 
 * [Amazon](https://amzn.to/3JSDoyk){target=_blank}
 
+#### [Zigbee] Sonoff Zigbee 3.0 Dongle
+
+Disclaimer- I have not used this product before, and cannot confirm nor deny how well it functions.
+
+* [Amazon](https://amzn.to/44FFyt6){target=_blank}
+
 ### Light Switches
 
 #### [Wifi] Kasa HS200 - Light Switch
