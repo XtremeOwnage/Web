@@ -240,3 +240,20 @@ You WILL need a working 433mhz setup to properly integrate into home assistant.
 * [Acurite Iris 5-in-1](https://amzn.to/43r0h2x){target=_blank}
 
 (Sadly, I didn't find any of the other acurite hardware on sale)
+
+### Smart Blinds
+
+#### [Z-Wave] iBlinds v3 Smart Motor Kit
+
+Disclaimer- I have not personally used this product. However- this is a z-wave controlled motor you can retrofit into your existing blinds.
+
+* [Amazon](https://amzn.to/3rnBDTn){target=_blank}
+
+#### [Wifi] Switchbot Blind Tilt Control
+
+Disclaimer- I have not personally used this product either.
+
+However, this offers tilt control for your blinds. As well, it is solar powered with its own battery.
+
+* [Amazon](https://amzn.to/3PLDv2q){target=_blank}
+* [Local, Native Home Assistant](https://www.home-assistant.io/integrations/switchbot/)
