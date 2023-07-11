@@ -26,7 +26,12 @@ If, you need reasons as to why required cloud services are bad, see [Reasons to 
 
 ### Smart Plugs
 
-#### [Wifi] Sonoff S31
+#### [Wifi] Sonoff 
+
+!!! warn
+    Warning! The Sonoff S40s are on sale, and are cheap. However, they do not leverage a esp-based processor, and cannot be easily flashed!
+
+##### Sonoff S31
 
 These are my absolute favorite smart plug at this point in time. I have 30 of these laying around. I use them for turning things on and off. I use them for tracking energy consumption.
 
@@ -40,11 +45,7 @@ Native home assistant integration.
 * [My Review / Install / Guide (2023)](./sonoff-s31-low-cost-energy-plug.md)
 * [Esphome](https://devices.esphome.io/devices/Sonoff-S31){target=_blank}
 
-Note- 
-
-Do NOT buy the S40s! They do not run esp chips, and cannot be flashed!!!!
-
-#### [Wifi] Sonoff S31 Lite
+##### Sonoff S31 Lite
 
 If you don't need energy monitoring, and want to save a few bucks over the S31, you can instead opt for the S31 Lite.
 
@@ -57,11 +58,18 @@ Native home assistant integration.
 * [Amazon](https://amzn.to/44iazDn){target=_blank}
 * [Esphome](https://devices.esphome.io/devices/Sonoff-S31-lite){target=_blank}
 
-Note- 
+#### [Wifi] Tplink Kasa
 
-Do NOT buy the S40s! They do not run esp chips, and cannot be flashed!!!!
+* [NATIVE Home-Assistant Integration](https://www.home-assistant.io/integrations/tplink/){target=_blank}
+* 100% local control.
+* Kasa devices DO require you to do initial setup using the kasa app. However, can be controlled completely by home-assistant afterwards.
 
-#### [Wifi] Kasa HS103 - Smart Plug
+!!! warn
+    Be careful updating the firmware of kasa devices. They have removed local-only control in the past.
+
+    [More Inforamtion](https://community.home-assistant.io/t/tp-link-offers-way-to-add-local-api-back/248333)
+
+##### Kasa HS103
 
 Generic 15 amp smart plug. No energy monitoring.
 
@@ -69,17 +77,14 @@ I still have 10 of these around the house, and they do work well. But, I prefer 
 
 These do work 100% locally, but, requires a phone app for initial setup.
 
-Native home assistant integration.
-
 * [Amazon](https://amzn.to/46Imb4k){target=_blank}
 
-#### [Wifi] Kasa KP405 - Outdoor Watertight Dimmer
+
+##### KP405 - Outdoor Watertight Dimmer
 
 These plugs are quite handy for outdoor use. I have one I use for controlling yard decorations during christmas time. 
 
 These do work 100% locally, but, requires a phone app for initial setup.
-
-Native home assistant integration.
 
 * [Kasa KP405](https://amzn.to/3NNUvSZ){target=_blank}
 
