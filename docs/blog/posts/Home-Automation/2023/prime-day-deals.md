@@ -106,7 +106,7 @@ I have 5 of these around for various use-cases, and can say, they work pretty ni
 
 ### Other
 
-#### [Wifi] Sonoff
+#### [Wifi] Shelly (Assorted)
 
 All of these products can be flashed to esphome. These are also quite small, and will easily fit inside of a normal outlet box, or switch box.
 
