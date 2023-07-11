@@ -28,7 +28,7 @@ If, you need reasons as to why required cloud services are bad, see [Reasons to 
 
 #### [Wifi] Sonoff 
 
-!!! warn
+!!! warning
     Warning! The Sonoff S40s are on sale, and are cheap. However, they do not leverage a esp-based processor, and cannot be easily flashed!
 
 ##### Sonoff S31
@@ -64,7 +64,7 @@ Native home assistant integration.
 * 100% local control.
 * Kasa devices DO require you to do initial setup using the kasa app. However, can be controlled completely by home-assistant afterwards.
 
-!!! warn
+!!! warning
     Be careful updating the firmware of kasa devices. They have removed local-only control in the past.
 
     [More Inforamtion](https://community.home-assistant.io/t/tp-link-offers-way-to-add-local-api-back/248333)
