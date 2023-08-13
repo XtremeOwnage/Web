@@ -1,0 +1,57 @@
+root@kube02:/sys/block# ceph tell osd.* bench
+osd.0: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 2.2576273690000002,
+    "bytes_per_sec": 475606310.74188572,
+    "iops": 113.3933808188166
+}
+osd.1: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 2.3308212839999998,
+    "bytes_per_sec": 460671022.42919117,
+    "iops": 109.83253060083179
+}
+osd.2: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 2.2769649159999998,
+    "bytes_per_sec": 471567135.90750825,
+    "iops": 112.43036649406153
+}
+osd.3: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 1.0901841249999999,
+    "bytes_per_sec": 984917867.88768375,
+    "iops": 234.82271859352201
+}
+osd.4: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 2.2955671569999998,
+    "bytes_per_sec": 467745768.5024721,
+    "iops": 111.51928150712779
+}
+osd.5: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 1.08393805,
+    "bytes_per_sec": 990593349.86902618,
+    "iops": 236.1758589432302
+}
+osd.6: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 1.0796095079999999,
+    "bytes_per_sec": 994564994.14230812,
+    "iops": 237.12277272756293
+}
+osd.7: {
+    "bytes_written": 1073741824,
+    "blocksize": 4194304,
+    "elapsed_sec": 1.072906626,
+    "bytes_per_sec": 1000778444.2557819,
+    "iops": 238.60417467493579
+}
