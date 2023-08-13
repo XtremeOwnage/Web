@@ -13,7 +13,29 @@ tags:
 
 My adventures in building out a small clustered ceph environment for redundant VM / Container storage. 
 
+!!! quote
+    Ceph is a great way to extract 10,000 IOPs from over 5 million IOPs worth of SSDs! -XtremeOwnage
+
 <!-- more -->
+
+## Why should you use ceph?
+
+In most cases, you shouldn't.
+
+If you have a centralized storage server, or SAN, ceph is likely not the tool for you. 
+
+As well, if you only have one or two nodes in a cluster, ceph is likely not the tool for you.
+
+Ceph is useful, for when you want to decentralize your storage, without having a central storage server, or SAN.
+
+You also should only use ceph, when you have AT LEAST three nodes. 
+
+My reasons for wanting to use ceph:
+
+1. Reduce my dependency on any single piece of hardware. I want to be able to performance maintenance on any server in my rack, with the least amount of service disruption. 
+2. I want to be able to instantly "vMotion" VMs in my proxmox cluster, without having to wait for ZFS replication.
+3. While I have previously leveraged ceph for my kubernetes cluster, I wanted to learn more about using it. For me, the best way to learn something, is to jump into it head first.
+4. Distributed, and remote storage. Any new node I add to my proxmox cluster, automatically has access to anything stored in ceph, regardless if the node hosts ceph storage or not. The proxmox/ceph integration works very nicely.
 
 ## Cluster Details
 
