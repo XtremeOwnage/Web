@@ -25,6 +25,10 @@ ALL of these applications are interconnected.
 
 If- you are out of the loop as to why everyone is looking for alternatives- see... [The end of reddit](2023-06-19-end-of-reddit.md)
 
+Here, is a useful infographic to explain some of the concepts.
+
+![](./assets-fediverse/fediverse-infograph.webp)
+
 ## Useful Links
 
 Here is a section of useful links, and locations.
@@ -37,6 +41,7 @@ Here is a section of useful links, and locations.
 * [Lemmy Stats / Fediverse](https://lemmy.fediverse.observer/dailystats)
 * [Lemmy Server List (Shows uptime) / Fediverse](https://lemmy.fediverse.observer/list)
 * [History of Lemmy](https://join-lemmy.org/docs/en/users/07-history-of-lemmy.html)
+* [Subreddit Migration Finder](https://sub.rehab/)
 
 
 * [Lemmy Account Migrator](https://github.com/wescode/lemmy_migrate){target=_blank}
@@ -48,6 +53,21 @@ Here is a section of useful links, and locations.
 * <https://joinmastodon.org/>
 * [My Self-Hosted Lemmy Instance](https://lemmyonline.com/)
 
+### Mobile Applications
+
+Disclaimer- I have not tested any of these options, nor am I providing endorsements. 
+
+* Android
+    * Jerboa
+        * [Github](https://github.com/dessalines/jerboa)
+        * [Google Play Store](https://play.google.com/store/apps/details?id=com.jerboa)
+    * Liftoff
+        * [Github](https://github.com/liftoff-app/liftoff)
+    * Lemmy itself, functions as a progressive web application. (Click menu, save to desktop)
+
+Here is also a [Kbin post](https://kbin.social/m/kbinMeta/t/73564) containing a much more thorough list of options, including IOS options.
+
+Note- There is a rumor Sync for reddit will support the fediverse as on June 30th. Unconfirmed. 
 ## How to Join 
 
 ### How to join lemmy?

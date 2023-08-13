@@ -1,0 +1,32 @@
+root@kube02:/sys/block# rados bench -p scbench 10 write --no-cleanup
+hints = 1
+Maintaining 16 concurrent writes of 4194304 bytes to objects of size 4194304 for up to 10 seconds or 0 objects
+Object prefix: benchmark_data_kube02_57301
+  sec Cur ops   started  finished  avg MB/s  cur MB/s last lat(s)  avg lat(s)
+    0       0         0         0         0         0           -           0
+    1      16       189       173   691.928       692   0.0189426   0.0889993
+    2      16       384       368   735.916       780    0.152198   0.0833317
+    3      16       585       569   758.572       804   0.0279818   0.0820953
+    4      16       761       745   744.904       704   0.0928292   0.0845662
+    5      16       947       931   744.699       744    0.113567   0.0842458
+    6      16      1154      1138   758.564       828   0.0593037   0.0834596
+    7      16      1329      1313   750.186       700   0.0762677   0.0842968
+    8      16      1529      1513   756.398       800   0.0401432   0.0840097
+    9      16      1695      1679   746.122       664    0.039783   0.0852354
+   10      16      1878      1862   744.697       732    0.218267   0.0856166
+Total time run:         10.0457
+Total writes made:      1878
+Write size:             4194304
+Object size:            4194304
+Bandwidth (MB/sec):     747.784
+Stddev Bandwidth:       55.6433
+Max bandwidth (MB/sec): 828
+Min bandwidth (MB/sec): 664
+Average IOPS:           186
+Stddev IOPS:            13.9108
+Max IOPS:               207
+Min IOPS:               166
+Average Latency(s):     0.0855197
+Stddev Latency(s):      0.0543139
+Max latency(s):         0.394606
+Min latency(s):         0.010446
