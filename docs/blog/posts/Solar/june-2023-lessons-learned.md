@@ -20,22 +20,17 @@ While- this doesn't sound like a huge deal- do note, I was able to maintain clim
 <!-- more -->
 
 
-## What happened?
+## Responding to the Crisis
 
-** Add content here.
+While this might not seem extraordinary, it's important to note that I managed to maintain climate control within my home and sustain the operation of an entire rack of servers throughout the power outage.
 
+Recognizing the impending storm's severity, I proactively initiated the battery charging process about an hour before it hit. Normally, the batteries would accumulate surplus solar energy during the day and discharge only to a minimum of 50% capacity.
 
-The night of the event- Around an hour before, after hearing lots of the weather reports on the radio- I felt it would be smart to start charging the batteries up. 
+I adjusted the inverter settings to enable the battery charging at a full 10,000 watts from the grid, which was a significant enhancement from the previous limit of 5,000 watts.
 
-Normally, the batteries will charge with excess solar during the day, and then release as needed (but, only down to 50%)
+When the grid went down during the event, my house seamlessly transitioned to battery power, demonstrating a flawless performance of the system.
 
-After setting my system to charge up the batteries- I was able to bring the state of charge from 50-60% in roughly 30 minutes. 
-
-* Item Corrected: I have modified the inverter to charge from grid at a FULL 10,000 watts. It was previously only set to charge around 5,000 watts from the grid, maximum.
-
-During the event, the entire grid went down, and my house instantly switched over to battery power. This worked flawlessly.
-
-## Timeline
+## A Day-by-Day Account
 
 ### The first night
 
@@ -47,27 +42,25 @@ And- everything worked pretty well throughout the night. HOWEVER- I un-mistakenl
 
 ### Day 1
 
-This, resulted in most of the power being shutoff around 7:20am. My servers, however, have a dedicated UPS with 2.4kwh of battery capacity, and were able to continue running.
+This led to a significant reduction in available power by around 7:20 am. Fortunately, my servers are equipped with a dedicated UPS featuring a 2.4 kWh battery capacity, enabling them to remain operational.
 
-* Item Corrected: Low-battery shut-off moved down to 10% capacity.
+* Correction Applied: Lowered the low-battery shut-off to 10% capacity.
 
-During normal operation, the batteries will never drain below 50%. So, in theory, the low-battery shut-off should only take effect when complete loss of grid has occurred. 
+Typically, the batteries are configured to never deplete below 50% charge during standard usage. Therefore, the low-battery shut-off should ideally engage only when a complete grid failure occurs.
 
-After, drinking some coffee, my first action was to fire up the generator as solar production doesn't really pick up until between 8am and 9am.
+After taking a coffee break, my initial step was to start the generator. Since solar energy production tends to pick up between 8 am and 9 am, this move was strategic.
 
-It took a lot of fiddling to get the inverter properly configured to accept the generator power- but, after doing so- I was able to get the batteries charged up.
+Although configuring the inverter to accept generator power required considerable tinkering, I eventually succeeded. Consequently, the generator began recharging the batteries.
 
-* Item Corrected: Generator settings properly configured... Although- this will become unneeded in a future step.
+* Correction Applied: Generator settings have been configured. However, this will become obsolete in a future step.
 
-After the generator was running, and battery was flowing into the batteries- the sun also managed to come out and produce some solar.
+As the generator operated and the batteries began to replenish, the sun emerged, contributing solar energy as well.
 
 ![](./assets-storm/day-1-utilization.webP)
 
-After a few hours when the PV output was up quite a bit, I went ahead and turned off the generator, allowing solar production to power everything, and run the loads.
+Several hours later, when the photovoltaic (PV) output had risen significantly, I deactivated the generator. This allowed solar production to take over and supply power to all the loads.
 
-I felt it would be best to ensure the batteries were completely charged up before going to bed, So, that evening after PV production had ceased, I fired up the generator and let it run until around 10pm.
-
-This, was enough to get around 95% state of charge.
+To ensure that the batteries were optimally charged for the night, I decided to run the generator again after PV production ceased in the evening. This continued until around 10 pm, effectively achieving a battery charge level of approximately 95%.
 
 ### Day 2
 
@@ -186,13 +179,11 @@ This was managed by a few settings on my inverter.
 
 #### How to fix this / WHY is this a problem?
 
-The reason the generator power is noisy- When the inverter receives either grid power, or generator power, it does not invert it. 
+The generator's power quality issue stems from the fact that when the inverter receives power from the grid or generator, it doesn't convert it but directly routes it to the connected loads. This design doesn't suit smaller generators like the Harbor Freight Predator, as these inverters are generally optimized for larger generators.
 
-Rather, it passes it directly through to the loads. I do believe most of these inverters are designed with a much larger generator in mind, and not a harbor freight predator.
+To address this problem, the solution involves not sending the generator power to the inverter. Instead, a more effective approach is to convert the generator's 240V AC power into clean DC power through inversion.
 
-As such, the method to fix this- is by not sending the generator power to the inverter. Rather- instead, we can invert the 240v AC from the generator, into nice, clean DC power.
-
-Signature solar, happens to sell a 5kw 48v charger which will work perfectly in this setup.
+A suitable solution for this scenario is offered by Signature Solar. They have a 5kW 48V charger available, which seamlessly integrates into this configuration. This charger provides the required functionality to rectify the generator power's noise issue and ensure a stable power supply.
 
 ![](./assets-storm/chargeverter.webP)
 
@@ -205,7 +196,7 @@ Signature solar, happens to sell a 5kw 48v charger which will work perfectly in 
 
 ##### The downsides
 
-1. Slight efficiency losses from inverting the power twice.
+1. Slight efficiency losses from inverting the power twice. (Generator AC -> DC To Battery/Inverter -> AC to House)
 2. Slightly reduced generator capacity. Going through the inverter, I can load the generator far in excess of its actual capacity. 
     * During testing while off-grid, I did manage to load the 7,200 watt rated generator at 7,000 watts for around... 30 minutes before it tripped its circuit breaker.
     * This- is not a massive disadvantage, as the generator is likely to run more efficiently at around 50-80% of its rated capacity. Running at full capacity, it was chugging fuel pretty quickly...
@@ -217,21 +208,15 @@ With 20kwh of battery capacity- there is only so much you can run from battery.
 
 #### Server Loads
 
-While- most households could actually go most of a day on 20kwh with ease- in my particular case- I have a rack full of servers hosting things.
+While most households can comfortably function on 20kWh of energy throughout a day, my specific situation is unique due to the presence of a full rack of servers dedicated to hosting various services. These services include my personal website, https://lemmyonline.com/, and my NVR, among others.
 
-Things like this website. Things like https://lemmyonline.com/, My NVR... etc. 
+Collectively, the servers in my setup consume around 400-700 watts of power, operating non-stop to provide both internal and external services. Although the option to downsize is available, such a move would unavoidably result in diminished functionality in other essential aspects.
 
-All together, I have around 400-700 watts of energy, running 24/7 providing services both internally, and externally.
+Nonetheless, I have made improvements to the setup by ensuring that all critical operations are now handled within my Kubernetes cluster. This strategic arrangement grants me the flexibility to power down my substantial "BIG" server, which accounts for a load of 300-400 watts. The remaining servers then operate at a mere 10-20 watts each, dedicated to running the Kubernetes cluster, firewall, home automation, NVR, and more.
 
-While downsizing is an option, it cannot be done without loss of functionality in other areas.
+It's worth noting that the larger server also hosts a significant volume of content, exceeding 100 terabytes. Fortunately, this content can generally tolerate being shut down overnight without issue.
 
-However, one area I have improved on after the fact, is ensuring all critical loads are running in my kubernetes cluster.
-
-This, allows me the flexibility to shutting down my "BIG" server (which is responsible for 300-400w of overall load). The remaining servers will only sip around 10w-20w each to run my kubernetes cluster, firewall, home automation, NVR, etc.
-
-Although- my big server, also hosts over 100 terabytes worth of content. But, this content will generally be OK, shut-down overnight.
-
-Altogether, my server rack is responsible for over half of the off-peak power load.  
+In totality, my server rack shoulders the responsibility for more than half of the off-peak power consumption.
 
 #### HVAC Loads
 
@@ -249,43 +234,35 @@ As such, I did not feel significant changes needed to occur here.
 
 ### Limited PV/Solar Capacity
 
-I currently have 5kw of panels installed on my roof, which theoretically, will produce, around 5kw. 
+Presently, my roof is equipped with 5kW solar panels, theoretically capable of generating about 5kW of power. However, several factors have led to a reduction in the actual power production:
 
-However, a few factors are driving this production down.
+1. Cloudy and overcast skies.
+2. [Smoke from wildfires in Canada](https://www.nytimes.com/interactive/2023/us/smoke-maps-canada-fires.html){target=_blank}
+3. Other environmental conditions.
 
-1. Clouds / Overcast skys
-2. [Smoke in the atmosphere from the fires in Canada](https://www.nytimes.com/interactive/2023/us/smoke-maps-canada-fires.html){target=_blank}
-3. etc.
+As a result of these influences, my solar panels were producing approximately 3kW to 4kW of power during this particular event.
 
-So, during this event, my panels were generally producing around 3kw to 4kw.
-
-Here- is a chart of my last weeks worth of production:
+Shown below is a chart detailing the production over the past week:
 
 ![](./assets-storm/pv-production.webP)
 
-Do note- on the day after the storm, production was abnormally high. Perhaps- the storms blew away smoke in the atmosphere? 
+It's worth noting that the day following the storm, there was an unusually high spike in production. This could possibly be attributed to the storm dispersing the atmospheric smoke.
 
-The rest of the time, production was rather lackluster due to the above potential causes.
+Throughout the rest of the week, production remained modest due to the factors mentioned above.
 
-For running 99% of the house, this is plenty of production.
+Fortunately, this level of production is sufficient to power a significant portion of my house. Essential operations like running servers, work computers, dishwashers, dryers, and washing machines can all function with this level of solar output. The main exception is the central HVAC unit, which requires more power than the available solar production can provide.
 
-I could run the servers, my computers for work. The dishwasher/dryer/washing machine could run. 
+#### Significance of the Main HVAC
 
-Everything, except the main HVAC.
+It's important to emphasize the significance of maintaining a functional main HVAC system. It's worth noting that my household includes not only myself but also my wife and young children.
 
-#### Why was the main HVAC important?
+During periods of heat advisories when the outdoor temperature exceeds 90 degrees Fahrenheit, the air conditioning (AC) becomes crucial. This is particularly true given the heat generated by the multitude of electronics necessary for my work and various projects.
 
-Do note, I am not a single person living in a basement.
+The main issue arises due to the energy demands of the AC compressor itself. It draws a substantial 3.5 to 4 kW of power, with an additional 500W required to operate the furnace blower. Consequently, the overall energy consumption for running the HVAC amounts to approximately 4-5 kW.
 
-I have a wife, and young children. 
+However, the challenge lies in the fact that my solar panels generate around 3-4 kW of power. Moreover, considering the other typical daily loads of 1.2 to 2 kW, the collective energy demand surpasses the available solar power production. In total, running both the AC and other essential appliances would consume between 5 to 7 kW of energy.
 
-When, there is a heat-advisory outside, and its 90+ degrees out- the AC is needed. Especially, when you consider the amount of heat being produced by all of the electronics required for my occupation, and other projects.
-
-The reason the main HVAC is an issue- the AC Compressor itself, draws around 3.5 - 4kw of energy, along with another 500w to run the furnace blower. This equals around 4-5kw total energy to run the HVAC.
-
-This is a problem, because I am only producing 3-4kw of solar power. (Don't forget the other 1.2kw to 2kw of loads during the day!) Running the AC along with the other normal loads would consume around 5-7kw of total energy.
-
-Again- this can run, however, it would suck the batteries down pretty quickly.... and I need those for nighttime!
+Although this arrangement is feasible, it would deplete the batteries at a swift pace, a situation that isn't ideal considering their importance for nighttime power needs. Therefore, the key lies in enhancing the solar panel capacity or employing alternative power solutions to ensure the reliable operation of the main HVAC system and maintain indoor comfort for my family.
 
 #### How to fix this?
 
