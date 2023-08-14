@@ -18,3 +18,6 @@ As new posts and content are created in the future regarding this project, the b
 * [Next Steps?](./../../blog/posts/Solar/solar-part-5-next-steps.md)
 * [Installing A/C Soft-Start](./../../blog/posts/Solar/ac-soft-start.md)
     * Installing a soft-start for my A/C compressor, to allow it to easily start when running off-grid.
+* [Running off-grid for 4 days after a disaster](./../../blog/posts/Solar/june-2023-lessons-learned.md)
+    * A weather event caused me to run off-grid for a few days. Lessons learned.
+
