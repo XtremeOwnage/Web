@@ -235,7 +235,7 @@ See [Disclaimer](https://github.com/itchannel/fordpass-ha#disclaimer){target=_bl
 
 ### 2023
 
-#### Ring requiring subscription to arm your alarm
+#### Amazon / Ring - Ring requiring subscription to arm your alarm
 
 Did you spend a few hundred bucks building your own ring alarm? Did you expect to own your hardware?
 
@@ -245,7 +245,28 @@ Well, hopefully you pay your subscription to be able to arm your system!
 
 If you are a user of home-assistant, there IS an easy fix to this. Just- remove the ring cloud from your ring products. The hardware itself, uses z-wave.
 
-[Full Local Ring Alarm - How To](./../2022-04/home-assistant-alarm.md){target=_blank}
+[Full Local Ring Alarm - How To](./../2022/home-assistant-alarm.md){target=_blank}
+
+#### Belkin / Wemo - Massive Vulnerability
+
+If, you didn't take note from the Belkin / Wemo issues reported in [2020](#2020), a massive new vulnerability has been discovered.
+
+And... Belkin / Wemo has no intentions on fixing it. This should be a big sign, to not buy anymore products from Belkin...
+
+* <https://thehackernews.com/2023/05/serious-unpatched-vulnerability.html>
+* <https://9to5mac.com/2023/05/16/wemo-smart-plug-security-flaw-no-patch-coming/>
+* <https://www.hackster.io/news/sternum-researchers-find-a-serious-security-flaw-in-belkin-s-wemo-mini-which-will-remain-unpatched-e6f2255c164d>
+
+### Amazon / Ring - Employees spying on customers using ring cameras
+
+Massive privacy breach, where internal Amazon employees were found guilty of spying on women using ring cameras. 
+
+* <https://www.reuters.com/legal/us-ftc-sues-amazoncoms-ring-2023-05-31/>
+* <https://www.theguardian.com/technology/2023/may/31/amazon-ring-doorbell-spying-ftc>
+* <https://abcnews.go.com/Technology/ring-security-cameras-gave-employee-full-access-customer/story?id=99737142>
+* <https://www.itpro.com/security/privacy/amazons-ring-agrees-to-dollar58m-settlement-over-alleged-use-of-its-cameras-to-spy-on-female-customers>
+* <https://metro.co.uk/2023/06/01/amazons-ring-camera-used-to-spy-on-customers-18879700/>
+
 
 
 ## On-Going Issues
@@ -313,7 +334,7 @@ Need an example?
 
 While, there are “supported” integrations for these products in home-assistant, I caution you to tread lightly. Here is an email chain between myself and blink customer support from 2020.
 
-![](assets/blink-email.png)
+![](./../2022/assets/blink-email.png)
 
 Blink stating **any 3rd party automation** is against their TOS. For the record, Home-Assistant, Hubitat, HomeSeer.... are all 3rd party integrations.
 

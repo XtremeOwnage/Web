@@ -23,7 +23,7 @@ To perform general configuration of the ConnectX-3, we will need....
 * ethtool
     * `apt-get install ethtool`
 * ConnectX-3 set in ETHERNET mode.
-    * [How to set ConnectX-3 to Ethernet](./../2023-01/2023-01-23-ConnectX3-PortMode.md){target=_blank}
+    * [How to set ConnectX-3 to Ethernet](./2023-01-23-ConnectX3-PortMode.md){target=_blank}
 
 
 ## Configuration

@@ -78,7 +78,7 @@ The final step to achieve the performance numbers I have been hunting for- I ins
 Out of the box, with no tuning whatsoever, it had no issues at all besting every performance metric from Scale.
 
 
-### 2023-01 [Death of my r720XD](./../../blog/posts/Technology/2023-01/r720xd-death.md)
+### 2023-01 [Death of my r720XD](./../../blog/posts/Technology/2023/2023-01-13-r720xd-death.md)
 
 While my [Home Solar Project](Solar-Project.md) was being installed, I powered down my r720xd to save a bit on battery, since I had to go a full day without any grid connection. Well, low and behold, when I went to power the machine back online, it wasn't having it.
 

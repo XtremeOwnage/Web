@@ -9,7 +9,7 @@ tags:
 
 # ConnectX-3 Set Port Mode to ETH/IB
 
-I just swapped my TrueNAS from a [Dell R720XD](./r720xd-death.md) over to a Dell r730XD. During this migration, I moved over my NVMe drives, NICs, and everything else relavent.
+I just swapped my TrueNAS from a [Dell R720XD](2023-01-13-r720xd-death.md) over to a Dell r730XD. During this migration, I moved over my NVMe drives, NICs, and everything else relevant.
 
 However, after firing up TrueNAS on the new hardware, I noticed my 40G NIC was not listed in the list of devices!
 

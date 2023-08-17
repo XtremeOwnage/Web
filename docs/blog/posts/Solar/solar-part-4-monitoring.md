@@ -20,7 +20,7 @@ Will be adding Iotawatt for per-circuit energy monitoring, and solar-assistant f
 
 Previously, I have used Iotawatt with great success. The interface works well, and getting data into home assistant has been extremely easy.
 
-If you are interested in eithe this solution, or seeing other potential options for home energy monitoring, Please check out [Home-Assistant Energy Monitoring Options](./../Home-Automation/2022-11/home-assistant-energy-monitoring.md){target=_blank}.
+If you are interested in eithe this solution, or seeing other potential options for home energy monitoring, Please check out [Home-Assistant Energy Monitoring Options](./../Home-Automation/living-posts/home-assistant-energy-monitoring.md){target=_blank}.
 
 As I still have the hardware and software ready for this- I will be re-implementing this.
 
