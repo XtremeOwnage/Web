@@ -72,6 +72,11 @@ When I pulled mine off, I found two issues.
 
 ![](./assets-wled-bad-segment//cut-here.webP)
 
+!!! danger
+    Make sure to turn your LEDs off, and disconnect the power before cutting.
+
+    Cutting a strip carrying current, generally leads to less then ideal results.
+
 After you have identified the issue- cut right down the middle of the copper pads.
 
 You will be left with a nice empty spot.
@@ -101,7 +106,7 @@ When you are soldering the new section into place, solder flux will greatly help
 
 If you are having trouble getting the pads to connect, solder on a thin piece of copper wire.
 
-In the end, you hopefully should be left with something lightly prettier then my soldering job.
+In the end, you hopefully should be left with something lightly prettier then my soldering job. (My soldering in general isn't the best- up on a ladder, its even worse!)
 
 ![](./assets-wled-bad-segment/new-piece-soldered.webP)
 
@@ -134,3 +139,4 @@ Apply a generous layer of liquid electrical tape to both sides of the solder joi
 
 ![](./assets-wled-bad-segment/all-done.webP)
 
+(I secured the dangling power-cable after taking this picture.)
