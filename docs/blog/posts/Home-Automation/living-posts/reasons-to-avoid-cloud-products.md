@@ -260,7 +260,16 @@ Massive privacy breach, where internal Amazon employees were found guilty of spy
 * <https://www.itpro.com/security/privacy/amazons-ring-agrees-to-dollar58m-settlement-over-alleged-use-of-its-cameras-to-spy-on-female-customers>
 * <https://metro.co.uk/2023/06/01/amazons-ring-camera-used-to-spy-on-customers-18879700/>
 
+### MyQ - Officially blocks 3rd party applications
 
+While- MyQ has been very troublesome for years, In november, they officially announced that no 3rd-party access was allowed. 
+
+* <https://chamberlaingroup.com/press/a-message-about-our-decision-to-prevent-unauthorized-usage-of-myq>
+* <https://www.home-assistant.io/blog/2023/11/06/removal-of-myq-integration/>
+
+So... if you take hint from the multitude of issues over the last few years.... officially, home assistant will no longer work with myQ.
+
+They did start a "Works with MyQ" program, however, the list of supported integrations is more of a joke, then a practicality. 
 
 ## On-Going Issues
 
