@@ -10,7 +10,3 @@ This project is centered around adding Solar power generation, and battery backu
 ## [40G NAS Project](./40G-NAS.md)
 
 This is where I have documented the journey and evolution of my home NAS. 
-
-## [Home WLED Project](./WLED-House-Lighting.md)
-
-A project to add individually-addressable LEDs to my home, for year-round, all-weather lighting.
