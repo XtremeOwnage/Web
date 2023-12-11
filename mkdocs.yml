@@ -136,12 +136,12 @@ extra:
       link: https://github.com/XtremeOwnageDotCom
     - icon: fontawesome/brands/discord
       link: https://discord.gg/gncCn88
-    - icon: fontawesome/brands/facebook
-      link: https://www.facebook.com/XtremeOwnage
+    #- icon: fontawesome/brands/facebook
+    #  link: https://www.facebook.com/XtremeOwnage
     # - icon: fontawesome/brands/twitter
     #   link: https://twitter.com/denysdovhan
     - icon: fontawesome/solid/globe
-      link: https://xtremeownage.com/
+      link: https://static.xtremeownage.com/
     - icon: fontawesome/solid/rss
       link: /feed_rss_created.xml
   analytics:
