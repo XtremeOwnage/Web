@@ -68,7 +68,7 @@ plugins:
       post_url_date_format: yyyy
       post_url_format: "{date}/{slug}"
       post_slugify_separator: "-"
-      post_excerpt: required
+      post_excerpt: optional
       post_excerpt_max_categories: 5
       archive: true
       archive_date_format: yyyy
