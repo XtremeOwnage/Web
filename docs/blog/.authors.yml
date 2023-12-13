@@ -1,4 +1,5 @@
-xo:
-  name: XtremeOwnage
-  description: Creator
-  avatar: /assets/avatar/XO.png
+authors:
+  xo:
+    name: XtremeOwnage
+    description: Creator
+    avatar: /assets/avatar/XO.png
