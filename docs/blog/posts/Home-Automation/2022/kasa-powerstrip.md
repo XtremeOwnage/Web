@@ -86,7 +86,7 @@ I used a few zip-ties to secure the power cord to the rack.
 
 First, visit your integrations page, and click "Add Integration" at the bottom-right.
 
-![](/assets/images/home-assistant/add-integration-button.png)
+![](../../../../assets/images/home-assistant/add-integration-button.png)
 
 Search for "kasa"
 

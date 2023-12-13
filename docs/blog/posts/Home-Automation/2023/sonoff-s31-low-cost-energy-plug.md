@@ -2,7 +2,6 @@
 title: "Sonoff S31 - Low Cost Energy Monitoring"
 date: 2023-03-17
 categories:
-    - Home-Automation
     - Technology
 tags:
     - Home Assistant

@@ -1,8 +1,6 @@
 ---
 title: "Proxmox - Coral TPU USB Passthrough"
 date: 2023-12-01
-categories:
-    - Home-Automation
 tags:
     - Home Assistant
     - Homelab

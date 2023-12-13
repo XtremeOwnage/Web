@@ -1,8 +1,6 @@
 ---
 title: "ConnectX-3 Configuration"
 date: 2023-01-23
-categories:
-  - Technology
 tags:
   - Homelab
   - Networking

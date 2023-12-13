@@ -1,16 +1,13 @@
 ---
 title: "Home Solar Project - Part 3 - Monitoring"
 date: 2023-02-17
-categories:
-  - Solar
 tags:
-  - Solar
   - Energy Monitoring
 ---
 
 # Home Solar Project - Adding Monitoring and Data Collection
 
-Part 4 of the [home solar project](/pages/Projects/Solar-Project). Adding monitoring tools and hardware.
+Part 4 of the [home solar project](../../../pages/Projects/Solar-Project.md). Adding monitoring tools and hardware.
 
 Will be adding Iotawatt for per-circuit energy monitoring, and solar-assistant for monitoring the performance of my inverter / batteries. 
 

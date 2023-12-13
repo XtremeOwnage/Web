@@ -2,10 +2,9 @@
 title: "Home Assistant - Split Sensor"
 date: 2023-03-14
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
+- Home Assistant
 ---
 
 # Home Assistant - Split Sensor into Negative and Positive

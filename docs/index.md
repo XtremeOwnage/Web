@@ -9,7 +9,7 @@
 
 This is my personal blog around my adventures in home-automation, software development, automative and machining projects... whatever other hobbies I find myself in.
 
-For content, please see [**The Blog**](blog/) 
+For content, please see [**The Blog**](blog/index.md) 
 
 If you wish to view content for specific projects, please view [**Projects**](./pages/Projects/index.md)
 

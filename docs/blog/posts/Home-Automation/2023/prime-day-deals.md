@@ -2,12 +2,11 @@
 title: "2023 Prime Day Deals"
 date: 2023-07-11
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
-    - Energy Monitoring
-    - ESPHome
+- Home Assistant
+- Energy Monitoring
+- ESPHome
 ---
 
 # 2023 Prime Day Deals

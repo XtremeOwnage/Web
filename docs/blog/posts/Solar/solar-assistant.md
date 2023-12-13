@@ -1,16 +1,13 @@
 ---
 title: "Solar-Assistant with Solark 12k"
 date: 2023-01-23
-categories:
-  - Solar
 tags:
-  - Solar
   - Home-Automation
 ---
 
 # Installing Solar-Assistant
 
-Per my [home solar project](/pages/Projects/Solar-Project), I needed a method to collect data from both my batteries and inverters, in near-real-time, with no dependancy on the internet.
+Per my [home solar project](../../../pages/Projects/Solar-Project.md), I needed a method to collect data from both my batteries and inverters, in near-real-time, with no dependency on the internet.
 
 Since, my inverter's connection relies on cloud applications to move data around, I decided to give [Solar Assistant](https://solar-assistant.io/){target=_blank} a try after reading of its support for the solark-12k.
 
