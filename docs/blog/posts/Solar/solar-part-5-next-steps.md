@@ -9,7 +9,7 @@ tags:
 
 # Home Solar Project - Next Steps
 
-Continuation of the [home solar project](/pages/Projects/Solar-Project). 
+Continuation of the [home solar project](../../../pages/Projects/Solar-Project.md). 
 
 <!-- more -->
 

@@ -123,7 +123,7 @@ After validating everything fits togather, and WORKS properly, I pressed on the 
 
 Click Add Integration
 
-![](/assets/images/home-assistant/add-integration-button.png)
+![](../../../../assets/images/home-assistant/add-integration-button.png)
 
 Search for "WLED"
 

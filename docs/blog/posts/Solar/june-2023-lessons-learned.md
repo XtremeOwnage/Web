@@ -9,7 +9,7 @@ tags:
 
 # Lessons learned from a local disaster
 
-Continuation of the [home solar project](/pages/Projects/Solar-Project). 
+Continuation of the [home solar project](../../../pages/Projects/Solar-Project.md). 
 
 Around Midnight, Saturday June 17th, a very strong storm passed over my house, and hit my town and surrounding areas with a 115mph wind gust. 
 

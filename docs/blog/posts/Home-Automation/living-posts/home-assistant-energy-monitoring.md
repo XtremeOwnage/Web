@@ -10,7 +10,7 @@ image: /assets/images/Home-Assistant-Banner-300x158.png
 
 # Home Assistant - Energy Monitoring Options
 
-![](/assets/images/home-assistant-logo.jpg)
+![](../../../../assets/images/home-assistant-logo.jpg)
 
 A quick post going over the best options for taking advantage of home assistant's [energy monitoring features](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/){target=_blank}. 
 

@@ -212,7 +212,7 @@ output:
 ```
 
 
-Regarding the contents of the "common" files, I have those documented here: [ESPhome Common](/pages/esphome/esphome-common/){target=_blank}. I use this include functionality, to keep my configuration files cleaner, and to avoid repeating the same configuration in multiple locations.
+Regarding the contents of the "common" files, I have those documented here: [ESPhome Common](../../../../pages/esphome/esphome-common.md){target=_blank}. I use this include functionality, to keep my configuration files cleaner, and to avoid repeating the same configuration in multiple locations.
 
 For my configuration, I used a `Button` to trigger this device. This uses the [generic output button](https://esphome.io/components/button/output.html){target=_blank}, which allows me to trigger a GPIO output for a determined amount of time.
 
