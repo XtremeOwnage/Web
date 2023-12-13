@@ -96,6 +96,12 @@ plugins:
       categories:
         - categories
         # - tags 
+  - optimize:
+      enabled: true
+      cache: true
+      optimize_png: false
+      optimize_png_strip: true
+      optimize_jpg: true
   - privacy:
       enabled: false
   - search:
