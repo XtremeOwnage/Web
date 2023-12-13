@@ -2,12 +2,11 @@
 title: "Pioneer Mini-split ESPHome"
 date: 2023-05-20
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
-    - ESPHome
-    - HVAC
+- Home Assistant
+- ESPHome
+- HVAC
 ---
 
 # Pioneer Minisplit control using ESPHome

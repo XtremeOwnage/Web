@@ -1,11 +1,8 @@
 ---
 title: "Automating the galaxy"
 date: 2023-01-05
-categories:
-    - Home-Automation
-    - Technology
 tags:
-    - WLED
+- WLED
 image: blog/assets/Home-Automation/2023-01/assets/globe-stock.webp
 ---
 

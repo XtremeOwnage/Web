@@ -1,10 +1,6 @@
 ---
 title: "Reasons to avoid cloud-based automation products"
 date: 2022-12-01
-categories:
-  - Home-Automation
-# tags:
-#   - energy monitoring
 image: ../../../../assets/icons/cloud-slash.png
 ---
 

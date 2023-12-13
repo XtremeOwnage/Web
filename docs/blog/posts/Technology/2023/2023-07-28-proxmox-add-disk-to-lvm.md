@@ -1,8 +1,6 @@
 ---
 title: "Proxmox - Add Disk to Existing Thin Provisioned LVM"
 date: 2023-07-28
-categories:
-  - Technology
 tags:
   - Homelab
   - Proxmox

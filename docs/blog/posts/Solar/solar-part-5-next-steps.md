@@ -1,10 +1,6 @@
 ---
 title: "Home Solar Project - Next Steps"
 date: 2023-02-18
-categories:
-  - Solar
-tags:
-  - Solar
 ---
 
 # Home Solar Project - Next Steps

@@ -1,10 +1,6 @@
 ---
 title: "Home Solar Project - Weather Disaster - Lessons Learned"
 date: 2023-06-22
-categories:
-  - Solar
-tags:
-  - Solar
 ---
 
 # Lessons learned from a local disaster

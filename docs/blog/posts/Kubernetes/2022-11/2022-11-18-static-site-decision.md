@@ -1,12 +1,7 @@
 ---
 title: "Static Site"
 date: 2022-11-19
-# authors:
-#   - xo
-categories:
-  - Kubernetes
 tags:
-  - Kubernetes
   - Homelab
 ---
 

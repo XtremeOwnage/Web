@@ -1,10 +1,6 @@
 ---
 title: "TrueNAS Scale - Enable apt-get"
 date: 2022-10-28
-# authors:
-#   - xo
-categories:
-  - Technology
 tags:
   - TrueNAS
   - Homelab

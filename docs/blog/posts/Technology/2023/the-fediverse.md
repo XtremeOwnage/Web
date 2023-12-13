@@ -1,8 +1,6 @@
 ---
 title: "Join the Fediverse"
 date: 2023-06-16
-categories:
-  - Technology
 ---
 
 # Join the Fediverse

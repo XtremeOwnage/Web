@@ -1,8 +1,6 @@
 ---
 title: "2023 Home Assistant - Energy Monitoring"
 date: 2022-11-29
-categories:
-  - Home-Automation
 tags:
   - Energy Monitoring
 image: /assets/images/Home-Assistant-Banner-300x158.png

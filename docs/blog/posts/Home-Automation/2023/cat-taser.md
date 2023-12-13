@@ -1,12 +1,9 @@
 ---
 title: "Feline Area Denial Device"
 date: 2023-06-03
-categories:
-    - Home-Automation
-    - Technology
 tags:
-    - Home Assistant
-    - ESPHome
+- Home Assistant
+- ESPHome
 ---
 
 # FADD - Feline Area Denial Device
