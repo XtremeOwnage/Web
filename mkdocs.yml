@@ -96,6 +96,8 @@ plugins:
       categories:
         - categories
         # - tags 
+  - social: 
+      enabled: false ## Needs special stuff for windows...
   - optimize:
       enabled: true
       cache: true
@@ -104,6 +106,8 @@ plugins:
       optimize_jpg: true
   - privacy:
       enabled: false
+      cache: true
+      links: false
   - search:
       lang: en
   - tags:
