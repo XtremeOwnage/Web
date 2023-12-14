@@ -1,8 +1,6 @@
 ---
 title: "What happened to reddit?"
 date: 2023-06-19
-categories:
-  - Technology
 ---
 
 # What happened to reddit?

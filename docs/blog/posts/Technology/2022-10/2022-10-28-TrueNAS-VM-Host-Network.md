@@ -1,10 +1,6 @@
 ---
 title: "TrueNAS Scale - VM Cannot Access TrueNAS"
 date: 2022-10-28
-# authors:
-#   - xo
-categories:
-  - Technology
 tags:
   - TrueNAS
   - Homelab

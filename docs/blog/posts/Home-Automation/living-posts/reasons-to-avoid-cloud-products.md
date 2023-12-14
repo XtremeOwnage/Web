@@ -1,18 +1,14 @@
 ---
 title: "Reasons to avoid cloud-based automation products"
 date: 2022-12-01
-categories:
-  - Home-Automation
-# tags:
-#   - energy monitoring
-image: /assets/icons/cloud-slash.png
+image: ../../../../assets/icons/cloud-slash.png
 ---
 
 # Reasons to avoid cloud-based home automation products
 
 On this blog / my house, I try to use 100% local control products whenever possible. Many people don’t understand the reasoning behind this…. So, I am dedicating this page to reasons as to why you should ONLY buy products which are 100% local control only, with no cloud dependency, and no proprietary hub.
 
-![](/assets/icons/cloud-slash.png)
+![](../../../../assets/icons/cloud-slash.png)
 
 <!-- more -->
 

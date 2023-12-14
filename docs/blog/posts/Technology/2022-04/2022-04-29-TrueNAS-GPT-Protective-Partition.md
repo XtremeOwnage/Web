@@ -1,10 +1,6 @@
 ---
 title: "TrueNAS – iSCSI – GPT Protective partition"
 date: 2022-04-29
-# authors:
-#   - xo
-categories:
-  - Technology
 tags:
   - TrueNAS
   - Homelab

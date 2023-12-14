@@ -1,10 +1,7 @@
 ---
 title: "EG4 Rack Assembly"
 date: 2022-12-10
-categories:
-  - Solar
 tags:
-  - Solar
   - Review
 ---
 

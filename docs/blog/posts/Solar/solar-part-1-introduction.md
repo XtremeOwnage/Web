@@ -1,10 +1,6 @@
 ---
 title: "Home Solar Project - Part 1 - Introduction"
 date: 2022-12-08
-categories:
-  - Solar
-tags:
-  - Solar
 ---
 
 # Home Solar Project - Introduction
@@ -25,7 +21,7 @@ Here are the goals I wish to accomplish, and how I plan on accomplishing them:
 
 Last year, I installed an Iotawatt, to start tracking my energy utilization. It has done a fantastic job, and gives me very good data, which also integrates extremely well into home assistant.
 
-If, you don’t have a solution for tracking your energy, and would like options, Please see [Home Assistant – Energy Monitoring Options.](./../../Home-Automation/2022-11/home-assistant-energy-monitoring.md/)
+If, you don’t have a solution for tracking your energy, and would like options, Please see [Home Assistant – Energy Monitoring Options.](./../Home-Automation/living-posts/home-assistant-energy-monitoring.md)
 
 Looking at this year's[^1] worth of utilization-
 

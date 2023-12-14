@@ -1,8 +1,6 @@
 ---
 title: "2023 Home Assistant - Energy Monitoring"
 date: 2022-11-29
-categories:
-  - Home-Automation
 tags:
   - Energy Monitoring
 image: /assets/images/Home-Assistant-Banner-300x158.png
@@ -10,7 +8,7 @@ image: /assets/images/Home-Assistant-Banner-300x158.png
 
 # Home Assistant - Energy Monitoring Options
 
-![](/assets/images/home-assistant-logo.jpg)
+![](../../../../assets/images/home-assistant-logo.jpg)
 
 A quick post going over the best options for taking advantage of home assistant's [energy monitoring features](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/){target=_blank}. 
 

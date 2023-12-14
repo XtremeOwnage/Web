@@ -1,8 +1,6 @@
 ---
 title: "Proxmox - Building a ceph cluster"
 date: 2023-08-13
-categories:
-  - Technology
 tags:
   - Homelab
   - Proxmox

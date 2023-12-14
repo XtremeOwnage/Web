@@ -1,10 +1,7 @@
 ---
 title: "Off grid AC"
 date: 2023-03-05
-categories:
-  - Solar
 tags:
-  - Solar
   - HVAC
 ---
 

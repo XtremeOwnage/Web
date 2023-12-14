@@ -1,15 +1,11 @@
 ---
 title: "Home Solar Project - Part 2 - Battery Selection"
 date: 2022-12-09
-categories:
-  - Solar
-tags:
-  - Solar
 ---
 
 # Home Solar Project - Battery Selection
 
-For the second part of my [Home Solar Project](/pages/Projects/Solar-Project), I researched possible solutions and ordered batteries.
+For the second part of my [Home Solar Project](../../../pages/Projects/Solar-Project.md), I researched possible solutions and ordered batteries.
 
 This post, describes some of the decision making process I went through.
 

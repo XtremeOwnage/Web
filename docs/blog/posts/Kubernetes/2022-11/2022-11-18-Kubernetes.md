@@ -1,12 +1,7 @@
 ---
 title: "Transitioning to Kubernetes"
 date: 2022-11-18
-# authors:
-#   - xo
-categories:
-  - Kubernetes
 tags:
-  - Kubernetes
   - Homelab
 ---
 

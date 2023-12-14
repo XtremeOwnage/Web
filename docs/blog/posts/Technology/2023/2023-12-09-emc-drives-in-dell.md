@@ -1,8 +1,6 @@
 ---
 title: "Using EMC Drives in other systems"
 date: 2023-12-09
-categories:
-  - Technology
 tags:
   - Homelab
   - Storage

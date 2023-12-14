@@ -1,8 +1,6 @@
 ---
 title: "Network Performance Troubleshooting"
 date: 2023-01-23
-categories:
-  - Technology
 tags:
   - Homelab
   - Networking

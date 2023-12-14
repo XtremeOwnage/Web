@@ -1,10 +1,6 @@
 ---
 title: "R720XD Bifurcation"
 date: 2022-01-08
-# authors:
-#   - xo
-categories:
-  - Technology
 tags:
   - TrueNAS
   - Homelab
