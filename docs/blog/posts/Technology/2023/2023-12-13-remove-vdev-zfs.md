@@ -115,3 +115,35 @@ errors: No known data errors
 At this point, you just need to wait for the pool to finish moving data around.
 
 It will yield the estimated time, and once completed, the vdev will be removed.
+
+## Step 3. Wait
+
+At this point, you just need to wait for it to finish. Once finished, the VDEV will be automatically removed.
+
+If- you use Unraid, you can also see the activity via its GUI. (At least, seeing reads from one stripe- and writes going to the other)
+
+![](./assets/zfs-removing-vdev.webP)
+
+Using bash, you can use `watch zpool status <poolname>` which will display the current status every few seconds.
+
+``` bash
+Every 2.0s: zpool status main                                                                                                                                                                                               Tower: Wed Dec 13 21:38:46 2023
+
+  pool: main
+ state: ONLINE
+  scan: scrub repaired 0B in 01:47:49 with 0 errors on Sun Dec 10 11:47:50 2023
+remove: Evacuation of mirror in progress since Wed Dec 13 21:18:05 2023
+        150G copied out of 940G at 123M/s, 15.91% done, 1h49m to go
+config:
+
+        NAME        STATE     READ WRITE CKSUM
+        main        ONLINE       0     0     0
+          mirror-0  ONLINE       0     0     0
+            sdc1    ONLINE       0     0     0
+            sdf1    ONLINE       0     0     0
+          mirror-1  ONLINE       0     0     0
+            sdg1    ONLINE       0     0     0
+            sdi1    ONLINE       0     0     0
+
+errors: No known data errors
+```
