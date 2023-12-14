@@ -66,22 +66,35 @@ I am assuming `/dev/sdf` is the missing drive, but, it is reporting a size of 0B
 
 So, lets resolve this issue.
 
+!!! info   
+    Note- This guide assumes you are using a DAS / Disk-shelf, and uses sg3-utils to interact directly with the scsi device.
+    
+    For using local disks, there are easier methods to interact.
+
 ## TLDR - Too Long, didn't read
 
 If- you don't want to read, and just want to get straight to the point, here is the summary. Otherwise, you can skip this section.
 
 This issue occurs because EMC, Netapp, (and others), use a non-standard block size for their drives. We can easily correct this issue by reformatting the drive, with the correct block-size.
 
-1. Identify the drive using `sg_scan`
+1. Install sg3-utils
+    * `apt-get install sg3-utils`
+2. Identify the drive using `sg_scan`
     * `sg_scan -i`
-2. Identify the current block size using `sg_readcap`
+3. Identify the current block size using `sg_readcap`
     * `sg_readcap /dev/sg2`
-3. Reformat the drive wit the correct block-size using `sg_format`
+4. Reformat the drive wit the correct block-size using `sg_format`
     * `sg_format --format --size=512 /dev/sg2`
-4. Done.
+5. Done.
 
 
 ## Getting Started
+
+### Install sg3-utils
+
+This will add the commands needed to interact with SCSI devices.
+
+`apt-get install sg3-utils`
 
 ### Step 1. Scan SCSI using sg_scan
 
