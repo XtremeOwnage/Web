@@ -246,6 +246,7 @@ I had a few extra HDDs in my r730XD which were not in use. Despite having spin d
 
 #### Optimizing Fans - 14 watts saved
 
+
 Originally, I attempted to throttle the fans down using racadm.
 
 [Dell: Modifying thermal settings using iDrac](Dell Fan: https://www.dell.com/support/manuals/en-us/idrac9-lifecycle-controller-v3.3-series/idrac_3.30.30.30_ug/modifying-thermal-settings-using-racadm?guid=guid-af4b39bf-49c3-4f12-a20d-9488b37eeb8f&lang=en-us){target=_blank}
