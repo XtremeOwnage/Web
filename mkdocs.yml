@@ -112,7 +112,9 @@ plugins:
       lang: en
   - tags:
       enabled: true
-      tags_file: pages/tags.md
+      export: true
+      listings: true
+      tags_hierarchy: true          
   - glightbox:  ## https://github.com/blueswen/mkdocs-glightbox#usage
       touchNavigation: true
       zoomable: true
