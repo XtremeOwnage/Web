@@ -4,8 +4,8 @@ date: 2019-11-07
 categories:
   - Development
 tags:
-  - C#
-  - .NET
+  - Development/C#
+  - Development/.NET
 ---
 
 # Unknown error (0x80005000) – Getting AD Group Members

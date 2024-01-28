@@ -4,8 +4,8 @@ date: 2021-02-05
 categories:
   - Development
 tags:
-  - C#
-  - .NET
+  - Development/C#
+  - Development/.NET
 ---
 
 # An anonymous request was received in between authentication handshake requests
