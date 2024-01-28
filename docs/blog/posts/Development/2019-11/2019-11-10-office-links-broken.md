@@ -4,8 +4,8 @@ date: 2019-11-07
 categories:
   - Development
 tags:
-  - C#
-  - .NET
+  - Development/C#
+  - Development/.NET
 ---
 
 # ASP.NET Core – Links don’t work from office/word document to SSO site.
