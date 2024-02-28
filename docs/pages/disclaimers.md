@@ -7,7 +7,7 @@ This page is used to store disclaimers used throughout this website.
 
 Occassionally, posts may include a warning such as this:
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"
 
 --8<--- "docs/snippets/ebay-affiliate.md"
 
@@ -21,9 +21,9 @@ As you may or may not have noticed- There are no ads. As such, affiliate links a
 I do **NOT** accept donations or payments. The only method offered for which you can financially support this site, is via purchasing through affiliate links. 
 
 
-## Sponsered Content
+## Sponsored Content
 
-I **DO** accept requests for sponsered content. 
+I **DO** accept requests for sponsored content. 
 
 I **cannot**, and will not promise to shed the sponsored product in a positive light. 
 

@@ -344,4 +344,4 @@ And- this can be easily repurposed for other areas of the house.
 
     Also- you probably should not build this. 
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"

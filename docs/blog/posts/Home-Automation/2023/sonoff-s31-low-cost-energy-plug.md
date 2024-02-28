@@ -207,4 +207,4 @@ I used one of these plugs for monitoring the energy consumption of my deep freez
 
     All products and materials were purchased by me for personal use.
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"

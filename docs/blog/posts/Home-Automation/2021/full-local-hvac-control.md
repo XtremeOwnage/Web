@@ -238,4 +238,4 @@ The **ONLY** issue I have had with this automation- The pilot light on my firepl
 
 ## Disclaimers
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"

@@ -160,4 +160,4 @@ As a bonus- since my Home Assistant automatically exports metrics to the prometh
 
     All hardware, time, and tools was provided solely by me.
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"
