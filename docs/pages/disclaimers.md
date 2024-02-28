@@ -9,6 +9,8 @@ Occassionally, posts may include a warning such as this:
 
 --8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
 
+--8<--- "docs/snippets/ebay-affiliate.md"
+
 This means, I am leveraging amazon affiliate links for my content. An affiliate link, does not alter or change the price you pay at all. However, if you purchase the products using my affiliate links, I will receive a very small percentage. This helps to support this site.
 
 As you may or may not have noticed- There are no ads. As such, affiliate links are currently the only method I have to recoup some of the hosting costs, and costs to purchase hardware to review and test. So- if you like my content, and would like to see more... those links are the only method of supporting me.
