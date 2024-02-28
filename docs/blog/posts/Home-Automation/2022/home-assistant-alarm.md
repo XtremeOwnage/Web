@@ -189,7 +189,7 @@ I can leverage all of its functionality, make use of all of its buttons, and eve
 
     All hardware, time, and tools was provided solely by me.
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"
 
 ### Changelogs
 

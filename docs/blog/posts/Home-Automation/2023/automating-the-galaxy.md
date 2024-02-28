@@ -141,5 +141,5 @@ For now, I included this into my office's scenes for ambiance lighting.
 
 ## Disclaimers
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"
 
