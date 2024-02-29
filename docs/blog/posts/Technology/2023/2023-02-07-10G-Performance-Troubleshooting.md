@@ -16,6 +16,10 @@ This is a simple guide, with a few methods you can leverage to troubleshoot netw
 
 <!-- more -->
 
+--8<--- "docs/snippets/amazon-affiliate.md"
+
+--8<--- "docs/snippets/ebay-affiliate.md"
+
 ## My Topology
 
 For this experiment, I have 4 servers which will be used for testing.

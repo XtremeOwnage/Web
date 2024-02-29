@@ -16,6 +16,8 @@ My adventures in building out a small clustered ceph environment for redundant V
 
 <!-- more -->
 
+--8<--- "docs/snippets/ebay-affiliate.md"
+
 ## Why should you use ceph?
 
 In most cases, you shouldn't.
