@@ -2,7 +2,7 @@
 title: "TrueNAS Scale - Use Vanilla Docker"
 date: 2021-12-15
 tags:
-  - TrueNAS
+  - Homelab/TrueNAS
   - Homelab
 ---
 

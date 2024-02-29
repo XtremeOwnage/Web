@@ -2,8 +2,8 @@
 title: "Unraid Vs TrueNAS SCALE 2021"
 date: 2021-11-10
 tags:
-  - TrueNAS
-  - Homelab
+  - Homelab/TrueNAS
+  - Homelab/Unraid
 ---
 
 # Unraid Vs TrueNAS SCALE 2021
