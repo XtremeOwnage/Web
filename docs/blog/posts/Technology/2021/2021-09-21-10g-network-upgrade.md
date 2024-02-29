@@ -14,6 +14,12 @@ This is the original documentation for when I deployed 10G out to my network.
 
 This post was migrated from the old wordpress site, mostly unaltered from its original form.
 
+## Disclaimers
+
+--8<--- "docs/snippets/ebay-affiliate.md"
+
+--8<--- "docs/snippets/amazon-affiliate.md"
+
 ## How much did it cost??
 
 Prices includes shipping and tax, except for the last two rows. Amazon did have free shipping through.
@@ -243,8 +249,3 @@ The volume was formatting with GPT table, and NTFS file system with a quick form
 
 ![](./assets-10g-network-upgrade/bench-9.webp)
 
-## Disclaimers
-
---8<--- "docs/snippets/ebay-affiliate.md"
-
---8<--- "docs/snippets/amazon-affiliate.md"
