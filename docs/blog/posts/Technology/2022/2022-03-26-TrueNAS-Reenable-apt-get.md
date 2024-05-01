@@ -71,11 +71,11 @@ I removed the other repos.... since it is shipped with apt-disabled anyways.
 ## Update - 2024
 
 !!! note
-  I have not personally tested the below commands as I no longer use TrueNAS.
+    I have not personally tested the below commands as I no longer use TrueNAS.
 
-  I am copying the information over, for others who end up here.
+    I am copying the information over, for others who end up here.
 
-  Full credit here goes to u/SpecialZestyclose255
+    Full credit here goes to u/SpecialZestyclose255
 
 From [u/SpecialZestyclose255](https://www.reddit.com/r/truenas/comments/toyrkn/comment/l246kfy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button){target=_blank}- 
 
