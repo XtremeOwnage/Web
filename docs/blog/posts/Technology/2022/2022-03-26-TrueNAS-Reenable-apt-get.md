@@ -68,3 +68,43 @@ deb-src http://deb.debian.org/debian bullseye main
 
 I removed the other repos.... since it is shipped with apt-disabled anyways.
 
+## Update - 2024
+
+!!! note
+  I have not personally tested the below commands as I no longer use TrueNAS.
+
+  I am copying the information over, for others who end up here.
+
+  Full credit here goes to u/SpecialZestyclose255
+
+From [u/SpecialZestyclose255](https://www.reddit.com/r/truenas/comments/toyrkn/comment/l246kfy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button){target=_blank}- 
+
+In the latest version (24.04.0), you need to remount a virtual drive before you can use chmod +x:
+
+`mount -o remount,rw 'boot-pool/ROOT/24.04.0/usr'`
+
+You need to make sure that `/usr/local/bin` isn't in your PATH too.
+
+`export PATH=/usr/bin:/usr/sbin`
+
+And then:
+
+`chmod +x /bin/apt*`
+`chmod +x /usr/bin/dpkg`
+
+
+Full Commands:
+``` bash
+# Remount as read-write
+mount -o remount,rw 'boot-pool/ROOT/24.04.0/usr'
+
+# Add bin / sbin directories to path.
+export PATH=/usr/bin:/usr/sbin
+
+# Add executable flag to binaries, which is emoved by the TrueNAS team.
+chmod +x /bin/apt*
+
+# Re-enable the ability to execute the dpkg binary.
+chmod +x /usr/bin/dpkg
+
+```
