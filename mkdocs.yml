@@ -79,6 +79,7 @@ plugins:
       categories_allowed:
         - Main
         - Development
+        - Fabrication
         - Kubernetes
         - Home-Automation
         - Technology
