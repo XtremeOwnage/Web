@@ -37,15 +37,17 @@ As an example- for the decades worth of photos I have collected, I have AT MINIM
 
 As you will find in this post- My synology is one of the primary pieces of infrastructure for my various backup strategies.
 
-All of the important shares, are protected by Immutable snapshots, which prevents the deletion of the data / share, until a timer has passed. This- is intended to prevent administrative action, or ransomware from being able to affect or touch the backups until a specified amount of time has past.
+I purchased this unit SPECIFICALLY with the use-case in mind, of using it for backups.
 
-In addition to immutable snapshots of shares- All of the data gets  encrypted, and replicated off-site, two multiple locations.
+All of the important shares, are protected by immutable snapshots, which prevents the deletion of the data / share, until a timer has passed. This- is intended to prevent administrative action, or ransomware from being able to affect or touch the backups until a specified amount of time has past.
 
-I use a well-known, but, unspecified cloud S3 provider for one copy.
+In addition to immutable snapshots of shares- All of the data gets  encrypted, and replicated off-site, to multiple locations.
+
+I use a well-known, but, unspecified cloud S3 provider for one copy, they also keep their own versioning and retention policies.
 
 And- I have a friend whom we share space on each other's NAS/Networks for the purpose of storing backups. The data is encrypted so that neither party can look at each other's backups, and is transferred through a VPN tunnel between our networks. We are geographically separated by enough distance, that a singular event has little chance of taking out both of our networks.
 
-That being said- this meets the 3-2-1 rule for anything backed up to the synology.
+That being said- this meets the 3-2-1 rule for anything on the synology, and exceeds it for anything backed up to it.
 
 1. First copy on the NAS itself
     - Immutable snapshots to help protect against administrative failure, or ransomware.
@@ -84,7 +86,7 @@ My [minio](https://min.io/){target=_blank} itself, has multiple layers of backup
 
 Originally, I used a NFS target to unraid for my backups. When I picked up the synology, I decided to create a Proxmox Backup Server VM,  but, host its storage to the synology via iSCSI. 
 
-Proxmox backup server is pretty great once you have it up and running. I am currently getting deduplication ratios of excess 40:1 for my backups. It does not consume many resources, and it only needs to transfer incremental (A NFS backup target did full backups, every time). In addition, you can do point in time, file-level restores.
+Proxmox backup server is pretty great once you have it up and running. I am currently getting extremely good deduplication rates- that goes up with every single backup (since, very little actually changes). It does not consume many resources, and it only needs to transfer incremental (A NFS backup target did full backups, every time). In addition, you can do point in time, file-level restores.
 
 Here is a picture of the Proxmox Backup Server Console, showing my iSCSI share.
 
@@ -104,14 +106,21 @@ For this particular data- there will always be at least three copies, meeting th
 
 1. Stored in Proxmox Backup Server - w/Storage hosted on the synology.
     - Immutable snapshots and retention policies scheduled for the LUN.
-2. Replicated Cloud backup 
-3. Encrypted copy replicated to a friend's NAS where we swap space for backups.
+2. Afterwards- follows the Synology's backup plan, which replicates the data to multiple cloud targets.
 
 #### Proxmox Configuration - Via Synology App, "Active Backup for Business"
 
 For backing up the running cluster state, and configuration, I found the "Active Backup for Business" to be the best fit. I configured one of my proxmox hosts with a SSH key, and configured it as a "File Server" using ssh/rsync.
 
-Since- /etc/pve is a cluster file system on all of the nodes- backing up that directory from a single host is enough to capture the entire cluster state.
+When- configuring a file server- here are the various options you have for backing it up.
+
+![Picture showing options to backup file server on synology](./assets-backups/file-server-backup-modes.webp)
+
+Since- `/etc/pve` is a cluster file system on all of the nodes- backing up that directory from a single host is enough to capture the entire cluster state.
+
+Here is a screenshot showing some of the configuration options for this specific task. You can select many files, or folders as needed, set different retention policies, set file type filters, etc.
+
+![Picture showing configuration screens for synology file sync task](./assets-backups/file-server-backup-options.webp)
 
 I was able to configure the synology to keep multi-versioned backups, which will allow me to execute a point-in-time recovery of any data.
 
@@ -123,8 +132,7 @@ Like the VM backups- we have a minimum of three copies of the cluster configurat
 
 1. Stored on Synology
     - Immutable snapshots and retention policies scheduled for the LUN.
-2. Replicated Cloud backup 
-3. Encrypted copy replicated to a friend's NAS where we swap space for backups.
+2. Afterwards- follows the Synology's backup plan, which replicates the data to multiple cloud targets.
 
 ### Unraid / File Servers
 
@@ -160,6 +168,8 @@ While, many people seem to prefer [Velero.io](https://velero.io/){target=_blank}
 For a short summary- It handles backups, recovery, and DR for my entire kubernetes cluster. It keeps point in time copies of all manifests, and configurations, and captures disk images. 
 
 It does also do immutable, encrypted backups, and it can effortlessly migrate applications to other clusters, clone entire applications, and perform rewrites of manifests when restoring. (For example- changing the storage class). You can also use kanister scripts to do operations such as... [application-consistent backups](https://docs.kasten.io/latest/kanister/testing.html#application-consistent-backups){target=_blank}. 
+
+Lastly- it does have a [DR recovery option](https://docs.kasten.io/latest/operating/dr.html){target=_blank}, where you can essentially recover the entire cluster from scratch, including your data. (Not- the VMs, or OS itself, just the stuff running inside of your cluster.)
 
 That being said- I am a fan. 
 
