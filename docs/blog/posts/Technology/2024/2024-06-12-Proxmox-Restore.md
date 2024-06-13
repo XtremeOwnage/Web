@@ -915,7 +915,96 @@ UPID:kube02:0003BA42:00137BD5:666A5E7A:srvreload:networking:root@pam:
 
 Afterwards, all of your SDN configurations will be reapplied.
 
+#### Step 10. Regenerate certs, and remove old ssh keys
 
+While- mostly everything is currently functional, if you attempt to open the console one of your VMs, you may noticed this:
+
+``` bash
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:fxUoUrMalniKJQXOdrO0m9YAf03OXaa0gwQLaU0uwKA.
+Please contact your system administrator.
+Add correct host key in /root/.ssh/known_hosts to get rid of this message.
+Offending RSA key in /etc/ssh/ssh_known_hosts:2
+  remove with:
+  ssh-keygen -f "/etc/ssh/ssh_known_hosts" -R "10.100.4.102"
+Host key for 10.100.4.102 has changed and you have requested strict checking.
+Host key verification failed.
+```
+
+To fix this, we just need to re-generate the keys.
+
+##### Manually
+
+On each of your hosts- run this
+
+``` bash
+# Put the IP of your new, rebuilt server here.
+NODE_IP="10.100.4.102"
+# Put the name, of your new, rebuilt server here.
+NODE_NAME="kube02"
+
+# Remove the old ssh keys.
+ssh-keygen -f "/etc/ssh/ssh_known_hosts" -R $NODE_IP
+ssh-keygen -f "/etc/ssh/ssh_known_hosts" -R $NODE_NAME
+
+# Add the new keys
+ssh-keyscan $NODE_IP >> /etc/ssh/ssh_known_hosts
+ssh-keyscan $NODE_NAME >> /etc/ssh/ssh_known_hosts
+
+# Update certs.
+pvecm updatecerts
+```
+# NOTE- breaks symlink??!?
+
+https://bugzilla.proxmox.com/show_bug.cgi?id=4252
+
+The above script will remove the old keys, and add the new keys.
+
+``` bash
+root@kube01:~# # Put the IP of your new, rebuilt server here.
+root@kube01:~# NODE_IP="10.100.4.102"
+root@kube01:~# # Put the name, of your new, rebuilt server here.
+root@kube01:~# NODE_NAME="kube02"
+root@kube01:~#
+root@kube01:~# # Remove the old ssh keys.
+root@kube01:~# ssh-keygen -f "/etc/ssh/ssh_known_hosts" -R $NODE_IP
+# Host 10.100.4.102 found: line 2
+/etc/ssh/ssh_known_hosts updated.
+Original contents retained as /etc/ssh/ssh_known_hosts.old
+root@kube01:~# ssh-keygen -f "/etc/ssh/ssh_known_hosts" -R $NODE_NAME
+# Host kube02 found: line 7
+/etc/ssh/ssh_known_hosts updated.
+Original contents retained as /etc/ssh/ssh_known_hosts.old
+root@kube01:~#
+root@kube01:~# # Add the new keys
+root@kube01:~# ssh-keyscan $NODE_IP >> /etc/ssh/ssh_known_hosts
+# 10.100.4.102:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# 10.100.4.102:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# 10.100.4.102:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# 10.100.4.102:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# 10.100.4.102:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+root@kube01:~# ssh-keyscan $NODE_NAME >> /etc/ssh/ssh_known_hosts
+# kube02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# kube02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# kube02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# kube02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+# kube02:22 SSH-2.0-OpenSSH_9.2p1 Debian-2+deb12u2
+root@kube01:~#
+root@kube01:~# # Update certs.
+root@kube01:~# pvecm updatecerts
+```
+
+Make sure to run this on all of your hosts.
+
+##### Via Ansible
+
+After completing this step- the errors will go away.
 ## Summary
 
 If- you are going through this process- hopefully the above documentation should save you a lot of time.
