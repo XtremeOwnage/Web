@@ -939,7 +939,18 @@ Host key verification failed.
 
 To fix this, we just need to re-generate the keys.
 
-##### Manually
+!!! warning
+    Do NOT run `ssh-keygen -f`! 
+    
+    It is a symlink to `ssh_known_hosts -> /etc/pve/priv/known_hosts`
+
+    `ssh-keygen` will break this, and it will not be automatically synced and updated.
+
+    Proxmox links the ssh_known_hosts file back to its cluster file system, and all hosts "share" the same file.
+
+    BUG: https://bugzilla.proxmox.com/show_bug.cgi?id=4252
+
+##### Manually (TODO- NOT RIGHT WAY)
 
 On each of your hosts- run this
 
@@ -1002,7 +1013,30 @@ root@kube01:~# pvecm updatecerts
 
 Make sure to run this on all of your hosts.
 
-##### Via Ansible
+##### Ansible task to re-link symlinks
+
+Here is my ansible task, which corrects issues with symlinks
+
+``` yaml
+---
+- name: Check if symbolic link exists
+  stat:
+    path: /etc/ssh/ssh_known_hosts
+  register: ssh_known_hosts_stat
+
+- name: Remove existing file if it's not a symbolic link
+  file:
+    path: /etc/ssh/ssh_known_hosts
+    state: absent
+  when: ssh_known_hosts_stat.stat.islnk == false
+  
+- name: Link /etc/ssh/ssh_known_hosts
+  file:
+    src:  /etc/pve/priv/known_hosts
+    dest: /etc/ssh/ssh_known_hosts
+    state: link
+```
+
 
 After completing this step- the errors will go away.
 ## Summary
