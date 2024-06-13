@@ -66,7 +66,15 @@ At this point- you should have a fully functional stand-alone host. Now- we star
 !!! danger
     These steps ARE completely unsupported, and may break your entire cluster!!!
 
-    Enter at your OWN risk.
+    I came up with these steps through my own process of trial and error.
+
+    This may not work for you. This may break your cluster and cause data loss.
+
+    Enter at your OWN risk. 
+    
+    I do not take any responsibility for any losses or damages which may occur from you following my unofficial 3rd party documentation.
+
+With- the warning out of the way- I will say- I was able to completely recover my cluster.
 
 This entire guide assumes you are running as root.
 
