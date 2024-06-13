@@ -322,14 +322,14 @@ config:
 #### Step 8. Reimport Ceph OSDs
 
 !!! info
-  This step assumes, you have a "somewhat" healthy ceph cluster at this point, and are just needing to reimport your existing OSDs.
+    This step assumes, you have a "somewhat" healthy ceph cluster at this point, and are just needing to reimport your existing OSDs.
 
-  If, you don't have functional monitors, and managers, you need to correct that first.
+    If, you don't have functional monitors, and managers, you need to correct that first.
 
 Since, I am running ceph, my OSDs are currently not running. We need to correct this.
 
 !!! info
-  This step can be used anytime you move a ceph OSD from one host to another, without rebuilding the OSD.
+    This step can be used anytime you move a ceph OSD from one host to another, without rebuilding the OSD.
 
 So- the first step- just make sure your ceph volumes are still there. They shouldn't be mounted at this point, as we are on a pretty fresh install still.
 
