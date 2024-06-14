@@ -1,4 +1,4 @@
-## Passing through intel iGPU to VMs.
+## Proxmox - SR-IOV, and IOMMU for iGPU/GPU/NIC Passthrough to VMs
 
 
 Make sure your CPU supports IOMMU.
@@ -409,3 +409,7 @@ root@kube01:~#
 
 
 Finish this guide: https://pve.proxmox.com/wiki/PCI(e)_Passthrough
+
+Also, enable SRV-IOV
+
+https://forum.proxmox.com/threads/enabling-sr-iov-for-intel-nic-x550-t2-on-proxmox-6.56677/
