@@ -413,3 +413,7 @@ Finish this guide: https://pve.proxmox.com/wiki/PCI(e)_Passthrough
 Also, enable SRV-IOV
 
 https://forum.proxmox.com/threads/enabling-sr-iov-for-intel-nic-x550-t2-on-proxmox-6.56677/
+
+Another interesting post:
+
+https://forum.proxmox.com/threads/here-is-how-you-can-get-100-gbps-infiniband-up-and-running.121873/
