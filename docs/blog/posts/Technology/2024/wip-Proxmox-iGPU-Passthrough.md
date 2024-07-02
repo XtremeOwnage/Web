@@ -408,6 +408,9 @@ root@kube01:~#
 ```
 
 
+
+# WIP - Docs
+
 Finish this guide: https://pve.proxmox.com/wiki/PCI(e)_Passthrough
 
 Also, enable SRV-IOV
@@ -417,3 +420,209 @@ https://forum.proxmox.com/threads/enabling-sr-iov-for-intel-nic-x550-t2-on-proxm
 Another interesting post:
 
 https://forum.proxmox.com/threads/here-is-how-you-can-get-100-gbps-infiniband-up-and-running.121873/
+
+# Another good read..
+https://tech-jungle.com/setting-up-proxmox-with-shared-storage-over-infiniband/
+
+
+
+
+## Enabling srv-iov for ConnectX-3
+
+### Install mstflint
+
+``` bash
+root@kube01:~# apt-get install mstflint
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libboost-filesystem1.74.0 libibmad5 libibumad3 libmuparser2v5
+The following NEW packages will be installed:
+  libboost-filesystem1.74.0 libibmad5 libibumad3 libmuparser2v5 mstflint
+0 upgraded, 5 newly installed, 0 to remove and 0 not upgraded.
+Need to get 2,492 kB of archives.
+After this operation, 19.7 MB of additional disk space will be used.
+Do you want to continue? [Y/n]
+```
+
+Query card.
+
+``` bash
+root@kube05:~/mlnx# mstflint -d 03:00.0 q
+Image type:            FS2
+FW Version:            2.35.5100
+FW Release Date:       6.9.2015
+Product Version:       02.35.51.00
+Rom Info:              type=PXE version=3.4.648
+Device ID:             4099
+Description:           Node             Port1            Port2            Sys image
+GUIDs:                 ffffffffffffffff ffffffffffffffff ffffffffffffffff ffffffffffffffff
+MACs:                                       e41d2ddd88a0     e41d2ddd88a1
+VSD:
+PSID:                  MT_1170110023
+```
+
+Downloading firmware.
+
+``` bash
+root@kube05:~/mlnx# wget http://content.mellanox.com/firmware/ConnectX3-rel-2_40_5030.tgz
+--2024-06-17 11:31:51--  http://content.mellanox.com/firmware/ConnectX3-rel-2_40_5030.tgz
+Resolving content.mellanox.com (content.mellanox.com)... 107.178.241.102
+Connecting to content.mellanox.com (content.mellanox.com)|107.178.241.102|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2046870 (2.0M) [application/x-tar]
+Saving to: ‘ConnectX3-rel-2_40_5030.tgz’
+
+ConnectX3-rel-2_40_5030.tgz                                  100%[=============================================================================================================================================>]   1.95M  2.92MB/s    in 0.7s
+
+2024-06-17 11:31:52 (2.92 MB/s) - ‘ConnectX3-rel-2_40_5030.tgz’ saved [2046870/2046870]
+
+root@kube05:~/mlnx# tar -xzvf ConnectX3-rel-2_40_5030.tgz
+./
+./MCX353A-QCB_Ax.ini
+./MCX312B-XCB_Bx.ini
+./MCX341A-XCG_Ax.ini
+./MCX311A-XCA_Ax.ini
+./MCX314A-BCB_Ax.ini
+./MCX341A-XCE_Ax.ini
+./MCX341A-XCD_Ax.ini
+./MCX354A-QCB_Ax.ini
+./MCX353A-TCB_Ax.ini
+./MCX354A-FCB_A2-A5.ini
+./MCX342A-XCC_Ax.ini
+./MCX353A-FCB_A2-A5.ini
+./MCX313A-BCB_A4-A6.ini
+./MCX341A-XCA_Ax.ini
+./MCX342A-XCE_MCTPOSMBUS_INTERNAL_Ax.ini
+./MCX342A-XCE_Ax.ini
+./MCX341A-XCC_Ax.ini
+./MCX342A-XCB_Ax.ini
+./MCX341A-XCE_MCTPOSMBUS_Ax.ini
+./MCX341A-XCB_Ax.ini
+./MCX342A-XCD_Ax.ini
+./MCX354A-TCB_Ax.ini
+./MCX312B-XCB_Ax.ini
+./MCX313A-BCB_A1-A3.ini
+./MCX342A-XCA_Ax.ini
+./MCX312A-XCB_A2-A6.ini
+./MCX342A-XCG_Ax.ini
+./fw-ConnectX3-rel.mlx
+./fw-ConnectX3-debug.mlx
+./fw-ConnectX3-defaults.ref
+```
+
+Dump config
+``` bash
+mstflint -d 03:00.0 dc > /tmp/ini.ini
+```
+
+Edit Config. Add the following under the "[HCA]" section.
+
+num_pfs = 1
+total_vfs = 64
+sriov_en = true
+
+``` bash
+nano /tmp/ini.ini
+```
+
+Update firmware, set config.
+
+
+# Install mellonax software from deb
+
+``` bash
+root@kube05:/etc/apt/sources.list.d# wget https://linux.mellanox.com/public/repo/mlnx_ofed/latest/debian12.1/mellanox_mlnx_ofed.list
+--2024-06-17 11:43:39--  https://linux.mellanox.com/public/repo/mlnx_ofed/latest/debian12.1/mellanox_mlnx_ofed.list
+Resolving linux.mellanox.com (linux.mellanox.com)... 168.62.212.37
+Connecting to linux.mellanox.com (linux.mellanox.com)|168.62.212.37|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 253
+Saving to: ‘mellanox_mlnx_ofed.list’
+
+mellanox_mlnx_ofed.list                                      100%[=============================================================================================================================================>]     253  --.-KB/s    in 0s
+
+2024-06-17 11:43:39 (27.6 MB/s) - ‘mellanox_mlnx_ofed.list’ saved [253/253]
+root@kube05:/etc/apt/sources.list.d# wget -qO - https://www.mellanox.com/downloads/ofed/RPM-GPG-KEY-Mellanox | sudo apt-key add -
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+OK
+root@kube05:/etc/apt/sources.list.d# apt-get update
+Hit:1 http://download.proxmox.com/debian/pve bookworm InRelease
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Hit:3 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:4 http://download.proxmox.com/debian/ceph-reef bookworm InRelease
+Hit:5 http://deb.debian.org/debian bookworm-updates InRelease
+Ign:6 http://linux.mellanox.com/public/repo/mlnx_ofed/24.04-0.6.6.0/debian12.1/amd64 ./ InRelease
+Get:7 http://linux.mellanox.com/public/repo/mlnx_ofed/24.04-0.6.6.0/debian12.1/amd64 ./ Release [1,329 B]
+Get:8 http://linux.mellanox.com/public/repo/mlnx_ofed/24.04-0.6.6.0/debian12.1/amd64 ./ Release.gpg [516 B]
+Get:9 http://linux.mellanox.com/public/repo/mlnx_ofed/24.04-0.6.6.0/debian12.1/amd64 ./ Packages [36.8 kB]
+Fetched 38.6 kB in 1s (56.4 kB/s)
+Reading package lists... Done
+W: http://linux.mellanox.com/public/repo/mlnx_ofed/24.04-0.6.6.0/debian12.1/amd64/./Release.gpg: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+root@kube05:/etc/apt/sources.list.d#
+```
+
+
+
+## Install MLXBurn
+
+Find the correct version / url here: https://network.nvidia.com/products/adapter-software/firmware-tools/
+
+``` bash
+root@kube05:~/mlxburn# wget https://www.mellanox.com/downloads/MFT/mft-4.28.0-92-x86_64-deb.tgz
+--2024-06-17 11:50:23--  https://www.mellanox.com/downloads/MFT/mft-4.28.0-92-x86_64-deb.tgz
+Resolving www.mellanox.com (www.mellanox.com)... 23.215.55.169, 23.215.55.185
+Connecting to www.mellanox.com (www.mellanox.com)|23.215.55.169|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://content.mellanox.com/MFT/mft-4.28.0-92-x86_64-deb.tgz [following]
+--2024-06-17 11:50:24--  https://content.mellanox.com/MFT/mft-4.28.0-92-x86_64-deb.tgz
+Resolving content.mellanox.com (content.mellanox.com)... 107.178.241.102
+Connecting to content.mellanox.com (content.mellanox.com)|107.178.241.102|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 60344664 (58M) [application/gzip]
+Saving to: ‘mft-4.28.0-92-x86_64-deb.tgz’
+
+mft-4.28.0-92-x86_64-deb.tgz                                 100%[=============================================================================================================================================>]  57.55M  9.25MB/s    in 7.1s
+
+2024-06-17 11:50:31 (8.07 MB/s) - ‘mft-4.28.0-92-x86_64-deb.tgz’ saved [60344664/60344664]
+
+root@kube05:~/mlxburn# tar -zxvf mft-4.28.0-92-x86_64-deb.tgz
+mft-4.28.0-92-x86_64-deb/DEBS/
+mft-4.28.0-92-x86_64-deb/DEBS/mft-autocomplete_4.28.0-92_amd64.deb
+mft-4.28.0-92-x86_64-deb/DEBS/mft-oem_4.28.0-92_amd64.deb
+mft-4.28.0-92-x86_64-deb/DEBS/mft-pcap_4.28.0-92_amd64.deb
+mft-4.28.0-92-x86_64-deb/DEBS/mft_4.28.0-92_amd64.deb
+mft-4.28.0-92-x86_64-deb/LICENSE.txt
+mft-4.28.0-92-x86_64-deb/SDEBS/
+mft-4.28.0-92-x86_64-deb/SDEBS/kernel-mft-dkms_4.28.0-92_all.deb
+mft-4.28.0-92-x86_64-deb/install.sh
+mft-4.28.0-92-x86_64-deb/old-mft-uninstall.sh
+mft-4.28.0-92-x86_64-deb/uninstall.sh
+root@kube05:~/mlxburn# cd mft-4.28.0-92-x86_64-deb/DEBS
+root@kube05:~/mlxburn/mft-4.28.0-92-x86_64-deb/DEBS# dpkg -i mft_4.28.0-92_amd64.deb
+Selecting previously unselected package mft.
+(Reading database ... 49112 files and directories currently installed.)
+Preparing to unpack mft_4.28.0-92_amd64.deb ...
+Unpacking mft (4.28.0-92) ...
+Setting up mft (4.28.0-92) ...
+Processing triggers for libc-bin (2.36-9+deb12u7) ...
+Processing triggers for man-db (2.11.2-2) ...
+root@kube05:~/mlxburn/mft-4.28.0-92-x86_64-deb/DEBS# mlx
+mlxburn                mlxcables_ext          mlxdump_ext            mlxfwstress_ext        mlxlink_ext            mlxpci                 mlxptrace_ext          mlxtokengenerator      mlxvpd
+mlxburn_old            mlxconfig              mlxfwmanager           mlxgearbox             mlxlink_plane_wrapper  mlxphyburn             mlxptrace_int          mlxtrace
+mlxcableimgen          mlxdpa                 mlxfwreset             mlxi2c                 mlxmcg                 mlxprivhost            mlxreg                 mlxtrace_ext
+mlxcables              mlxdump                mlxfwstress            mlxlink                mlxmdio                mlxptrace              mlxreg_ext             mlxuptime
+```
+
+
+A really good piece of documentation: https://forums.servethehome.com/index.php?threads/connectx-3-custom-firmware-files.39457/
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_openstack_platform/7/html/networking_guide/sr-iov-support-for-virtual-networking
+
+## Purge Mellonax packages
+
+``` bash
+dpkg -P mft
+dpkg -P mstflint
+```
