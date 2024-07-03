@@ -10,6 +10,15 @@ tags:
 
 This post documents the steps needed to create a minified debian cloud image template, which you can easily clone, and have a running VM in seconds with no configuration needed.
 
+This includes common packages, ssh-keys, IP information.
+
+The end result of this project is...
+
+1. You clone a template, and start it.
+2. The cloned VM automatically starts up, updates itself, and starts running, with common packages installed, and your ssh details pre-configured.
+3. A slimmed down distribution, without excess (My end result was a 400M image.)
+4. No need to edit the VM after cloning, other then adding CPU/RAM, or other hardware as needed.
+
 <!-- more -->
 
 ## Verbiage / Documentation
@@ -30,13 +39,13 @@ This- image does not include many bare metal hardware drivers, which aren't need
 
 From [Debian Official Cloud Images](https://cloud.debian.org/images/cloud/){target=_blank}, we want to select the [Bookworm](https://cloud.debian.org/images/cloud/bookworm/){target=_blank}/[Latest](https://cloud.debian.org/images/cloud/bookworm/latest/){target=_blank} folder at the bottom of the page.
 
-![Image showing the folders at the bottom of the debian cloud images page, with the bookworm folder highlighted](./assets-cloudinit-template/cloud-images-bookworm.png)
+![Image showing the folders at the bottom of the debian cloud images page, with the bookworm folder highlighted](./assets-cloudinit-template/cloud-images-bookworm.webP)
 
 Inside of this folder, is quite a few different files. 
 
 We SPECIFICALLY want, the "genericcloud"-"amd64".qcow2 image. Its name is ["debian-12-genericcloud-amd64.qcow2"](https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2){target=_blank}
 
-![Image showing list of available images, with genericcloud-amd64 image highlighted](./assets-cloudinit-template/genericcloud-image.png)
+![Image showing list of available images, with genericcloud-amd64 image highlighted](./assets-cloudinit-template/genericcloud-image.webP)
 
 !!! warning
     While- the above link DOES link to the image- I don't recommend blindly copying and pasting links from the internet.
@@ -101,6 +110,12 @@ guest
 
 
 #### (Optional) Expand the image size
+
+!!! info
+    This step is optional- because you can just grow the partition in Proxmox, and either start or reboot the cloned VM.
+
+    It will automatically grow the root partition.
+
 Next up, I am going to set the size of this image, to 16G, as its original size is 2GB.
 
 You can view the current size of the image, using `qemu-img info`
@@ -177,7 +192,7 @@ At this point, we should have a suitable base image.
 
 Now that we have a suitable image, we need to build a base VM template. I will be doing this step through the GUI.
 
-![Image showing create VM button highlighted in proxmox](./assets-cloudinit-template/proxmox-create-vm.png)
+![Image showing create VM button highlighted in proxmox](./assets-cloudinit-template/proxmox-create-vm.webP)
 
 For the general tab, give a name which implies this is a template.
 
@@ -185,19 +200,19 @@ I also have a template source pool, and tag I assigned. But, this is optional.
 
 Finally- I set a shutdown timeout of 5 minutes. This- is also optional.
 
-![Image showing General tab when creating VM](./assets-cloudinit-template/createvm-general.png)
+![Image showing General tab when creating VM](./assets-cloudinit-template/createvm-general.webP)
 
 For the OS Tab- click "don't use any media". No other changes are needed here.
 
-![Create VM - OS Tab](./assets-cloudinit-template/createvm-os.png)
+![Create VM - OS Tab](./assets-cloudinit-template/createvm-os.webP)
 
 On the system tab, I enabled the checkbox for Qemu-Agent.
 
-![Create VM - System Tab](./assets-cloudinit-template/createvm-system.png)
+![Create VM - System Tab](./assets-cloudinit-template/createvm-system.webP)
 
 On the disks tab, you will want to REMOVE the default disks. We will add 
 
-![Create VM - Disks Tab](./assets-cloudinit-template/createvm-disks.png)
+![Create VM - Disks Tab](./assets-cloudinit-template/createvm-disks.webP)
 
 For CPU / Memory tab- just set whatever defaults you want.
 
@@ -207,11 +222,11 @@ For memory, I allocated 1024G of ram, and disabled ballooning. Remember- we will
 
 For network, I chose my default vlan interface, where I typically create new nodes. I did select firewall.
 
-![Create VM - Networking Tab](./assets-cloudinit-template/createvm-networking.png)
+![Create VM - Networking Tab](./assets-cloudinit-template/createvm-networking.webP)
 
 On the confirm tab- don't select start after created.
 
-![Create VM - Confirm Tab](./assets-cloudinit-template/createvm-confirm.png)
+![Create VM - Confirm Tab](./assets-cloudinit-template/createvm-confirm.webP)
 
 ### Step 4. Attach qcow2 image to VM
 
@@ -259,22 +274,22 @@ Attach the disk we created from the qcow2.
 2. I also like to set write back cache. However, this is optional.
 3. Click Add.
 
-![Picture showing Add Unused Disk Interface](./assets-cloudinit-template/editvm-attach-disk.png)
+![Picture showing Add Unused Disk Interface](./assets-cloudinit-template/editvm-attach-disk.webP)
 
 
 Next- Click Add -> CloudInit Device
 
-![Add hardware dropdown with CloudInit selected](./assets-cloudinit-template/editvm-add-hw-dropdown.png)
+![Add hardware dropdown with CloudInit selected](./assets-cloudinit-template/editvm-add-hw-dropdown.webP)
 
 Select your storage. I leave IDE selected as the default bus.
 
-![Add CloudInit Device Dialog](./assets-cloudinit-template/editvm-add-cloudinit-dialog.png)
+![Add CloudInit Device Dialog](./assets-cloudinit-template/editvm-add-cloudinit-dialog.webP)
 
 Click Add.
 
 If, you plan on using UEFI, you can also add an EFI disk at this step.
 
-![My final configuration for the hardware tab](./assets-cloudinit-template/editvm-hw-final.png)
+![My final configuration for the hardware tab](./assets-cloudinit-template/editvm-hw-final.webP)
 
 #### Cloud Init Tab
 
@@ -288,7 +303,7 @@ But- the key here is, for its initial login, it can log into VMs cloned from thi
 
 For the IP Config, I set dhcp as the default.
 
-![Cloud init tab populate with information](./assets-cloudinit-template/editvm-cloud-init-tab.png)
+![Cloud init tab populate with information](./assets-cloudinit-template/editvm-cloud-init-tab.webP)
 
 #### Options Tab
 
@@ -300,7 +315,7 @@ I always uncheck network boot, since I don't use it. As well, make sure to unsel
 
 We only want the primary disk, containing our cloned qcow2 selected here.
 
-![Boot order dialog showing only the primary disk selected.](./assets-cloudinit-template/editvm-boot-order.png)
+![Boot order dialog showing only the primary disk selected.](./assets-cloudinit-template/editvm-boot-order.webP)
 
 
 #### Final touches?
@@ -311,26 +326,40 @@ As a good example, I have a firewall rule defined at the datacenter level, for o
 
 Here- is my personal starting point for firewall rules.
 
-![Image showing my default firewall security groups](./assets-cloudinit-template/editvm-fw-rules.png)
+![Image showing my default firewall security groups](./assets-cloudinit-template/editvm-fw-rules.webP)
 
 If you do plan on including firewall rules, make sure to enable "Firewall" under Firewall -> Options. It is not enabled by default.
 
-![Firewall is not enabled by default](./assets-cloudinit-template/editvm-fw-disabled.png)
+![Firewall is not enabled by default](./assets-cloudinit-template/editvm-fw-disabled.webP)
 
-### Step 6. (Optional) Convert to template
+### Step 6. Convert to template
 
-This step is optional, because you don't need to convert this to a template, in order to clone it.
+This step is questionably optional, because you don't need to convert this to a template, in order to clone it.
 
 !!! info
     If you wish to use a linked-clone, you DO need to convert your VM to a template.
 
-If, you wish to convert this to a template- Right click on the VM, and select, Convert to template.
+!!! warning
+    Without converting to a template, you will need to change the MAC address for every clone.
 
-![Right click VM dialog, with convert to template highlighted.](./assets-cloudinit-template/vm-convert-template.png)
+    (aka, you should make this a template, if you plan on cloning it)
+
+To convert this to a template- Right click on the VM, and select, Convert to template.
+
+![Right click VM dialog, with convert to template highlighted.](./assets-cloudinit-template/vm-convert-template.webP)
 
 After you have converted it to a template, you will no longer be able to start/stop or snapshot this machine. You would need to clone it first, and then start the clone.
 
-![Right click dialog options after converting to a template](./assets-cloudinit-template/right-click-dialog-template.png)
+![Right click dialog options after converting to a template](./assets-cloudinit-template/right-click-dialog-template.webP)
+
+One final configuration item- Edit the network interface on your template. Set its MAC Address to `00:00:00:00:00:00`
+
+![Image showing edit network device, with mac address zeroed out](./assets-cloudinit-template/editvm-nic-zero-mac.webP)
+
+!!! warning
+    If you miss this step- all of your cloned VMs will have the same MAC address.
+
+    This, will likely cause a lot of problems. Make sure to do this step!
 
 
 ## The final result
@@ -341,7 +370,7 @@ Now- just clone the template, and voila- you will have a patched up debian machi
 
 Right click the template (or VM, if you didn't convert to a template), and select Clone.
 
-![Right clicked template dialog, with clone highlighted](./assets-cloudinit-template/right-click-clone.png)
+![Right clicked template dialog, with clone highlighted](./assets-cloudinit-template/right-click-clone.webP)
 
 Select a target node and a new name for your new VM.
 
@@ -364,13 +393,13 @@ A full clone, is exactly that. Its a full clone. You can full clone VMs or templ
 
 If- you try to delete the image used by a linked clone, you will get this:
 
-![Image showing dialog to delete a disk](./assets-cloudinit-template/delete-linked-clone-image.png)
+![Image showing dialog to delete a disk](./assets-cloudinit-template/delete-linked-clone-image.webP)
 
-![Error showing that the base image is being used by other disks](./assets-cloudinit-template/delete-linked-clone-image-error.png)
+![Error showing that the base image is being used by other disks](./assets-cloudinit-template/delete-linked-clone-image-error.webP)
 
 For this- I will be using a linked clone, as I leverage my [Ceph Cluster](./../2023/2023-08-08-proxmox-ceph.md){target=_blank} for cluster-wide storage.
 
-![Clone VM dialog, with linked clone specified](./assets-cloudinit-template/clone-vm-dialog.png)
+![Clone VM dialog, with linked clone specified](./assets-cloudinit-template/clone-vm-dialog.webP)
 
 After you have performed your changes, click Clone.
 
@@ -378,15 +407,15 @@ After you have performed your changes, click Clone.
 
 Once you start your VM, it will automatically start the process of downloading updates, and configuring itself.
 
-![Picture showing the terminal flying by as the clone starts](./assets-cloudinit-template/clone-running-starting.png0)
+![Picture showing the terminal flying by as the clone starts](./assets-cloudinit-template/clone-running-starting.webP)
 
 And- lastly, you will be left, with a login prompt.
 
-![Picture showing the login prompt of cloned VM](./assets-cloudinit-template/clone-login-prompt.png)
+![Picture showing the login prompt of cloned VM](./assets-cloudinit-template/clone-login-prompt.webP)
 
 If- you followed through with the step to update the base-image, to add qemu-guest-agent, you will also be able to see IP details via the proxmox web interface.
 
-![Image showing the details of the newly cloned VM running](./assets-cloudinit-template/vm-details.png)
+![Image showing the details of the newly cloned VM running](./assets-cloudinit-template/vm-details.webP)
 
 Lastly- since we specified the username, and ssh-keys via the CloudInit, we can also log into this VM.
 
@@ -429,7 +458,7 @@ nano /etc/pve/qemu-server/139.conf
 
 Then, once your GUI reflects the changes, convert the VM back into a template again.
 
-![Converting VM back into template](./assets-cloudinit-template/right-click-dialog-template.png)
+![Converting VM back into template](./assets-cloudinit-template/right-click-dialog-template.webP)
 
 ### Patching linked clones through template
 
@@ -439,15 +468,15 @@ If- you are thinking of creating a template, spinning up linked clones, and patc
 
 Looking at ceph- my base image is only using 1.3G of total disk space. 
 
-![Image of ceph dashboard showing the base template's image](./assets-cloudinit-template/ceph-base-image.png)
+![Image of ceph dashboard showing the base template's image](./assets-cloudinit-template/ceph-base-image.webP)
 
 If- we look at a VM cloned using Full Clone- we can see, it is using 1.4G of disk space. The parent field is also empty (as it was a full copy)
 
-![Image of full cloned vm disk in ceph dashboard](./assets-cloudinit-template/ceph-full-clone.png)
+![Image of full cloned vm disk in ceph dashboard](./assets-cloudinit-template/ceph-full-clone.webP)
 
 Looking at a disk from a Linked clone, we can see, it is also using 1.3/1.4G of disk space, but, you can see the "layering" feature is enabled, and it has a parent specified.
 
-![Image of linked clone disk in ceph dashboard](./assets-cloudinit-template/ceph-linked-clone.png)
+![Image of linked clone disk in ceph dashboard](./assets-cloudinit-template/ceph-linked-clone.webP)
 
 Now- you might be saying- That doesn't sound right at all.
 
@@ -506,3 +535,53 @@ rbd image 'vm-141-disk-0':
         parent: ceph-block/base-139-disk-0@__base__
         overlap: 16 GiB
 ```
+
+### How to add disk-space after cloning?
+
+Easy- Add the disk space via proxmox. 
+
+Then- you can take one of two paths.
+
+#### Reboot the system
+
+The debian cloud templates will automatically resize during boot.
+
+Just- add disk space, and reboot.
+
+``` bash
+[    6.697063] EXT4-fs (vda1): resizing filesystem from 4161531 to 20938747 blocks
+[    6.813343] EXT4-fs (vda1): resized filesystem to 20938747
+```
+
+#### Using growpart- no reboot needed.
+
+SSH into the VM, and run `growpart`
+
+``` bash
+temp@test:~$ lsblk
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sr0      11:0    1    4M  0 rom
+vda     254:0    0   32G  0 disk
+|-vda1  254:1    0 15.9G  0 part /
+|-vda14 254:14   0    3M  0 part
+`-vda15 254:15   0  124M  0 part /boot/efi
+root@test:/home/temp# growpart /dev/vda 1
+CHANGED: partition=1 start=262144 old: size=33292255 end=33554398 new: size=66846687 end=67108830
+root@test:/home/temp# lsblk
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sr0      11:0    1    4M  0 rom
+vda     254:0    0   32G  0 disk
+|-vda1  254:1    0 31.9G  0 part /
+|-vda14 254:14   0    3M  0 part
+`-vda15 254:15   0  124M  0 part /boot/efi
+```
+
+
+
+### Help, all of my machines are getting the same IP address from DHCP.
+
+Edit the hardware of your template. Set the Network Device's MAC address to `00:00:00:00:00:00`
+
+New machines will receive a random mac address.
+
+(If- you missed the step above, and you have already cloned a dozen machines, you can "clear" the mac address field of the VMs NIC(s),  and a new address will be automatically configured.)
