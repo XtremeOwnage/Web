@@ -535,10 +535,6 @@ https://forum.proxmox.com/threads/enabling-sr-iov-for-intel-nic-x550-t2-on-proxm
 
 
 
-
-
-
-
 # KVMGT
 
 https://www.linux-kvm.org/images/f/f3/01x08b-KVMGT-a.pdf
@@ -550,3 +546,7 @@ After enabling required drivers, and functionality.
 These "mediated" devices can also be used with resource mappings at the cluster level. This will allow VMs to "share" GPUs when failing over to other hosts.
 
 ![alt text](./assets-iommu/proxmox-mediated-resource-mapping.png)
+=======
+Another interesting post:
+
+https://forum.proxmox.com/threads/here-is-how-you-can-get-100-gbps-infiniband-up-and-running.121873/
