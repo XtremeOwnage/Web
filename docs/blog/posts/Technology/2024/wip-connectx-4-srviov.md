@@ -16,3 +16,14 @@ root@kube02:/sys/class/infiniband/mlx5_0# lspci | grep Mel
 And... poof
 
 ![alt text](./proxmox-set-device-group.png)
+
+
+## How to persist?
+
+To make this persistent, we need to create a udev rule.
+
+Create `/etc/udev/rules.d/80-sriov.rules`
+
+```
+SUBSYSTEM=="pci", DRIVERS=="mlx5_core", ATTR{sriov_numvfs}="4"
+```
