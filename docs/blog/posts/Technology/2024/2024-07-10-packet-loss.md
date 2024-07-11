@@ -8,7 +8,7 @@ tags:
 
 # Detecting a weird packet loss issue.
 
-So- I recently installed a [Quad 100G Mikrotik CRS504-4XQ-IN Router](https://amzn.to/3Ll3sTa){target=_blank} into my lab recently, and moved my rack, and SFFs over to 100G NICs.
+So- I recently installed a [Quad 100G Mikrotik CRS504-4XQ-IN Router](https://amzn.to/3Ll3sTa){target=_blank} into my lab recently and moved a few servers over to 100G NICs.
 
 Around the time I did this- I also started experiencing tons of random, hard to pinpoint instances of latency across my network.
 
@@ -16,6 +16,17 @@ I validated flow-control was enabled for the network- and I checked various port
 
 This- issue took me around a week or two to finally pinpoint.... this post- is going through a bit of the steps taken.
 
+<!-- more -->
+
+## The Symptoms
+
+The symptoms- were rather unique.
+
+* Web pages would pause for up to 10 seconds before loading.
+* Some mobile apps (clash of clans) would randomly disconnect with connection issues.
+* Random latency and disconnects occurring throughout my network. 
+* Very little detectable packet-loss. This- is key.
+* The symptoms almost resembled what occurs when you have a STP loop causing a port to flap up and down.
 
 ### Starting at the Mikrotik
 
