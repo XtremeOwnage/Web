@@ -16,6 +16,7 @@ I validated flow-control was enabled for the network- and I checked various port
 
 This- issue took me around a week or two to finally pinpoint.... this post- is going through a bit of the steps taken.
 
+<!-- more -->
 
 ### Starting at the Mikrotik
 
