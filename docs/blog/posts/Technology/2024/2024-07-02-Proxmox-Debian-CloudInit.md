@@ -108,44 +108,36 @@ guest
 
     I personally, rely on ansible to do the final provisioning, as such, I am only installing the bare minimum software.
 
+#### (Optional) Fix DHCP Issue
 
-#### (Optional) Expand the image size
+By default, the cloud images uses the hostname as the DHCP identifier. This- works fine.... when it doesn't send the default template name for every cloned image.
 
-!!! info
-    This step is optional- because you can just grow the partition in Proxmox, and either start or reboot the cloned VM.
-
-    It will automatically grow the root partition.
-
-Next up, I am going to set the size of this image, to 16G, as its original size is 2GB.
-
-You can view the current size of the image, using `qemu-img info`
+A simple fix, is to just update the logic to use the hardware / mac address.
 
 ``` bash
-root@kube01:~/template# qemu-img info debian-12-genericcloud-amd64.qcow2
-image: debian-12-genericcloud-amd64.qcow2
-file format: qcow2
-virtual size: 2 GiB (2147483648 bytes)
-disk size: 607 MiB
-cluster_size: 65536
-Format specific information:
-    compat: 1.1
-    compression type: zlib
-    lazy refcounts: false
-    refcount bits: 16
-    corrupt: false
-    extended l2: false
-Child node '/file':
-    filename: debian-12-genericcloud-amd64.qcow2
-    protocol type: file
-    file length: 607 MiB (636682240 bytes)
-    disk size: 607 MiB
+root@kube01:~/cloud-init# virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "sed -i 's|send host-name = gethostname();|send dhcp-client-identifier = hardware;|' /etc/dhcp/dhclient.conf"
+[   0.0] Examining the guest ...
+[   2.3] Setting a random seed
+virt-customize: warning: random seed could not be set for this type of
+guest
+[   2.3] Setting the machine ID in /etc/machine-id
+[   2.3] Running: sed -i 's|send host-name = gethostname();|send dhcp-client-identifier = hardware;|' /etc/dhcp/dhclient.conf
+[   2.4] Finishing off
 ```
 
-To resize the disk, use `qemu-img resize`
+Want to learn more about this issue?
+
+* <https://github.com/Telmate/terraform-provider-proxmox/issues/481>
+* <https://forum.proxmox.com/threads/cloud-init-registering-dns-with-template-name.106726/>
+
+For me- setting the dhcp-identifier to use the MAC address, works extremely well, as proxmox gives each clone a randomly generated MAC address when cloning.
+
+#### Reset machine-id
+
+One more step- we need to add a step to reset the machine-id. If this step is left out, machines will each acquire the same IP address when using DHCP (Regardless if your MAC is different)
 
 ``` bash
-root@kube01:~/template# qemu-img resize debian-12-genericcloud-amd64.qcow2 16G
-Image resized.
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "echo -n > /etc/machine-id"
 ```
 
 #### (Optional) Compress and shrink the image
@@ -180,9 +172,15 @@ This- saved around 200M, which is pretty impressive when you consider the file w
 
 Full commands used:
 ``` bash
+# Install tools to manage images
 apt-get install libguestfs-tools
+# Install packages
 virt-customize -a debian-12-genericcloud-amd64.qcow2 --install qemu-guest-agent,curl,wget,nano,rsync,htop
-qemu-img resize debian-12-genericcloud-amd64.qcow2 16G
+# Set DHCP-Identifier to use hardware address instead of hostname.
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "sed -i 's|send host-name = gethostname();|send dhcp-client-identifier = hardware;|' /etc/dhcp/dhclient.conf"
+# Reset Machine-ID
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "echo -n > /etc/machine-id"
+# Compress the image
 qemu-img convert -O qcow2 -c -o preallocation=off debian-12-genericcloud-amd64.qcow2 debian-12-genericcloud-amd64-shrink.qcow2
 ```
 
@@ -317,6 +315,31 @@ We only want the primary disk, containing our cloned qcow2 selected here.
 
 ![Boot order dialog showing only the primary disk selected.](./assets-cloudinit-template/editvm-boot-order.webP)
 
+### Script containing image customizations
+
+Here is the list of CLI commands used to download, and customize the image.
+
+``` bash
+# The ID of the Template/VM.
+VM_ID=139
+# Desired proxmox storage for the new image.
+STORAGE="ceph-block"
+
+# Download Image
+wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-genericcloud-amd64.qcow2
+# Install tools to manage images
+apt-get install libguestfs-tools
+# Install packages
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --install qemu-guest-agent,curl,wget,nano,rsync,htop
+# Set the DHCP client identifier to use hardware address.
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "sed -i 's|send host-name = gethostname();|send dhcp-client-identifier = hardware;|' /etc/dhcp/dhclient.conf"
+# Reset Machine-ID
+virt-customize -a debian-12-genericcloud-amd64.qcow2 --run-command "echo -n > /etc/machine-id"
+# Compress the image
+qemu-img convert -O qcow2 -c -o preallocation=off debian-12-genericcloud-amd64.qcow2 debian-12-genericcloud-amd64-shrink.qcow2
+# Import the image to our template.
+qm importdisk $VM_ID debian-12-genericcloud-amd64-shrink.qcow2 $STORAGE
+```
 
 #### Final touches?
 
