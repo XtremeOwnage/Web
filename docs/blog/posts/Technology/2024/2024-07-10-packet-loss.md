@@ -401,7 +401,7 @@ Interesting enough- as soon as I paused it, I noticed a bunch of interesting....
 Also- while  digging around, I noticed one of my DDNS clients was failing. I went ahead and fix it.
 
 
-Afterwards, load dropped down to 1.5... and all noticable packet loss stopped.
+Afterwards, load dropped down to 1.5... and all noticeable packet loss stopped.
 
 ``` bash
 top - 20:35:47 up 1 day,  2:44,  1 user,  load average: 1.52, 1.56, 1.65
@@ -460,7 +460,12 @@ SUPPORT_URL="https://www.debian.org/support"
 BUG_REPORT_URL="https://bugs.debian.org/"
 ```
 
-So- I'm going to enable SNMP on this thing.
+So- I'm going to enable SNMP on this thing. 
+
+!!! info
+    Yes- I realize SNMP is available for UDM models, and *PRO models.
+
+    I'm not paying 400$ for the privilege to "enable SNMP", or to handle 10G routing, when I have a perfectly serviceable 10G Layer 3 switch already.
 
 What is interesting- there is a snmp.conf on the base image.
 
