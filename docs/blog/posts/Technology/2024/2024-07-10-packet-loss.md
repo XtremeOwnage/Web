@@ -95,9 +95,9 @@ After- not finding anything really of use- I decided to try a few difference app
 After digging down quite a few rabbit holes, I started running [Python- multi-ping-ext](https://pypi.org/project/ping-multi-ext/){target=_blank}. This- is a simple python project, which pings multiple hosts at the same time, and keeps track of latency and failures.
 
 And- it didn't take long for it to spot the issues.
-![Image showing interfaces belonging to my UXG-Lite dropping packets](./assets-packet-loss/multi-ping-failures.png)
+![Image showing interfaces belonging to my UXG-Lite dropping packets](./assets-packet-loss/multi-ping-failures.webP)
 
-![alt text](./assets-packet-loss/multi-ping-failures-2.png)
+![alt text](./assets-packet-loss/multi-ping-failures-2.webP)
 
 For back-story, my network has 4 different routers, handling various pieces.
 
@@ -440,7 +440,7 @@ So- the root cause, was due to a single OpenVPN client spamming reconnect attemp
 
 I have [libreNMS](https://www.librenms.org/){target=_blank} already running for every OTHER network device... EXCEPT the uxg-lite.
 
-![Image showing SNMP not supported](./assets-packet-loss/snmp-not-supported.png)
+![Image showing SNMP not supported](./assets-packet-loss/snmp-not-supported.webP)
 
 But- you know what? There is nothing special about the UXG-Lite. Its just an embedded system running a customized verison of debian.
 
@@ -518,7 +518,7 @@ root@UniFiNext-GenGatewayLite:/etc/snmp# systemctl restart snmpd.service
 
 And, afterwards, I was able to add it directly into LibreNMS without any issues.
 
-![Image showing UXG lite in LIbreNMS](./assets-packet-loss/uxg-lite-librenms.png)
+![Image showing UXG lite in LIbreNMS](./assets-packet-loss/uxg-lite-librenms.webP)
 
 Now- I can centerally report on its stats, performance, and packet loss.
 
