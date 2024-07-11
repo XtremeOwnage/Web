@@ -548,7 +548,7 @@ Sure- it might get erased during the next firmware update- but, nothing an ansib
 
 One goal of mine- is even when the internet is completely out, and backup circuits are unavailable- my entire network should continue to function normally.
 
-Rather then making the internet-facing UXG-Lite router the "Center" of my network, I prefer to think of it as being just another component on the edge. 
+Rather then making the internet-facing UXG-Lite router the "Center" of my network, I prefer to think of it as being just another component on the edge, and not at the core.
 
 #### Security Concerns.
 
