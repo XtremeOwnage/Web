@@ -208,7 +208,7 @@ On the system tab, I enabled the checkbox for Qemu-Agent.
 
 ![Create VM - System Tab](./assets-cloudinit-template/createvm-system.webP)
 
-On the disks tab, you will want to REMOVE the default disks. We will add 
+On the disks tab, you will want to REMOVE the default disks. We will add disks later.
 
 ![Create VM - Disks Tab](./assets-cloudinit-template/createvm-disks.webP)
 
@@ -345,7 +345,7 @@ qm importdisk $VM_ID debian-12-genericcloud-amd64-shrink.qcow2 $STORAGE
 
 I personally, like customizing a default set of sane firewall rules for my VMs. However- this is completely optional, and up to you.
 
-As a good example, I have a firewall rule defined at the datacenter level, for only allowing ssh access, for known, good hosts.
+As a good example, I have a firewall rule defined at the data center level, for only allowing ssh access, for known, good hosts.
 
 Here- is my personal starting point for firewall rules.
 
@@ -375,7 +375,7 @@ After you have converted it to a template, you will no longer be able to start/s
 
 ![Right click dialog options after converting to a template](./assets-cloudinit-template/right-click-dialog-template.webP)
 
-One final configuration item- Edit the network interface on your template. Set its MAC Address to `00:00:00:00:00:00`
+One final configuration item- Edit the network interface on your template. Ensure its MAC Address to `00:00:00:00:00:00` (This will cause a random MAC address to be generated for every new clone)
 
 ![Image showing edit network device, with mac address zeroed out](./assets-cloudinit-template/editvm-nic-zero-mac.webP)
 
@@ -413,6 +413,15 @@ A full clone, is exactly that. Its a full clone. You can full clone VMs or templ
     The linked clone, **MUST** remain on the same storage as the original template.
 
     The cloned VMs REQUIRES the image from the template.
+
+!!! info
+    Linked clones are implemented in the storage itself. So- you must have supported storage to use linked-clones.
+
+    Per [The Documentation](https://pve.proxmox.com/wiki/VM_Templates_and_Clones){target=_blank}
+
+    Linked Clones works for theses storages: files in raw, qcow2, vmdk format (either on local storage or nfs); LVM-thin, ZFS, rbd, sheepdog, nexenta.
+
+    It's not supported with LVM & ISCSI storage.
 
 If- you try to delete the image used by a linked clone, you will get this:
 
