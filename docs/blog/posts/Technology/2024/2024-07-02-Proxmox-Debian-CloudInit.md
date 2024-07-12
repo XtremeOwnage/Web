@@ -208,7 +208,7 @@ On the system tab, I enabled the checkbox for Qemu-Agent.
 
 ![Create VM - System Tab](./assets-cloudinit-template/createvm-system.webP)
 
-On the disks tab, you will want to REMOVE the default disks. We will add 
+On the disks tab, you will want to REMOVE the default disks. We will add disks later.
 
 ![Create VM - Disks Tab](./assets-cloudinit-template/createvm-disks.webP)
 
