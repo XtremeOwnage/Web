@@ -1,7 +1,3 @@
-Sure, here is a concise article detailing various methods to edit files inside a Kubernetes container:
-
----
-
 title: "Kubernetes - Edit Files in Containers"
 date: 2024-07-02
 tags:
