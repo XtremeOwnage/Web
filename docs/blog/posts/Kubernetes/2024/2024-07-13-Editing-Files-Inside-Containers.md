@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes - Edit Files in Containers"
-date: 2024-07-02
+date: 2024-07-13
 tags:
   - Homelab
   - Kubernetes/General
