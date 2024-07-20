@@ -374,6 +374,31 @@ Unifi's [Layer 3 Routing Documentation](https://help.ui.com/hc/en-us/articles/36
 ![alt text](./assets-unifi-layer3/layer-3-routing-static-routing.png)
 
 
+## How DOES Unifi's "Layer 3" work?
+
+When you use Unifi gear, without layer 3 switches, with everything connected to your gateway, Your **layer 3** network will use a star topology.
+
+!!! info
+    Just because you have a bunch of layer 2 switches, does not change this.
+
+    The keyword, in bold, is LAYER 3 topology. NOT physical, or layer 2 topology.
+
+![alt text](./assets-unifi-layer3/star-topology.png)
+
+This- meaning, every client's packets, will be routed by the central gateway / udm / uxg / etc.
+
+When you decide to add a unifi layer 3 switch, and host networks on it, you end up with a extended star topology for your **layer 3** routing.
+
+![alt text](./assets-unifi-layer3/extended-star.png)
+
+Clients will send their packets through their assigned layer 3 switch. The switch will then route those packets to either other networks hosted by the switch..
+
+Or, if the destination network is not hosted on this switch, the switch will send the packets to the central gateway to be routed. 
+
+The issue here- if you have multiple layer-3 switches in this way- the traffic going between switches MUST pass through the gateway. This causes additional latency, and load, especially when you do not need to apply ACLs between lan networks.
+
+Typically, in most enterprise networks, you have a "Core Network" which consists of inter-connected, meshed switches. All of your routing will occur here in the network core.
+
 ## Other Complaints about Unifi in General
 
 ### UXG-Lite "does not support SNMP"
