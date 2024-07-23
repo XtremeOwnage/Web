@@ -1,6 +1,6 @@
 ---
 title: "Synology Multipath"
-date: 2024-07-12
+date: 2024-07-22
 tags:
   - Homelab
   - Storage/Synology
@@ -263,6 +263,9 @@ Lets make a new multipath configuration file.
 `nano /etc/multpath.conf`
 
 Make sure to update the wwid, to YOUR WWN.
+
+--- info
+    If you forget, or neglect to correctly set the multipaths, you will be limited to the speed of a single connection.
 
 ``` title="/etc/multpath.conf"
 defaults {
