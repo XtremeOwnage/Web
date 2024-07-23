@@ -20,6 +20,12 @@ This post details how to enable multipath for SMB, and how to configure iSCSI on
 
 <!-- more -->
 
+## WHY?
+
+LACP isn't perfect. With LACP, a single client's connection is typically limited to the maximum throughput of a single NIC, regardless of how many NICs you have.
+
+There are settings you can change and tweak with LACP to help mitigate this problem, HOWEVER, enable multipathing is far easier, and from my testing, is EXTREMELY effective at maximizing the amount of throughput.
+
 ## Synology Network Configuration
 
 If, you previously had a LACP/LAGG group configured, delete it. 
