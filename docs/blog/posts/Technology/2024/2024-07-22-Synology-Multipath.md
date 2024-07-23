@@ -94,7 +94,7 @@ iSCSI, is a bit more involved then a single checkbox.
 
 ### Linux Configuration
 
---- info
+!!! info
     If you already had iSCSI running, you will need to remove the lines from `/etc/fstab`, unmount it, and log out of the portal before following these steps.
 
 #### Installing packages
@@ -156,7 +156,7 @@ root@network-test:~#
 
 #### Configure iSCSId to start at boot
 
---- info
+!!! info
     If- you forget this step, your mounts will not be automatically mounted after a reboot!
 
 To automatically start iSCSI at boot, we need to edit `/etc/iscsi/iscsid.conf`
@@ -264,7 +264,7 @@ Lets make a new multipath configuration file.
 
 Make sure to update the wwid, to YOUR WWN.
 
---- info
+!!! info
     If you forget, or neglect to correctly set the multipaths, you will be limited to the speed of a single connection.
 
 ``` title="/etc/multpath.conf"
