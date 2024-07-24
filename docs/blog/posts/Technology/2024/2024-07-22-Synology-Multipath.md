@@ -778,6 +778,7 @@ root@network-test:~#
 
 #### Performance Testing
 
+
 A quick performance test with `fio`
 
 Command Used: `fio --name=seq_read_test --directory=/mnt/multipath --rw=read --bs=1M --size=1G --numjobs=1 --time_based --runtime=60 --group_reporting --ioengine=libaio --direct=1`
@@ -884,4 +885,19 @@ root@network-test:~#
 | **Context Switches**          | 13754                          |
 | **IO Depth**                  | 1                              |
 | **Disk Utilization**          | 97.39%                         |
+
+
+One last test, a quick and dirty test with DD.
+
+``` bash
+root@pbs:~# dd if=/dev/zero of=/mnt/nas/testfile bs=1G count=10 oflag=direct
+10+0 records in
+10+0 records out
+10737418240 bytes (11 GB, 10 GiB) copied, 47.4802 s, 226 MB/s
+```
+
+![Image showing resource manager in synology reporting both NICs saturated.](./assets-synology/synology-network-saturated-iscsi.webp)
+
+
+
 
