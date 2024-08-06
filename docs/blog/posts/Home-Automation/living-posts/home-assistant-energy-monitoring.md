@@ -153,8 +153,8 @@ Links:
 
 Athom recently released both 2, and 6 channel din-mountable energy monitoring modules. These come shipped WITH Esphome pre-installed. The prices are extremely reasonable too.
 
-* [https://www.athom.tech/blank-1/2-ch-energy-meter-made-for-esphome]{target=_blank}
-* [https://www.athom.tech/blank-1/6-ch-energy-meter-made-for-esphome]{target=_blank}
+* [Athom - 2ch](https://www.athom.tech/blank-1/2-ch-energy-meter-made-for-esphome){target=_blank}
+* [Athom - 6ch](https://www.athom.tech/blank-1/6-ch-energy-meter-made-for-esphome){target=_blank}
 
 
 ### Mains Monitoring
