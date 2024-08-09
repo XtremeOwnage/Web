@@ -40,6 +40,8 @@ Dimensions: 1U, rack mountable
 
 No licenses appear to be needed. Comes with web interface, SSH, SNMP. No additional "cards" needed to enable connectivity features.
 
+JSON WebAPI is also included.
+
 Has the ability to trigger outlets based on conditions.
 
 Dual, Redundant 100M network connections.
@@ -358,7 +360,65 @@ I- am not going to dig into detail here on how to consume these MIBs, but, I wil
 
 Keep- an eye out for a separate post regarding this.
 
+### SSH
 
+This unit does indeed have an SSH interface.
+
+``` bash
+> help
+Usage: COMMAND PATH [= ARGUMENT]
+  COMMAND
+    [get, set, logout, add, delete, control, ack, sendTest, reset, reboot, help]
+  PATH
+    The API path (excluding "api" and separated by spaces) to which COMMAND will be applied.
+  ARGUMENT
+    The "data" field for the API request formatted as either JSON or YAML.
+```
+
+This [Manual for r-series v4](https://www.vertiv.com/48ff97/globalassets/documents/support/geist-elo-change-notice-and-legacy-manuals/eol-change-notice/gm1174_-_r-series_v4_pdu_rev3.0.pdf){target=_blank}, was helpful in determining how to use the interface.
+
+I found, the paths match exactly what the API returns. 
+
+So- this command: `get dev A0AE260C851900C3 outlet 2 measurement` will return all of the measurement details, for outlet 2.
+
+Set commands are allowed, and are documented in the manual.
+
+### JSON API
+
+Accessing the API, was extremely easy.
+
+Just- visit http://YOUR_PDU_IP_ADDRESS:80/api
+
+And- you will get a full listing of elements in json format.
+
+As, a simple example- here is a command to retrieve the current amperage from each outlet.
+
+``` bash
+root@remote:~# curl -s http://ip.of.my.pdu:80/api | jq -r '.data.dev.A0AE260C851900C3.outlet | to_entries[] | "\(.value.label)\t\(.value.name)\t\(.value.measurement["4"].value) A"' | column -t
+Unifi:          USW-24-PRO  Outlet  12      0.18    A
+Unifi:          UXG-Lite    Outlet  3       0.04    A
+Proxmox:        Kube01      Outlet  5       0.81    A
+Dell:           MD1220      Outlet  2       0.40    A
+Proxmox:        Kube05      Outlet  6       0.49    A
+Proxmox:        Kube06      Outlet  4       0.31    A
+Synology:       NAS         Outlet  9       0.41    A
+Dell:           R730XD      Outlet  1       1.98    A
+Outlet          7           Outlet  7       0.00    A
+Proxmox:        Kube04      Outlet  10      0.30    A
+Closet-POE-UPS              Outlet  8       0.50    A
+CRS504-100G     Switch      Outlet  11  0.18  A
+```
+
+(Data- is oddly formatted, due to the characters in my labels.)
+
+
+### Other documentation and references
+
+[Vertiv Geist RPDU - User Manual](https://www.vertiv.com/globalassets/products/critical-power/power-distribution/vertiv-geist-rpdu---switched_user-manual.pdf){target=_blank}
+
+This manual, seems to be relevant for this particular PDU.
+
+[Manual for r-series v4](https://www.vertiv.com/48ff97/globalassets/documents/support/geist-elo-change-notice-and-legacy-manuals/eol-change-notice/gm1174_-_r-series_v4_pdu_rev3.0.pdf){target=_blank}
 
 [^1]: With- the correct adapter to connect a NEMA L5-30R into a standard NEMA 5-15R, or 5-20R.
 [^2]: The linked posting advertising as including original packaging, and manuals. My unit which was purchased from the same listing, did come in the original packages, unopened, with all original documentation, and accessories. 
