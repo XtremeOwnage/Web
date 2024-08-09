@@ -6,7 +6,7 @@ tags:
   - Homelab/Power
 ---
 
-# A reasonably priced, individually switched and metered PDU.
+# Vertiv rPDU - A reasonably priced, 120v, individually switched and metered PDU.
 
 For years- I have been using a combination of [Sonoff S31 Plugs](./../../Home-Automation/2023/sonoff-s31-low-cost-energy-plug.md){target=_blank} and a [Kasa HS300 Strip](./../../Home-Automation/2022/kasa-powerstrip.md) to monitor, and measure my power consumption.
 
@@ -332,7 +332,9 @@ The info tab has a nice display showing current versions, firmware, serial, and 
 
 This option redirects you to vertiv's support page.
 
-### SNMP Information
+### Programmatic Access & Getting Data
+
+#### SNMP Information
 
 Using LibreNMS, I was able to effortless add this device. It was able to pull in common information with no configuration needed.
 
@@ -348,7 +350,7 @@ Common options have methods to remotely update and manage via SNMP. You, can iss
 
 The included MIBs, contains quite a few options not displayed in the GUI as well...
 
-#### Example of available MIBs
+##### Example of available MIBs
 
 Here, are the MIBS listed for "config and control for outlets with switching", and "metering data"
 
@@ -360,7 +362,7 @@ I- am not going to dig into detail here on how to consume these MIBs, but, I wil
 
 Keep- an eye out for a separate post regarding this.
 
-### SSH
+#### SSH
 
 This unit does indeed have an SSH interface.
 
@@ -383,7 +385,7 @@ So- this command: `get dev A0AE260C851900C3 outlet 2 measurement` will return al
 
 Set commands are allowed, and are documented in the manual.
 
-### JSON API
+#### JSON API
 
 Accessing the API, was extremely easy.
 
@@ -422,3 +424,11 @@ This manual, seems to be relevant for this particular PDU.
 
 [^1]: With- the correct adapter to connect a NEMA L5-30R into a standard NEMA 5-15R, or 5-20R.
 [^2]: The linked posting advertising as including original packaging, and manuals. My unit which was purchased from the same listing, did come in the original packages, unopened, with all original documentation, and accessories. 
+
+### My personal plans
+
+My goal was to clean-up the back area of my rack. Since, the [S31s](./../../Home-Automation/2023/sonoff-s31-low-cost-energy-plug.md){target=_blank} are bulky, and the [HS300](./../../Home-Automation/2022/kasa-powerstrip.md){target=_blank}  is literally a power strip mounted in my rack.. Its not the most appealing.
+
+As, I want to chart, and collect this data at a frequent interval, I will be exporting this data to emonCMS, where I will keep long-term history.
+
+As well, I am strongly considering creating a simple Home-Assistant plugin, which allows the entities to exist in home-assistant, with the ability to view stats, and manage the plugs (on/off/reset/etc.)
