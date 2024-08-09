@@ -50,7 +50,7 @@ theme:
     - search.highlight
     - search.share
     # - header.autohide
-
+    - content.footnote.tooltips
 nav:
   - Home: index.md
   - Projects: pages/Projects/index.md
