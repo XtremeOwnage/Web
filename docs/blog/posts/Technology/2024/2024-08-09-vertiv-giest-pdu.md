@@ -56,7 +56,7 @@ Idle Consumption: 6w[^3]
 
 --8<--- "docs/snippets/ebay-affiliate.md"
 
-![Picture of eBay listing](./assets-pdu/ebay-listing.webP)
+![Picture of eBay listing](./assets-pdu/ebay-listing.webp)
 
 As of this time, this is the ONLY posting on eBay for this model. And, only a few dozen are left.
 
@@ -105,17 +105,17 @@ My reasons for doing so-
 
 The front.
 
-![Picture of the front of the unit](./assets-pdu/front-pic.webP)
+![Picture of the front of the unit](./assets-pdu/front-pic.webp)
 
 The rear.
 
-![Picture of the rear, showing 12 outlets.](./assets-pdu/rear-pic.webP)
+![Picture of the rear, showing 12 outlets.](./assets-pdu/rear-pic.webp)
 
 Here- is a picture of the unit mounted in my rack. It is mounted securely on the rear of the rack in a vertical orientation. 
 
 This, unusual mounting, is due to limited spaces in the rack, and, I want to get the mess of power cables OUT of the rack. 
 
-![Mounted in rack](./assets-pdu/pic-in-rack.webP)
+![Mounted in rack](./assets-pdu/pic-in-rack.webp)
 
 ### Web Interface Walkthrough
 
@@ -123,27 +123,27 @@ This, unusual mounting, is due to limited spaces in the rack, and, I want to get
 
 ##### Sensors > Overview
 
-![Main / Sensors Tab, Options](./assets-pdu/sensors-tab.webP)
+![Main / Sensors Tab, Options](./assets-pdu/sensors-tab.webp)
 
 Main Screen, showing connected devices, configurable labels, current, voltage, wattage.
 
-![Main Screen](./assets-pdu/main-screen.webP)
+![Main Screen](./assets-pdu/main-screen.webp)
 
 Each plug, has configurable label, and mode. The PDU can enact automated actions to turn plugs on or off as needed, based on criteria you specify.
 
 As well- you can adjust the delay/behavior when power cycling, or rebooting.
 
-![Plug Configuration Image](./assets-pdu/plug-configuration.webP)
+![Plug Configuration Image](./assets-pdu/plug-configuration.webp)
 
 For the actions for a plug- you can turn on, off, power cycle, or reset energy data. You can optionally include a delay.
 
-![Image of plug actions](./assets-pdu/plug-action.webP)
+![Image of plug actions](./assets-pdu/plug-action.webp)
 
 For the circuits, and primary input, you have the ability to reset energy usage data.
 
 At the top/pdu level, you have a few actions for it. Reboot, Reset, Reset to defaults, etc.
 
-![PDU Actions](./assets-pdu/pdu-actions.webP)
+![PDU Actions](./assets-pdu/pdu-actions.webp)
 
 #### Sensors > Logging
 
@@ -153,7 +153,7 @@ The logging tab has a few interesting features.
 2. Adjustable logging period, store data more, or less frequently.
 3. Ability to enable/disable logging for specific plugs.
 
-![Logging Tab](./assets-pdu/logging-tab.webP)
+![Logging Tab](./assets-pdu/logging-tab.webp)
 
 #### Sensors > Alarms & Warnings
 
@@ -165,20 +165,20 @@ For the warnings / alarms tab- there are few nice features here as well.
 
 #### System Tab(s)
 
-![Image showing available tabs, under configuration tab](./assets-pdu/config-tab.webP)
+![Image showing available tabs, under configuration tab](./assets-pdu/config-tab.webp)
 
 ##### System > Users
 For the users tab, multiple users can be specified. You can also optionally scope users access to only specific items.
 
 The guest account allows viewing an overview of current data, without logging in.
 
-![Users Tab](./assets-pdu/users-tab.webP)
+![Users Tab](./assets-pdu/users-tab.webp)
 
 When creating users, you can specify if they are allowed to control plugs, if they have administrator rights (aka, adjust device configuration).
 
 And- you can optionally assign a scope which limits access to specific plugs. (These options can also be edited for existing users)
 
-![Users > Add User](./assets-pdu/add-user.webP)
+![Users > Add User](./assets-pdu/add-user.webp)
 
 ##### System > Network
 
@@ -194,7 +194,7 @@ For the networking tab- you can configure...
 
 Image- Note- internal layer 2 / layer 3 addresses are removed.
 
-![Networking Tab](./assets-pdu/networking-tab.webP)
+![Networking Tab](./assets-pdu/networking-tab.webp)
 
 ##### System > Web Server
 
@@ -204,11 +204,11 @@ For webserver options- HTTP can be enabled or disabled. HTTPs is always enabled.
 
 Interestingly, this PDU has the ability to automatically generate and email reports. The- options are not very flexible, however, still an interesting option.
 
-![Add Report](./assets-pdu/add-report.webP)
+![Add Report](./assets-pdu/add-report.webp)
 
 Email Configuration:
 
-![Email Configuration](./assets-pdu/email-config.webP)
+![Email Configuration](./assets-pdu/email-config.webp)
 
 ##### System > Authentication
 
@@ -222,13 +222,13 @@ Note- only ONE option can be selected. You can't use LDAP AND Radius, for exampl
 
 Here- are the options-
 
-![Authentication Options](./assets-pdu/auth-options.webP)
+![Authentication Options](./assets-pdu/auth-options.webp)
 
 ##### System > Display
 
 You have the ability to configure the display on the PDU itself. 
 
-![Display Options](./assets-pdu/display-options.webP)
+![Display Options](./assets-pdu/display-options.webp)
 
 ##### System > SSH
 
@@ -236,11 +236,11 @@ This unit has SSH access enabled by default. You can enable, or disable it, and 
 
 There is no option to disallow password-login, or change any other functionality.
 
-![System > SSH](./assets-pdu/ssh-options.webP)
+![System > SSH](./assets-pdu/ssh-options.webp)
 
 If you use key-based authentication, configure public keys in the user's tab.
 
-![Users Tab > User > Add Public Key](./assets-pdu/add-public-key.webP)
+![Users Tab > User > Add Public Key](./assets-pdu/add-public-key.webp)
 
 ##### System > SNMP
 
@@ -252,13 +252,13 @@ You can optional enable, or disable SNMP v1/2, and v3. You can adjust the port.
 
 Version 3 is supported, with NoAuth,NoPriv, or Auth,NoPriv, Or Auth&Priv.
 
-![System > SNMP Tab](./assets-pdu/snmp-settings.webP)
+![System > SNMP Tab](./assets-pdu/snmp-settings.webp)
 
 Multiple SNMP traps can be specified, with configurable host, version, port.
 
 Individual Alarms, or warnings can be configured to send to the traps specified.
 
-![System > SNMP > Add  Tab](./assets-pdu/add-snmp-trap.webP)
+![System > SNMP > Add  Tab](./assets-pdu/add-snmp-trap.webp)
 
 Details for SNMP location/contact/phone/etc are adjustable in the System > Admin tab.
 
@@ -276,7 +276,7 @@ Events include configuration changes, network interface changes/events(up/down),
 
 You can configure a remote syslog server.
 
-![System > Syslog](./assets-pdu/syslog-settings.webP)
+![System > Syslog](./assets-pdu/syslog-settings.webp)
 
 This unit does not appear to use the correct facility codes when used with a remote syslog server.
 
@@ -290,7 +290,7 @@ The aggregation section, I assume, is used with vendor-specific central manageme
 
 Firmware is upgradable, if you can find it.
 
-![SYstem > Utilities Tab](./assets-pdu/utilities-tab.webP)
+![SYstem > Utilities Tab](./assets-pdu/utilities-tab.webp)
 
 ##### System - Misc 
 
@@ -304,11 +304,11 @@ Units of F, or C are settable.
 
 Appears a few language options are selectable.
 
-![System > Locale > Language](./assets-pdu/language-options.webP)
+![System > Locale > Language](./assets-pdu/language-options.webp)
 
 #### Provisioner Tab
 
-![alt text](./assets-pdu/provisioner-tab.webP)
+![alt text](./assets-pdu/provisioner-tab.webp)
 
 ##### Provisioner > Discovery
 
@@ -316,21 +316,21 @@ As, again, documentation is pretty hard to come by, I am not sure of the intende
 
 This- is being included for completeness. 
 
-![Provisioner > Discovery](./assets-pdu/provisioner-discovery.webP)
+![Provisioner > Discovery](./assets-pdu/provisioner-discovery.webp)
 
 ##### Provisioner > File Management
 
-![Provisioner > File Management](./assets-pdu/provisioner_file_mgmt.webP)
+![Provisioner > File Management](./assets-pdu/provisioner_file_mgmt.webp)
 
 #### Help Tab
 
-![Help Tab options](./assets-pdu/help-tab.webP)
+![Help Tab options](./assets-pdu/help-tab.webp)
 
 ##### Help > Info
 
 The info tab has a nice display showing current versions, firmware, serial, and lifetime energy.
 
-![Help > Info](./assets-pdu/help_info.webP)
+![Help > Info](./assets-pdu/help_info.webp)
 
 ##### Help > Online Support
 
@@ -346,7 +346,7 @@ Included data automatically populated- contains voltage, amperage, and wattage d
 
 By default, individual plugs are not listed.
 
-![Discovered Data in LibreNMS](./assets-pdu/librenms.webP)
+![Discovered Data in LibreNMS](./assets-pdu/librenms.webp)
 
 The included MIB sheet, is detailed, with names, OIDs, required access, units, and methods.
 
@@ -358,7 +358,7 @@ The included MIBs, contains quite a few options not displayed in the GUI as well
 
 Here, are the MIBS listed for "config and control for outlets with switching", and "metering data"
 
-![Screenshot of excel showing a few dozen MIBs for outlet-related stats](./assets-pdu/outlet-mibs.webP)
+![Screenshot of excel showing a few dozen MIBs for outlet-related stats](./assets-pdu/outlet-mibs.webp)
 
 I will note, the sheets, includes hundreds of MIBs across two separate CSVs. .MIB files are also included.
 
