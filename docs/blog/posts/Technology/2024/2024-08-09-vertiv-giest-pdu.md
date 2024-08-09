@@ -46,6 +46,10 @@ Has the ability to trigger outlets based on conditions.
 
 Dual, Redundant 100M network connections.
 
+Idle Consumption: 6w[^3]
+
+[^3]: Measured in my lab, with no connected plugs, or network cables, with the unit powered on after initialization.
+
 ### Where can you get it?
 
 [Ebay Link - Affiliated](https://ebay.us/41ex8R){target=_blank}
