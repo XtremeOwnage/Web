@@ -16,7 +16,7 @@ However- the form-factor of neither solution was ideal, and as my rack has becom
 
 The issue is, there are not many 120v PDUs, for a 24U rack. As a matter of fact, there are not many zero-U PDUs at all for 24U racks.
 
-But- I finally found an option, for a fully managed PDU, with INDIVIDUALLY metered and switched outlets, which CAN^1 plug into a standard 120v outlet.
+But- I finally found an option, for a fully managed PDU, with INDIVIDUALLY metered and switched outlets, which CAN[^1] plug into a standard 120v outlet.
 
 <!-- more -->
 
@@ -26,7 +26,7 @@ So- as a warning- there is basically no public documentation I was able to find 
 
 However- As I purchased a unit, racked it up, and put it into use- I will tell you- these do work, and they work quite well. 
 
-At this time, they can be acquired for "BRAND NEW", in the original packaging, with the original manuals^2, for 170$. However- I will also say- there are 27 units available still, and ZERO other results on eBay.
+At this time, they can be acquired for "BRAND NEW", in the original packaging, with the original manuals[^2], for 170$. However- I will also say- there are 27 units available still, and ZERO other results on eBay.
 
 So... if you are reading this post in one month- there is a good chance, they will all be gone.
 
@@ -360,5 +360,5 @@ Keep- an eye out for a separate post regarding this.
 
 
 
-^1 - With- the correct adapter to connect a NEMA L5-30R into a standard NEMA 5-15R, or 5-20R.
-^2 - The linked posting advertising as including original packaging, and manuals. My unit which was purchased from the same listing, did come in the original packages, unopened, with all original documentation, and accessories. 
+[^1]: With- the correct adapter to connect a NEMA L5-30R into a standard NEMA 5-15R, or 5-20R.
+[^2]: The linked posting advertising as including original packaging, and manuals. My unit which was purchased from the same listing, did come in the original packages, unopened, with all original documentation, and accessories. 
