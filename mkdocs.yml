@@ -51,6 +51,9 @@ theme:
     - search.share
     # - header.autohide
     - content.footnote.tooltips
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
 nav:
   - Home: index.md
   - Projects: pages/Projects/index.md
