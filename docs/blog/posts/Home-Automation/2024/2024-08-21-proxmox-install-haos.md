@@ -1,6 +1,6 @@
 ---
 title: "Proxmox - Install HAOS"
-date: 2024-04-08
+date: 2024-08-12
 tags:
   - Homelab
   - Proxmox
