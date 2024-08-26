@@ -121,9 +121,9 @@ plugins:
   - glightbox:  ## https://github.com/blueswen/mkdocs-glightbox#usage
       touchNavigation: true
       zoomable: true
-  - redirects:
-      redirect_maps:
-        'discord': 'https://discord.gg/DcgPVwxaPz'
+  # - redirects:
+  #     redirect_maps:
+  #       'discord': 'https://discord.gg/DcgPVwxaPz'
 markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/extensions/tilde/
   - meta
   - toc:
