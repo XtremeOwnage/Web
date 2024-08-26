@@ -154,7 +154,7 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/XtremeOwnageDotCom
     - icon: fontawesome/brands/discord
-      link: /pages/discord-redirect/
+      link: /discord
     #- icon: fontawesome/brands/facebook
     #  link: https://www.facebook.com/XtremeOwnage
     # - icon: fontawesome/brands/twitter
