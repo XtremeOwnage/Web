@@ -1,10 +1,8 @@
 name: Build Docs - DEV
 on:
   push:
-    branches:
+    tags:
       - dev
-      - dev/*
-      - dev-*
 jobs:
   deploy:
     runs-on: ubuntu-latest
