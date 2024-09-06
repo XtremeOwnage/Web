@@ -36,7 +36,10 @@ Input Connection: NEMA L5-30R (120v, 30 amp locking plug) - Input connections ar
 
 Output Connections: 12x NEMA 5-20R (120v plug which supports standard 5-15R plugs, as well as 20amp 5-20R plugs.) All outputs are individually metered, and switched.
 
-Dimensions: 1U, rack mountable
+Dimensions: 1.25U, rack mountable
+
+!!! info
+    Note- this unit is SLIGHTLY over 1U tall.
 
 No licenses appear to be needed. Comes with web interface, SSH, SNMP. No additional "cards" needed to enable connectivity features.
 
