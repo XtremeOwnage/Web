@@ -79,15 +79,15 @@ As a random note- there is no romex here- everything is THHN/THWN, because it tr
 
 #### Step 3. Identify a suitable location for the surge arrestor
 
-IDEALLY- you want this to be as close to the main-breaker as possible. 
+![Me holding the BRN in front of the panel](./assets-surge/picture-of-brn.webP)
 
-![](./assets-surge/picture-of-brn.webP)
+IDEALLY- you want this to be as close to the main-breaker as possible. 
 
 In my case- there isn't a ton of slack to go around, and the top-right spot is filled. So- I slapped it into the bottom socket. 
 
 Make sure to also connect the neutral leg.
 
-![Breaker installed, with pigtail secured](./assets-surge/picture-of-brn.webP)
+![Breaker installed, with pigtail secured](./assets-surge/installed.webP)
 
 The green light, lets you know the unit is functioning correctly. If you don't see a green light, something was done incorrectly.
 
