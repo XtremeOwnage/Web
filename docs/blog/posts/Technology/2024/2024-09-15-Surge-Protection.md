@@ -153,4 +153,12 @@ Or- maybe I have a friend, co-worker, or fellow Redditor looking to do something
 And- I don't mine sharing my experiences. So- Enjoy!
 
 
+---------------------------------------------------------------------------------------------------
+
 --8<--- "docs/snippets/amazon-affiliate.md"
+
+Yup. The amazon links above are affiliated.
+
+If- the idea of you paying the exact same price, and me potentially getting 2 pennies worth of affiliate money makes you angry- I can provide you with documentation on how to completely block this entire domain using either u-block, or network-level DNS blocking. Makes no difference to me! Just remember- hours of research, experimentation, editing, and writing goes into each of these posts. I'd prefer you just completely block me, and my domain, rather then to hear you fuss about the affiliate links.  
+
+And- if you are wondering- there is an underlying reason for the above spill. 
