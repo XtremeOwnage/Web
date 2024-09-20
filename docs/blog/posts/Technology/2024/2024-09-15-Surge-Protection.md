@@ -126,7 +126,7 @@ Yes- I will agree, that the closer to the mains it is, the more effective it sho
 
 Since, none of the [PDUs](./2024-08-09-vertiv-giest-pdu.md) on my rack explicitly say, "Surge Protection"- I wanted to add an in-line device just as a fail-safe.
 
-And- for under 10$, [Monoprice 1 Outlet Surge](https://www.amazon.com/Monoprice-68-207-7382R-Outlet-Protector-Service/dp/B076CRH2DN){https://amzn.to/3TBF981}{target=_blank} both fits the bill, and fits the need.
+And- for under 10$, [Monoprice 1 Outlet Surge](https://amzn.to/3TBF981){target=_blank} both fits the bill, and fits the need.
 
 The [specifications](https://www.monoprice.com/product?p_id=27850){target=_blank} list a rating of 400v, with a max current capacity of 15amps, and a < 1ns response, which fits my needs perfectly.
 
@@ -161,4 +161,4 @@ Yup. The amazon links above are affiliated.
 
 If- the idea of you paying the exact same price, and me potentially getting 2 pennies worth of affiliate money makes you angry- I can provide you with documentation on how to completely block this entire domain using either u-block, or network-level DNS blocking. Makes no difference to me! Just remember- hours of research, experimentation, editing, and writing goes into each of these posts. I'd prefer you just completely block me, and my domain, rather then to hear you fuss about the affiliate links.  
 
-And- if you are wondering- there is an underlying reason for the above spill. 
+And- if you are wondering- Yes- there is an underlying reason for the above spill. 
