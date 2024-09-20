@@ -1,9 +1,7 @@
 name: Build Docs On Tag Release
 on:
-  push:
-    tags:
-      - release 
-      - main
+  release:
+    types: [published]
 jobs:
   deploy:
     runs-on: ubuntu-latest
