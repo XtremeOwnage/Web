@@ -26,8 +26,6 @@ start explorer.exe
 :: Empty Comment (Prevents you from having to press "enter" to execute the line to restart explorer.exe)
 ```
 
-There is nothing further to read on this post.
-
 <!-- more -->
 
 ## Why?
@@ -39,6 +37,8 @@ The windows 11 context menu, is missing basically every option, and requires me 
 Thats it. Thats literally the entire post. Told you that you didn't need to click on it.
 
 ## How to restore Win 11 Context Menu & Explorer Command Bar
+
+Copy and paste this into an administrative command prompt.
 
 ``` cmd
 :: Restore Win 11 Explorer Context Menu

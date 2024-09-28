@@ -9,4 +9,5 @@ mkdocs-git-revision-date-plugin
 mkdocs-minify-plugin
 mkdocs-glightbox
 mkdocs-rss-plugin
+mkdocs-redirects
 mkdocs-material[imaging]

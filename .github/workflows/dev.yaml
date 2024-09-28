@@ -1,10 +1,9 @@
 name: Build Docs - DEV
 on:
+  workflow_dispatch:
   push:
-    branches:
+    tags:
       - dev
-      - dev/*
-      - dev-*
 jobs:
   deploy:
     runs-on: ubuntu-latest
