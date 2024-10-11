@@ -554,4 +554,6 @@ As quoted above directly from their website, "Sudden and accidental breaks or pi
 
 Apparently, my pipe which suddenly burst during cold weather, is NOT covered.
 
+To also confirm, Allstate NEVER sent out an inspector, or adjuster to physically look at anything.
+
 I, am also no longer with Allstate.
