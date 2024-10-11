@@ -68,7 +68,7 @@ Specifically- this, copied from the above website, on 2024-10-10.
 ![Text in image is below.](./assets-bathroom-floor/allstate-leaking-water-covered.webP)
 
 !!! quote "Does homeowners insurance cover water damage from leaking plumbing?"
-    Homeowners insurance may help cover damage caused by leaking plumbing if the leak is sudden and accidental, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
+    Homeowners insurance may help cover damage caused by ==leaking plumbing if the leak is sudden and accidental==, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
 
 Note- the highlighted section for later...
     
@@ -516,7 +516,7 @@ Anyways, will grab threshold in the future, which will completely cover the tran
 So, remember the part I quoted from Allstate's website above, talking about how burst pipes are covered? If not- here, I'll paste it here again.
 
 !!! quote "Does homeowners insurance cover water damage from leaking plumbing?"
-    Homeowners insurance may help cover damage caused by leaking plumbing if the leak is sudden and accidental, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
+    Homeowners insurance may help cover damage caused by ==leaking plumbing if the leak is sudden and accidental==, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
 
 Well, I decided to submit new evidence to my claim, since, obviously a pipe had burst.
 
@@ -552,6 +552,6 @@ In my case, I really don't feel as though, "I am in good hands".
 
 As quoted above directly from their website, "Sudden and accidental breaks or pipe bursts" are covered. But- suppose if the leak is inside of the wall, and goes undetected, then apparently it is considered a seeping pipe.
 
-And- my obviously burst pipe, is not considered a burst pipe.
+Apparently, my pipe which suddenly burst during cold weather, is NOT covered.
 
 I, am also no longer with Allstate.
