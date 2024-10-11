@@ -72,8 +72,6 @@ Specifically- this, copied from the above website, on 2024-10-10.
 
 Note- the highlighted section for later...
     
-I will note, I am no longer a customer of AllState. I did not feel like "I am in good hands."
-
 ## Fixing the issue myself.
 
 Given my insurance company who claims to cover burst pipes, does not cover burst pipes, I decided to go ahead and remediate this issue myself.
