@@ -21,7 +21,7 @@ After investigation, I concurred, something indeed odd was happening.
 
 The first sign- the toilet was literally sinking into the floor.
 
-![Picture of toilet sinking into the floor](./symptom-1-toilet-sinking.png)
+![Picture of toilet sinking into the floor](./assets-bathroom-floor/symptom-1-toilet-sinking.webP)
 
 (Sorry- I didn't take a good "Before" picture, having to work on other pictures I had laying around).
 
@@ -29,13 +29,13 @@ Next- when walking near the toilet, it was pretty obvious the floor was shifting
 
 For reference- here is a picture of the area as of April, 2022.
 
-![Picture of the toilet, as of April 2022](./toilet-april-2022.png)
+![Picture of the toilet, as of April 2022](./assets-bathroom-floor/toilet-april-2022.webP)
 
 This image was taking while we were remodeling the bathroom, removing the 1970's wood trim, and slightly updating everything.
 
 For reference- the area circled in red, is the area which appears to be affected.
 
-![Floor plan, with middle-bathroom toilet area circled.](./floor-plan.png)
+![Floor plan, with middle-bathroom toilet area circled.](./assets-bathroom-floor/floor-plan.webP)
 
 ### Next steps- Determine the scope
 
@@ -43,9 +43,9 @@ A few days later after work, I went ahead and crawled under the house, to scope 
 
 Well- what I discovered, was quite a bit worse then I was thinking....
 
-![Image of damage, angle 1](./damage-shot-1.jpg)
+![Image of damage, angle 1](./assets-bathroom-floor/damage-shot-1.webP)
 
-![Image of damage, angle 2](./damage-shot-2.jpg)
+![Image of damage, angle 2](./assets-bathroom-floor/damage-shot-2.webP)
 
 So- the first obvious symptom- the floor is literally rotten.
 
@@ -59,13 +59,13 @@ So, given I had water damage, I decided to contact my insurance company, Allstat
 
 I suspected the damage was caused by an leaking toilet flange. After reviewing the photos, without sending out an inspector, or adjuster, the claim was denied.
 
-![Allstate Rejection Letter](./allstate-rejection-1.png)
+![Allstate Rejection Letter](./assets-bathroom-floor/allstate-rejection-1.webP)
 
 I will save you from needing to read the entire policy, and its numerous pages of "exclusions" to coverage- but, I will draw attention to [AllState - Does homeowners insurance cover water damage](https://www.allstate.com/resources/home-insurance/water-damage){target=_blank}
 
 Specifically- this, copied from the above website, on 2024-10-10.
 
-![Text in image is below.](./allstate-leaking-water-covered.png)
+![Text in image is below.](./assets-bathroom-floor/allstate-leaking-water-covered.webP)
 
 !!! quote "Does homeowners insurance cover water damage from leaking plumbing?"
     Homeowners insurance may help cover damage caused by leaking plumbing if the leak is sudden and accidental, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
@@ -84,25 +84,25 @@ The first step was easy- remove the old floor. Simply hitting the tile with a ha
 
 Yes. The tile was holding the floor up.
 
-![Picture showing the removal of the floor](./removing-floor.jpg)
+![Picture showing the removal of the floor](./assets-bathroom-floor/removing-floor.webP)
 
 On a positive note, while removing the floor, I did discover the floor under the tub, was in good condition, and did not need to be removed.
 
 This, would have escalated costs, and added another day or two of labor.
 
-![Picture showing the wood under the tub area](./removal-tub-good.jpg)
+![Picture showing the wood under the tub area](./assets-bathroom-floor/removal-tub-good.webP)
 
 But, the other wall, was not so lucky. The rot extended well under the wall dividing the two bathrooms.
 
-![Picture showing rotting wood under other wall](./removal-3-other-wall-gone.jpg)
+![Picture showing rotting wood under other wall](./assets-bathroom-floor/removal-3-other-wall-gone.webP)
 
 Here- is a picture showing the back-wall. 
 
-![Picture showing rotten wood on the back/exterior wall](./removal-4-back-wall.jpg)
+![Picture showing rotten wood on the back/exterior wall](./assets-bathroom-floor/removal-4-back-wall.webP)
 
 And- here is a picture of the entry way, after being mostly cleaned up.
 
-![Picture showing the entry to the bathroom, after mostly being cleaned up](./removal-5-entry.jpg)
+![Picture showing the entry to the bathroom, after mostly being cleaned up](./assets-bathroom-floor/removal-5-entry.webP)
 
 A few hours was spent using hammers, chisels, drills, sawzalls, etc to remove the rotten wood where possible.... 
 
@@ -110,7 +110,7 @@ During this process, I also cut back the bad sections of the joist, and removed 
 
 Here- is a picture of the majority of cleanup completed.
 
-![Picture showing the cleaned up floor](./removal-done.jpg)
+![Picture showing the cleaned up floor](./assets-bathroom-floor/removal-done.webP)
 
 ### Obtaining Supplies
 
@@ -143,13 +143,13 @@ This- one was fun enough to eat up a couple of hours of time....
 
 First- a picture of the cut pipe through the wall, after I cut it off, at the section which was nicked.
 
-![](./drain-pipe-cut-1.jpg)
+![](./assets-bathroom-floor/drain-pipe-cut-1.webP)
 
 And- a couple of angles from below.
 
-![](./drain-pipe-cut-2.jpg)
+![](./assets-bathroom-floor/drain-pipe-cut-2.webP)
 
-![](./drain-pipe-cut-3.jpg)
+![](./assets-bathroom-floor/drain-pipe-cut-3.webP)
 
 So, I did not take a picture during "fixing" this issue, or after. But- the process of fixing this, involve cutting away the nearly inch and a half base-floor to get enough pipe exposed to add a coupler.
 
@@ -161,7 +161,7 @@ Afterwards, I was able to remove this section of subfloor, and properly repair t
 
 I did go ahead and cut the main drainage line to properly install new couplers anyways, as getting the pipe into the coupler without doing this, was proving to be overly difficult.
 
-![Sewage / Drainage line with new couplers installed](./drain-pipe-cut-4.png)
+![Sewage / Drainage line with new couplers installed](./assets-bathroom-floor/drain-pipe-cut-4.webP)
 
 ### Framing / Foundation
 
@@ -175,33 +175,33 @@ The vast majority of lumbar used here, is also pressure-treated, to provide addi
 
 The first step, was to properly support the old joist. A 2x8 was used here, with joist-hangers attaching to the other two joists. As well- if you look closely- there is a concrete pier supporting both the joist, and the new stringer from the bottom. You can also see stacks of 2x6 pressure-treated boards, used to create stringers, and additional support for the new floor, and the tub.
 
-![Image taken while building new joists, and stringers.](./framing-1.jpg)
+![Image taken while building new joists, and stringers.](./assets-bathroom-floor/framing-1.webP)
 
 Next- we wanted to ENSURE the toilet would be properly supported. To accomplish this, a Pair of pressure-treated 2x10s were used to create joists. Joist-hangers were used to connect to the stringer. A few additional pieces of wood were used to ensure the seal-plate was properly supported, and to ensure everything is nice and tight.
 
 Note- Notches in the bottom of the new joists to compensate for the pipes.... These were needed because the new material, is.. well. bigger. Ample room was cut-out to allow for pipe-movement, without knocking against the boards.
 
-![](./framing-2.jpg)
+![](./assets-bathroom-floor/framing-2.webP)
 
 Here- is this section closer to completion.
 
-![](./framing-3.jpg)
+![](./assets-bathroom-floor/framing-3.webP)
 
 Here is a good shot of the additional support added for the original, severed joist. As a note- this joist had to be lifted around 1 inch, to become properly level again. (This is why my hallway floor has a massive sag in it!!!!)
 
 The 4x4 has a 2" notch, which supports the old joist, and supports the new stringer as well.
 
-![](./framing-4.jpg)
+![](./assets-bathroom-floor/framing-4.webP)
 
 In the following picture, the new foundation and framing has been nearly completed. You can see stringers on either side, designed to ensure the new subfloor is properly supported.
 
 Do note- the new floor does not fit under the tub. Additional support was added under the tub as well, to ensure it is properly supported.
 
-![](./framing-5.jpg)
+![](./assets-bathroom-floor/framing-5.webP)
 
 And, after a while, the framing/foundation work was completed.... The subfloor was cut to dimensions, and a hole was added for the potty.
 
-![](./framing-final.jpg)
+![](./assets-bathroom-floor/framing-final.webP)
 
 Not shown- all of the debris, wood, saw-dust, etc was raked up from under the house. I don't need to give terminates any extra reasons to move in. My trash-disposal company was quite happy with me.... /s.
 
@@ -215,29 +215,29 @@ Due to the timing, most of the hardware stores was closed when this was done. Si
 
 First- I used some tin-snips to make several small cuts on the radius.
 
-![Picture of 1" duct, with several small cuts around the radius.](./duct-1.png)
+![Picture of 1" duct, with several small cuts around the radius.](./assets-bathroom-floor/duct-1.webP)
 
 Next, using a pair of linesman pliers, I made bends on each of the cut segments.
 
-![Picture showing the semgents with bends in the middle](./duct-2.png)
+![Picture showing the semgents with bends in the middle](./assets-bathroom-floor/duct-2.webP)
 
 Finally- using a piece of the old 4" aluminum drive-shaft from "Project - Racetruck", I clamped the 5" pipe down, using a standard hose clamp.
 
-![5" pipe clamped around section of 4" driveshaft from old racecar](./duct-3.png)
+![5" pipe clamped around section of 4" driveshaft from old racecar](./assets-bathroom-floor/duct-3.webP)
 
 Afterwards, I was able to fit a 4" 90 degree bend on.
 
-![Picture showing 90 degree bend installed on homemade 5" to 4" reducer](./duct-4.png)
+![Picture showing 90 degree bend installed on homemade 5" to 4" reducer](./assets-bathroom-floor/duct-4.webP)
 
 From here, I was able to go ahead and connect up the new duct. Insulation was wrapped around the new duct, and re-secured around the old duct to somewhat stop heat/cold loss.
 
-![New Duct Installed](./duct-5.png)
+![New Duct Installed](./assets-bathroom-floor/duct-5.webP)
 
 Again- apologize for the lack of good images- Taking pictures was not a priority during this process! 
 
 Also- it appeared the duct was not supported well enough. Since- I didn't have the correct hanger material, I bent a piece of scrap steel I had laying around, and securely attached it to the joist.
 
-![Image showing homemade hanger holding up duct work](./duct-6.png)
+![Image showing homemade hanger holding up duct work](./assets-bathroom-floor/duct-6.webP)
 
 ## Installing Subfloor
 
@@ -251,7 +251,7 @@ But, after the subfloor was cut, a healthy bead of construction adhesive was pla
 
 After the sub-floor was installed, a hole for the toilet line was cut with a hole saw, and the toilet flange was installed.
 
-![](./subfloor-2.jpg)
+![](./assets-bathroom-floor/subfloor-2.webP)
 
 You may notice the silicon which was very liberally applied. I don't EVER want to worry about this particular floor rotting. Silicon was used everyone under, and around this flange. Even if it manages to leak- The silicon will prevent anything from rotting out.
 
@@ -268,7 +268,7 @@ The main purpose of this foam, is to create a barrier which both prevents things
 
 Yes- there is a specific reason slugs were mentioned.....
 
-![](./subfloor-1.jpg)
+![](./assets-bathroom-floor/subfloor-1.webP)
 
 Before you ask why there is a machete in the above image.... Just know, it does a fantastic job of trimming foam, removing rotted wood, etc....
 
@@ -280,7 +280,7 @@ For this, I decided to use [Redguard.](https://www.homedepot.com/p/Custom-Buildi
 
 In short, you paint a few coats on the floor, and it provides copious amounts of water resistance. 
 
-![](./redguard.jpg)
+![](./assets-bathroom-floor/redguard.webP)
 
 Once it turns completely red, with no hints of pink- it is ready. This will generally take a few hours per coat. I applied 3 coats.
 
@@ -300,7 +300,7 @@ You may also need a [Diamond Blade](https://amzn.to/3zUGlfS){target=_blank} for 
 
 After, measure, cut, measure, cut, measure cut.... for a while, I had all of the tile layed out on the floor.
 
-![](./tile-cut.jpg)
+![](./assets-bathroom-floor/tile-cut.webP)
 
 And.... Af this point, I was ready to put in thinset to permanently mount these files. 
 
@@ -314,7 +314,7 @@ After filling up my bucket with water, The new floor had accumulated a half inch
 
 So.... I went ahead and opened up the wall to determine what was happening.
 
-![](./plumbing-1.jpg)
+![](./assets-bathroom-floor/plumbing-1.webP)
 
 Other then... obviously the handy work of the old plumber who cut the entire joist in half.... (the torched drain-line...)
 
@@ -322,7 +322,7 @@ Not- a lot to see here, right?
 
 Well- I saw with my own eyes, water pouring from this section of the wall. So, I turned the water mains off, and cut the copper line, and removed the spigot.
 
-![Picture showing old spigot being removed from house, with burst pipe](./plumbing-2.png)
+![Picture showing old spigot being removed from house, with burst pipe](./assets-bathroom-floor/plumbing-2.webP)
 
 Low and behold, we have a burst pipe. This, likely occurred during one of the recent freezes.
 
@@ -330,7 +330,7 @@ Low and behold, we have a burst pipe. This, likely occurred during one of the re
 
 So, I went to the hardware store, again, to pick up a new spigot.
 
-![Picture showing new spigot in box, with old spigot with burst pipe in foreground.](./plumbing-3.png)
+![Picture showing new spigot in box, with old spigot with burst pipe in foreground.](./assets-bathroom-floor/plumbing-3.webP)
 
 And, the next step, was to get everything sweated back on. 
 
@@ -346,7 +346,7 @@ Note, in the below image, you can see pieces of tile used to prevent from torchi
 
 There are [products specifically for this purpose](https://amzn.to/4eYC5Lj){target=_blank}, however, I had pieces of tile already on-hand. Tile, is quite resistent to heat. And, it was only exposed for a short duration.
 
-![](./plumbing-4.jpg)
+![](./assets-bathroom-floor/plumbing-4.webP)
 
 Not shown- Apply flux to the interior of your new fitting, and on the pipe being sweated.
 
@@ -366,7 +366,7 @@ Apply Heat via propane/map gas torch. The solder should melt, WITHOUT direct fla
 
 Once done, you should have a nice, and pretty fitting, with solder properly sucked into all of the gaps... Like this.
 
-![](./plumbing-sweated.jpg)
+![](./assets-bathroom-floor/plumbing-sweated.webP)
 
 Don't be like the guy on the right. That is wrong. That is not professional.
 
@@ -384,7 +384,7 @@ While looking inside of the wall- we did manage to find an easter egg.
 
 A bit of research hints this can was from 1950-1970.
 
-![](./eater-egg.jpg)
+![](./assets-bathroom-floor/eater-egg.webP)
 
 BUT.... if you paid attention in earlier images, especially the section where I accidentally cut the drain-pipe... You may have noticed an extra unpopulated hole.
 
@@ -398,7 +398,7 @@ With, the plumbing issue remediated, we went back to finishing up the tile.
 
 So- not pictured, BEFORE fixing the plumbing issue, we did get around half of the tile layed.
 
-![](./tile-half-layed.jpg)
+![](./assets-bathroom-floor/tile-half-layed.webP)
 
 But- a huge problem arose.... Since, a few hours were wasted with drying up the floor, and locating the plumbing issue- The thinset (rapid-set, thinset) had already begun setting up.
 
@@ -416,7 +416,7 @@ During this waiting time, we melted down a few aluminum, and copper ingots in th
 
 The first copper ingot- Apparently I did not do a good job removing all of the flux before pouring.
 
-![Picture of copper ingot covered in flux](image.png)
+![Picture of copper ingot covered in flux](image.webP)
 
 But, with a tiny bit of grinding and buffing, it cleaned up extremely nicely.
 
@@ -424,13 +424,13 @@ I also recently acquired a new carbide saw blade for my [14" dewalt chopsaw](htt
 
 (Image- was taking a bit later when I was doing the wood floor.... but, still provided to give a good idea of the chop saw.)
 
-![Picture showing my chopsaw](./chop-saw.png)
+![Picture showing my chopsaw](./assets-bathroom-floor/chop-saw.webP)
 
 After, watching it effortlessly slice through wood, aluminum, and basically everything else like a hot-knife through butter, I decided to try it one of my aluminum ingots.
 
 Turns out- slices through those like butter too.
 
-![Picture showing aluminum ingot with sides sliced off. Very shiny.](./sliced-ingot.png)
+![Picture showing aluminum ingot with sides sliced off. Very shiny.](./assets-bathroom-floor/sliced-ingot.webP)
 
 In a few weeks, when I get my garage cleaned up, I'm going to toss all of my ingots on the lathe, and machine down the dimensions to be... uniform, and flat. The flat look is very nice looking.
 
@@ -440,9 +440,9 @@ After playing around with melting metal for a bit, the coats of redguard were on
 
 So, we did.
 
-![Picture showing the remaining tile layed.](./tile-1.png)
+![Picture showing the remaining tile layed.](./assets-bathroom-floor/tile-1.webP)
 
-![Another angle showing the newly laid tile](./tile-2.png)
+![Another angle showing the newly laid tile](./assets-bathroom-floor/tile-2.webP)
 
 This time, the process went MUCH smoother, as we also made the thinset, slightly thinner. This gave PLENTY of time for laying laying the files, and adjusting the height of each one.
 
@@ -454,23 +454,23 @@ This process, was honestly extremely easy, and quite relaxing.
 
 Mix grout to pancake-batter-like consistency, and use a float to push it into the cracks.
 
-![Picture showing grout layed, with drywall repair in progress.](./grout-1.png)
+![Picture showing grout layed, with drywall repair in progress.](./assets-bathroom-floor/grout-1.webP)
 
 Wait a hour or so, come back with a wet grouting sponge, and wipe up any excess.
 
 The next day, come back and give it a nice shine.
 
-![Picture showing the floor the next day, after some cleanup](./grout-2.jpg)
+![Picture showing the floor the next day, after some cleanup](./assets-bathroom-floor/grout-2.webP)
 
 Do note- the progress of replacing, and texturing the drywall in the background too.
 
-![Another picture showing the floor, post-grout](./grout-3.png)
+![Another picture showing the floor, post-grout](./assets-bathroom-floor/grout-3.webP)
 
 ### Mostly Finished
 
 After a coat of paint, this project is nearly done.
 
-![](./mostly-finished.jpg)
+![](./assets-bathroom-floor/mostly-finished.webP)
 
 Will need to add another coat of paint, and then cut/paint trim to replace the trim. However- project is nearly completed.
 
@@ -482,29 +482,29 @@ While someone was working on texturing the drywall, I did decide to go ahead and
 
 So, A few weeks ago, I pulled the carpet out of the closet, and sanded down the floors to remove the construction residue/etc.
 
-![](./closet-before.jpg)
+![](./assets-bathroom-floor/closet-before.webP)
 
 I WAS planning on applying wood stain, with a coat of polyurethane, however, I came into possession of quite a few boxes of wood floor. So- I decided to use those.
 
 To, give an example- here is one of the other closets I pulled the carpet from, stripped, sanded, stained, and poly-d.
 
-![alt text](./other-closet.png)
+![alt text](./assets-bathroom-floor/other-closet.webP)
 
 Nothing, fancy. But, I do like the wood texture.
 
 But, since... I had the boxes of wood flooring on hand.....
 
-![](./closet-layed.jpg)
+![](./assets-bathroom-floor/closet-layed.webP)
 
 Yup. This looks much better. Really glad I did this.
 
 But- one thing that was bothering me- the wood did not perfectly line up.
 
-![Picture showing jagged edge of new wood flooring](./closet-edge-bad.png)
+![Picture showing jagged edge of new wood flooring](./assets-bathroom-floor/closet-edge-bad.webP)
 
 Now- this is basically a non-issue, as the threshold would cover this.... But, I decided to pull out the wood chisel for a bit.
 
-![Picture showing nice clean, straight line of wood flooring](./closet-edge-good.png)
+![Picture showing nice clean, straight line of wood flooring](./assets-bathroom-floor/closet-edge-good.webP)
 
 Much better.
 
@@ -520,19 +520,19 @@ So, remember the part I quoted from Allstate's website above, talking about how 
 
 Well, I decided to submit new evidence to my claim, since, obviously a pipe had burst.
 
-![alt text](./allstate-2-initial-message.png)
+![alt text](./assets-bathroom-floor/allstate-2-initial-message.webP)
 
 I was greeted by an extremely pleasant individual.
 
-![alt text](./allstate-2-response-1.png)
+![alt text](./assets-bathroom-floor/allstate-2-response-1.webP)
 
 So, in response, I sent back this response.
 
-![alt text](./allstate-2-response-2.png)
+![alt text](./assets-bathroom-floor/allstate-2-response-2.webP)
 
 And, finally, they decided to take another look.
 
-![alt text](./allstate-2-response-3.png)
+![alt text](./assets-bathroom-floor/allstate-2-response-3.webP)
 
 ### Rejected, Again.
 
