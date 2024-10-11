@@ -474,7 +474,7 @@ After a coat of paint, this project is nearly done.
 
 Will need to add another coat of paint, and then cut/paint trim to replace the trim. However- project is nearly completed.
 
-A threshold will be added too.
+A threshold will be added too, along with grout sealer after a week or so.
 
 ## Bonus - Closet Floor Replacement
 
