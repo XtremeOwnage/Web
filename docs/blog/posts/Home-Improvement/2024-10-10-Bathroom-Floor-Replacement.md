@@ -70,7 +70,9 @@ Specifically- this, copied from the above website, on 2024-10-10.
 !!! quote "Does homeowners insurance cover water damage from leaking plumbing?"
     Homeowners insurance may help cover damage caused by ==leaking plumbing if the leak is sudden and accidental==, such as if a washing machine supply hose ==suddenly breaks or a pipe burst==. However, homeowners insurance does not cover damage resulting from poor maintenance. So, if damage results after you fail to repair a leaky toilet, for example, homeowners insurance likely will not pay for repairs.
 
-Note- the highlighted section for later...
+So- assuming the theory of leaking toilet flange- it is indeed, not covered.
+
+Note- the highlighted section for later... It becomes extremely relevant.
     
 ## Fixing the issue myself.
 
