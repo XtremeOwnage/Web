@@ -84,6 +84,7 @@ plugins:
         - Development
         - Kubernetes
         - Home-Automation
+        - Home-Improvement
         - Technology
         - Solar
       pagination: true
@@ -101,12 +102,12 @@ plugins:
         # - tags 
   #- social: 
   #    enabled: false ## Needs special stuff for windows...
-  - optimize:
-      enabled: true
-      cache: true
-      optimize_png: false
-      optimize_png_strip: true
-      optimize_jpg: true
+  # - optimize:
+  #     enabled: true
+  #     cache: true
+  #     optimize_png: false
+  #     optimize_png_strip: true
+  #     optimize_jpg: true
   #- privacy:
   #    enabled: false
   #    cache: true
@@ -143,7 +144,9 @@ markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/exte
       alternate_style: true 
   - footnotes
   - tables
-
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
 extra_css:
   - stylesheets/extra.css
 
