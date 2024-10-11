@@ -15,9 +15,9 @@ This post, goes over replacing the floor, including what happened, and how it wa
 
 ## Detecting the issue
 
-So, Sometime in July, my Wife told me something odd was going on with the main bathroom.
+So, Sometime in July, my wife told me something odd was going on with the main bathroom.
 
-After investigation, I concurred, something indeed odd was happening.
+After investigation, I concurred that, something indeed odd was happening.
 
 The first sign- the toilet was literally sinking into the floor.
 
@@ -31,7 +31,7 @@ For reference- here is a picture of the area as of April, 2022.
 
 ![Picture of the toilet, as of April 2022](./bathroom-floor-replacement/toilet-april-2022.webp)
 
-This image was taking while we were remodeling the bathroom, removing the 1970's wood trim, and slightly updating everything.
+This image was taken while we were remodeling the bathroom, removing the 1970's wood trim, and slightly updating everything.
 
 For reference- the area circled in red, is the area which appears to be affected.
 
@@ -57,7 +57,7 @@ Finally- you will notice- somebody was aware of this issue, and "fixed" it by na
 
 So, given I had water damage, I decided to contact my insurance company, Allstate, to get a claim opened. Because, of course, "I am in good hands"
 
-I suspected the damage was caused by an leaking toilet flange. After reviewing the photos, without sending out an inspector, or adjuster, the claim was denied.
+I suspected the damage was caused by a leaking toilet flange. After reviewing the photos, without sending out an inspector, or adjuster, the claim was denied.
 
 ![Allstate Rejection Letter](./bathroom-floor-replacement/allstate-rejection-1.webp)
 
@@ -72,7 +72,7 @@ Specifically- this, copied from the above website, on 2024-10-10.
 
 Note- the highlighted section for later...
     
-I will note, I am no longer a customer of AllState. I did not feel like I was in good hands.
+I will note, I am no longer a customer of AllState. I did not feel like "I am in good hands."
 
 ## Fixing the issue myself.
 
@@ -151,9 +151,9 @@ And- a couple of angles from below.
 
 ![](./bathroom-floor-replacement/drain-pipe-cut-3.webp)
 
-So, I did not take a picture during "fixing" this issue, or after. But- the process of fixing this, involve cutting away the nearly inch and a half base-floor to get enough pipe exposed to add a coupler.
+So, I did not take a picture during "fixing" this issue, or after. But- the process of fixing this, involved cutting away the nearly inch and a half base-floor to get enough pipe exposed to add a coupler.
 
-This process, involved using a sawzall to cut the base-floor on the sides, up to the seal-plate.... and a very long drill-bit to slowly drill away behind the pipes, to avoid causing any more unneeded damage.
+This process, involved using a saw-zall to cut the base-floor on the sides, up to the seal-plate.... and a very long drill-bit to slowly drill away behind the pipes, to avoid causing any more unneeded damage.
 
 Afterwards, I was able to remove this section of subfloor, and properly repair the drain-pipe using a coupler.
 
@@ -165,7 +165,7 @@ I did go ahead and cut the main drainage line to properly install new couplers a
 
 ### Framing / Foundation
 
-Part of installing the new floor, meant it needed to be properly secured, on all sides. You don't want a softspot, this could cause the tile to crack.
+Part of installing the new floor, meant it needed to be properly secured, on all sides. You don't want a soft spot, this could cause the tile to crack.
 
 As well, since the center joist was completely cut in two by a careless plumber years back... a portion of the house was not properly supported causing the floor to sag.
 
