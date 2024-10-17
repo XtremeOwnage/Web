@@ -11,3 +11,4 @@ mkdocs-glightbox
 mkdocs-rss-plugin
 mkdocs-redirects
 mkdocs-material[imaging]
+mkdocs-git-revision-date-localized-plugin
