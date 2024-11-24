@@ -3,6 +3,8 @@ title: 2024 Network Revamp
 date: 2024-11-23
 tags:
   - Homelab
+  - Networking/Mikrotik
+  - Networking/Unifi
 ---
 
 # 2024 Network Revamp
