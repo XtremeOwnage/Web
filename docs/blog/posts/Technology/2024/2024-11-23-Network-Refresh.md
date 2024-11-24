@@ -7,19 +7,6 @@ tags:
 
 # 2024 Network Revamp
 
-!!! info "Why didn't you just post this on reddit??"
-    Ok- So, my primary audience is reddit.
-
-    Lots of redditors, often wonder WHY they are having to read this on an external site.
-
-    You want to know why? 
-
-    ![alt text](./assets/reddit-error.png)
-
-    Simple. Because [r/homelab](https://www.reddit.com/r/homelab) has policies in place, which blocks certain post from being created.
-
-    Everything you see below- was originally written inside of reddit. But, ported here, because I couldn't post it, without explanation.
-
 In the current state- I have WAN -> UXG-Lite -> Everything else.
 
 But, there are quite a few things which drives me crazy about unifi...
