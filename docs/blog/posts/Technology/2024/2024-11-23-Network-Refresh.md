@@ -9,6 +9,12 @@ tags:
 
 # 2024 Network Revamp
 
+This month's goal, is to update the network to provide isolation, and separation between LAN subnets, and my server subnets.
+
+Aka, if I go unplug my rack of servers- The internet should remain unaffected for members in my household.
+
+<!-- more -->
+
 In the current state- I have WAN -> UXG-Lite -> Everything else.
 
 But, there are quite a few things which drives me crazy about unifi...
