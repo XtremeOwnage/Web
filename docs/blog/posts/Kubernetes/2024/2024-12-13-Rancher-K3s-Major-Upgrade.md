@@ -1,6 +1,6 @@
 ---
 title: "Rancher / K3s. How to upgrade"
-date: 2024-07-13
+date: 2024-12-13
 tags:
   - Homelab
   - Kubernetes/General
