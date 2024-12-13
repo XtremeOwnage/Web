@@ -2,8 +2,6 @@ name: Build Docs - DEV
 on:
   workflow_dispatch:
   push:
-    tags:
-      - dev
 jobs:
   deploy:
     runs-on: ubuntu-latest
