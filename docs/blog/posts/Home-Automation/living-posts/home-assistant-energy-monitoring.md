@@ -28,7 +28,7 @@ Products will be split into these categories.
 
 1. [Products which provide per device/circuit entire-home monitoring, typically from sensors located in your mains panel.](#per-circuit-monitoring)
 2. [Products which only monitor energy entering or leaving the home, typically through CT clamps on the mains.](#mains-monitoring)
-3. [Smart Plugs and/or Devices with build in reporting](#Individual-Device-Monitoring)
+3. [Smart Plugs and/or Devices with build in reporting](#individual-device-monitoring)
 
 
 ### Per Circuit Monitoring

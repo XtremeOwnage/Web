@@ -68,7 +68,7 @@ IF, this option does not work for you, then try using mstflint. If it does work 
 
 `apt-get install mstflint`
 
-Note- if you use truenas like me... you may need to [Re-enable apt-get](./../2022-03/2022-03-26-TrueNAS-Reenable-apt-get.md){target=_blank}
+Note- if you use TrueNAS like me... you may need to [Re-enable apt-get](../2022/2022-03-26-TrueNAS-Reenable-apt-get.md){target=_blank}
 
 Then use `mstflint -d {your pci id} q` to query info
 
