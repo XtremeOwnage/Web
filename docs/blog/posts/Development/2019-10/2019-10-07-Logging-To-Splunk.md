@@ -4,8 +4,7 @@ date: 2019-10-07
 categories:
   - Development
 tags:
-  - C#
-  - .NET
+  - Development/C#
   - Splunk
 ---
 

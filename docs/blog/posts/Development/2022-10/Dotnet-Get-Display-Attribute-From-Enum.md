@@ -4,7 +4,7 @@ date: 2022-10-04
 categories:
   - Development
 tags:
-  - C#
+  - Development/C#
 ---
 
 # C# - Get Display Attribute Value from Enum

@@ -4,7 +4,7 @@ date: 2022-07-14
 categories:
   - Development
 tags:
-  - C#
+  - Development/C#
 ---
 
 # TFS / Azure Devops - Semantic Versioning
