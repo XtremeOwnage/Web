@@ -10,7 +10,7 @@ tags:
 
 # 10G or faster networking options.
 
-Want connectivity faster then 10G?$
+Want connectivity faster then 10G?
 
 Well- I have a list of NICs, switches, and notes.
 
@@ -79,7 +79,7 @@ Please keep in mind, compatible speeds for a given network adapter.
 
 25G NICs will nearly always also support 10G. (and slower)
 
-100G NICs, can generally support anything less.$
+100G NICs, can generally support anything less.
 
 If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP to SFP+ Adapter.
 
@@ -89,7 +89,7 @@ NONE of the listed NICs supports "Multi-gig", aka, 2.5G or 5G. You can, however,
 
 Mellanox Infiniband NICs (Every one of the listed Mellanox NICs) can be ran in either ethernet mode (where they behave like a normal NIC), or Infiniband mode. I strongly recommend ETH mode. [Guide: Switch Port Mode](../2023/2023-01-23-ConnectX3-PortMode.md){target=_blank}
 
-I personally prefer Mellanox NICs.$
+I personally prefer Mellanox NICs.
 
 In my experiences, Intel, Mellonax, and Chelsio have all been plug and play with both Linux and Windows.
 
@@ -105,13 +105,13 @@ Mikrotik hardware will either run RouterOS, or SwOS.
 
 SwOS is a very basic interface, which only exposes basic layer 2 switching, and vlan functionality.
 
-RouterOS, exposes the kitchen sink of networking features.$
+RouterOS, exposes the kitchen sink of networking features.
 
 !!! warning
         Do- check for hardware offload for the features you are interested in, however, as non-hardware offloaded features may have a gimped backplane connection.
 
-        For example- My CRS504-4XQ can handle line-speed 100G routing, without breaking a sweat.$
-$
+        For example- My CRS504-4XQ can handle line-speed 100G routing, without breaking a sweat.
+
         If I enable a non-offloaded feature, such as smart-queues, NAT, or non-offloaded filtering- it would need to be process by the CPU. The CPU link works at [1Gbps MAX](https://cdn.mikrotik.com/web-assets/rb_images/2162_hi_res.png){target=_blank}
 
         This is 100 times slower.
@@ -125,13 +125,13 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
         - 1x 100GBe
         - 1x 40GBe
         - 4x 25GBe
-        - 4x 10GBe$
-    - Silent and low power usage (~25W without load).$
+        - 4x 10GBe
+    - Silent and low power usage (~25W without load).
         - With 3x 100G + 4x10G, This switch consumes around 35 watts in my lab.
     - Cheapest 100GBe switch option. (One of the cheapest options for 25G too)
     - This is a layer 3 switch.
-- **Notes:**$
-    - Use the 1G port for management only; it does not share a backplane.$
+- **Notes:**
+    - Use the 1G port for management only; it does not share a backplane.
     - This is the central layer 3 router for my lab. Excellent switch.
     - Runs RouterOS Only.
 - **Links**:
@@ -139,10 +139,10 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
     - [Mikrotik](https://mikrotik.com/product/crs504_4xq_in){target=_blank}
 
 #### Mikrotik CRS305-1G-4S+IN
-- **Price:** $120$
+- **Price:** $120
 - **Capabilities:**
-    - 4-port 10G Layer 3 switch.$
-    - Silent and efficient.$
+    - 4-port 10G Layer 3 switch.
+    - Silent and efficient.
 - **Notes**:
     - While this is a layer 3 switch- It does not have dedicated hardware offload, and is barely capable of routing 1Gbit/s. I only recommend using this for layer 2.
     - Can run either RouterOS, or SwOS
@@ -159,14 +159,14 @@ If you decide on picking up a brocade switch, I strongly recommend checking out 
 These are best acquired from eBay, or other resellers.
 
 #### Brocade ICX6610
-- **Price:** $100 (Can go as low as $40)$
+- **Price:** $100 (Can go as low as $40)
 - **Capabilities:**
-    - Line-speed Layer 3 routing across all ports.$
-    - 2x 40G QSFP, 16x 10G SFP+, 48x 1G POE.$
-    - Supports BGP, OSPF, RIP, NTP, and DHCP server.$
+    - Line-speed Layer 3 routing across all ports.
+    - 2x 40G QSFP, 16x 10G SFP+, 48x 1G POE.
+    - Supports BGP, OSPF, RIP, NTP, and DHCP server.
 - **Notes:**
     - **EXTREMELY** loud. (Extremely difficult to make these quieter)
-    - High power consumption (~150W average).$
+    - High power consumption (~150W average).
     - Absolute unit of a switch. Can get these dirt-cheap. Just- be prepared for it to be hot and loud.
     - Comes in 24, or 48 port variants, with, and without POE.
 - **Links**:
@@ -174,12 +174,12 @@ These are best acquired from eBay, or other resellers.
     - [Fohdeesha](https://fohdeesha.com/docs/fcx.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
 
 #### Brocade ICX6450
-- **Price:** $60 average$
+- **Price:** $60 average
 - **Capabilities:**
-    - 4x 10G SFP + 24 or 48 port options (POE optional).$
-    - Supports OSPF and RIP (no BGP).$
+    - 4x 10G SFP + 24 or 48 port options (POE optional).
+    - Supports OSPF and RIP (no BGP).
 - **Notes:**
-    - Fan mods are easy and can reduce power usage (~40-50W).$
+    - Fan mods are easy and can reduce power usage (~40-50W).
     - Runs nearly silent with fan mods.
     - Comes in 24, or 48 port variants, with, and without POE.
 - **Links**:
@@ -187,10 +187,10 @@ These are best acquired from eBay, or other resellers.
     - [Fohdeesha](https://fohdeesha.com/docs/icx6450.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
 
 #### Brocade ICX7150
-- **Price:** $100-150 average$
+- **Price:** $100-150 average
 - **Capabilities:**
     - 4-8 10G SFP+, 24-48 1G, with optional POE. Depending on configuration.
-    - Supports OSPF and RIP (no BGP).$
+    - Supports OSPF and RIP (no BGP).
 - **Notes:**
     - Very quiet. Silent when ran in fanless mode.
     - Comes in 24, or 48 port variants, with, and without POE.
@@ -200,10 +200,10 @@ These are best acquired from eBay, or other resellers.
     - [Specs](https://docs.commscope.com/bundle/icx7150-technicalspecification/page/GUID-45937574-0953-40F5-84A9-16FBF4F408B7.html){target=_blank}
 
 #### Brocade ICX7250
-- **Price:** $50-150 average$
+- **Price:** $50-150 average
 - **Capabilities:**
     - 4-8 10G SFP+, 24-48 1G, with optional POE. Depending on configuration.
-    - Supports OSPF and RIP (no BGP).$
+    - Supports OSPF and RIP (no BGP).
 - **Notes:**
     - Pretty quiet under normal working conditions. 40-45dBA on spec sheets.
     - Can be ran in fanless mode with reduced POE output.
@@ -214,12 +214,12 @@ These are best acquired from eBay, or other resellers.
     - [Fohdeesha](https://fohdeesha.com/docs/icx7250.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
     - [Secs](https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html){target=_blank}
 
-### Mellanox$
+### Mellanox
 
 You can pick up used Mellanox infiniband switches for pretty cheap.
 
 #### Mellanox SX6036
-- **Price:** $75-150 average$
+- **Price:** $75-150 average
 - **Capabilities:**
     - 36 QSFP+ (40 / 56GBe)
 - **Notes:**
@@ -232,7 +232,7 @@ You can pick up used Mellanox infiniband switches for pretty cheap.
 
 ### Unifi
 
-Unifi's switches are silent, and efficient.$
+Unifi's switches are silent, and efficient.
 
 I generally recommend buying these from Unifi.
 
@@ -261,11 +261,11 @@ I generally recommend buying these from Unifi.
 ## Additional Notes
 
 ### Configuration
-- Most NICs arrive ready to use. Use `ethtool` to adjust hardware offload parameters if needed:$
-    [Documentation on ConnectX-3 Configuration](../2023/2023-02-07-ConnectX3-Settings.md)$
+- Most NICs arrive ready to use. Use `ethtool` to adjust hardware offload parameters if needed:
+    [Documentation on ConnectX-3 Configuration](../2023/2023-02-07-ConnectX3-Settings.md)
 
-- For setting port modes between ETH/IB:$
-    [Documentation on ETH/IB Mode](../2023/2023-01-23-ConnectX3-PortMode.md)$
+- For setting port modes between ETH/IB:
+    [Documentation on ETH/IB Mode](../2023/2023-01-23-ConnectX3-PortMode.md)
 
 ## Disclaimers
 
