@@ -1,8 +1,6 @@
 ---
 title: "Proxmox - Building a ceph cluster"
 date: 2023-08-13
-categories:
-  - Technology
 tags:
   - Homelab
   - Proxmox
@@ -17,6 +15,8 @@ My adventures in building out a small clustered ceph environment for redundant V
     Ceph is a great way to extract 10,000 IOPs from over 5 million IOPs worth of SSDs! -XtremeOwnage
 
 <!-- more -->
+
+--8<--- "docs/snippets/ebay-affiliate.md"
 
 ## Why should you use ceph?
 

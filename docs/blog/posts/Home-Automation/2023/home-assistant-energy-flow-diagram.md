@@ -2,11 +2,10 @@
 title: "Home Assistant - Energy Flow Diagram"
 date: 2023-03-14
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
-    - Energy Monitoring
+- Home Assistant
+- Energy Monitoring
 ---
 
 # Home Assistant - Energy Flow Diagram

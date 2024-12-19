@@ -2,12 +2,11 @@
 title: "Pioneer Mini-split ESPHome"
 date: 2023-05-20
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
-    - ESPHome
-    - HVAC
+- Home Assistant
+- ESPHome
+- HVAC
 ---
 
 # Pioneer Minisplit control using ESPHome
@@ -174,7 +173,7 @@ climate:
       - BOTH
 ```
 
-If, you are curious regarding the contents of some of my common includes- I have created a [basic page detailing my comment components](/pages/esphome/esphome-common/){target=_blank}
+If, you are curious regarding the contents of some of my common includes- I have created a [basic page detailing my comment components](../../../../pages/esphome/esphome-common.md){target=_blank}
 
 After you have your configuration ready- compile it via esphome.
 

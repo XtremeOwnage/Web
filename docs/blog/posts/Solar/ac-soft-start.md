@@ -1,10 +1,7 @@
 ---
 title: "Off grid AC"
 date: 2023-03-05
-categories:
-  - Solar
 tags:
-  - Solar
   - HVAC
 ---
 
@@ -305,4 +302,4 @@ To summarize-
 
     All hardware, time, and tools was provided and paid for out of my pocket.
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"
+--8<--- "docs/snippets/amazon-affiliate.md"

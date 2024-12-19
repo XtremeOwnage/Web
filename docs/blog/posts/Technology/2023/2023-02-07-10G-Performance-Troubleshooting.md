@@ -1,8 +1,6 @@
 ---
 title: "Network Performance Troubleshooting"
 date: 2023-01-23
-categories:
-  - Technology
 tags:
   - Homelab
   - Networking
@@ -17,6 +15,10 @@ I noticed a few potential performance issues, and decided to track them down.
 This is a simple guide, with a few methods you can leverage to troubleshoot network performance issues. 
 
 <!-- more -->
+
+--8<--- "docs/snippets/amazon-affiliate.md"
+
+--8<--- "docs/snippets/ebay-affiliate.md"
 
 ## My Topology
 

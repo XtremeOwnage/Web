@@ -2,12 +2,11 @@
 title: "ESPHome on critical infrastructure"
 date: 2023-03-20
 categories:
-    - Home-Automation
-    - Technology
+- Technology
 tags:
-    - Home Assistant
-    - Homelab
-    - ESPHome
+- Home Assistant
+- Homelab
+- ESPHome
 ---
 
 # Using ESPHome on critical devices, such as networking gear

@@ -1,8 +1,6 @@
 ---
 title: "2023 Home Assistant - Energy Monitoring"
 date: 2022-11-29
-categories:
-  - Home-Automation
 tags:
   - Energy Monitoring
 image: /assets/images/Home-Assistant-Banner-300x158.png
@@ -10,7 +8,7 @@ image: /assets/images/Home-Assistant-Banner-300x158.png
 
 # Home Assistant - Energy Monitoring Options
 
-![](/assets/images/home-assistant-logo.jpg)
+![](../../../../assets/images/home-assistant-logo.jpg)
 
 A quick post going over the best options for taking advantage of home assistant's [energy monitoring features](https://www.home-assistant.io/blog/2021/08/04/home-energy-management/){target=_blank}. 
 
@@ -30,7 +28,7 @@ Products will be split into these categories.
 
 1. [Products which provide per device/circuit entire-home monitoring, typically from sensors located in your mains panel.](#per-circuit-monitoring)
 2. [Products which only monitor energy entering or leaving the home, typically through CT clamps on the mains.](#mains-monitoring)
-3. [Smart Plugs and/or Devices with build in reporting](#Individual-Device-Monitoring)
+3. [Smart Plugs and/or Devices with build in reporting](#individual-device-monitoring)
 
 
 ### Per Circuit Monitoring
@@ -148,6 +146,16 @@ Links:
 * [Vendor Website](https://www.emporiaenergy.com/){target=_blank}
 * [3rd Party Home Assistant Integration](https://github.com/magico13/ha-emporia-vue){target=_blank}
 * [Flashing to ESPHome](https://gist.github.com/flaviut/93a1212c7b165c7674693a45ad52c512){target=_blank}
+
+#### Athom
+
+(Added Aug 2024)
+
+Athom recently released both 2, and 6 channel din-mountable energy monitoring modules. These come shipped WITH Esphome pre-installed. The prices are extremely reasonable too.
+
+* [Athom - 2ch](https://www.athom.tech/blank-1/2-ch-energy-meter-made-for-esphome){target=_blank}
+* [Athom - 6ch](https://www.athom.tech/blank-1/6-ch-energy-meter-made-for-esphome){target=_blank}
+
 
 ### Mains Monitoring
 

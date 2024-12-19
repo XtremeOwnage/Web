@@ -1,0 +1,211 @@
+---
+title: "Dell IMPI Based Fan Control"
+date: 2023-12-07
+categories:
+  - Technology
+tags:
+  - Homelab
+#image: "https://static.xtremeownage.com/blog/assets/Technology/2023-01/assets/r720%20on%20wall.webP"
+---
+
+# IPMI Based Fan Control for Dell Servers
+
+I often get asked how I handle controlling fan speeds for my r730xd. 
+
+So- today, I am sharing the scripts used.
+
+<!-- more -->
+
+## Intro
+
+I am using Python based scripts, combined with racadmin to automatically control fan speed curves.
+
+I am NOT the original author of these scripts, and I would love to link the original author, but, cannot seem to find them. (If, you are aware of the origins, please let me know, and I will update this post.)
+
+
+### Scripts
+
+#### fan-control.py
+
+This is the primary script, which controls the fan speed.
+
+
+``` python title="fan-control.py
+#!/usr/bin/python3
+##
+## ipmi-fan-control.py
+##
+
+# import needed components
+import time # used for sleep
+import subprocess # used to execute external commands
+import logging # lets make some nice logs
+import json # we'll use json to handle reading the data from sensors a bit more cleanly/easily in Proxmox
+import os # used to check if config.ini has changed
+from configparser import ConfigParser # using ConfigParser for separate config file
+import ast # used when importing config.ini to make it cleaner to work with
+
+## need to load some config info at the top
+# Read config.ini file
+config_object = ConfigParser()
+config_object.read("config.ini")
+# logging
+log_file_name = config_object["log_config"]["file_name"]
+log_format = config_object["log_config"]["format"]
+log_date_format = config_object["log_config"]["date_format"]
+log_frequency = config_object["log_config"]["frequency"]
+# ipmi type
+hardware_platform = config_object["system_info"]["ipmi_type"]
+# HDD temp cycle
+detect_hdd_temp_every = int(config_object["detect_timers"]["hdd_timer"])
+
+## define log basics
+logging.basicConfig(format=log_format, datefmt=log_date_format, filename=log_file_name, level=logging.DEBUG)
+
+## lets make some logic
+
+def logger_start(): # show when logging of fan-control sessions starts
+    logging.info("=============================")
+    logging.info("||                         ||")
+    logging.info("||  FAN CONTROL HAS BEGUN  ||")
+    logging.info("||                         ||")
+    logging.info("|| assuming direct control ||") # couldn't stop myself from a Mass Effect 2 joke for some reason
+    logging.info("||                         ||")
+    logging.info("=============================")
+
+def has_config_changed(): # used to check if the config file has changed so values can be updated
+    stat = os.stat("config.ini")
+    return stat.st_mtime
+
+def get_cpu_temp(op_sys):
+    if op_sys == "Proxmox":
+        sensors_data_json = json.loads(subprocess.check_output('sensors -j', shell=True)) # gets json formatted temperatures from sensors command, loads them into a variable as a dictionary
+        temps_list = [] # define list for temperatures to be added to with following iterations
+        for sensors_data_name, sensors_data_value in sensors_data_json.items(): # iterate thru every data set dict in json output
+            if "coretemp" in sensors_data_name: # find dicts with coretemp data
+                for coretemp_data_name, coretemp_data_value in sensors_data_value.items(): # iterate thru core temp data sets
+                    if "Core " in coretemp_data_name: # find dicts with actual core data
+                        for temps_data_name, temps_data_value in coretemp_data_value.items(): #iterate thru core data set
+                            if "input" in temps_data_name: # find data with actual temperature value
+                                temps_list.append(temps_data_value) # add that data to the full list
+        cpu_avg_temp = sum(temps_list) / len(temps_list) # run a quick average of the data
+        return round(cpu_avg_temp,2)
+    if op_sys == "TrueNAS" or "pfSense":
+        cpu_temps_cmd = "sysctl -a dev.cpu |  grep temperature | awk '{print $2}' | sed 's/.$//'" # define command to find the CPU temps by core
+        cpu_temps = subprocess.check_output(cpu_temps_cmd, shell=True) # get the CPU temps into variable cpu_temps
+        cpu_temps_list = list(map(float, cpu_temps.splitlines())) # take cpu_temps and create list for iterating on
+        cpu_avg_temp = sum(cpu_temps_list) / len(cpu_temps_list) # run a quick average of the data
+        return round(cpu_avg_temp,2)
+
+def get_cpu_zone_speed(temp,cpu_fan_curve): # based on the fan curve, decide what the appropriate fan power level (fan speed) should be, return it as an integer.
+    i = 0 # create an iterator
+    while i < (len(cpu_fan_curve) - 1): # while iterator is 1 less than total length of fan curve...
+        a = cpu_fan_curve[i] # set 'a' to curve temp value of iterator
+        b = cpu_fan_curve[i + 1] # set 'b' to next curve temp value of iterator
+
+        if temp >= a[0] and temp <= b[0]: # if current average temperature is greater or equal to 'a' and less or equal to 'b' ...
+            power = a[1] + (temp - a[0]) * (b[1] - a[1]) / (b[0] - a[0]) # do some math to figure out what to set fan power to
+            break
+        i += 1 # bump the iterator
+    return int(power)
+
+def set_fan_speed(zone_0_speed): # simple method to set the Zone 0 fan speed
+    cmd = 'ipmitool raw 0x30 0x30 0x02 0xff {speed}'.format(speed=zone_0_speed)
+    subprocess.check_output(cmd, shell=True)
+
+##
+## OK, lets do all the things.
+##
+
+logger_start()
+
+config_loaded = False # assume config not loaded at first
+config_last_changed = has_config_changed() # go ahead and get the current change time
+hdd_itter = detect_hdd_temp_every # create an HDD iterator we'll use for a timer
+# defaults fan speeds to 100%, and creates variables so things will hold during loop skips
+current_cpu_fan_speed = 100
+current_hdd_fan_speed = 100
+hdd_suggested_fan_speed = 0
+last_cpu_fan_speed = 0
+last_hdd_fan_speed = 0
+
+
+## if Dell, set fans to allow full manual control to stop iDRAC from trying to manage it
+cmd = 'ipmitool raw 0x30 0x30 0x01 0x00'
+subprocess.check_output(cmd, shell=True)
+time.sleep(2)
+
+while True: # This is a service so it needs to run forever... so... lets make an infinite loop!
+    try:
+        if config_loaded is False or config_last_changed != has_config_changed(): # on every loop, check to see if the config file has changed, if so reload it
+            ## Read config.ini file
+            config_object = ConfigParser()
+            config_object.read("config.ini")
+            ## system info
+            operating_system = config_object["system_info"]["system_os"]
+            hardware_platform = config_object["system_info"]["ipmi_type"]
+            fan_control_linked = config_object["system_info"].getboolean("single_zone")
+            control_focus = config_object["system_info"]["temp_focus"]
+            hdd_to_monitor = ast.literal_eval(config_object["system_info"]["disks"])
+            ## fan curve
+            cpu_fan_curve = ast.literal_eval(config_object["fan_curve"]["cpu"])
+            hdd_fan_curve = ast.literal_eval(config_object["fan_curve"]["hdd"])
+            ## temperature related data
+            hdd_max_temp = int(config_object["hdd_panic"]["max_temp"])
+            hdd_max_temp_addition = int(config_object["hdd_panic"]["panic_addition"])
+            ## timers
+            detect_cpu_temp_every = int(config_object["detect_timers"]["cpu_timer"])
+            detect_hdd_temp_every = int(config_object["detect_timers"]["hdd_timer"])
+            ## logging
+            log_file_name = config_object["log_config"]["file_name"]
+            log_format = config_object["log_config"]["format"]
+            log_date_format = config_object["log_config"]["date_format"]
+            log_frequency = config_object["log_config"]["frequency"]
+            ## confirm complete
+            config_loaded = True
+            config_last_changed = has_config_changed()
+            logging.info("""
+
+            Config: Config loaded! Current config is:
+            System OS: {os}
+            Hardware Platform: {plat}
+            Linked Fan Zones: {link}
+            Drives to Monitor: {drives}
+            CPU Fan Curve: {cpu_curve}
+            HDD Fan Curve: {hdd_curve}
+            HDD Panic Temp: {hmax}
+            HDD Panic Addition: {addition}
+            Log Frequency: {freq}
+
+            """.format(os=operating_system,plat=hardware_platform,link=fan_control_linked,drives=hdd_to_monitor,cpu_curve=cpu_fan_curve,hdd_curve=hdd_fan_curve,hmax=hdd_max_temp,addition=hdd_max_temp_addition,freq=log_frequency))
+
+        current_cpu_temp = get_cpu_temp(operating_system) #get current CPU average temp
+        current_cpu_fan_speed = get_cpu_zone_speed(current_cpu_temp,cpu_fan_curve) # get what the fan speed should be based on above temp
+        if log_frequency == "Every":
+            logging.info("CPU Temp: {temp}C -> Fans: {fan_speed}".format(temp=current_cpu_temp,fan_speed=current_cpu_fan_speed)) # For each loop, write the temp then the proposed fan speed
+            set_fan_speed(current_cpu_fan_speed) # set the fan speed
+        if log_frequency == "On_Change":
+            if current_cpu_fan_speed > last_cpu_fan_speed or current_cpu_fan_speed < last_cpu_fan_speed:
+                last_cpu_fan_speed = current_cpu_fan_speed
+                logging.info("CPU Temp: {temp}C -> Fans: {fan_speed}".format(temp=current_cpu_temp,fan_speed=current_cpu_fan_speed)) # For each loop, write the temp then the proposed fan speed
+                set_fan_speed(current_cpu_fan_speed) # set the fan speed
+        if log_frequency == "On_Panic":
+            set_fan_speed(current_cpu_fan_speed) # set the fan speed
+
+        time.sleep(detect_cpu_temp_every) # wait to run again
+    except Exception as exc: # in event of a script crash, dump more data to log
+        logging.error("Critical error occurred!!", exc_info=True)
+
+```
+
+I store this in `/root/fan-control/fan-control.py`
+
+#### max-speed.py
+
+This script is executed when my service stops, and will set the fans to maximum speed.
+
+``` python title="max-speed.py"
+
+```
+
+This gets stored in `/root/fan-control/max-speed.py`

@@ -19,6 +19,10 @@ Using a Tp-link kasa HS300 as a low-cost switchable PDU. This product has featur
 
 <!-- more -->
 
+--8<--- "docs/snippets/amazon-affiliate.md"
+
+--8<--- "docs/snippets/ebay-affiliate.md"
+
 ## Products Used
 
 This article is centered around the [Tp-link Kasa HS300 (Amazon)](https://amzn.to/3Buk5Hx){target=_blank}
@@ -86,7 +90,7 @@ I used a few zip-ties to secure the power cord to the rack.
 
 First, visit your integrations page, and click "Add Integration" at the bottom-right.
 
-![](/assets/images/home-assistant/add-integration-button.png)
+![](../../../../assets/images/home-assistant/add-integration-button.png)
 
 Search for "kasa"
 
@@ -160,4 +164,3 @@ As a bonus- since my Home Assistant automatically exports metrics to the prometh
 
     All hardware, time, and tools was provided solely by me.
 
---8<--- "docs/snippets/amazon-affiliate-link-non-sponsered.md"

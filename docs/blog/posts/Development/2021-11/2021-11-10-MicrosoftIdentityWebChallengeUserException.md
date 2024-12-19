@@ -4,7 +4,7 @@ date: 2021-11-10
 categories:
   - Development
 tags:
-  - C#
+  - Development/C#
 ---
 
 # MicrosoftIdentityWebChallengeUserException: IDW10502
