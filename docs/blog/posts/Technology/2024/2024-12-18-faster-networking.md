@@ -267,9 +267,9 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
     - Silent and efficient.
 - **Notes**:
     - While this is a layer 3 switch- It does not have dedicated hardware offload, and is barely capable of routing 1Gbit/s. I only recommend using this for layer 2.
-    - Can run either RouterOS, or SwOS
+    - Can run either RouterOS, or SwOS    
 - **Links**:
-    - [Amazon](https://www.amazon.com/s?k=CRS305-1G-4S%2BIN&crid=1QPNN89FD06ZZ&sprefix=crs504-4xq-in%2Caps%2C400&ref=nb_sb_noss_2){target=_blank}
+    - [Amazon](https://amzn.to/41JLinl){target=_blank}    
     - [Mikrotik](https://mikrotik.com/product/crs305_1g_4s_in){target=_blank}
     - [ServeTheHome](https://www.servethehome.com/mikrotik-crs305-1g-4sin-review-4-port-must-have-10gbe-switch/){target=_blank}
 
