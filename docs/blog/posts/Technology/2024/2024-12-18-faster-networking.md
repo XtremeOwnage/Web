@@ -6,6 +6,8 @@ tags:
     - Networking
     - Networking/Mikrotik
     - Networking/Unifi
+hide:
+  - navigation
 ---
 
 # 10G or faster networking options.
@@ -180,7 +182,7 @@ Notes:
     Don't buy a Unifi switch for its layer 3 capabilities. 
     
     You will be disappointed. Treat these as a layer 2 switch, and you will sleep better at night.
-    
+
 ### Mikrotik
 
 All of the listed Mikrotik options are acquired new.
