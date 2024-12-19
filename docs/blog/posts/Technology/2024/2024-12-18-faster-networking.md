@@ -413,6 +413,8 @@ You can pick up used Mellanox infiniband switches for pretty cheap.
 
     For- these reasons, only links to the MANAGED switches are included.
 
+    The models ending with an odd-number are unmanaged.
+
 #### Mellanox SX6036
 - **Price:** $75-150 average
 - **Capabilities:**
@@ -426,6 +428,16 @@ You can pick up used Mellanox infiniband switches for pretty cheap.
     - [Specs](https://www.netsolutionworks.com/datasheets/Mellanox_SX6036_SpecSheet.pdf){target=_blank}
     - [Datasheet](https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf){target=_blank}
     - [Storage Review](https://www.storagereview.com/review/mellanox-sx6036-56gb-infiniband-switch-review){target=_blank}
+
+#### Other Models
+
+* [SX1036 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX1036_SpecSheet.pdf){target=_blank}
+* [SX6005 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6005_SpecSheet.pdf){target=_blank}
+* [SX6012 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6012_SpecSheet.pdf){target=_blank}
+* [SX6015 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6015_SpecSheet.pdf){target=_blank}
+* [SX6018 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6018_SpecSheet.pdf){target=_blank}
+* [SX6025 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6025_SpecSheet.pdf){target=_blank}
+* [SX6036 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6036_SpecSheet.pdf){target=_blank}
 
 ### Unifi
 
