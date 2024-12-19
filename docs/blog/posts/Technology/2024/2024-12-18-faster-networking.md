@@ -16,6 +16,21 @@ Well- I have a list of NICs, switches, and notes.
 
 <!-- more -->
 
+!!! info
+    This content is **NOT** sponsored.
+
+    I do personally own these switch models mentioned below:
+        - Unifi USW-Aggregation
+        - Mikrotik CRS504-4XQ
+        - Mikrotik CSS610-8G-2S+
+        - Brocade ICX6610-48P
+        - Brocade ICX6610-48
+        - Brocade ICX6450-24P
+
+    These switches were purchased by myself, with no undisclosed benefits.
+
+    This post DOES include affiliate links. More information at the bottom of this post.
+
 ## Network Adapters
 
 Note- price estimates last updated Dec 18, 2024.
@@ -97,6 +112,74 @@ In my experiences, Intel, Mellonax, and Chelsio have all been plug and play with
 
 Note, ALL switches listed, are MANAGED switches, with support for vlans.
 
+### Table
+
+Notes:
+- Data used from manufacturer spec-sheets when possible.
+- Footnotes are included for additional context.
+
+|Manufacturer|Model              |Layer 3  |Max Speed|RJ45   |SFP|SFP+  |QSFP+|Multigig|Noise          |Power      |POE|Price |
+|------------|-------------------|---------|---------|-------|---|------|-----|--------|---------------|-----------|---|------|
+|Brocade     |ICX 6450-24        |Yes      |10G      |24     |-  |4     |-    |No      |37.9 dBA       |20-37w     |No |eBay  |
+|Brocade     |ICX 6450-24P       |Yes      |10G      |24     |-  |4     |-    |No      |39.2 dBA       |21-400w[^4]|Yes|eBay  |
+|Brocade     |ICX 6450-48        |Yes      |10G      |48     |-  |4     |-    |No      |37.2 dBA       |30-55w     |No |eBay  |
+|Brocade     |ICX 6450-48P       |Yes      |10G      |48     |-  |4     |-    |No      |55.5 dBA       |31-776w[^4]|Yes|eBay  |
+|Brocade     |ICX 6610-24        |Yes      |40G      |24     |-  |16[^5]|2[^5]|No      |39.6 - 48.7 dB |120-140w   |No |eBay  |
+|Brocade     |ICX 6610-24P       |Yes      |40G      |24     |-  |16[^5]|2[^5]|No      |39.6 - 48.7 dB |120-140w   |Yes|eBay  |
+|Brocade     |ICX 6610-48        |Yes      |40G      |48     |-  |16[^5]|2[^5]|No      |39.6 - 48.7 dB |165-185w   |No |eBay  |
+|Brocade     |ICX 6610-48P       |Yes      |40G      |48     |-  |16[^5]|2[^5]|No      |39.6 - 48.7 dB |165-185w   |Yes|eBay  |
+|Brocade     |ICX 7250-24        |Yes      |10G      |24     |-  |8     |-    |No      |41.9 dBA       |39-57w     |No |eBay  |
+|Brocade     |ICX 7250-24P       |Yes      |10G      |24     |-  |8     |-    |No      |44.7 dBA       |48-454w[^4]|Yes|eBay  |
+|Brocade     |ICX 7250-48        |Yes      |10G      |48     |-  |8     |-    |No      |44.5 dBA       |50-70w     |No |eBay  |
+|Brocade     |ICX 7250-48P       |Yes      |10G      |48     |-  |8     |-    |No      |45.9 dBA       |70-942w[^4]|Yes|eBay  |
+|Brocade     |ICX-7150-24        |Yes      |10G      |24     |-  |4     |-    |No      |Fanless        |14-24w     |No |eBay  |
+|Brocade     |ICX-7150-24P       |Yes      |10G      |24     |-  |4     |-    |No      |41.4 dBA       |32-472w[^4]|Yes|eBay  |
+|Brocade     |ICX-7150-48        |Yes      |10G      |48     |-  |4     |-    |No      |Fanless        |24-39w     |No |eBay  |
+|Brocade     |ICX-7150-48P       |Yes      |10G      |48     |-  |4     |-    |No      |41.8 dBA       |47-491w[^4]|Yes|eBay  |
+|Mikrotik    |CRS304-4XG-IN      |Yes**[^6]|10G      |1      |-  |4     |-    |Yes     |Fanless        |7-21w      |No |199$  |
+|Mikrotik    |CRS305-1G-4S+IN    |Yes**[^6]|10G      |1      |-  |4     |-    |No      |Fanless        |10-18w     |No |120$  |
+|Mikrotik    |CRS309-1G-8S+IN    |Yes**[^6]|10G      |1      |-  |8     |-    |No      |Fanless        |17-23w     |No |269$  |
+|Mikrotik    |CRS310-1G-5S-4S+IN |Yes**[^6]|10G      |1      |5  |4     |-    |No      |Nearly Silent  |8-20w      |No |199$  |
+|Mikrotik    |CRS326-4C+20G+2Q+RM|Yes**[^6]|40G      |20-24+1|-  |0-4   |2    |Yes     |36-54 dBA      |31-70w     |No |999$  |
+|Mikrotik    |CRS504-4XQ-IN      |Yes**[^6]|100G     |-      |-  |-     |4[^2]|Yes     |Nearly Silent  |11-41w     |No |650$  |
+|Mikrotik    |CRS510-8XS-2XQ-IN  |Yes**[^6]|100G     |1      |-  |8     |2    |Yes     |Silent - 40 dBA|15-45w     |No |999$  |
+|Mikrotik    |CRS518-16XS-2XQ-RM |Yes**[^6]|100G     |1      |-  |16[^7]|2[^2]|No      |Nearly Silent  |15-95w     |No |1,595$|
+|Mikrotik    |CSS318-16G-2S+IN   |No       |10G      |16     |-  |2     |-    |No      |Fanless        |10-13w     |No |139$  |
+|Mikrotik    |CSS610-8G-2S+IN    |No       |10G      |8      |-  |2     |-    |No      |Fanless        |5-11w      |No |110$  |
+|Unifi       |USW-Aggregation    |No       |10G      |-      |-  |8     |-    |No      |Silent?        |10-30w     |No |269$  |
+|Unifi       |USW-Pro-Aggregation|Yes**[^8]|25G      |-      |-  |32    |-    |No      |Unknown        |?? - 100w  |No |899$  |
+
+
+[^2]:
+    This Mikroktik switch can support various speed configurations.
+    
+    Each QSFP+ port can do ONE of:
+    
+    1. 1x 100G
+    2. 1x 50G
+    3. 1x 40G
+    4. 4x 25G
+    5. 4x 10G
+    6. 4x 5G
+    7. 4x 2.5G
+    8. 4x 1G
+    9. 4x 100M
+[^4]:
+    This includes POE loads.
+[^5]:
+    Two of the rear 40G ports can only be used in 4x10G breakout.
+[^6]:
+    Mikrotik hardware can perform layer 3 routing without having dedicated hardware offload.
+    
+    If using the layer 3 functionality, double-check Mikrotik's documentation to ensure your required features are hardware offloaded.
+
+    The majority of Mikrotik switches have limited CPU, and are not very effective for doing high-speed routing without hardware offload.
+[^7]:
+    These SFP+ ports are 25GBe.
+[^8]:
+    Don't buy a Unifi switch for its layer 3 capabilities. 
+    
+    You will be disappointed. Treat these as a layer 2 switch, and you will sleep better at night.
 ### Mikrotik
 
 All of the listed Mikrotik options are acquired new.
@@ -118,6 +201,32 @@ RouterOS, exposes the kitchen sink of networking features.
 
 I have found Amazon to be the best place to buy. Mikrotik only sells to other distributors.
 
+#### Mikrotik CRS518-16XS-2XQ-RM
+- **Price:** $1,595
+- **Capabilities:**
+    - 2x 100G QSFP+, 16x25G SFP+, 1x 10/100M RJ45
+    - This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.
+- **Notes:**
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/4gmFiVZ){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs518_16xs_2xq){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs518-16xs-2xq-rm-review-cheaper-25gbe-and-100gbe-switching-marvell){target=_blank}
+
+#### Mikrotik CRS510-8XS-2XQ-IN
+- **Price:** $999
+- **Capabilities:**
+    - 2x 100G QSFP+, 8x25G SFP+, 1x 10/100M RJ45
+    - This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.
+    - Can be powered via POE.
+    - This- is essentially the same hardware as the CRS504-4XQ, but, with two of the 100G QSFP+ ports instead broken out into 8x 25G SFP+
+- **Notes:**
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/3P7QtGd){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs510_8xs_2xq_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs510-8xs-2xq-in-review-8-port-25gbe-2-port-100gbe-switch-marvell/){target=_blank}
+
 #### Mikrotik CRS504-4XQ-IN
 - **Price:** $650
 - **Capabilities:**
@@ -130,6 +239,7 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
         - With 3x 100G + 4x10G, This switch consumes around 35 watts in my lab.
     - Cheapest 100GBe switch option. (One of the cheapest options for 25G too)
     - This is a layer 3 switch.
+    - Can be powered via POE.
 - **Notes:**
     - Use the 1G port for management only; it does not share a backplane.
     - This is the central layer 3 router for my lab. Excellent switch.
@@ -137,6 +247,51 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
 - **Links**:
     - [Amazon](https://amzn.to/41BckgE){target=_blank}
     - [Mikrotik](https://mikrotik.com/product/crs504_4xq_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs504-4xq-in-review-momentus-4x-100gbe-and-25gbe-desktop-switch-marvell/3/){target=_blank}
+
+#### Mikrotik CRS326-4C+20G+2Q+RM
+- **Price:** $999
+- **Capabilities:**
+    - 20x Multi-gig RJ45 (1/2.5/5G)
+    - 4x "Combo" ports. Either Multi-gig RJ45, or 10G SFP+
+    - 1x 10/100m Management Port
+    - Noisy at startup, but, pretty quiet when running.
+    - Layer 3** (If you use this as a router, make SURE the features you will be using are hardware offloaded. If the CPU processes packets- performance will be very, very slow.)
+- **Notes**:
+    - RouterOSv7
+- **Links**:
+    - [Amazon](https://amzn.to/41DhRmU){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs326_4c_20g_2q_rm){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs326-4c20g2qrm-switch-review-2-5gbe-10gbe-and-40gbe-marvell-qualcomm/){target=_blank}
+
+#### Mikrotik CRS310-1G-5S-4S+IN
+- **Price:** $199
+- **Capabilities:**
+    - 5x 1G SFP, 4x 10G SFP+, 1x 1G RJ45
+    - Nearly silent. Low energy
+    - Layer 3 (Limited to around 1G of routing throughput.)
+- **Notes**:
+    - SwOS or RouterOSv7
+- **Links**:
+    - [Amazon](hhttps://amzn.to/3BOA7ix){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs310_1g_5s_4s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs310-1g-5s-4sin-fiber-switch/){target=_blank}
+
+
+#### Mikrotik CRS309-1G-8S+IN
+- **Price:** $269
+- **Capabilities:**
+    - 8 port SFP+, with 1x 1G RJ45
+    - Silent and efficient.
+    - Can be powered via POE
+- **Notes**:
+    - While this is a layer 3 switch- It does not have dedicated hardware offload, but, can offer reasonable routing performance (not linespeed!)
+    - Can run either RouterOS, or SwOS
+- **Links**:
+    - [Amazon](https://amzn.to/4goepAX){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs309_1g_8s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs309-1g-8sin-review-inexpensive-8x-10gbe-switch/){target=_blank}
+
 
 #### Mikrotik CRS305-1G-4S+IN
 - **Price:** $120
@@ -149,6 +304,50 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
 - **Links**:
     - [Amazon](https://www.amazon.com/s?k=CRS305-1G-4S%2BIN&crid=1QPNN89FD06ZZ&sprefix=crs504-4xq-in%2Caps%2C400&ref=nb_sb_noss_2){target=_blank}
     - [Mikrotik](https://mikrotik.com/product/crs305_1g_4s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs305-1g-4sin-review-4-port-must-have-10gbe-switch/){target=_blank}
+
+#### Mikrotik CRS304-4XG-IN
+- **Price:** $199
+- **Capabilities:**
+    - 4 port layer 3 10G switch with 1x 1G Management Port
+    - Silent and Efficient.
+    - Very cost-effective 10G router.
+    - This is a layer 3 switch.
+    - Can be powered via POE.
+    - Multi-gig capabilities (2.5G, 5G)
+- **Notes:**
+    - Use the 1G port for management only; it does not share a backplane.
+    - This is the central layer 3 router for my lab. Excellent switch.
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/49IPBBn){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs304_4xg_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs304-4xg-in-review-this-is-a-must-have-10gbase-t-marvell-switch/){target=_blank}
+
+#### Mikrotik CSS610-8G-2S+IN
+- **Price:** $139
+- **Capabilities:**
+    - 16x1G + 2x 10G SFP+
+    - Silent and efficient.
+    - Layer 2
+- **Notes**:
+    - SwOS only. 
+    - I have been personally running one of these for 2 years now. Simple, and effective.
+- **Links**:
+    - [Amazon](https://amzn.to/3VNWTOB){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/css610_8g_2s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-css610-8g-2sin-review-10gbe/){target=_blank}
+
+#### Mikrotik CSS318-16G-2S+IN
+- **Price:** $139
+- **Capabilities:**
+    - 16x1G + 2x 10G SFP+
+    - Silent and efficient.
+    - Layer 2
+- **Notes**:
+    - SwOS only.     
+- **Links**:
+    - [Mikrotik](https://mikrotik.com/product/css318_16g_2s_in){target=_blank}
 
 ### Brocade
 
@@ -172,6 +371,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/T1tiQ8){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/fcx.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
+    - [Datasheet](https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6610.pdf){target=_blank}
 
 #### Brocade ICX6450
 - **Price:** $60 average
@@ -185,6 +385,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/t4VL0U){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx6450.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
+    - [Datasheet](https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6430-6450.pdf){target=_blank}
 
 #### Brocade ICX7150
 - **Price:** $100-150 average
@@ -197,7 +398,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/wyo9XF){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx7150.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
-    - [Specs](https://docs.commscope.com/bundle/icx7150-technicalspecification/page/GUID-45937574-0953-40F5-84A9-16FBF4F408B7.html){target=_blank}
+    - [Datasheet](https://www.commscope.com/globalassets/digizuite/61729-ds-icx-7150.pdf){target=_blank}
 
 #### Brocade ICX7250
 - **Price:** $50-150 average
@@ -212,7 +413,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/t4VL0U){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx7250.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
-    - [Secs](https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html){target=_blank}
+    - [Datasheet](https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html){target=_blank}
 
 ### Mellanox
 
@@ -243,6 +444,7 @@ I generally recommend buying these from Unifi.
 - **Notes:**
     - 8 port layer 2 10G Switch. Silent.
     - My switch with all 8 ports in use, with either fiber modules, or DACs, uses around 10w average.
+    - A solid layer 2 switch.
 - **Links**:
     - [Unifi](https://store.ui.com/us/en/products/usw-aggregation){target=_blank}
     - [Amazon](https://amzn.to/3BnGbyA){target=_blank}
@@ -250,7 +452,12 @@ I generally recommend buying these from Unifi.
 #### Unifi USW-Pro-Aggregation
 - **Price:** $899
 - **Capabilities:**
-    - 28x 10G SFP+ + 4x 25G SFP+
+    - 28x 10G SFP+
+    - 4x 25G SFP+
+        - **NOTE**: Does not support mixed speed!! All of these ports must run at the same speed. 
+        - Either- all four are 25G, or all four are 10G. 
+        - Mixed speed is supported for 10G or below.
+        - This means, you CANNOT run 2x 25G, and 2x 10G. They will instead run at 4x 10G.
 - **Notes:**
     - 32 port "layer 3" switch.
     - I **STRONGLY** do not recommend buying a Unifi switch, for its layer 3 capabilities. If you buy this switch, Then consider it a layer 2 switch.
@@ -268,6 +475,8 @@ I generally recommend buying these from Unifi.
     [Documentation on ETH/IB Mode](../2023/2023-01-23-ConnectX3-PortMode.md)
 
 ## Disclaimers
+
+--8<--- "docs/snippets/non-sponsored.md"
 
 --8<--- "docs/snippets/amazon-affiliate.md"
 
