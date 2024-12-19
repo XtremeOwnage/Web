@@ -6,6 +6,8 @@ tags:
     - Networking
     - Networking/Mikrotik
     - Networking/Unifi
+hide:
+  - navigation
 ---
 
 # 10G or faster networking options.
@@ -16,6 +18,21 @@ Well- I have a list of NICs, switches, and notes.
 
 <!-- more -->
 
+!!! info
+    This content is **NOT** sponsored.
+
+    I do personally own these switch models mentioned below:
+        - Unifi USW-Aggregation
+        - Mikrotik CRS504-4XQ
+        - Mikrotik CSS610-8G-2S+
+        - Brocade ICX6610-48P
+        - Brocade ICX6610-48
+        - Brocade ICX6450-24P
+
+    These switches were purchased by myself, with no undisclosed benefits.
+
+    This post DOES include affiliate links. More information at the bottom of this post.
+
 ## Network Adapters
 
 Note- price estimates last updated Dec 18, 2024.
@@ -24,27 +41,7 @@ I do not recommend picking up the 10G NICs. Instead, Spend 5 or 10$ more, and pi
 
 This is also not a complete list. This list will be updated as I discover new NICs worthy of being added.
 
-
-| Make             | Model                     | Ports     | Type                        | Speed                 | Generation            | Price                 | Link                                                                                                                                                                    | Notes                                                                                                                                                                 |
-|------------|-----------------|---------|-----------------|---------------|-----------------|---------------|---------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| Mellanox     | MCX311A-XCAT        | Single    | SFP+                        | 10G                     | ConnectX-3[^2]    | $15-$25             | [eBay Link](https://ebay.us/V9Q6Eq){target=_blank}                                                                     | ASPM broken on newer Intel CPUs; works with `mlx4_core`. Recommended to choose 25G.     |
-| Mellanox     | MCX312B                 | Dual        | SFP+                        | 10G                     | ConnectX-3[^2]    | $30-$40             | [eBay Link](https://ebay.us/aU5gI7){target=_blank}                                                                     | Consider ConnectX-4 10/25G instead.                                                                                                    |
-| Mellanox     | MCX4111A                | Single    | SFP+                        | 25G                     | ConnectX-4            | $20-$40             | [eBay Link](https://ebay.us/5dn58j){target=_blank}                                                                     |                                                                                                                                                                             |
-| Mellanox     | CX4121A                 | Dual        | SFP+                        | 25G                     | ConnectX-4            | $30-$40             | [eBay Link](https://ebay.us/Pm5SzF){target=_blank}                                                                     |                                                                                                                                                                             |
-| Mellanox     | CX354A                    | Dual        | QSFP+                     | 40G                     | ConnectX-3[^2]    | $10-$20             | [eBay Link](https://ebay.us/fXd3Dw){target=_blank}                                                                     | Recommend newer NICs (e.g., ConnectX-4). Can support 10G with SFP -> QSFP adapter.     |
-| Mellanox     | CX314A                    | Dual        | QSFP+                     | 40G                     | ConnectX-3[^2]    | $10-$20             | [eBay Link](https://ebay.us/Cz7Kih){target=_blank}                                                                     | Recommend newer NICs (e.g., ConnectX-4). Can support 10G with SFP -> QSFP adapter.     |
-| Mellanox     | CX455                     | Single    | QSFP+                     | 100G                    | ConnectX-4            | $100                    | [eBay Link](https://ebay.us/lhTWMZ){target=_blank}                                                                     |                                                                                                                                                                             |
-| Mellanox     | CX416A                    | Dual        | QSFP+                     | 100G                    | ConnectX-4            | $100-$200         | [eBay Link](https://ebay.us/Glpsya){target=_blank}                                                                     | This is the NIC I use in most of my servers.                                                                                    |
-| Mellanox     | CX516A                    | Dual        | QSFP+                     | 100G                    | ConnectX-5            | $150-$300         | [eBay Link](https://ebay.us/rJTayB){target=_blank}                                                                     |                                                                                                                                                                             |
-| Dell             | 099GTM[^4]            | Dual        | SFP+                        | 25G                     |                                 | $10-$20             | [eBay Link](https://ebay.us/7Q2TDQ){target=_blank}                                                                     | Compatible with many Dell servers (e.g., R730XD). Not picky with modules. 2x1G + 2x10G RJ45. Intel X540 |
-| Dell             | 6VDPG[^5]             | Quad        | SFP+                        | 2x 1G + 2x 10G|                                 | $20-30                | [eBay Link](https://ebay.us/6Rr1p9){target=_blank}                                                                     | I do NOT recommend getting this NIC. It is extremely picky with modules |
-| Dell             | R887V[^1]             | Quad        | RJ45                        | 2x 1G + 2x 10G|                                 | $10-$20             | [eBay Link](https://ebay.us/dKP98K){target=_blank}                                                                     | Compatible with many Dell servers (e.g., R730XD). Not picky with modules.                        |
-| Intel            | X540-T2[^3]         | Dual        | RJ45                        | 10G                     |                                 | $15-$30             | [eBay Link](https://ebay.us/VkKMRt){target=_blank}                                                                     | These work well when you need a copper 10G link.                                                                         |
-| Chelsio        | T520-CR                 | Dual        | SFP+                        | 10G                     | T5                            | $30-$70             | [eBay Link](https://ebay.us/H1GmFL){target=_blank}                                                                     |                                                                         |
-| Chelsio        | T540-CR                 | Quad        | SFP+                        | 10G                     | T5                            | $40-$100            | [eBay Link](https://ebay.us/toNXXN){target=_blank}                                                                     | One of the few quad 10G NICs.                                                                        |
-| Chelsio        | T580-CR                 | Dual        | QSFP+                     | 40G                     | T5                            | $20-$60             | [eBay Link](https://ebay.us/VO9Ced){target=_blank}                                                                     |                                                                         |
-| Chelsio        | T6225-CR                | Dual        | SFP+                        | 25G                     | T6                            | $50-$150            | [eBay Link](https://ebay.us/2W7XGR){target=_blank}                                                                     |                                                                         |
-
+{{ read_csv('assets-faster-networking/nics.csv') }}
 
 [^1]:
         The Dell R887V is based on the ConnectX-4 CX4121C
@@ -81,21 +78,74 @@ Please keep in mind, compatible speeds for a given network adapter.
 
 100G NICs, can generally support anything less.
 
-If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP to SFP+ Adapter.
+If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP+ to SFP+ Adapter.
 
-NONE of the listed NICs supports "Multi-gig", aka, 2.5G or 5G. You can, however, acquire SFP+ modules which may work.    This post is for 10G or faster, as such, no options for 2.5G / 5G are listed.
+Only NICs which specify "Multi-Gig" are capable of 2.5G, or 5G. (TP-Link NICs & Intel i226 are the only NICs flagged at this time)
 
 56Gbit/s is infiniband only, and only applies when running a Mellanox NIC, in IB mode, when connected to a supported infiniband switch.
 
 Mellanox Infiniband NICs (Every one of the listed Mellanox NICs) can be ran in either ethernet mode (where they behave like a normal NIC), or Infiniband mode. I strongly recommend ETH mode. [Guide: Switch Port Mode](../2023/2023-01-23-ConnectX3-PortMode.md){target=_blank}
 
-I personally prefer Mellanox NICs.
+I personally prefer Mellanox NICs. In my experiences, these are the best bang for the buck, are generally really cheap, plug and play, and have been extremely reliable.
 
 In my experiences, Intel, Mellonax, and Chelsio have all been plug and play with both Linux and Windows.
 
 ## Switches
 
 Note, ALL switches listed, are MANAGED switches, with support for vlans.
+
+### Table
+
+Notes:
+- Data used from manufacturer spec-sheets when possible.
+- Footnotes are included for additional context.
+
+{{ read_csv('assets-faster-networking/switches.csv') }}
+
+[^10]:
+    Unmanaged Infiniband Switch.
+
+    REQUIRES external subnet manager.
+
+    Does not support ethernet mode to my knowledge.
+
+    Do not buy these, unless you know EXACTLY what you are purchasing.
+[^11]:
+    56Gb when running in Infiniband Mode.
+
+    Supports 1/10/40G in ethernet mode.
+
+    Note- IPoIB packets are processed by the CPU of the host typically- Do not recommend using IPoIB.
+[^12]:
+    This Mikroktik switch can support various speed configurations.
+    
+    Each QSFP+ port can do ONE of:
+    
+    1. 1x 100G
+    2. 1x 50G
+    3. 1x 40G
+    4. 4x 25G
+    5. 4x 10G
+    6. 4x 5G
+    7. 4x 2.5G
+    8. 4x 1G
+    9. 4x 100M
+[^14]:
+    This includes POE loads.
+[^15]:
+    Two of the rear 40G ports can only be used in 4x10G breakout.
+[^16]:
+    Mikrotik hardware can perform layer 3 routing without having dedicated hardware offload.
+    
+    If using the layer 3 functionality, double-check Mikrotik's documentation to ensure your required features are hardware offloaded.
+
+    The majority of Mikrotik switches have limited CPU, and are not very effective for doing high-speed routing without hardware offload.
+[^17]:
+    These SFP+ ports are 25GBe.
+[^18]:
+    Don't buy a Unifi switch for its layer 3 capabilities. 
+    
+    You will be disappointed. Treat these as a layer 2 switch, and you will sleep better at night.
 
 ### Mikrotik
 
@@ -118,6 +168,32 @@ RouterOS, exposes the kitchen sink of networking features.
 
 I have found Amazon to be the best place to buy. Mikrotik only sells to other distributors.
 
+#### Mikrotik CRS518-16XS-2XQ-RM
+- **Price:** $1,595
+- **Capabilities:**
+    - 2x 100G QSFP+, 16x25G SFP+, 1x 10/100M RJ45
+    - This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.
+- **Notes:**
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/4gmFiVZ){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs518_16xs_2xq){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs518-16xs-2xq-rm-review-cheaper-25gbe-and-100gbe-switching-marvell){target=_blank}
+
+#### Mikrotik CRS510-8XS-2XQ-IN
+- **Price:** $999
+- **Capabilities:**
+    - 2x 100G QSFP+, 8x25G SFP+, 1x 10/100M RJ45
+    - This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.
+    - Can be powered via POE.
+    - This- is essentially the same hardware as the CRS504-4XQ, but, with two of the 100G QSFP+ ports instead broken out into 8x 25G SFP+
+- **Notes:**
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/3P7QtGd){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs510_8xs_2xq_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs510-8xs-2xq-in-review-8-port-25gbe-2-port-100gbe-switch-marvell/){target=_blank}
+
 #### Mikrotik CRS504-4XQ-IN
 - **Price:** $650
 - **Capabilities:**
@@ -130,6 +206,7 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
         - With 3x 100G + 4x10G, This switch consumes around 35 watts in my lab.
     - Cheapest 100GBe switch option. (One of the cheapest options for 25G too)
     - This is a layer 3 switch.
+    - Can be powered via POE.
 - **Notes:**
     - Use the 1G port for management only; it does not share a backplane.
     - This is the central layer 3 router for my lab. Excellent switch.
@@ -137,6 +214,51 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
 - **Links**:
     - [Amazon](https://amzn.to/41BckgE){target=_blank}
     - [Mikrotik](https://mikrotik.com/product/crs504_4xq_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs504-4xq-in-review-momentus-4x-100gbe-and-25gbe-desktop-switch-marvell/3/){target=_blank}
+
+#### Mikrotik CRS326-4C+20G+2Q+RM
+- **Price:** $999
+- **Capabilities:**
+    - 20x Multi-gig RJ45 (1/2.5/5G)
+    - 4x "Combo" ports. Either Multi-gig RJ45, or 10G SFP+
+    - 1x 10/100m Management Port
+    - Noisy at startup, but, pretty quiet when running.
+    - Layer 3** (If you use this as a router, make SURE the features you will be using are hardware offloaded. If the CPU processes packets- performance will be very, very slow.)
+- **Notes**:
+    - RouterOSv7
+- **Links**:
+    - [Amazon](https://amzn.to/41DhRmU){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs326_4c_20g_2q_rm){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs326-4c20g2qrm-switch-review-2-5gbe-10gbe-and-40gbe-marvell-qualcomm/){target=_blank}
+
+#### Mikrotik CRS310-1G-5S-4S+IN
+- **Price:** $199
+- **Capabilities:**
+    - 5x 1G SFP, 4x 10G SFP+, 1x 1G RJ45
+    - Nearly silent. Low energy
+    - Layer 3 (Limited to around 1G of routing throughput.)
+- **Notes**:
+    - SwOS or RouterOSv7
+- **Links**:
+    - [Amazon](hhttps://amzn.to/3BOA7ix){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs310_1g_5s_4s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs310-1g-5s-4sin-fiber-switch/){target=_blank}
+
+
+#### Mikrotik CRS309-1G-8S+IN
+- **Price:** $269
+- **Capabilities:**
+    - 8 port SFP+, with 1x 1G RJ45
+    - Silent and efficient.
+    - Can be powered via POE
+- **Notes**:
+    - While this is a layer 3 switch- It does not have dedicated hardware offload, but, can offer reasonable routing performance (not linespeed!)
+    - Can run either RouterOS, or SwOS
+- **Links**:
+    - [Amazon](https://amzn.to/4goepAX){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs309_1g_8s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs309-1g-8sin-review-inexpensive-8x-10gbe-switch/){target=_blank}
+
 
 #### Mikrotik CRS305-1G-4S+IN
 - **Price:** $120
@@ -149,6 +271,50 @@ I have found Amazon to be the best place to buy. Mikrotik only sells to other di
 - **Links**:
     - [Amazon](https://www.amazon.com/s?k=CRS305-1G-4S%2BIN&crid=1QPNN89FD06ZZ&sprefix=crs504-4xq-in%2Caps%2C400&ref=nb_sb_noss_2){target=_blank}
     - [Mikrotik](https://mikrotik.com/product/crs305_1g_4s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs305-1g-4sin-review-4-port-must-have-10gbe-switch/){target=_blank}
+
+#### Mikrotik CRS304-4XG-IN
+- **Price:** $199
+- **Capabilities:**
+    - 4 port layer 3 10G switch with 1x 1G Management Port
+    - Silent and Efficient.
+    - Very cost-effective 10G router.
+    - This is a layer 3 switch.
+    - Can be powered via POE.
+    - Multi-gig capabilities (2.5G, 5G)
+- **Notes:**
+    - Use the 1G port for management only; it does not share a backplane.
+    - This is the central layer 3 router for my lab. Excellent switch.
+    - Runs RouterOS Only.
+- **Links**:
+    - [Amazon](https://amzn.to/49IPBBn){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/crs304_4xg_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-crs304-4xg-in-review-this-is-a-must-have-10gbase-t-marvell-switch/){target=_blank}
+
+#### Mikrotik CSS610-8G-2S+IN
+- **Price:** $139
+- **Capabilities:**
+    - 16x1G + 2x 10G SFP+
+    - Silent and efficient.
+    - Layer 2
+- **Notes**:
+    - SwOS only. 
+    - I have been personally running one of these for 2 years now. Simple, and effective.
+- **Links**:
+    - [Amazon](https://amzn.to/3VNWTOB){target=_blank}
+    - [Mikrotik](https://mikrotik.com/product/css610_8g_2s_in){target=_blank}
+    - [ServeTheHome](https://www.servethehome.com/mikrotik-css610-8g-2sin-review-10gbe/){target=_blank}
+
+#### Mikrotik CSS318-16G-2S+IN
+- **Price:** $139
+- **Capabilities:**
+    - 16x1G + 2x 10G SFP+
+    - Silent and efficient.
+    - Layer 2
+- **Notes**:
+    - SwOS only.     
+- **Links**:
+    - [Mikrotik](https://mikrotik.com/product/css318_16g_2s_in){target=_blank}
 
 ### Brocade
 
@@ -172,6 +338,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/T1tiQ8){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/fcx.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
+    - [Datasheet](https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6610.pdf){target=_blank}
 
 #### Brocade ICX6450
 - **Price:** $60 average
@@ -185,6 +352,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/t4VL0U){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx6450.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
+    - [Datasheet](https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6430-6450.pdf){target=_blank}
 
 #### Brocade ICX7150
 - **Price:** $100-150 average
@@ -197,7 +365,7 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/wyo9XF){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx7150.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
-    - [Specs](https://docs.commscope.com/bundle/icx7150-technicalspecification/page/GUID-45937574-0953-40F5-84A9-16FBF4F408B7.html){target=_blank}
+    - [Datasheet](https://www.commscope.com/globalassets/digizuite/61729-ds-icx-7150.pdf){target=_blank}
 
 #### Brocade ICX7250
 - **Price:** $50-150 average
@@ -212,11 +380,20 @@ These are best acquired from eBay, or other resellers.
 - **Links**:
     - [Ebay](https://ebay.us/t4VL0U){target=_blank}
     - [Fohdeesha](https://fohdeesha.com/docs/icx7250.html){target=_blank} This is a setup guide, along with license unlocks, etc. Make **SURE** to go through these steps.
-    - [Secs](https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html){target=_blank}
+    - [Datasheet](https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html){target=_blank}
 
 ### Mellanox
 
 You can pick up used Mellanox infiniband switches for pretty cheap.
+
+!!! warning
+    The unmanaged switches are drastically cheaper for a reason.
+
+    They **REQUIRE** an external subnet manager. AFAIK, they are also infiniband-mode only.
+
+    For- these reasons, only links to the MANAGED switches are included.
+
+    The models ending with an odd-number are unmanaged.
 
 #### Mellanox SX6036
 - **Price:** $75-150 average
@@ -228,7 +405,19 @@ You can pick up used Mellanox infiniband switches for pretty cheap.
     - As I do not own one of these- I cannot give more details.
 - **Links**:
     - [Ebay](https://ebay.us/pcaJgV){target=_blank}
-    - [Secs](https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf){target=_blank}
+    - [Specs](https://www.netsolutionworks.com/datasheets/Mellanox_SX6036_SpecSheet.pdf){target=_blank}
+    - [Datasheet](https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf){target=_blank}
+    - [Storage Review](https://www.storagereview.com/review/mellanox-sx6036-56gb-infiniband-switch-review){target=_blank}
+
+#### Other Models
+
+* [SX1036 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX1036_SpecSheet.pdf){target=_blank}
+* [SX6005 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6005_SpecSheet.pdf){target=_blank}
+* [SX6012 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6012_SpecSheet.pdf){target=_blank}
+* [SX6015 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6015_SpecSheet.pdf){target=_blank}
+* [SX6018 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6018_SpecSheet.pdf){target=_blank}
+* [SX6025 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6025_SpecSheet.pdf){target=_blank}
+* [SX6036 Brief](../../../../assets/pdfs/mellanox/Mellanox_SX6036_SpecSheet.pdf){target=_blank}
 
 ### Unifi
 
@@ -243,6 +432,7 @@ I generally recommend buying these from Unifi.
 - **Notes:**
     - 8 port layer 2 10G Switch. Silent.
     - My switch with all 8 ports in use, with either fiber modules, or DACs, uses around 10w average.
+    - A solid layer 2 switch.
 - **Links**:
     - [Unifi](https://store.ui.com/us/en/products/usw-aggregation){target=_blank}
     - [Amazon](https://amzn.to/3BnGbyA){target=_blank}
@@ -250,7 +440,12 @@ I generally recommend buying these from Unifi.
 #### Unifi USW-Pro-Aggregation
 - **Price:** $899
 - **Capabilities:**
-    - 28x 10G SFP+ + 4x 25G SFP+
+    - 28x 10G SFP+
+    - 4x 25G SFP+
+        - **NOTE**: Does not support mixed speed!! All of these ports must run at the same speed. 
+        - Either- all four are 25G, or all four are 10G. 
+        - Mixed speed is supported for 10G or below.
+        - This means, you CANNOT run 2x 25G, and 2x 10G. They will instead run at 4x 10G.
 - **Notes:**
     - 32 port "layer 3" switch.
     - I **STRONGLY** do not recommend buying a Unifi switch, for its layer 3 capabilities. If you buy this switch, Then consider it a layer 2 switch.
@@ -268,6 +463,8 @@ I generally recommend buying these from Unifi.
     [Documentation on ETH/IB Mode](../2023/2023-01-23-ConnectX3-PortMode.md)
 
 ## Disclaimers
+
+--8<--- "docs/snippets/non-sponsored.md"
 
 --8<--- "docs/snippets/amazon-affiliate.md"
 
