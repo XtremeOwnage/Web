@@ -120,38 +120,22 @@ Notes:
 - Data used from manufacturer spec-sheets when possible.
 - Footnotes are included for additional context.
 
-|Manufacturer|Model              |Layer 3  |Max Speed|RJ45   |SFP|SFP+  |QSFP+|Multigig|Noise          |Power      |POE|Price |
-|------------|-------------------|---------|---------|-------|---|------|-----|--------|---------------|-----------|---|------|
-|Brocade     |ICX 6450-24        |Yes      |10G      |24     |-  |4     |-    |No      |37.9 dBA       |20-37w     |No |eBay  |
-|Brocade     |ICX 6450-24P       |Yes      |10G      |24     |-  |4     |-    |No      |39.2 dBA       |21-400w[^14]|Yes|eBay  |
-|Brocade     |ICX 6450-48        |Yes      |10G      |48     |-  |4     |-    |No      |37.2 dBA       |30-55w     |No |eBay  |
-|Brocade     |ICX 6450-48P       |Yes      |10G      |48     |-  |4     |-    |No      |55.5 dBA       |31-776w[^14]|Yes|eBay  |
-|Brocade     |ICX 6610-24        |Yes      |40G      |24     |-  |16[^15]|2[^15]|No      |39.6 - 48.7 dB |120-140w   |No |eBay  |
-|Brocade     |ICX 6610-24P       |Yes      |40G      |24     |-  |16[^15]|2[^15]|No      |39.6 - 48.7 dB |120-140w   |Yes|eBay  |
-|Brocade     |ICX 6610-48        |Yes      |40G      |48     |-  |16[^15]|2[^15]|No      |39.6 - 48.7 dB |165-185w   |No |eBay  |
-|Brocade     |ICX 6610-48P       |Yes      |40G      |48     |-  |16[^15]|2[^15]|No      |39.6 - 48.7 dB |165-185w   |Yes|eBay  |
-|Brocade     |ICX 7250-24        |Yes      |10G      |24     |-  |8     |-    |No      |41.9 dBA       |39-57w     |No |eBay  |
-|Brocade     |ICX 7250-24P       |Yes      |10G      |24     |-  |8     |-    |No      |44.7 dBA       |48-454w[^14]|Yes|eBay  |
-|Brocade     |ICX 7250-48        |Yes      |10G      |48     |-  |8     |-    |No      |44.5 dBA       |50-70w     |No |eBay  |
-|Brocade     |ICX 7250-48P       |Yes      |10G      |48     |-  |8     |-    |No      |45.9 dBA       |70-942w[^14]|Yes|eBay  |
-|Brocade     |ICX-7150-24        |Yes      |10G      |24     |-  |4     |-    |No      |Fanless        |14-24w     |No |eBay  |
-|Brocade     |ICX-7150-24P       |Yes      |10G      |24     |-  |4     |-    |No      |41.4 dBA       |32-472w[^14]|Yes|eBay  |
-|Brocade     |ICX-7150-48        |Yes      |10G      |48     |-  |4     |-    |No      |Fanless        |24-39w     |No |eBay  |
-|Brocade     |ICX-7150-48P       |Yes      |10G      |48     |-  |4     |-    |No      |41.8 dBA       |47-491w[^14]|Yes|eBay  |
-|Mikrotik    |CRS304-4XG-IN      |Yes**[^16]|10G      |1      |-  |4     |-    |Yes     |Fanless        |7-21w      |No |199$  |
-|Mikrotik    |CRS305-1G-4S+IN    |Yes**[^16]|10G      |1      |-  |4     |-    |No      |Fanless        |10-18w     |No |120$  |
-|Mikrotik    |CRS309-1G-8S+IN    |Yes**[^16]|10G      |1      |-  |8     |-    |No      |Fanless        |17-23w     |No |269$  |
-|Mikrotik    |CRS310-1G-5S-4S+IN |Yes**[^16]|10G      |1      |5  |4     |-    |No      |Nearly Silent  |8-20w      |No |199$  |
-|Mikrotik    |CRS326-4C+20G+2Q+RM|Yes**[^16]|40G      |20-24+1|-  |0-4   |2    |Yes     |36-54 dBA      |31-70w     |No |999$  |
-|Mikrotik    |CRS504-4XQ-IN      |Yes**[^16]|100G     |-      |-  |-     |4[^12]|Yes     |Nearly Silent  |11-41w     |No |650$  |
-|Mikrotik    |CRS510-8XS-2XQ-IN  |Yes**[^16]|100G     |1      |-  |8     |2    |Yes     |Silent - 40 dBA|15-45w     |No |999$  |
-|Mikrotik    |CRS518-16XS-2XQ-RM |Yes**[^16]|100G     |1      |-  |16[^17]|2[^12]|No      |Nearly Silent  |15-95w     |No |1,595$|
-|Mikrotik    |CSS318-16G-2S+IN   |No       |10G      |16     |-  |2     |-    |No      |Fanless        |10-13w     |No |139$  |
-|Mikrotik    |CSS610-8G-2S+IN    |No       |10G      |8      |-  |2     |-    |No      |Fanless        |5-11w      |No |110$  |
-|Unifi       |USW-Aggregation    |No       |10G      |-      |-  |8     |-    |No      |Silent?        |10-30w     |No |269$  |
-|Unifi       |USW-Pro-Aggregation|Yes**[^18]|25G      |-      |-  |32    |-    |No      |Unknown        |?? - 100w  |No |899$  |
+{{ read_csv('assets-faster-networking/switches.csv') }}
 
+[^10]:
+    Unmanaged Infiniband Switch.
 
+    REQUIRES external subnet manager.
+
+    Does not support ethernet mode to my knowledge.
+
+    Do not buy these, unless you know EXACTLY what you are purchasing.
+[^11]:
+    56Gb when running in Infiniband Mode.
+
+    Supports 1/10/40G in ethernet mode.
+
+    Note- IPoIB packets are processed by the CPU of the host typically- Do not recommend using IPoIB.
 [^12]:
     This Mikroktik switch can support various speed configurations.
     
