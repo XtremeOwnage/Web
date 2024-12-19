@@ -406,6 +406,13 @@ These are best acquired from eBay, or other resellers.
 
 You can pick up used Mellanox infiniband switches for pretty cheap.
 
+!!! warning
+    The unmanaged switches are drastically cheaper for a reason.
+
+    They **REQUIRE** an external subnet manager. AFAIK, they are also infiniband-mode only.
+
+    For- these reasons, only links to the MANAGED switches are included.
+
 #### Mellanox SX6036
 - **Price:** $75-150 average
 - **Capabilities:**
@@ -416,7 +423,9 @@ You can pick up used Mellanox infiniband switches for pretty cheap.
     - As I do not own one of these- I cannot give more details.
 - **Links**:
     - [Ebay](https://ebay.us/pcaJgV){target=_blank}
-    - [Secs](https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf){target=_blank}
+    - [Specs](https://www.netsolutionworks.com/datasheets/Mellanox_SX6036_SpecSheet.pdf){target=_blank}
+    - [Datasheet](https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf){target=_blank}
+    - [Storage Review](https://www.storagereview.com/review/mellanox-sx6036-56gb-infiniband-switch-review){target=_blank}
 
 ### Unifi
 
