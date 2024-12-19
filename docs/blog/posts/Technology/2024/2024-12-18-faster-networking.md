@@ -98,7 +98,7 @@ Please keep in mind, compatible speeds for a given network adapter.
 
 100G NICs, can generally support anything less.
 
-If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP to SFP+ Adapter.
+If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP+ to SFP+ Adapter.
 
 NONE of the listed NICs supports "Multi-gig", aka, 2.5G or 5G. You can, however, acquire SFP+ modules which may work.    This post is for 10G or faster, as such, no options for 2.5G / 5G are listed.
 
