@@ -15,10 +15,10 @@ Brocade,ICX-7150-24,Yes,10G,24,-,4,-,No,Fanless,14-24w,No,eBay
 Brocade,ICX-7150-24P,Yes,10G,24,-,4,-,No,41.4 dBA,32-472w[^14],Yes,eBay
 Brocade,ICX-7150-48,Yes,10G,48,-,4,-,No,Fanless,24-39w,No,eBay
 Brocade,ICX-7150-48P,Yes,10G,48,-,4,-,No,41.8 dBA,47-491w[^14],Yes,eBay
-Mellanox,SX6036,Yes,40/56G[^11],-,-,-,36,No,Unknown,?? - 231w,No,eBay
-Mellanox,SX1036,Yes,40/56G[^11],-,-,-,36,No,Unknown,??,No,eBay
-Mellanox,SX6012,Yes,40/56G[^11],-,-,-,12,No,Unknown,28w - ??,No,eBay
-Mellanox,SX6018,Yes,40/56G[^11],-,-,-,18,No,Unknown,??,No,eBay
+Mellanox,SX6036,Yes,40/56G[^11],2,-,-,36,No,Unknown,?? - 231w,No,eBay
+Mellanox,SX1036,Yes,40/56G[^11],1,-,-,36,No,Unknown,78 - 100w?,No,eBay
+Mellanox,SX6012,Yes,40/56G[^11],1,-,-,12,No,Unknown,28w - ??,No,eBay
+Mellanox,SX6018,Yes,40/56G[^11],2,-,-,18,No,Unknown,??,No,eBay
 Mellanox,SX6005[^10],No,56G IB Only,-,-,-,12,No,Unknown,??,No,eBay
 Mellanox,SX6015[^10],No,56G IB Only,-,-,-,18,No,Unknown,??,No,eBay
 Mellanox,SX6025[^10],No,56G IB Only,-,-,-,36,No,Unknown,??,No,eBay
