@@ -80,13 +80,13 @@ Please keep in mind, compatible speeds for a given network adapter.
 
 If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP+ to SFP+ Adapter.
 
-NONE of the listed NICs supports "Multi-gig", aka, 2.5G or 5G. You can, however, acquire SFP+ modules which may work.    This post is for 10G or faster, as such, no options for 2.5G / 5G are listed.
+Only NICs which specify "Multi-Gig" are capable of 2.5G, or 5G. (TP-Link NICs & Intel i226 are the only NICs flagged at this time)
 
 56Gbit/s is infiniband only, and only applies when running a Mellanox NIC, in IB mode, when connected to a supported infiniband switch.
 
 Mellanox Infiniband NICs (Every one of the listed Mellanox NICs) can be ran in either ethernet mode (where they behave like a normal NIC), or Infiniband mode. I strongly recommend ETH mode. [Guide: Switch Port Mode](../2023/2023-01-23-ConnectX3-PortMode.md){target=_blank}
 
-I personally prefer Mellanox NICs.
+I personally prefer Mellanox NICs. In my experiences, these are the best bang for the buck, are generally really cheap, plug and play, and have been extremely reliable.
 
 In my experiences, Intel, Mellonax, and Chelsio have all been plug and play with both Linux and Windows.
 
