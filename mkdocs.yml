@@ -167,21 +167,3 @@ extra:
       link: https://static.xtremeownage.com/
     - icon: fontawesome/solid/rss
       link: /feed_rss_created.xml
-  analytics:
-    provider: google
-    property: G-MGFPTX2F2H
-    feedback:
-      title: Did you find this content helpful? Let me know.
-      ratings:
-        - icon: material/emoticon-happy-outline
-          name: I like this content
-          data: 1
-          note: Thanks for your feedback!
-        - icon: material/emoticon-neutral-outline
-          name: I am neutral
-          data: 0
-          note: Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
-          name: I did not like this content
-          data: -1
-          note: Thanks for your feedback!
