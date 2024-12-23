@@ -159,10 +159,8 @@ extra:
       link: https://github.com/XtremeOwnageDotCom
     - icon: fontawesome/brands/discord
       link: /discord
-    #- icon: fontawesome/brands/facebook
-    #  link: https://www.facebook.com/XtremeOwnage
-    # - icon: fontawesome/brands/twitter
-    #   link: https://twitter.com/denysdovhan
+    - icon: fontawesome/brands/reddit
+      link: https://www.reddit.com/r/HTTP_404_NotFound
     - icon: fontawesome/solid/globe
       link: https://static.xtremeownage.com/
     - icon: fontawesome/solid/rss
