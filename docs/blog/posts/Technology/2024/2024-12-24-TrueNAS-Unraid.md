@@ -8,7 +8,7 @@ tags:
 
 ---
 
-# Debugging DDNS for Unifi
+# My history with Unraid & TrueNAS
 
 I have swapped between Unraid, and TrueNAS a few times over the years.
 
