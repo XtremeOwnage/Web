@@ -2,6 +2,9 @@ name: Build Docs - DEV
 on:
   workflow_dispatch:
   push:
+    branches-ignore:
+      - main
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
