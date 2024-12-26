@@ -80,7 +80,9 @@ Unraid Pros:
     - Unraid's built in array, is the most power efficient option, for write-once, read-many. See [Power Efficient Storage](#power-efficient-storage)
 6. A nice app store. (Use both- and you will know what I mean)
 7. ACLs that aren't a PITA. [Google: "Reddit TrueNAS ACLs"](https://www.google.com/search?q=reddit+truenas+ACLs){target=_blank}
-    - Seriously- Unraid's ACLs are very, very easy. They just work. TrueNAS- takes a bit more effort. They- aren't nearly as powerful, but, for a simple NAS, thats OK.
+    - Seriously- Unraid's ACLs are very, very easy. They just work. TrueNAS- takes a bit more effort.
+    - TrueNAS hands down has much more powerful ACLs, but- for most home uses- the simple ACLs used by Unraid, is PERFECTLY acceptable.
+    - Think about it- how many of our labs have more then a single user?
 8. Need more storage? Add a disk. 
     - Size does not need to match. As long as the parity disk is equal or larger in size, you can expand the array.
 
