@@ -97,6 +97,8 @@ First- this will download the script, and open in an editor.
 
     Even if you trust me- I don't control what happens between my server, and you. Always analyze scripts.
 
+This can be copy and pasted directly into a terminal.
+
 ``` bash
 SCRIPT_FILENAME=/tmp/setup-git-sync
 curl https://static.xtremeownage.com/blog/Technology/2024/assets/edgemax-install-script.sh > $SCRIPT_FILENAME
