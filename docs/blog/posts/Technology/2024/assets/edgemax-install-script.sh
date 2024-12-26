@@ -1,15 +1,14 @@
 #!/bin/vbash
 
+# Update this to point at YOUR git server.
+GIT_SERVER=gitea@gitea.yourdomain.com:youruser/yourrepo.git
+
 source /opt/vyatta/etc/functions/script-template
 
-# --8<-- [start:config]
-GIT_SERVER=gitea@gitea.yourdomain.com:youruser/yourrepo.git
-# --8<-- [end:config]
-
-# This is where the git repo will be stored.
+# This is where the git repo will be stored. You can customize this, if you like.
 LOCAL_REPO_PATH="/root/backup"
 
-# This is the path of the ssh key we will save.
+# This is the path of the ssh key we will save. You can customize this, if you like.
 SSH_KEYFILE="/config/user-data/id_rsa"
 
 

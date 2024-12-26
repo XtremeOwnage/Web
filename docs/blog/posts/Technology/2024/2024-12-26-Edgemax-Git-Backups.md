@@ -77,10 +77,11 @@ Thats, basically it.
 
 The entire script is [LOCATED HERE](./assets/edgemax-install-script.sh)
 
-You will need to modify ONE line
+You will need to modify ONE line. It is at the very top of the script.
 
 ``` bash title="edgemax-install-script.sh"
---8<-- "assets/edgemax-install-script.sh:config"
+# Update this to point at YOUR git server.
+GIT_SERVER=gitea@gitea.yourdomain.com:youruser/yourrepo.git
 ```
 
 No other changes are needed.
