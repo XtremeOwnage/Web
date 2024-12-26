@@ -2,9 +2,16 @@
 
 source /opt/vyatta/etc/functions/script-template
 
-SSH_KEYFILE="/config/user-data/id_rsa"
+# --8<-- [start:config]
 GIT_SERVER=gitea@gitea.yourdomain.com:youruser/yourrepo.git
+# --8<-- [end:config]
+
+# This is where the git repo will be stored.
 LOCAL_REPO_PATH="/root/backup"
+
+# This is the path of the ssh key we will save.
+SSH_KEYFILE="/config/user-data/id_rsa"
+
 
 ###########################################################################
 ###### Title: Ensure Directories are created
@@ -75,12 +82,12 @@ echo -e "\n\n\n"
 
 # Display the public key
 echo "Please add the above public key to the security configuration for $GIT_SERVER"
-
+echo "You can also press CTRL+C to stop execution of this script."
 
 # Pause and prompt the user to update their configuration
 read -p "Press Enter to continue after you have added the public key to $GIT_SERVER..."
 
-echo "Continuing with the script...\r"
+echo -e "Continuing with the script...\r"
 
 ###########################################################################
 ###### Title: Update Configuration - Set Package Repository
