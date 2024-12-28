@@ -37,7 +37,7 @@ Well, lets go through the process of adding a static route to a unifi layer 3 sw
 
 First, create your route through the Unifi's Static routes page. Make sure to click DeviceType: Switch, and select your Layer 3 switch.
 
-![alt text](./assets-unifi-layer3/unifi-add-route.png)
+![alt text](./assets-unifi-layer3/unifi-add-route.webP)
 
 Afterwards, wait a second for your device to provision.
 
@@ -101,7 +101,7 @@ The short version, If you want to use a Unifi "layer 3" switch behind your exist
 
 And no, per Unifi, you cannot change the VLAN ID.
 
-![alt text](./assets-unifi-layer3/cannot-change-4040.png)
+![alt text](./assets-unifi-layer3/cannot-change-4040.webP)
 
 Even if you have a Unifi UDM/UXG/Other Gateway- this default route, and vlan will always exist, on every Unifi Layer 3 switch you have.
 
@@ -134,7 +134,7 @@ default via 10.255.253.1 dev rt_v4040  proto icos  metric 16
 
 Imagine picking up a 400$ layer 3 unifi switch, and being excited to get all of your routes for your network configured.... and then....
 
-![alt text](./assets-unifi-layer3/max-routes-2.png)
+![alt text](./assets-unifi-layer3/max-routes-2.webP)
 
 You discover, there is a limitation of **TWO** static routes. Rights right, Two.
 
@@ -367,13 +367,13 @@ This is a case of a  limitation, which will likely be released as a feature in t
 
 So, when you are creating a network on a UXG/UDM/etc.... You have quite a few features.
 
-![alt text](./assets-unifi-layer3/create-network-uxg.png)
+![alt text](./assets-unifi-layer3/create-network-uxg.webP)
 
 But, When you decide that you want to use that fancy 10 gig layer 3 switch to speed up traffic a bit... 
 
 You will notice a few features disappear.
 
-![alt text](./assets-unifi-layer3/create-network-switch.png)
+![alt text](./assets-unifi-layer3/create-network-switch.webP)
 
 Notably, you lose the ability to configure any form of IPv6. No SLAAC, No DHCP-v6, No prefix delegation. Nothing.
 
@@ -387,16 +387,16 @@ I'd guess, one day years from now, a feature update will include "IPv6 Support" 
 
 As of 2024-07-19, the front page advertises this as a "Layer 3" switch, with "Layer 3 switching"
 
-![alt text](./assets-unifi-layer3/usw-pro-24-sales-page.png)
+![alt text](./assets-unifi-layer3/usw-pro-24-sales-page.webP)
 
 Under Technical Specifications, it lists "Static routing between local networks"
 
-![alt text](./assets-unifi-layer3/unifi-static-routing-subnets.png)
+![alt text](./assets-unifi-layer3/unifi-static-routing-subnets.webP)
 
 
 Unifi's [Layer 3 Routing Documentation](https://help.ui.com/hc/en-us/articles/360042281174-Layer-3-Routing){target=_blank}
 
-![alt text](./assets-unifi-layer3/layer-3-routing-static-routing.png)
+![alt text](./assets-unifi-layer3/layer-3-routing-static-routing.webP)
 
 
 ## How DOES Unifi's "Layer 3" work?
@@ -405,13 +405,13 @@ When you use Unifi, It will form a star topology network.
 
 This- does not change regardless of the number of layer 2 switches in your deployment.
 
-![alt text](./assets-unifi-layer3/star-topology.png)
+![alt text](./assets-unifi-layer3/star-topology.webP)
 
 This- meaning, every client's packets, will be routed by the central gateway / udm / uxg / etc.
 
 When you decide to add a unifi layer 3 switch, and host networks on it, you end up with a extended star topology for your **layer 3** routing.
 
-![alt text](./assets-unifi-layer3/extended-star.png)
+![alt text](./assets-unifi-layer3/extended-star.webP)
 
 Clients will send their packets through their assigned layer 3 switch. The switch will then route those packets to either other networks hosted by the switch..
 
@@ -432,7 +432,7 @@ Typically, in most enterprise networks, you have a "Core Network" which consists
 
 While, this is a pretty minor compliant- You cannot enable SNMP on the UXG-Lite via the Unifi interface.
 
-![alt text](./assets-unifi-layer3/no-snmp-uxg.png)
+![alt text](./assets-unifi-layer3/no-snmp-uxg.webP)
 
 Although, you can enable it manually pretty easily. It just will not persist across reboots.
 
@@ -481,17 +481,17 @@ There is no way, you can view, anywheres near a live-traffic view for debugging 
 
 Sure, you can look at switch insights... But, this data is all aggregated, and does not update frequently.
 
-![alt text](./assets-unifi-layer3/switch-insights.png)
+![alt text](./assets-unifi-layer3/switch-insights.webP)
 
 Meanwhile, compared to my Mikrotik, which updates every piece of data in the entire interface... every half second...
 
 (Granted- this is a flat picture, which doesn't show updates.... But- know, those values update every half second or so.)
 
-![alt text](./assets-unifi-layer3/mikrotik-fast-upates.png)
+![alt text](./assets-unifi-layer3/mikrotik-fast-upates.webP)
 
 The best option you have, for getting any form of "Useful" diagnostics from Unifi- is by using a monitoring tool... Nagios, Zabbix, LibreNMS, etc.
 
-![alt text](./assets-unifi-layer3/librenms-interface-traffic.png)
+![alt text](./assets-unifi-layer3/librenms-interface-traffic.webP)
 
 Honestly, I am not kidding. I have to use a 3rd party tool to get any USEFUL metrics from Unifi.
 
@@ -499,11 +499,11 @@ Going back to my [Packet Loss](./2024-07-10-packet-loss.md) issue, One of the it
 
 So, Mikrotik RouterOS makes it easy to view TX/RX drops...
 
-![alt text](./assets-unifi-layer3/mikrotik-drops.png)
+![alt text](./assets-unifi-layer3/mikrotik-drops.webP)
 
 Mikrotik's SwOS also makes it easy to view Drops/Pauses/Issues.
 
-![alt text](./assets-unifi-layer3/swos-drops.png)
+![alt text](./assets-unifi-layer3/swos-drops.webP)
 
 So, one would think, it shouldn't be hard to do via Unifi, right?
 
@@ -512,11 +512,11 @@ Well, the ONLY stats I can find in Unifi for packet issues, is when I click one 
 !!! info
     After some googling, I did manage to find where switch-port interface stats are, at least for tx/rx drops.
 
-![alt text](./assets-unifi-layer3/unifi-ap-stats.png)
+![alt text](./assets-unifi-layer3/unifi-ap-stats.webP)
 
 Turns out- the feature DOES exist. Port Insights, Top right, Enable the columns.
 
-![alt text](./assets-unifi-layer3/unifi-switch-errors-drops.png)
+![alt text](./assets-unifi-layer3/unifi-switch-errors-drops.webP)
 
 Oddly enough those, this is the only location I can find the view the stats. You cannot just click on a device and see the packet drops/pauses.
 
