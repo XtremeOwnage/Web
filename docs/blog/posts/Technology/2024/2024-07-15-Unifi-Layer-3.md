@@ -1,4 +1,26 @@
+---
+title: "Rant: Unifi Layer 3"
+date: 2024-07-15
+tags:
+    - Networking/Unifi
+---
 
+# Rant: Unifi Layer 3 Switches
+
+I have a love-hate relationship with Unifi.
+
+One of the things I absolutely hate about Unifi, is their "Layer 3" switches.
+
+IMO, its a marketing gimmick, and an absolute joke.
+
+<!-- more -->
+
+!!! info
+    This post was originally written in July of 2024.
+
+    I did not get around to finishing and publishing until December 2024.
+
+    Some of my below issues have been resolved. I have left the original text, and included notes such as this where applicable.
 
 ## Why you should avoid Unifi "Layer 3" Switches
 
@@ -11,7 +33,7 @@ Well, lets go through the process of adding a static route to a unifi layer 3 sw
 !!! info
     You CAN manually add routes via the CLI. However, these will be lost whenever the switch provisions or reboots.
 
-    The switches hardware is perfectly capable, and suitable for layer 3 routing. 
+    The switches hardware is perfectly capable, and suitable for layer 3 routing.... **WHEN** you don't use the Unifi software.
 
 First, create your route through the Unifi's Static routes page. Make sure to click DeviceType: Switch, and select your Layer 3 switch.
 
@@ -66,7 +88,7 @@ Ok, so, the only route that exists, is the default "inter-vlan" routing route.
 
 Summary?
 
-You cannot add your own routes via the Unifi interface.
+This feature does not work as expected.
 
 
 ### Reason #2, Non-Configurable default "VLAN 4040" / Default Route.
@@ -339,6 +361,7 @@ S      192.168.99.0/24 [100/0] directly connected,   Null0 Discard  hw-failure
 
 So, yup. TWO static routes.
 
+This is a case of a  limitation, which will likely be released as a feature in the future.......
 
 ### Reason #4. No IPv6 when using "Layer 3" switches.
 
@@ -346,19 +369,21 @@ So, when you are creating a network on a UXG/UDM/etc.... You have quite a few fe
 
 ![alt text](./assets-unifi-layer3/create-network-uxg.png)
 
-But, When you decide that you want to use that fancy 10 gig layer 3 switch to speed up traffic a bit... You will notice quite a few features disappears.
+But, When you decide that you want to use that fancy 10 gig layer 3 switch to speed up traffic a bit... 
+
+You will notice a few features disappear.
 
 ![alt text](./assets-unifi-layer3/create-network-switch.png)
 
 Notably, you lose the ability to configure any form of IPv6. No SLAAC, No DHCP-v6, No prefix delegation. Nothing.
 
-In this case, the ability likely isn't actually implemented. However- this is something to be aware of.
-
 **This also means, NO support for IPv6 routing**
 
 IPv6 traffic can pass over layer 2 just fine. However, there is **ZERO** support for doing anything with IPv6 on this switch.
 
-### But- Unifi does not advertise these as layer-3 routing anymore.
+I'd guess, one day years from now, a feature update will include "IPv6 Support" for Layer 3 switches.
+
+### But... Those features aren't advertised!!!!
 
 As of 2024-07-19, the front page advertises this as a "Layer 3" switch, with "Layer 3 switching"
 
@@ -376,12 +401,9 @@ Unifi's [Layer 3 Routing Documentation](https://help.ui.com/hc/en-us/articles/36
 
 ## How DOES Unifi's "Layer 3" work?
 
-When you use Unifi gear, without layer 3 switches, with everything connected to your gateway, Your **layer 3** network will use a star topology.
+When you use Unifi, It will form a star topology network.
 
-!!! info
-    Just because you have a bunch of layer 2 switches, does not change this.
-
-    The keyword, in bold, is LAYER 3 topology. NOT physical, or layer 2 topology.
+This- does not change regardless of the number of layer 2 switches in your deployment.
 
 ![alt text](./assets-unifi-layer3/star-topology.png)
 
@@ -402,6 +424,11 @@ Typically, in most enterprise networks, you have a "Core Network" which consists
 ## Other Complaints about Unifi in General
 
 ### UXG-Lite "does not support SNMP"
+
+!!! notice
+    This feature has been added via software updates.
+
+    The update occurred sometime between me writing the post in July 2024, and me publishing this post, in December 2024.
 
 While, this is a pretty minor compliant- You cannot enable SNMP on the UXG-Lite via the Unifi interface.
 
@@ -441,6 +468,10 @@ Don't bother trying to set it up via Unifi. There is zero support.
     Just- don't expect it to persist.
 
 ### Real time metrics
+
+!!! info
+    Unifi added Netflow recently, in [Unifi Network Application 8.5.6](https://community.ui.com/releases/UniFi-Network-Application-8-5-6/bfa15dd8-8b58-4d40-9d83-73ebe8c9a955)
+
 
 This- is an issue I ran across recently when I was working on my [Packet Loss](./2024-07-10-packet-loss.md) issue.
 
@@ -705,6 +736,11 @@ Time Since Counters Last Cleared............... 0 day 1 hr 37 min 35 sec
 
 ### Routing - BGP/OSPF/etc.
 
+!!! info
+    Note- BGP routing WAS added recently. However, it is only supported for "Enterprise" gateways.
+
+    BGP was added in [Unifi Network Application release 8.2.93](https://community.ui.com/releases/UniFi-Network-Application-8-2-93/fce86dc6-897a-4944-9c53-1eec7e37e738){target=_blank}
+
 Unifi DID recently release [OSPF routing.](https://help.ui.com/hc/en-us/articles/12115251061143-UniFi-Gateway-OSPF-Advanced){target=_blank}
 
 And, while its a very basic implementation, it does work, mostly.
@@ -720,6 +756,5 @@ BGP- Supposedly- BGP is coming in a future update.
 > Addition of the BGP Dynamic Routing Protocol is scheduled for an upcoming release.
 
 
+
 My complaint here, It took nearly a decade before we got support for a single dynamic routing protocol.
-
-
