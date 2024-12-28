@@ -205,4 +205,4 @@ I… am a sucker for features.
 
 
 
-[^1]: Prices / Price per Kwh listed is as of December 2022
+Note- Prices / Price per Kwh listed is as of December 2022

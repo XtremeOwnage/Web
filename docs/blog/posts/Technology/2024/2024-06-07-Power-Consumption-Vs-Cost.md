@@ -107,7 +107,7 @@ Kubeo6 (i7-6700)
 
 #### R720XD vs. R730XD
 
-I used to run an R720XD, the server I built my [40G NAS Project](/pages/Projects/40G-NAS/){target=_blank} with. After many optimizations, its idle utilization WITH:
+I used to run an R720XD, the server I built my [40G NAS Project](../../../../pages/Projects/40G-NAS.md){target=_blank} with. After many optimizations, its idle utilization WITH:
 
 - 14 HDDs
 - A ton of NVMe

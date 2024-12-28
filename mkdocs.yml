@@ -3,7 +3,7 @@ site_author: XtremeOwnage
 site_url: https://Static.XtremeOwnage.com/
 site_description: Cars, Computer, and Code.
 
-copyright: 'Copyright &copy; 2024 XtremeOwnage.com'
+copyright: 'Copyright &copy; 2025 XtremeOwnage.com'
 
 # repo_url: http://git.local.xtremeownage.com:3000/eric/XOSite.git
 # repo_name: denysdovhan/smart-home
@@ -24,17 +24,17 @@ theme:
       scheme: default
       primary: grey
       accent: orange
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    # Dark mode
-    - media: '(prefers-color-scheme: dark)'
-      scheme: slate
-      primary: cyan
-      accent: cyan
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+    #   toggle:
+    #     icon: material/weather-night
+    #     name: Switch to dark mode
+    # # Dark mode
+    # - media: '(prefers-color-scheme: dark)'
+    #   scheme: slate
+    #   primary: cyan
+    #   accent: cyan
+    #   toggle:
+    #     icon: material/weather-sunny
+    #     name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -50,7 +50,10 @@ theme:
     - search.highlight
     - search.share
     # - header.autohide
-
+    - content.footnote.tooltips
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
 nav:
   - Home: index.md
   - Projects: pages/Projects/index.md
@@ -59,6 +62,7 @@ nav:
     - blog/index.md
 
 plugins:
+  - table-reader
   - meta:
       meta_file: .meta.yml
       enabled: true
@@ -81,6 +85,7 @@ plugins:
         - Development
         - Kubernetes
         - Home-Automation
+        - Home-Improvement
         - Technology
         - Solar
       pagination: true
@@ -98,12 +103,12 @@ plugins:
         # - tags 
   #- social: 
   #    enabled: false ## Needs special stuff for windows...
-  - optimize:
-      enabled: true
-      cache: true
-      optimize_png: false
-      optimize_png_strip: true
-      optimize_jpg: true
+  # - optimize:
+  #     enabled: true
+  #     cache: true
+  #     optimize_png: false
+  #     optimize_png_strip: true
+  #     optimize_jpg: true
   #- privacy:
   #    enabled: false
   #    cache: true
@@ -118,6 +123,9 @@ plugins:
   - glightbox:  ## https://github.com/blueswen/mkdocs-glightbox#usage
       touchNavigation: true
       zoomable: true
+  # - redirects:
+  #     redirect_maps:
+  #       'discord': 'https://discord.gg/DcgPVwxaPz'
 markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/extensions/tilde/
   - meta
   - toc:
@@ -137,7 +145,9 @@ markdown_extensions:    # https://facelessuser.github.io/pymdown-extensions/exte
       alternate_style: true 
   - footnotes
   - tables
-
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
 extra_css:
   - stylesheets/extra.css
 
@@ -148,30 +158,10 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/XtremeOwnageDotCom
     - icon: fontawesome/brands/discord
-      link: https://discord.gg/RkyEG3QX8R
-    #- icon: fontawesome/brands/facebook
-    #  link: https://www.facebook.com/XtremeOwnage
-    # - icon: fontawesome/brands/twitter
-    #   link: https://twitter.com/denysdovhan
+      link: /discord
+    - icon: fontawesome/brands/reddit
+      link: https://www.reddit.com/r/HTTP_404_NotFound
     - icon: fontawesome/solid/globe
       link: https://static.xtremeownage.com/
     - icon: fontawesome/solid/rss
       link: /feed_rss_created.xml
-  analytics:
-    provider: google
-    property: G-MGFPTX2F2H
-    feedback:
-      title: Did you find this content helpful? Let me know.
-      ratings:
-        - icon: material/emoticon-happy-outline
-          name: I like this content
-          data: 1
-          note: Thanks for your feedback!
-        - icon: material/emoticon-neutral-outline
-          name: I am neutral
-          data: 0
-          note: Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
-          name: I did not like this content
-          data: -1
-          note: Thanks for your feedback!

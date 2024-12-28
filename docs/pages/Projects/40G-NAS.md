@@ -49,7 +49,7 @@ Since, 10GBe just wasn’t cutting it for me, I finally got around to running 40
 
 Since the 40GB was point to point, no switches, no routers, etc, This also improved performance significantly over the 10GBe routed iscsi from previous steps.
 
-### 2022-01 [Adding "Bifurcation" to my Poweredge r720XD](./../../blog/posts/Technology/2022-01/R720XD-Bifurcation.md)
+### 2022-01 [Adding "Bifurcation" to my Poweredge r720XD](../../blog/posts/Technology/2022/R720XD-Bifurcation.md)
 
 Since, my r720XD does not support bifurcation, I found a few PCIe cards to work as switches for my NVMes. This allowed me to run many more NVMe drives rather then only being able to leverage a single NVMe per PCIe-slot.
 
