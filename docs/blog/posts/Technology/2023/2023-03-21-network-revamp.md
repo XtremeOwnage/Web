@@ -246,6 +246,7 @@ I had a few extra HDDs in my r730XD which were not in use. Despite having spin d
 
 #### Optimizing Fans - 14 watts saved
 
+
 Originally, I attempted to throttle the fans down using racadm.
 
 [Dell: Modifying thermal settings using iDrac](Dell Fan: https://www.dell.com/support/manuals/en-us/idrac9-lifecycle-controller-v3.3-series/idrac_3.30.30.30_ug/modifying-thermal-settings-using-racadm?guid=guid-af4b39bf-49c3-4f12-a20d-9488b37eeb8f&lang=en-us){target=_blank}
@@ -361,6 +362,35 @@ In addition to saving energy, this also cleaned up some room in my rack.
 
 ![](assets/2023-network-revamp/kube05-replaced.webP)
 
+
+## Firewall / Opnsense Updates
+
+During this update, I wanted to improve the overall security, AND reliability of my home network as well. 
+
+In the event the primary firewall is down, everything internal to my network should still work.
+
+### Replacing HP Z240 with Optiplex 3060m - 40 watts saved
+
+Since- all of the 10G routing is now handled by the Brocade, and all internal routing is handled between the switches/routers- I no longer need a firewall with full 10G connectivity.
+
+I only pay for 500 down/100 up WAN. 
+
+So- I replaced the HP Z240, with a optiplex 3060m. 
+
+Specs:
+* i5-8500t
+* 8Gb DDR4 RAM.
+* 256G NVMe.
+
+This box, is nothing special. However, it idles around 10 watts and has more then enough power for processing its traffic.
+
+It is responsible for:
+1. Primary WAN firewall
+2. NAT
+3. Primary DNS server
+4. VPN
+5. Primary NTP server
+=======
 ## Firewall Updates
 
 ### Replacing Opnsense Hardware - 31 watts saved
@@ -394,6 +424,7 @@ Another benefit of this approach, when updating/rebooting the primary firewall, 
 OSPF is leveraged between Opnsense, the Edgerouter, and the Brocade for distributing routes. Each device announces its own subnets, and redistributes to the other devices.
 
 As such, adding/removing vlans/subnets is quite easy. 
+
 
 ## Overall?
 
