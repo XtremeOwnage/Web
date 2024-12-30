@@ -14,3 +14,5 @@
     If you see a product linked on my blog, It means I paid for it out of my pocket, for my own personal uses, unless otherwise noted.
 
     This blog exists for the sole reason, of documenting my various projects and experiences, to share with others.
+
+    If, you do not wish to use the links, you are under no obligation to click them.
