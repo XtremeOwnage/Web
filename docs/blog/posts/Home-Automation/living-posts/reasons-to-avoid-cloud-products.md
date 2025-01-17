@@ -320,6 +320,21 @@ I personally keep all of my IOT devices 100% isolated from the internet, and the
 * <https://mashable.com/article/tesla-api-pricing>
 * <https://developer.tesla.com/docs/fleet-api/billing-and-limits>
 
+#### Bambu - Limiting 3rd party access. 
+
+This- is not specifically cloud- as these products are locally accessed and controlled, however, I feel it deserves a spot on this list.
+
+* <https://blog.bambulab.com/firmware-update-introducing-new-authorization-control-system-2/>
+
+This firmware update will make it to where many actions requires authorization in order to be executed.
+
+Not- YOUR authorization, but, "Official" authorization.
+
+Have a 3d printing dashboard in home assistant, where you have buttons to start/stop printing, etc?
+
+More or less- you are about to lose the ability to set/write anything to your Bambu products.
+
+Yet another reason to look for user-servicable firmware.
 
 ## On-Going Issues
 
