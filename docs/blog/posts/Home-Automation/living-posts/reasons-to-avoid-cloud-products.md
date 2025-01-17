@@ -325,6 +325,7 @@ I personally keep all of my IOT devices 100% isolated from the internet, and the
 This- is not specifically cloud- as these products are locally accessed and controlled, however, I feel it deserves a spot on this list.
 
 * <https://blog.bambulab.com/firmware-update-introducing-new-authorization-control-system-2/>
+* <https://github.com/greghesp/ha-bambulab/issues/833#issuecomment-2596570305>
 
 This firmware update will make it to where many actions requires authorization in order to be executed.
 
