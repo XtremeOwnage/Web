@@ -8,7 +8,7 @@ tags:
 
 # Guide: Migrate from Virtualbox to Proxmox
 
-Just a short guide on how to migrate a VM from Virtualbox on windows, to Proxmox.
+Just a short guide on how to migrate a VirtualBox VM on Windows, to Proxmox.
 
 <!-- more -->
 
