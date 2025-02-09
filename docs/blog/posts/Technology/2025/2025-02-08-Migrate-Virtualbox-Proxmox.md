@@ -1,6 +1,6 @@
 ---
-title: Edgemax - Git Backups
-date: 2024-12-26
+title: Migrate from Virtualbox to Proxmox
+date: 2025-02-08
 tags:
     - Homelab
     - Proxmox

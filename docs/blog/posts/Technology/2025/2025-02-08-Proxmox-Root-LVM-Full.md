@@ -1,6 +1,6 @@
 ---
-title: Proxmox - Delete data pool
-date: 2024-12-26
+title: Proxmox - Delete pve/data pool
+date: 2025-02-08
 tags:
     - Homelab
     - Proxmox
