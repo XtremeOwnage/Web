@@ -20,11 +20,11 @@ tmpfs                                  26G   21M   26G   1% /run
 
 Confused because your boot disk is much larger in size?
 
-![alt text](./assets-proxmox-lvm/proxmox-actual-size.png)
+![alt text](./assets-proxmox-lvm/proxmox-actual-size.webP)
 
 Well, its because Proxmox by default, partitions the root disk with LVM, Regardless if you are using it to store data.
 
-![alt text](./assets-proxmox-lvm/empty-data-lvm.png)
+![alt text](./assets-proxmox-lvm/empty-data-lvm.webP)
 
 This post detail completely removing the data partition and extending the root partition
 

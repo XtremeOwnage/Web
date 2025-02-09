@@ -56,39 +56,39 @@ Ignore... the exception... Powershell does very odd things with stderr.
 
 No, special configurations are needed.
 
-![alt text](./assets-vbox-migrate/create-vm-1.png)
+![alt text](./assets-vbox-migrate/create-vm-1.webP)
 
 Do not use attach any boot media.
 
-![alt text](./assets-vbox-migrate/create-vm-2.png)
+![alt text](./assets-vbox-migrate/create-vm-2.webP)
 
 Nothing special needed here.
 
-![alt text](./assets-vbox-migrate/create-vm-3.png)
+![alt text](./assets-vbox-migrate/create-vm-3.webP)
 
 For disks- remove the default disk created. We will manually attach a disk via CLI.
 
-![alt text](./assets-vbox-migrate/create-vm-4.png)
+![alt text](./assets-vbox-migrate/create-vm-4.webP)
 
 Nothing special needed on CPU. Allocate cores as needed.
 
-![alt text](./assets-vbox-migrate/create-vm-5.png)
+![alt text](./assets-vbox-migrate/create-vm-5.webP)
 
 For memory, I personally always disable ballooning.
 
-![alt text](./assets-vbox-migrate/create-vm-memory.png)
+![alt text](./assets-vbox-migrate/create-vm-memory.webP)
 
 For network, I am not going to specify a NIC at this time. You can specify network as needed for your use-cases.
 
-![alt text](./assets-vbox-migrate/create-vm-network.png)
+![alt text](./assets-vbox-migrate/create-vm-network.webP)
 
 On the confirm screen, make sure "Start after created" is not checked.
 
-![alt text](./assets-vbox-migrate/create-vm-confirm.png)
+![alt text](./assets-vbox-migrate/create-vm-confirm.webP)
 
 You now have a new VM, without any storage, in a stopped state.
 
-![alt text](./assets-vbox-migrate/create-vm-done.png)
+![alt text](./assets-vbox-migrate/create-vm-done.webP)
 
 ## Step 3. Migrate the .IMG to Proxmox
 
@@ -118,7 +118,7 @@ root@kube02:~# qemu-img convert -f raw -O qcow2 /mnt/pve/ISOs/DiskImage.img NewI
 
 If... you are using a remote mounted share- it will have to read over the network. According to Unraid, it was reading around 2g/s.
 
-![alt text](./assets-vbox-migrate/unraid-read.png)
+![alt text](./assets-vbox-migrate/unraid-read.webP)
 
 QCow2 stands for QEMU, Copy on Write... It supports compression, snapshots, thin-provisioning, and a few other nice features.
 
@@ -162,11 +162,11 @@ unused0: successfully imported disk 'ceph-block:vm-144-disk-0'
 
 For me, this step took... about one minute. Ceph averaged 300-500MB/s
 
-![alt text](./assets-vbox-migrate/ceph-speed.png)
+![alt text](./assets-vbox-migrate/ceph-speed.webP)
 
 In proxmox, you will now see the new disk.
 
-![alt text](./assets-vbox-migrate/proxmox-new-disk.png)
+![alt text](./assets-vbox-migrate/proxmox-new-disk.webP)
 
 ## Step 5. Configure VM
 
@@ -176,20 +176,20 @@ Set your desired bus, and settings, then click add.
 
 I always use VirtIO when possible, as this provides the best performance using para-virtualized drivers.
 
-![alt text](./assets-vbox-migrate/Edit-Disk.png)
+![alt text](./assets-vbox-migrate/Edit-Disk.webP)
 
 The disk will now show attached.
 
-![alt text](./assets-vbox-migrate/disk-attached.png)
+![alt text](./assets-vbox-migrate/disk-attached.webP)
 
 Now, set the boot options. By default, it is set to ide2 (cd-rom drive). You can uncheck this, and select the new disk.
 
-![alt text](./assets-vbox-migrate/set-boot-options.png)
+![alt text](./assets-vbox-migrate/set-boot-options.webP)
 
 ## Step 6. Start VM / Done.
 
 At this point, you can start the VM, and everything should work.
 
-![alt text](./assets-vbox-migrate/vm-running.png)
+![alt text](./assets-vbox-migrate/vm-running.webP)
 
 Congratulations, you have successfully migrated your Virtualbox VM to Proxmox.
