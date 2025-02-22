@@ -38,7 +38,7 @@ The NIC being tested is a Mellanox ConnectX-4 CX-416A 100GBe Dual Port NIC [eBay
 
 For measuring power consumption, I will be using my [Vertiv rPDU](../2024/2024-08-09-vertiv-giest-pdu.md){target=_blank}
 
-I will be collecting the historical data using [rPDU2MQTT](https://github.com/XtremeOwnage/rPDU2MQTT){target=_blank}, which will insert into emoncms.
+I will be collecting data using [rPDU2MQTT](https://github.com/XtremeOwnage/rPDU2MQTT){target=_blank}, which will insert into emoncms at a 10 second interval.
 
 !!! info
     rPDU2MQTT is a project I have been **SLOWLY** working on for a while.
