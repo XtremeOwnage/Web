@@ -222,7 +222,7 @@ And- watching HTOP for anything unexpected.
 For the baseline test- we have an idle system, with the NIC running at 100G.
 
 ``` bash
-root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
+root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed && uptime
         Speed: 100000Mb/s
  12:20:26 up  1:38,  2 users,  load average: 0.10, 0.07, 0.14
 ```
@@ -276,7 +276,7 @@ After, configuring the servers, I verified at the switch we had the expected ban
 ### 40G
 
 ``` bash
-root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
+root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed && uptime
         Speed: 40000Mb/s
  12:30:07 up  1:48,  2 users,  load average: 0.11, 0.05, 0.08
 ```
@@ -300,7 +300,7 @@ Verifying expected bandwidth via switch.
 ### 25G
 
 ``` bash
-root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
+root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed && uptime
         Speed: 25000Mb/s
  12:42:01 up  2:00,  2 users,  load average: 0.05, 0.05, 0.07
 ```
@@ -325,7 +325,7 @@ Verifying bandwidth...
 ### 10G
 
 ``` bash
-root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
+root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed && uptime
         Speed: 10000Mb/s
  12:55:52 up  2:13,  2 users,  load average: 0.01, 0.03, 0.05
 ```
@@ -350,7 +350,7 @@ Verify bandwidth...
 ### 1G
 
 ``` bash
-root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
+root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed && uptime
         Speed: 1000Mb/s
  13:13:00 up  2:31,  2 users,  load average: 0.04, 0.05, 0.04
 ```
