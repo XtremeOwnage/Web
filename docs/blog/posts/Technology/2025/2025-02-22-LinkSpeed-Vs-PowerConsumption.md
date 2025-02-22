@@ -19,16 +19,20 @@ For this post- I will benchmark and determine the impact.
 
 <!-- more -->
 
-## TLDR;
+??? note "TLDR/Spoiler (Click to Expand)"
+    ## TLDR;
 
-There is a 6% difference in idle consumption between 100G, and 1G link speed.
+    There is a 6% difference in idle consumption between 100G, and 1G link speed.
 
-A total of 3 watts difference.
+    A total of 3 watts difference.
 
-Under full network utilization, there was a 14.2% difference between 100G, and 1G link speed.
+    Under full network utilization, there was a 14.2% difference between 100G, and 1G link speed.
 
-A total of 7.8 watts difference.
+    A total of 7.8 watts difference.
 
+    If- you want more detailed results, Skip straight to [The Results](#testing-results)
+
+    Otherwise- stay tuned..
 
 ## Test Fixture
 
