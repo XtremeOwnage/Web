@@ -253,7 +253,7 @@ root@kube01:~#  ethtool enp1s0f0np0  | grep -i speed
         Speed: 50000Mb/s
 root@kube01:~# uptime
  11:35:53 up 53 min,  3 users,  load average: 0.22, 0.29, 0.66
- ```
+```
 
  After changing the link speed to 50G, ensuring we were at a near-idle state, I waited a while to capture data.
 
