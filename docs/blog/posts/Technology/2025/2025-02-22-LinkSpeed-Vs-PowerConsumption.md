@@ -63,7 +63,7 @@ I am aiming for around 25 to 30 datapoints for each test, which is around 4-5 mi
 
 2. Load
     - Idle Load, with no workflows active, no VMs running.
-    - Full Tilt, with iperf running continuous mode saturating available bandwidth.
+    - Full Tilt, saturated network bandwidth (at the current link speed)
 
 !!! info
     Originally, I planned on including 2.5g, and 5g, however- my CX-4 nics do not support this.
