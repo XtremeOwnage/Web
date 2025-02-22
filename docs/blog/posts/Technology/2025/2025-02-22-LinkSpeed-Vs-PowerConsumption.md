@@ -72,7 +72,7 @@ I am aiming for around 25 to 30 datapoints for each test, which is around 4-5 mi
 
 I am setting link speed on my switch- by changing the advertised speeds. Quick and easy.
 
-![alt text](./assets-linkspeed-power/switch-speed-advertisement.png)
+![alt text](./assets-linkspeed-power/switch-speed-advertisement.webP)
 
 #### Generating Network Load - Using RDMA
 
@@ -90,21 +90,21 @@ root@kube05:~# iperf -c 10.100.4.100 -t 5000 -i 5 -P 4
 
 NIC is consistently saturated at 90Gbits, reported by the switch.
 
-![alt text](./assets-linkspeed-power/iperf-running.png)
+![alt text](./assets-linkspeed-power/iperf-running.webP)
 
 Results? 129 watts.
 
-![alt text](./assets-linkspeed-power/100g-load-iperf.png)
+![alt text](./assets-linkspeed-power/100g-load-iperf.webP)
 
 The huge issue- we aren't just measuring the NIC's consumption- we are measuring the entire system's consumption.
 
-![alt text](./assets-linkspeed-power/100g-load-cpu-40.png)
+![alt text](./assets-linkspeed-power/100g-load-cpu-40.webP)
 
 So... how can we measure the NIC alone?
 
 Well, RDMA speed tests have always been handy at isolating the CPU. Lets try that.
 
-![alt text](./assets-linkspeed-power/100g-rdma-load.png)
+![alt text](./assets-linkspeed-power/100g-rdma-load.webP)
 
 Much better. CPU is nearly idle, And we are passing a FULL 100G of bandwidth.
 
@@ -133,7 +133,7 @@ Since- we will be messing with network access, Make sure to have... means of acc
 
 For this- I will be using my JetKVM.
 
-![Image of JetKVM with remote PC pulled up](./assets-linkspeed-power/jetkvm.png)
+![Image of JetKVM with remote PC pulled up](./assets-linkspeed-power/jetkvm.webP)
 
 !!! info
     This is honestly the first time I have plugged in the JetKVM.
@@ -205,13 +205,13 @@ After stopping all services, just needed to verify everything was indeed stopped
 
 For ceph-
 
-![alt text](./assets-linkspeed-power/ceph-services-stopped.png)
+![alt text](./assets-linkspeed-power/ceph-services-stopped.webP)
 
-![alt text](./assets-linkspeed-power/ceph-osds-stopped.png)
+![alt text](./assets-linkspeed-power/ceph-osds-stopped.webP)
 
 And- watching HTOP for anything unexpected.
 
-![alt text](./assets-linkspeed-power/htop-nearly-idle.png)
+![alt text](./assets-linkspeed-power/htop-nearly-idle.webP)
 
 ## Running Tests
 
@@ -236,7 +236,7 @@ root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
 
 With, 100G of network traffic being reported by the switch, I took measurements
 
-![](./assets-linkspeed-power/100g-rdma-load.png)
+![](./assets-linkspeed-power/100g-rdma-load.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|
@@ -291,7 +291,7 @@ root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
 
 Verifying expected bandwidth via switch.
 
-![alt text](./assets-linkspeed-power/40g-switch.png)
+![alt text](./assets-linkspeed-power/40g-switch.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|
@@ -316,7 +316,7 @@ root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
 
 Verifying bandwidth...
 
-![alt text](./assets-linkspeed-power/25g-switch.png)
+![alt text](./assets-linkspeed-power/25g-switch.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|
@@ -341,7 +341,7 @@ root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
 
 Verify bandwidth...
 
-![alt text](./assets-linkspeed-power/10g-switch.png)
+![alt text](./assets-linkspeed-power/10g-switch.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|
@@ -366,7 +366,7 @@ root@kube01:~/scripts#  ethtool enp1s0f0np0  | grep -i speed && uptime
 
 Verify bandwidth...
 
-![alt text](./assets-linkspeed-power/1g-switch.png)
+![alt text](./assets-linkspeed-power/1g-switch.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|
@@ -393,6 +393,14 @@ Here is the results for each test, aggregated into a table.
 | 10G        | Load      | 49.1      | 28/31       | 49.0 | 50.0 | 1.0  | 49.1 | 15.3  | 2.8            |
 | 1G         | Idle      | 47        | 31/31       | 46.0 | 47.0 | 1.0  | 47.0 | 0.2   |                |
 | 1G         | Load      | 47        | 28/31       | 47.0 | 47.0 | 0.0  | 47.0 | 14.6  | 0.0            |
+
+Here is a screenshot of the entire collected dataset in emonCMS.
+
+![alt text](./assets-linkspeed-power/emon-dataset.webP)
+
+After- disabling all non-essential services to ensure a consistent idle load- you can see the power usage slowly stepping down little by little for each test.
+
+Load tests followed after idle tests. At the end, the NIC was restored to 100G link speed.
 
 ### Formatted Data
 
