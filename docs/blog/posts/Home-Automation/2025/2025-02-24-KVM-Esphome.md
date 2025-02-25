@@ -154,6 +154,159 @@ Once you have initially flashed the ESP, you can reassemble the case.
 
 Add ESPHome Config.
 
+``` yaml
+substitutions:
+  devicename: "rack_kvm"
+  friendly_name: "Rack KVM"
+  pc_1: Kube01
+  pc_2: Kube05
+  pc_3: Kube06
+  pc_4: Kube04
+
+packages:
+  common: !include common/package-common.yaml
+
+esp8266:
+  board: d1_mini
+  #variant: esp32
+
+output:
+  - platform: gpio
+    pin: D1
+    id: pc1_switch
+    inverted: true
+
+  - platform: gpio
+    pin: D2
+    id: pc2_switch
+    inverted: true
+
+  - platform: gpio
+    pin: D5
+    id: pc3_switch
+    inverted: true
+
+  - platform: gpio
+    pin: D6
+    id: pc4_switch
+    inverted: true
+
+globals:
+  - id: action_in_progress
+    type: bool
+    restore_value: no
+    initial_value: 'false'
+  - id: last_selected_pc
+    type: int
+    restore_value: no
+    initial_value: "1"  # Default to PC 1
+
+button:
+  - platform: template
+    name: "Switch to ${pc_1}"
+    id: pc1_button
+    on_press:
+      - if:
+          condition:
+            lambda: return !id(action_in_progress);
+          then:
+            - lambda: id(last_selected_pc) = 1;
+            - lambda: id(action_in_progress) = true;
+            - output.turn_on: pc1_switch
+            - delay: 500ms
+            - output.turn_off: pc1_switch
+            - delay: 500ms
+            - lambda: id(action_in_progress) = false;
+
+  - platform: template
+    name: "Switch to ${pc_2}"
+    id: pc2_button
+    on_press:
+      - if:
+          condition:
+            lambda: return !id(action_in_progress);
+          then:
+            - lambda: id(last_selected_pc) = 2;
+            - lambda: id(action_in_progress) = true;
+            - output.turn_on: pc2_switch
+            - delay: 500ms
+            - output.turn_off: pc2_switch
+            - delay: 500ms
+            - lambda: id(action_in_progress) = false;
+
+  - platform: template
+    name: "Switch to ${pc_3}"
+    id: pc3_button
+    on_press:
+      - if:
+          condition:
+            lambda: return !id(action_in_progress);
+          then:
+            - lambda: id(last_selected_pc) = 3;
+            - lambda: id(action_in_progress) = true;
+            - output.turn_on: pc3_switch
+            - delay: 500ms
+            - output.turn_off: pc3_switch
+            - delay: 500ms
+            - lambda: id(action_in_progress) = false;
+
+  - platform: template
+    name: "Switch to ${pc_4}"
+    id: pc4_button
+    on_press:
+      - if:
+          condition:
+            lambda: return !id(action_in_progress);
+          then:
+            - lambda: id(last_selected_pc) = 4;
+            - lambda: id(action_in_progress) = true;
+            - output.turn_on: pc4_switch
+            - delay: 500ms
+            - output.turn_off: pc4_switch
+            - delay: 500ms
+            - lambda: id(action_in_progress) = false;
+
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: D3
+    name: "Bit 0"
+    id: bit_0
+    internal: true
+
+  - platform: gpio
+    pin:
+      number: D7
+    name: "Bit 1"
+    id: bit_1
+    internal: true
+
+
+text_sensor:
+  - platform: template
+    name: "Active PC"
+    id: active_pc
+    lambda: |-
+      // I incorrectly soldered one of the pins.
+      // Instead, of redoing it- just adding simple logic here.
+      // bit_1 works correctly, bit_0 does not. So- we store the last selected pin
+      // If, the last selected pin is in a state allowed by bit_1, we display it. Otherwise, return unknown.
+      // This, works just fine even when cycling using remote, or button on KVM.
+      // Fake it, till you make it.
+      if (!id(bit_1).state) {
+        // Bit 1 OFF - Valid options: PC 1 or PC 3
+        if (id(last_selected_pc) == 1) return std::string("${pc_1}");
+        if (id(last_selected_pc) == 3) return std::string("${pc_3}");
+      } else {
+        // Bit 1 ON - Valid options: PC 2 or PC 4
+        if (id(last_selected_pc) == 2) return std::string("${pc_2}");
+        if (id(last_selected_pc) == 4) return std::string("${pc_4}");
+      }
+      // Invalid state detected
+      return std::string("Unknown");
+```
+
 Assembled KVM.
 
 ![alt text](./assets-kvm/reassembled.webP)
