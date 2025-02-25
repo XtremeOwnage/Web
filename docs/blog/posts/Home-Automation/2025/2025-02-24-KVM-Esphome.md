@@ -321,7 +321,7 @@ Mess of wires in the rack...
 
 Youtube testing final solution using PiKVM:
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=_XnbofQxTtU" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/_XnbofQxTtU" frameborder="0" allowfullscreen></iframe>
 
 
 ## Footnotes
