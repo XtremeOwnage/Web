@@ -152,6 +152,10 @@ Once you have initially flashed the ESP, you can reassemble the case.
 
 ### To Do...
 
+Add notes on DP -> HDMI. Add notes on DP/HDMI.
+
+Add notes on cleaning up rack...
+
 Add ESPHome Config.
 
 ``` yaml
