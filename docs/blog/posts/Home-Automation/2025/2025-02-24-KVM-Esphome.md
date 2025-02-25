@@ -57,15 +57,15 @@ First step, was to unpack the switch.
 
 Right away- you can notice I have four HDMI cables........ in a box for a DisplayPort KVM.
 
-![alt text](./assets-kvm/unboxing.png)
+![alt text](./assets-kvm/unboxing.webP)
 
 Next, we need to remove the cover. Two phillips #2 head screws on each side.
 
-![alt text](./assets-kvm/phillips-screws.png)
+![alt text](./assets-kvm/phillips-screws.webP)
 
 Afterwards, we can see the interior.
 
-![alt text](./assets-kvm/interior.png)
+![alt text](./assets-kvm/interior.webP)
 
 ### A slight bit of reverse engineering
 
@@ -73,13 +73,13 @@ The layout is extremely simple.
 
 We can see Four switching chips. And- follow the traces.
 
-![alt text](./assets-kvm/dp-traces.png)
+![alt text](./assets-kvm/dp-traces.webP)
 
 So, each pair of DP ports, goes into a switch. Then the pair of switches, goes into another switch.
 
 This circled area, is where my interest is. This is the area where the buttons, and control hardware are.
 
-![alt text](./assets-kvm/control-area.png)
+![alt text](./assets-kvm/control-area.webP)
 
 So- just need to tie into the correct traces in order to activate the desired outputs.
 
@@ -87,7 +87,7 @@ I started with this [Cheap Oscilloscope](https://amzn.to/4igKImd){target=_blank}
 
 I used my automotive multimeter instead....  Don't buy one of these. Its not even a good toy.
 
-![alt text](./assets-kvm/finesi-scope.png)
+![alt text](./assets-kvm/finesi-scope.webP)
 
 So- to determine which pins did what- I simply toggled the outputs and probed the chip using my multimeter. 
 
@@ -95,13 +95,13 @@ As well, I had this suspicion the included remote, did not actually use USB. I d
 
 A knife was the easy tool here. Slide in in, and wedge the case apart.
 
-![alt text](./assets-kvm/remote-knife.png)
+![alt text](./assets-kvm/remote-knife.webP)
 
 Low and behold- No circuitry for USB. Just a simple remote. 
 
 When you press a button, it pulls that line low.
 
-![alt text](./assets-kvm/no-usb.png)
+![alt text](./assets-kvm/no-usb.webP)
 
 ### Soldering Connections
 
@@ -109,11 +109,11 @@ I planned on using ESPHome from the start. now, I just need to start adding conn
 
 For wire, I used a piece of copper CAT6 I had laying around. 
 
-![alt text](./assets-kvm/cat6.png)
+![alt text](./assets-kvm/cat6.webP)
 
 After a while, I had a lovely rat's nest of wire.
 
-![alt text](./assets-kvm/soldering-1.png)
+![alt text](./assets-kvm/soldering-1.webP)
 
 I felt this was a good time to test everything.
 
@@ -127,11 +127,11 @@ NORMALLY, I would use a ESP32-C3, however, I am currently out of stock apparentl
 
 To attach it, a bit of hot-glue worked just fine.
 
-![alt text](./assets-kvm/esp-glued-down.png)
+![alt text](./assets-kvm/esp-glued-down.webP)
 
 From this point, It was just a matter of trimming, and soldering the rest of the connections.
 
-![alt text](./assets-kvm/esp-soldered.png)
+![alt text](./assets-kvm/esp-soldered.webP)
 
 For ground, I soldered a wire to the USB port, which is grounded.
 
@@ -154,11 +154,11 @@ Once you have initially flashed the ESP, you can reassemble the case.
 
 Assembled KVM.
 
-![alt text](./assets-kvm/reassembled.png)
+![alt text](./assets-kvm/reassembled.webP)
 
 Mess of wires in the rack...
 
-![alt text](./assets-kvm/mess-of-wires.png)
+![alt text](./assets-kvm/mess-of-wires.webP)
 
 Youtube testing final solution using PiKVM:
 
