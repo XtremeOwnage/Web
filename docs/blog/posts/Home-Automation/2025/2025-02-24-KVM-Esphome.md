@@ -152,6 +152,8 @@ Once you have initially flashed the ESP, you can reassemble the case.
 
 ### To Do...
 
+Add ESPHome Config.
+
 Assembled KVM.
 
 ![alt text](./assets-kvm/reassembled.webP)
