@@ -1,0 +1,171 @@
+---
+title: "Hacking KVM with IP Control"
+date: 2025-02-24
+tags:
+  - Homelab
+  - Home Assistant
+  - ESPHome
+---
+
+# Hacking a cheap KVM with IP Control
+
+I picked up a PiKVM a few months back. I finally got to use it earlier this week when [Comparing Link Speed to Power Consumption](../../Technology/2025/2025-02-22-LinkSpeed-Vs-PowerConsumption.md){target=_blank}.
+
+But- it only works for a single PC. I need a solution for all four SFFs/Micros in my rack.
+
+So... I picked up a cheap Display Port KVM for 70$, and hacked it to be controllable via Home Assistant.
+
+<!-- more -->
+
+## The Goal
+
+The goal is simple. I want to be able to control a KVM switch from Home Assistant.
+
+For- the immediate need, I will control a KVM switch behind PiKVM, allowing me to remotely access and control all 4 PCs in my rack, which do not have iDrac.
+
+For the future need, I'd love to automate the KVM in my office. But- before touching my more expensive KVM switch, I wanted to test a proof of concept with a cheap one.
+
+### Hardware Used
+
+[4 Port DisplayPort KVM Switch](https://amzn.to/3Qznf3S){target=_blank}[^amazon]
+
+There is nothing fancy here. Costed me 70$
+
+It is a simple DP 1.2 KVM. I don't even think it supports EDID emulation.
+
+[Espressif D1 Mini](https://amzn.to/4ie72N3){target=_blank}[^amazon]
+
+Cheap, effective micro controller. I just ordered another 20 ESP32-C3s for future projects. Can pick these up from 99 cents to a few bucks each.
+
+Even an older ESP8266 will be fine for this project. There are no special requirements.
+
+I had an old crusty one laying around, which I ended up using.
+
+### Tools Used
+
+A soldering iron. Solder. Flux.
+
+A screwdriver.
+
+Basic hand tools.
+
+A multimeter.
+
+## Execution
+
+First step, was to unpack the switch.
+
+Right away- you can notice I have four HDMI cables........ in a box for a DisplayPort KVM.
+
+![alt text](./assets-kvm/unboxing.png)
+
+Next, we need to remove the cover. Two phillips #2 head screws on each side.
+
+![alt text](./assets-kvm/phillips-screws.png)
+
+Afterwards, we can see the interior.
+
+![alt text](./assets-kvm/interior.png)
+
+### A slight bit of reverse engineering
+
+The layout is extremely simple. 
+
+We can see Four switching chips. And- follow the traces.
+
+![alt text](./assets-kvm/dp-traces.png)
+
+So, each pair of DP ports, goes into a switch. Then the pair of switches, goes into another switch.
+
+This circled area, is where my interest is. This is the area where the buttons, and control hardware are.
+
+![alt text](./assets-kvm/control-area.png)
+
+So- just need to tie into the correct traces in order to activate the desired outputs.
+
+I started with this [Cheap Oscilloscope](https://amzn.to/4igKImd){target=_blank}[^amazon] that I picked up for 30$. I wouldn't recommend one.
+
+I used my automotive multimeter instead....  Don't buy one of these. Its not even a good toy.
+
+![alt text](./assets-kvm/finesi-scope.png)
+
+So- to determine which pins did what- I simply toggled the outputs and probed the chip using my multimeter. 
+
+As well, I had this suspicion the included remote, did not actually use USB. I decided to open it up. 
+
+A knife was the easy tool here. Slide in in, and wedge the case apart.
+
+![alt text](./assets-kvm/remote-knife.png)
+
+Low and behold- No circuitry for USB. Just a simple remote. 
+
+When you press a button, it pulls that line low.
+
+![alt text](./assets-kvm/no-usb.png)
+
+### Soldering Connections
+
+I planned on using ESPHome from the start. now, I just need to start adding connections.
+
+For wire, I used a piece of copper CAT6 I had laying around. 
+
+![alt text](./assets-kvm/cat6.png)
+
+After a while, I had a lovely rat's nest of wire.
+
+![alt text](./assets-kvm/soldering-1.png)
+
+I felt this was a good time to test everything.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_0zhT6DVztw" frameborder="0" allowfullscreen></iframe>
+
+### Adding the ESP
+
+Next, I decided to go ahead and add the ESP.
+
+NORMALLY, I would use a ESP32-C3, however, I am currently out of stock apparently. This old crusty d1 mini was all I had laying around.
+
+To attach it, a bit of hot-glue worked just fine.
+
+![alt text](./assets-kvm/esp-glued-down.png)
+
+From this point, It was just a matter of trimming, and soldering the rest of the connections.
+
+![alt text](./assets-kvm/esp-soldered.png)
+
+For ground, I soldered a wire to the USB port, which is grounded.
+
+For 5v, I soldered onto the 5V pin of USB Port 1. (5v is shared across all of the ports).
+
+!!! info
+    Yes- I know- my soldering looks like 💩
+
+    Minus- this website- nobody will ever physically see this again.
+
+    And- despite the looks, it will function the same now, as it will in 5 years from now.
+
+At this point, all of the physical modifications are done.
+
+Once you have initially flashed the ESP, you can reassemble the case.
+
+
+
+### To Do...
+
+Assembled KVM.
+
+![alt text](./assets-kvm/reassembled.png)
+
+Mess of wires in the rack...
+
+![alt text](./assets-kvm/mess-of-wires.png)
+
+Youtube testing final solution using PiKVM:
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=_XnbofQxTtU" frameborder="0" allowfullscreen></iframe>
+
+
+## Footnotes
+
+[^amazon]:
+    --8<--- "docs/snippets/amazon-affiliate.md"
