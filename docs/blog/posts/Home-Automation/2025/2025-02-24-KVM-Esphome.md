@@ -73,6 +73,15 @@ The layout is extremely simple.
 
 We can see Four switching chips. And- follow the traces.
 
+!!! info
+    As a random note I learned recently- For DisplayPort, its pretty rare to see switching ICs with more then 2 channels.
+
+    Turns out, the differential pairs used, are extremely sensitive to issues, and interference. 
+
+    I went down a rabbit hole researching the effort to build a homemade modular KVM switch, and this would be a huge challenge.
+
+    I FIGURED, this could be handled by a simple FPGA, used to switch between the inputs, and outputs. However, this requires specialized hardware on the FPGA which.... $$$$$$$
+
 ![alt text](./assets-kvm/dp-traces.webP)
 
 So, each pair of DP ports, goes into a switch. Then the pair of switches, goes into another switch.
@@ -89,27 +98,87 @@ I used my automotive multimeter instead....  Don't buy one of these. Its not eve
 
 ![alt text](./assets-kvm/finesi-scope.webP)
 
-So- to determine which pins did what- I simply toggled the outputs and probed the chip using my multimeter. 
+I also had this suspicion the included remote, did not actually use USB, and was instead just pulling lines high/low.
 
-As well, I had this suspicion the included remote, did not actually use USB. I decided to open it up. 
+I decided to open it up, and have a look.
 
 A knife was the easy tool here. Slide in in, and wedge the case apart.
 
 ![alt text](./assets-kvm/remote-knife.webP)
 
-Low and behold- No circuitry for USB. Just a simple remote. 
+![alt text](./assets-kvm/no-usb.webP)
+
+Low and behold- No ICs for USB signaling.
 
 When you press a button, it pulls that line low.
 
 This means... all four traces must be running into the IC, allowing setting individual inputs.
 
-![alt text](./assets-kvm/no-usb.webP)
+### Thought process
+
+You don't need a degree in electrical engineering to fully reverse engineer this.
+
+The only **useful** tool I used for this, was a simple automotive multimeter I have had for years. Not even a fancy one. A 30$ one from Walmart.
+
+#### Triggering Specific PC
+
+Knowing there is no actual USB connection- follow the pines from the "USB" port, to the IC. Use your tester to double-check the connection is made when you press buttons 1-4 on the remote. 
+
+Do note- some of these traces go under the IC, and hit pins on the top side of it.
+
+![Close up image of the IC, and "USB" port](./assets-kvm/main-ic.webP)
+
+After you identify where all four pins are- boom. Your done here.
+
+#### Detect Active PC
+
+Now- for a stretch goal, I wanted to detect which PC was currently active. 
+
+HOWEVER, I ran into an issue.
+
+!!! info "D1 Mini Pinout & Limitations"
+
+    The D1 Mini I was using, only has a few usable pins. [D1-Mini Pinout Reference](https://lastminuteengineers.com/wemos-d1-mini-pinout-reference/){target=_blank}
+
+    D1, D2, D5, D6, D7. This gives 5 useful pins.
+
+    D8 will cause boot to fail if pulled high.
+
+    D3, D4 will cause boot to fail if pulled low.
+
+    Do note- I did use pin D3 later in this post- which did successful fail to work.  
+
+    So- be aware of the special pin limitations!
+
+Since, we only have 5 usable GPIOs, and four of them were just taken up to trigger individual outputs- This means we can't just attach a GPIO to each of the four LED pins.
+
+Instead- I identified two pins which were responsible for setting the switch chips. 
+
+Those two pins, can successfully identify PC 1 - 4.  (Boolean logic)
+
+* 0, 0 = PC 1
+* 0, 1 = PC 2
+* 1, 0 = PC 3
+* 1, 1 = PC 4
+
+I decided to use those.
+
+#### Power
+
+For Power- I soldered a ground wire to one of thee USB port frames. I previous verified they all share a common ground.
+
+For +5v, I soldered to the +5v pin on USB5.
 
 ### Soldering Connections
 
 I planned on using ESPHome from the start. now, I just need to start adding connections.
 
 For wire, I used a piece of **copper** CAT6 I had laying around. 
+
+!!! info
+    I will note.... there is already proper 22AWG cable in the mail.
+
+    But- solid-copper CAT6 did the job just fine. Make sure to use a bit of flux when initially tinning the wire.
 
 ![alt text](./assets-kvm/cat6.webP)
 
@@ -122,6 +191,11 @@ I felt this was a good time to test everything.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_0zhT6DVztw" frameborder="0" allowfullscreen></iframe>
 
 Since everything tested as expected... lets move forward.
+
+!!! warning
+    Do- be careful when working with the pads under the IC.
+
+    They can be pulled easily.... (**cough, I pulled the pad for the LED for PC 2)
 
 ### Adding the ESP
 
@@ -481,13 +555,21 @@ With EDID emulation, the KVM switch presents a constant virtual display to each 
 
 ### Your Soldering is horrible
 
-I know. But- fit for use, fit for purpose. It will do its job until this KVM is disposed of.
+![alt text](./assets-kvm/i-know.webP)
 
 ### Why didn't you use a HDMI KVM, they are cheaper & easier to work with.
 
 Because the PCs I want to put behind this KVM, don't have HDMI. Dell SFFs/Micros are mostly DisplayPort.
 
 Since, the JetKVM is HDMI-based, there is a DisplayPort to HDMI converter between the KVM, and the JetKVM.
+
+### You can get KVM switches much cheaper blah blah...
+
+This is one of the cheapest DP switches available on Amazon. 
+
+And- to my knowledge, there is "0" home-assistant integrated KVM switches available for purchase.
+
+Especially not for the price I built this one. 70$ for DP switch + 1.50$ for D1 mini.
 
 ## Next Steps?
 
