@@ -101,13 +101,15 @@ Low and behold- No circuitry for USB. Just a simple remote.
 
 When you press a button, it pulls that line low.
 
+This means... all four traces must be running into the IC, allowing setting individual inputs.
+
 ![alt text](./assets-kvm/no-usb.webP)
 
 ### Soldering Connections
 
 I planned on using ESPHome from the start. now, I just need to start adding connections.
 
-For wire, I used a piece of copper CAT6 I had laying around. 
+For wire, I used a piece of **copper** CAT6 I had laying around. 
 
 ![alt text](./assets-kvm/cat6.webP)
 
@@ -119,11 +121,15 @@ I felt this was a good time to test everything.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_0zhT6DVztw" frameborder="0" allowfullscreen></iframe>
 
+Since everything tested as expected... lets move forward.
+
 ### Adding the ESP
 
 Next, I decided to go ahead and add the ESP.
 
 NORMALLY, I would use a ESP32-C3, however, I am currently out of stock apparently. This old crusty d1 mini was all I had laying around.
+
+There was a bit open spot right in the middle, this looked ideal.
 
 To attach it, a bit of hot-glue worked just fine.
 
@@ -148,180 +154,413 @@ At this point, all of the physical modifications are done.
 
 Once you have initially flashed the ESP, you can reassemble the case.
 
+## ESPHome Firmware
+
+So, next up, I needed to come up with some ESPHome Firmware.
+
+### Details
+
+#### Outputs
+
+We have four outputs, one for each PC we want to control.
+
+Notes:
+
+1. `inverted=true`: All of the buttons, switches, etc work by pulling the line low. We need to do this on the ESP Side too.
+2. Interlock: 
+    - While testing, I noticed if two switches were toggled at the same time, it would soft-lock the KVM until you power cycled it.
+    - I added an interlock which only allows a single output to become active at the same time.
 
 
-### To Do...
-
-Add notes on DP -> HDMI. Add notes on DP/HDMI.
-
-Add notes on cleaning up rack...
-
-Add ESPHome Config.
+We need to do the same here.
 
 ``` yaml
-substitutions:
-  devicename: "rack_kvm"
-  friendly_name: "Rack KVM"
-  pc_1: Kube01
-  pc_2: Kube05
-  pc_3: Kube06
-  pc_4: Kube04
-
-packages:
-  common: !include common/package-common.yaml
-
-esp8266:
-  board: d1_mini
-  #variant: esp32
-
 output:
   - platform: gpio
     pin: D1
     id: pc1_switch
     inverted: true
+    interlock: &pc_select [relay1, relay2]
 
   - platform: gpio
     pin: D2
     id: pc2_switch
     inverted: true
+    interlock: *pc_select
 
   - platform: gpio
     pin: D5
     id: pc3_switch
     inverted: true
+    interlock: *pc_select
 
   - platform: gpio
     pin: D6
     id: pc4_switch
     inverted: true
-
-globals:
-  - id: action_in_progress
-    type: bool
-    restore_value: no
-    initial_value: 'false'
-  - id: last_selected_pc
-    type: int
-    restore_value: no
-    initial_value: "1"  # Default to PC 1
-
-button:
-  - platform: template
-    name: "Switch to ${pc_1}"
-    id: pc1_button
-    on_press:
-      - if:
-          condition:
-            lambda: return !id(action_in_progress);
-          then:
-            - lambda: id(last_selected_pc) = 1;
-            - lambda: id(action_in_progress) = true;
-            - output.turn_on: pc1_switch
-            - delay: 500ms
-            - output.turn_off: pc1_switch
-            - delay: 500ms
-            - lambda: id(action_in_progress) = false;
-
-  - platform: template
-    name: "Switch to ${pc_2}"
-    id: pc2_button
-    on_press:
-      - if:
-          condition:
-            lambda: return !id(action_in_progress);
-          then:
-            - lambda: id(last_selected_pc) = 2;
-            - lambda: id(action_in_progress) = true;
-            - output.turn_on: pc2_switch
-            - delay: 500ms
-            - output.turn_off: pc2_switch
-            - delay: 500ms
-            - lambda: id(action_in_progress) = false;
-
-  - platform: template
-    name: "Switch to ${pc_3}"
-    id: pc3_button
-    on_press:
-      - if:
-          condition:
-            lambda: return !id(action_in_progress);
-          then:
-            - lambda: id(last_selected_pc) = 3;
-            - lambda: id(action_in_progress) = true;
-            - output.turn_on: pc3_switch
-            - delay: 500ms
-            - output.turn_off: pc3_switch
-            - delay: 500ms
-            - lambda: id(action_in_progress) = false;
-
-  - platform: template
-    name: "Switch to ${pc_4}"
-    id: pc4_button
-    on_press:
-      - if:
-          condition:
-            lambda: return !id(action_in_progress);
-          then:
-            - lambda: id(last_selected_pc) = 4;
-            - lambda: id(action_in_progress) = true;
-            - output.turn_on: pc4_switch
-            - delay: 500ms
-            - output.turn_off: pc4_switch
-            - delay: 500ms
-            - lambda: id(action_in_progress) = false;
-
-
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: D3
-    name: "Bit 0"
-    id: bit_0
-    internal: true
-
-  - platform: gpio
-    pin:
-      number: D7
-    name: "Bit 1"
-    id: bit_1
-    internal: true
-
-
-text_sensor:
-  - platform: template
-    name: "Active PC"
-    id: active_pc
-    lambda: |-
-      // I incorrectly soldered one of the pins.
-      // Instead, of redoing it- just adding simple logic here.
-      // bit_1 works correctly, bit_0 does not. So- we store the last selected pin
-      // If, the last selected pin is in a state allowed by bit_1, we display it. Otherwise, return unknown.
-      // This, works just fine even when cycling using remote, or button on KVM.
-      // Fake it, till you make it.
-      if (!id(bit_1).state) {
-        // Bit 1 OFF - Valid options: PC 1 or PC 3
-        if (id(last_selected_pc) == 1) return std::string("${pc_1}");
-        if (id(last_selected_pc) == 3) return std::string("${pc_3}");
-      } else {
-        // Bit 1 ON - Valid options: PC 2 or PC 4
-        if (id(last_selected_pc) == 2) return std::string("${pc_2}");
-        if (id(last_selected_pc) == 4) return std::string("${pc_4}");
-      }
-      // Invalid state detected
-      return std::string("Unknown");
+    interlock: *pc_select
 ```
 
-Assembled KVM.
+#### Inputs
+
+And- we have two inputs. The two inputs are between the target IC, and the DP switches. Only two inputs are needed to tell us the exact PC activated.
+
+``` yaml
+  binary_sensor:
+    - platform: gpio
+      pin:
+        number: D3
+      name: "Bit 0"
+      id: bit_0
+      internal: true
+
+    - platform: gpio
+      pin:
+        number: D7
+      name: "Bit 1"
+      id: bit_1
+      internal: true
+```
+
+#### Current PC Logic
+
+So, I did want the ability to see which PC was selected at a given time, hence, the two inputs above.
+
+HOWEVER- I did incorrectly solder ONE of the inputs to the incorrect pin on the IC. So, I decided to perform a work-around.
+
+I am storing the last selected state in a global variable. If- the currently selected input, is not allowed by the single functioning output, we will return "Unknown" instead.
+
+Perfect? No. But- now you know so you can do better then I did.
+
+``` yaml
+  globals:
+    - id: last_selected_pc
+      type: int
+      restore_value: no
+      initial_value: "1"
+
+  text_sensor:
+    - platform: template
+      name: "Active PC"
+      id: active_pc
+      lambda: |-
+        // I incorrectly soldered one of the pins.
+        // Instead, of redoing it- just adding simple logic here.
+        // bit_1 works correctly, bit_0 does not. So- we store the last selected pin
+        // If, the last selected pin is in a state allowed by bit_1, we display it. Otherwise, return unknown.
+        // This, works just fine even when cycling using remote, or button on KVM.
+        // Fake it, till you make it.
+        if (!id(bit_1).state) {
+          // Bit 1 OFF - Valid options: PC 1 or PC 3
+          if (id(last_selected_pc) == 1) return std::string("${pc_1}");
+          if (id(last_selected_pc) == 3) return std::string("${pc_3}");
+        } else {
+          // Bit 1 ON - Valid options: PC 2 or PC 4
+          if (id(last_selected_pc) == 2) return std::string("${pc_2}");
+          if (id(last_selected_pc) == 4) return std::string("${pc_4}");
+        }
+        // Invalid state detected
+        return std::string("Unknown");
+```
+
+#### Click Button Logic
+
+When, you click the button inside of home assistant.... two things occur:
+
+1. It sets the last select PC into the global variable.
+2. It pulls the GPIO low for a half second, and then releases.
+
+``` yaml
+  button:
+    - platform: template
+      name: "Switch to ${pc_1}"
+      id: pc1_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 1;
+          - output.turn_on: pc1_switch
+          - delay: 0.5s
+          - output.turn_off: pc1_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_2}"
+      id: pc2_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 2;
+          - output.turn_on: pc2_switch
+          - delay: 0.5s
+          - output.turn_off: pc2_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_3}"
+      id: pc3_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 3;
+          - output.turn_on: pc3_switch
+          - delay: 0.5s
+          - output.turn_off: pc3_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_4}"
+      id: pc4_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 4;
+          - output.turn_on: pc4_switch
+          - delay: 0.5s
+          - output.turn_off: pc4_switch
+          - delay: 0.5s
+```
+
+### Finished Firmware
+
+??? "ESPHome Config"
+  ``` yaml
+  substitutions:
+    devicename: "rack_kvm"
+    friendly_name: "Rack KVM"
+    pc_1: Kube01
+    pc_2: Kube05
+    pc_3: Kube06
+    pc_4: Kube04
+
+  packages:
+    common: !include common/package-common.yaml
+
+  esp8266:
+    board: d1_mini
+    #variant: esp32
+
+  output:
+    - platform: gpio
+      pin: D1
+      id: pc1_switch
+      inverted: true
+
+    - platform: gpio
+      pin: D2
+      id: pc2_switch
+      inverted: true
+
+    - platform: gpio
+      pin: D5
+      id: pc3_switch
+      inverted: true
+
+    - platform: gpio
+      pin: D6
+      id: pc4_switch
+      inverted: true
+
+  globals:
+    - id: last_selected_pc
+      type: int
+      restore_value: no
+      initial_value: "1"
+
+  button:
+    - platform: template
+      name: "Switch to ${pc_1}"
+      id: pc1_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 1;
+          - output.turn_on: pc1_switch
+          - delay: 0.5s
+          - output.turn_off: pc1_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_2}"
+      id: pc2_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 2;
+          - output.turn_on: pc2_switch
+          - delay: 0.5s
+          - output.turn_off: pc2_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_3}"
+      id: pc3_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 3;
+          - output.turn_on: pc3_switch
+          - delay: 0.5s
+          - output.turn_off: pc3_switch
+          - delay: 0.5s
+
+    - platform: template
+      name: "Switch to ${pc_4}"
+      id: pc4_button
+      on_press:
+        then:
+          - lambda: id(last_selected_pc) = 4;
+          - output.turn_on: pc4_switch
+          - delay: 0.5s
+          - output.turn_off: pc4_switch
+          - delay: 0.5s
+
+
+  binary_sensor:
+    - platform: gpio
+      pin:
+        number: D3
+      name: "Bit 0"
+      id: bit_0
+      internal: true
+
+    - platform: gpio
+      pin:
+        number: D7
+      name: "Bit 1"
+      id: bit_1
+      internal: true
+
+
+  text_sensor:
+    - platform: template
+      name: "Active PC"
+      id: active_pc
+      lambda: |-
+        // I incorrectly soldered one of the pins.
+        // Instead, of redoing it- just adding simple logic here.
+        // bit_1 works correctly, bit_0 does not. So- we store the last selected pin
+        // If, the last selected pin is in a state allowed by bit_1, we display it. Otherwise, return unknown.
+        // This, works just fine even when cycling using remote, or button on KVM.
+        // Fake it, till you make it.
+        if (!id(bit_1).state) {
+          // Bit 1 OFF - Valid options: PC 1 or PC 3
+          if (id(last_selected_pc) == 1) return std::string("${pc_1}");
+          if (id(last_selected_pc) == 3) return std::string("${pc_3}");
+        } else {
+          // Bit 1 ON - Valid options: PC 2 or PC 4
+          if (id(last_selected_pc) == 2) return std::string("${pc_2}");
+          if (id(last_selected_pc) == 4) return std::string("${pc_4}");
+        }
+        // Invalid state detected
+        return std::string("Unknown");
+  ```
+
+## Final Product
+
+The final product- does exactly what it was expected to do.
+
+Nothing fancy or over the top here.
 
 ![alt text](./assets-kvm/reassembled.webP)
 
-Mess of wires in the rack...
+After sitting it in the rack and connecting all four pairs of DisplayPort / USB cables.... I had a mess of wires to cleanup and organize later.
+
+My rack, [Stays well organized, typically](../../Technology/2024/2024-12-28-homelab-2024.md){target=_blank}
 
 ![alt text](./assets-kvm/mess-of-wires.webP)
 
-Youtube testing final solution using PiKVM:
+Here is a video of it in action.
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=_XnbofQxTtU" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_XnbofQxTtU" frameborder="0" allowfullscreen></iframe>
+
+## Q&A, Issues, etc.
+
+### Why does it take so long to switch between PCs?
+
+The reason there is such a long delay when switching devices is due to the lack of EDID emulation.
+
+The delay when switching between PCs on a cheap KVM switch happens because it physically disconnects and reconnects the display each time you switch. 
+
+Without EDID emulation, each PC thinks the monitor has been unplugged and replugged, causing it to reinitialize the display settings.
+
+With EDID emulation, the KVM switch presents a constant virtual display to each connected PC, making the system believe the monitor is always connected. This helps to prevent resolution changes, window repositioning, and eliminates the delay caused by display detection during switching.
+
+### Your Soldering is horrible
+
+I know. But- fit for use, fit for purpose. It will do its job until this KVM is disposed of.
+
+### Why didn't you use a HDMI KVM, they are cheaper & easier to work with.
+
+Because the PCs I want to put behind this KVM, don't have HDMI. Dell SFFs/Micros are mostly DisplayPort.
+
+Since, the JetKVM is HDMI-based, there is a DisplayPort to HDMI converter between the KVM, and the JetKVM.
+
+## Next Steps?
+
+The next stage of this process will be to automate the KVM(s) in my office.
+
+I want to be able to fully configure my desk, using home assistant scenes and automatons.
+
+Notice- I said KVM(s) <-- "(s) being the key word. 
+
+If- you want to know more- expand the spoiler.
+
+??? "More Details"
+    Three monitors. Three PCs. Turns out, 4x4 KVMs are expensive. 
+    
+    2x2 KVMs are cheap. I picked up this [CKL 2x2 DisplayPort KVM for 30$ today](https://amzn.to/41jnCnU){target=_blank}[^amazon]
+
+    Its only DisplayPort 1.2- but, that won't be a problem here.
+
+    Two massive 32" screens, for work and play, and a single 24" screen which is great for watching email/chats/videos/etc.
+
+    The left 32" screen, also is used by my wife's gaming PC whenever we are gaming.
+
+    The top 24" screen, and right 32" screen, are work/personal only.
+
+    Since... a picture says 1,000 words, here is a diagram of what I want to accomplish:
+
+    ``` mermaid
+    graph TB
+    subgraph "Monitors"
+        1["32in 1440p@144hz LG"]
+        2["32in 4k@60hz Philips"]
+        3["24in 1080p@60hz Dell"]
+    end
+
+    subgraph "KVMs"
+        K1["2x2 DP KVM-1"]
+        K2["2x2 DP KVM-2"]
+        K3["2x2 HDMI KVM-3"]
+    end
+
+    subgraph "Computers"
+        C["Wife's Gaming PC"]
+        A["Gaming/Personal PC"]
+        B["Work PC"]
+
+    end
+
+    A & B ==> |2x DP| K1
+    A & B --> |1x HDMI| K3
+    K1 --> |1x DP| 2 & K2
+    C --> | 1x DP| K2
+    K2 --> | 1x DP| 1
+    K3 --> | 1x HDMI| 3
+    ```
+
+    This, enables the following use-cases:
+
+    1. "Working": All three monitors connected to work PC.
+    2. "Gaming/Personal": "All three monitors connected to Gaming/Personal PC.
+    3. "Gaming with Wife": Left monitor connected to Wife's PC. Right two monitors connected to Gaming/Personal PC.
+    4. "Work Hybrid": Both 32" screens on work PC. 24" Screen watching personal PC. (Watching NVR, Events, etc....)
+    5. "Personal Hybrid": Both 32" screens on personal PC. 24" screen watching work PC. ("Watching emails, long running processes, etc.)
+
+    This setup allows the 24" screen to be independently switched between Work/Game.
+
+    It also allows the left 32" screen to be independently switched between the Wife's PC, and Game/Work.
+
+    Now- the above is easily handled with a matrix, or multi-view KVM switch, however a pair of cheap 30$ KVMs made a lot more financial sense to me, then picking up a single 400$ multi-view capable KVM.
+
+    Finally- I will be doing that automation without any disassembly or modification to the KVMs. It will be handled through the remote port, which is a standard 3.5mm audio jack. Will still use ESP Home though.
+
+
+
 
 
 ## Footnotes
