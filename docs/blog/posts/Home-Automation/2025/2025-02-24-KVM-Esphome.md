@@ -571,6 +571,16 @@ And- to my knowledge, there is "0" home-assistant integrated KVM switches availa
 
 Especially not for the price I built this one. 70$ for DP switch + 1.50$ for D1 mini.
 
+### The ESP is not going to get reception without an external antenna.
+
+I tested and flashed it in my office, which is one of the furthest areas from my Access points.
+
+As well, it will live the rest of its life inside of my server rack, which has an access point 5 ft away.
+
+Besides, its fine.
+
+* **WiFi Signal**: -53 dBm
+
 ## Next Steps?
 
 The next stage of this process will be to automate the KVM(s) in my office.
