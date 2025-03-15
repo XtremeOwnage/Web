@@ -10,7 +10,7 @@ tags:
 
 So... Near the end of 2024, I ended up cleaning up my rack, and making everything nice and tidy.
 
-If- you missed that, have a look at the [2024 Homelab Summary](../2024/2024-12-28-homelab-2024.md){target=_blank}
+If- you missed that, have a look at the [2024 Homelab Summary](../2024/homelab-2024.md){target=_blank}
 
 For the next problem- my networking closet is an absolute disaster.
 

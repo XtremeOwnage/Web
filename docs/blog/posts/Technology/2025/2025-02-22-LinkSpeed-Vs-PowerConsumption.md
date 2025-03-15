@@ -283,7 +283,7 @@ EXTREMELY consistent data.
 
 After, configuring the servers, I verified at the switch we had the expected bandwidth being sent.
 
-![alt text](./assets-linkspeed-power/50g-switch.png1)
+![alt text](./assets-linkspeed-power/50g-switch.webP)
 
 | Feed                      | Data Points | Min  | Max  | Diff | Mean | Stdev |
 |---------------------------|-------------|------|------|------|------|-------|

@@ -533,7 +533,7 @@ Nothing fancy or over the top here.
 
 After sitting it in the rack and connecting all four pairs of DisplayPort / USB cables.... I had a mess of wires to cleanup and organize later.
 
-My rack, [Stays well organized, typically](../../Technology/2024/2024-12-28-homelab-2024.md){target=_blank}
+My rack, [Stays well organized, typically](../../Technology/2024/homelab-2024.md){target=_blank}
 
 ![alt text](./assets-kvm/mess-of-wires.webP)
 
