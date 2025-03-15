@@ -1,0 +1,589 @@
+root@kube02:~# ## See available versions here: https://linux.mellanox.com/public/repo/mlnx_ofed/
+root@kube02:~# VERSION="latest"
+root@kube02:~# ## See available distributions here: https://linux.mellanox.com/public/repo/mlnx_ofed/latest/
+root@kube02:~# DISTRO="debian12.1"
+root@kube02:~# wget -qO - https://www.mellanox.com/downloads/ofed/RPM-GPG-KEY-Mellanox | sudo apt-key add -
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+OK
+root@kube02:~# cd /etc/apt/sources.list.d/
+root@kube02:/etc/apt/sources.list.d# wget https://linux.mellanox.com/public/repo/mlnx_ofed/$VERSION/$DISTRO/mellanox_mlnx_ofed.list
+--2025-03-15 07:37:10--  https://linux.mellanox.com/public/repo/mlnx_ofed/latest/debian12.1/mellanox_mlnx_ofed.list
+Resolving linux.mellanox.com (linux.mellanox.com)... 168.62.212.37
+Connecting to linux.mellanox.com (linux.mellanox.com)|168.62.212.37|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 253
+Saving to: ‘mellanox_mlnx_ofed.list’
+
+mellanox_mlnx_ofed.list                                     100%[========================================================================================================================================>]     253  --.-KB/s    in 0s
+
+2025-03-15 07:37:10 (8.12 MB/s) - ‘mellanox_mlnx_ofed.list’ saved [253/253]
+
+root@kube02:/etc/apt/sources.list.d# apt-get update
+Hit:1 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Ign:4 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ InRelease
+Get:5 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ Release [1,329 B]
+Hit:6 http://download.proxmox.com/debian/pve bookworm InRelease
+Hit:7 http://download.proxmox.com/debian/ceph-reef bookworm InRelease
+Get:8 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ Release.gpg [516 B]
+Get:9 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ Packages [36.8 kB]
+Fetched 38.7 kB in 2s (20.9 kB/s)
+Reading package lists... Done
+W: http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64/./Release.gpg: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+root@kube02:/etc/apt/sources.list.d# apt-get install mlnx-ofed-basic
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libc-ares2 libyang2
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  ibacm ibverbs-providers ibverbs-utils infiniband-diags iser-dkms isert-dkms kernel-mft-dkms libibmad-dev libibmad5 libibnetdisc5 libibumad-dev libibumad3 libibverbs-dev libibverbs1 libnl-3-dev libnl-route-3-dev libopensm
+  libopensm-devel librdmacm-dev librdmacm1 mft mlnx-ethtool mlnx-iproute2 mlnx-ofed-kernel-dkms mlnx-ofed-kernel-utils mlnx-tools ofed-scripts opensm opensm-doc rdma-core rdmacm-utils rshim srp-dkms srptools
+The following NEW packages will be installed:
+  ibacm iser-dkms isert-dkms kernel-mft-dkms libibmad-dev libibumad-dev libibverbs-dev libnl-3-dev libnl-route-3-dev libopensm libopensm-devel librdmacm-dev mft mlnx-ethtool mlnx-iproute2 mlnx-ofed-basic mlnx-ofed-kernel-dkms
+  mlnx-ofed-kernel-utils mlnx-tools ofed-scripts opensm opensm-doc rdma-core rshim srp-dkms srptools
+The following packages will be upgraded:
+  ibverbs-providers ibverbs-utils infiniband-diags libibmad5 libibnetdisc5 libibumad3 libibverbs1 librdmacm1 rdmacm-utils
+9 upgraded, 26 newly installed, 0 to remove and 110 not upgraded.
+Need to get 59.3 MB of archives.
+After this operation, 237 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libnl-3-dev amd64 3.7.0-0.2+b1 [104 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libnl-route-3-dev amd64 3.7.0-0.2+b1 [203 kB]
+Get:3 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ rdma-core 2410mlnx54-1.2410068 [37.9 kB]
+Get:4 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibumad3 2410mlnx54-1.2410068 [27.9 kB]
+Get:5 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibverbs1 2410mlnx54-1.2410068 [61.4 kB]
+Get:6 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ ibacm 2410mlnx54-1.2410068 [84.8 kB]
+Get:7 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ ibverbs-providers 2410mlnx54-1.2410068 [220 kB]
+Get:8 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ ibverbs-utils 2410mlnx54-1.2410068 [55.4 kB]
+Get:9 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibmad5 2410mlnx54-1.2410068 [43.0 kB]
+Get:10 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ infiniband-diags 2410mlnx54-1.2410068 [228 kB]
+Get:11 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibnetdisc5 2410mlnx54-1.2410068 [33.7 kB]
+Get:12 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-tools 24.10-0.2410068 [69.7 kB]
+Get:13 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-ofed-kernel-utils 24.10.OFED.24.10.1.1.4.1-1 [27.8 kB]
+Get:14 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-ofed-kernel-dkms 24.10.OFED.24.10.1.1.4.1-1 [2,480 kB]
+Get:15 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ iser-dkms 24.10.OFED.24.10.1.1.4.1-1 [31.9 kB]
+Get:16 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ isert-dkms 24.10.OFED.24.10.1.1.4.1-1 [25.2 kB]
+Get:17 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ kernel-mft-dkms 4.30.1.8-1 [34.9 kB]
+Get:18 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibmad-dev 2410mlnx54-1.2410068 [52.8 kB]
+Get:19 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibumad-dev 2410mlnx54-1.2410068 [56.1 kB]
+Get:20 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libibverbs-dev 2410mlnx54-1.2410068 [506 kB]
+Get:21 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ librdmacm1 2410mlnx54-1.2410068 [68.8 kB]
+Get:22 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ librdmacm-dev 2410mlnx54-1.2410068 [126 kB]
+Get:23 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-ethtool 6.9-1.2410068 [201 kB]
+Get:24 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-iproute2 6.10.0-1.2410114 [968 kB]
+Get:25 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ rdmacm-utils 2410mlnx54-1.2410068 [79.2 kB]
+Get:26 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ rshim 2.1.8-0.g5e3709e.2410114 [67.5 kB]
+Get:27 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ srp-dkms 24.10.OFED.24.10.1.1.4.1-1 [44.8 kB]
+Get:28 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ srptools 2410mlnx54-1.2410068 [43.6 kB]
+Get:29 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libopensm 5.21.0.MLNX20241126.d9aa3dff-0.1.2410114 [761 kB]
+Get:30 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ libopensm-devel 5.21.0.MLNX20241126.d9aa3dff-0.1.2410114 [961 kB]
+Get:31 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mft 4.30.1-8 [49.1 MB]
+Get:32 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ opensm 5.21.0.MLNX20241126.d9aa3dff-0.1.2410114 [1,699 kB]
+Get:33 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ opensm-doc 5.21.0.MLNX20241126.d9aa3dff-0.1.2410114 [750 kB]
+Get:34 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ ofed-scripts 24.10.OFED.24.10.1.1.4-1 [57.6 kB]
+Get:35 http://linux.mellanox.com/public/repo/mlnx_ofed/24.10-1.1.4.0/debian12.1/amd64 ./ mlnx-ofed-basic 24.10-1.1.4.0 [2,876 B]
+Fetched 59.3 MB in 11s (5,236 kB/s)
+Reading changelogs... Done
+Extracting templates from packages: 100%
+Selecting previously unselected package rdma-core.
+(Reading database ... 150524 files and directories currently installed.)
+Preparing to unpack .../00-rdma-core_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking rdma-core (2410mlnx54-1.2410068) ...
+Preparing to unpack .../01-libibumad3_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibumad3:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Preparing to unpack .../02-libibverbs1_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibverbs1:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Selecting previously unselected package ibacm.
+Preparing to unpack .../03-ibacm_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking ibacm (2410mlnx54-1.2410068) ...
+Preparing to unpack .../04-ibverbs-providers_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking ibverbs-providers:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Preparing to unpack .../05-ibverbs-utils_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking ibverbs-utils (2410mlnx54-1.2410068) over (44.0-2) ...
+Preparing to unpack .../06-libibmad5_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibmad5:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Preparing to unpack .../07-infiniband-diags_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking infiniband-diags (2410mlnx54-1.2410068) over (44.0-2) ...
+Preparing to unpack .../08-libibnetdisc5_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibnetdisc5:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Selecting previously unselected package mlnx-tools.
+Preparing to unpack .../09-mlnx-tools_24.10-0.2410068_amd64.deb ...
+Unpacking mlnx-tools (24.10-0.2410068) ...
+Selecting previously unselected package mlnx-ofed-kernel-utils.
+Preparing to unpack .../10-mlnx-ofed-kernel-utils_24.10.OFED.24.10.1.1.4.1-1_amd64.deb ...
+Unpacking mlnx-ofed-kernel-utils (24.10.OFED.24.10.1.1.4.1-1) ...
+Selecting previously unselected package mlnx-ofed-kernel-dkms.
+Preparing to unpack .../11-mlnx-ofed-kernel-dkms_24.10.OFED.24.10.1.1.4.1-1_all.deb ...
+Unpacking mlnx-ofed-kernel-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Selecting previously unselected package iser-dkms.
+Preparing to unpack .../12-iser-dkms_24.10.OFED.24.10.1.1.4.1-1_all.deb ...
+Unpacking iser-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Selecting previously unselected package isert-dkms.
+Preparing to unpack .../13-isert-dkms_24.10.OFED.24.10.1.1.4.1-1_all.deb ...
+Unpacking isert-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Selecting previously unselected package kernel-mft-dkms.
+Preparing to unpack .../14-kernel-mft-dkms_4.30.1.8-1_all.deb ...
+Unpacking kernel-mft-dkms (4.30.1.8-1) ...
+Selecting previously unselected package libibmad-dev:amd64.
+Preparing to unpack .../15-libibmad-dev_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibmad-dev:amd64 (2410mlnx54-1.2410068) ...
+Selecting previously unselected package libibumad-dev:amd64.
+Preparing to unpack .../16-libibumad-dev_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibumad-dev:amd64 (2410mlnx54-1.2410068) ...
+Selecting previously unselected package libnl-3-dev:amd64.
+Preparing to unpack .../17-libnl-3-dev_3.7.0-0.2+b1_amd64.deb ...
+Unpacking libnl-3-dev:amd64 (3.7.0-0.2+b1) ...
+Selecting previously unselected package libnl-route-3-dev:amd64.
+Preparing to unpack .../18-libnl-route-3-dev_3.7.0-0.2+b1_amd64.deb ...
+Unpacking libnl-route-3-dev:amd64 (3.7.0-0.2+b1) ...
+Selecting previously unselected package libibverbs-dev:amd64.
+Preparing to unpack .../19-libibverbs-dev_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking libibverbs-dev:amd64 (2410mlnx54-1.2410068) ...
+Preparing to unpack .../20-librdmacm1_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking librdmacm1:amd64 (2410mlnx54-1.2410068) over (44.0-2) ...
+Selecting previously unselected package librdmacm-dev:amd64.
+Preparing to unpack .../21-librdmacm-dev_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking librdmacm-dev:amd64 (2410mlnx54-1.2410068) ...
+Selecting previously unselected package mlnx-ethtool.
+Preparing to unpack .../22-mlnx-ethtool_6.9-1.2410068_amd64.deb ...
+Unpacking mlnx-ethtool (6.9-1.2410068) ...
+Selecting previously unselected package mlnx-iproute2.
+Preparing to unpack .../23-mlnx-iproute2_6.10.0-1.2410114_amd64.deb ...
+Unpacking mlnx-iproute2 (6.10.0-1.2410114) ...
+Preparing to unpack .../24-rdmacm-utils_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking rdmacm-utils (2410mlnx54-1.2410068) over (44.0-2) ...
+Selecting previously unselected package rshim.
+Preparing to unpack .../25-rshim_2.1.8-0.g5e3709e.2410114_amd64.deb ...
+Unpacking rshim (2.1.8-0.g5e3709e.2410114) ...
+Selecting previously unselected package srp-dkms.
+Preparing to unpack .../26-srp-dkms_24.10.OFED.24.10.1.1.4.1-1_all.deb ...
+Unpacking srp-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Selecting previously unselected package srptools.
+Preparing to unpack .../27-srptools_2410mlnx54-1.2410068_amd64.deb ...
+Unpacking srptools (2410mlnx54-1.2410068) ...
+Selecting previously unselected package libopensm.
+Preparing to unpack .../28-libopensm_5.21.0.MLNX20241126.d9aa3dff-0.1.2410114_amd64.deb ...
+Unpacking libopensm (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Selecting previously unselected package libopensm-devel.
+Preparing to unpack .../29-libopensm-devel_5.21.0.MLNX20241126.d9aa3dff-0.1.2410114_amd64.deb ...
+Unpacking libopensm-devel (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Selecting previously unselected package mft.
+Preparing to unpack .../30-mft_4.30.1-8_amd64.deb ...
+Unpacking mft (4.30.1-8) ...
+Selecting previously unselected package opensm.
+Preparing to unpack .../31-opensm_5.21.0.MLNX20241126.d9aa3dff-0.1.2410114_amd64.deb ...
+Unpacking opensm (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Selecting previously unselected package opensm-doc.
+Preparing to unpack .../32-opensm-doc_5.21.0.MLNX20241126.d9aa3dff-0.1.2410114_amd64.deb ...
+Unpacking opensm-doc (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Selecting previously unselected package ofed-scripts.
+Preparing to unpack .../33-ofed-scripts_24.10.OFED.24.10.1.1.4-1_amd64.deb ...
+Unpacking ofed-scripts (24.10.OFED.24.10.1.1.4-1) ...
+Selecting previously unselected package mlnx-ofed-basic.
+Preparing to unpack .../34-mlnx-ofed-basic_24.10-1.1.4.0_all.deb ...
+Unpacking mlnx-ofed-basic (24.10-1.1.4.0) ...
+Setting up libibverbs1:amd64 (2410mlnx54-1.2410068) ...
+Setting up ibverbs-providers:amd64 (2410mlnx54-1.2410068) ...
+Removing obsolete conffile /etc/libibverbs.d/bnxt_re.driver ...
+Removing obsolete conffile /etc/libibverbs.d/cxgb4.driver ...
+Removing obsolete conffile /etc/libibverbs.d/efa.driver ...
+Removing obsolete conffile /etc/libibverbs.d/erdma.driver ...
+Removing obsolete conffile /etc/libibverbs.d/hfi1verbs.driver ...
+Removing obsolete conffile /etc/libibverbs.d/hns.driver ...
+Removing obsolete conffile /etc/libibverbs.d/ipathverbs.driver ...
+Removing obsolete conffile /etc/libibverbs.d/irdma.driver ...
+Removing obsolete conffile /etc/libibverbs.d/mana.driver ...
+Removing obsolete conffile /etc/libibverbs.d/mlx4.driver ...
+Removing obsolete conffile /etc/libibverbs.d/mthca.driver ...
+Removing obsolete conffile /etc/libibverbs.d/ocrdma.driver ...
+Removing obsolete conffile /etc/libibverbs.d/qedr.driver ...
+Removing obsolete conffile /etc/libibverbs.d/rxe.driver ...
+Removing obsolete conffile /etc/libibverbs.d/siw.driver ...
+Setting up mlnx-iproute2 (6.10.0-1.2410114) ...
+Setting up libibumad3:amd64 (2410mlnx54-1.2410068) ...
+Setting up libopensm (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Setting up mlnx-ethtool (6.9-1.2410068) ...
+Setting up libibmad5:amd64 (2410mlnx54-1.2410068) ...
+Setting up mlnx-tools (24.10-0.2410068) ...
+Setting up kernel-mft-dkms (4.30.1.8-1) ...
+Loading new kernel-mft-dkms-4.30.1.8 DKMS files...
+First Installation: checking all kernels...
+Building only for 6.8.12-4-pve
+Building for architecture amd64
+Building initial module for 6.8.12-4-pve
+Done.
+
+mst_pci.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mst_pciconf.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod....
+Setting up libibumad-dev:amd64 (2410mlnx54-1.2410068) ...
+Setting up ibverbs-utils (2410mlnx54-1.2410068) ...
+Setting up ofed-scripts (24.10.OFED.24.10.1.1.4-1) ...
+Setting up opensm (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Setting up rshim (2.1.8-0.g5e3709e.2410114) ...
+Installation complete. To enable and start the rshim service, run:
+  systemctl daemon-reload
+  systemctl enable rshim
+  systemctl start rshim
+Setting up libibnetdisc5:amd64 (2410mlnx54-1.2410068) ...
+Setting up libibmad-dev:amd64 (2410mlnx54-1.2410068) ...
+Setting up libnl-3-dev:amd64 (3.7.0-0.2+b1) ...
+Setting up mlnx-ofed-kernel-utils (24.10.OFED.24.10.1.1.4.1-1) ...
+Configured /etc/security/limits.conf
+Setting up opensm-doc (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Setting up rdma-core (2410mlnx54-1.2410068) ...
+rdma-ndd.service is a disabled or a static unit, not starting it.
+Setting up mft (4.30.1-8) ...
+Setting up librdmacm1:amd64 (2410mlnx54-1.2410068) ...
+Setting up libopensm-devel (5.21.0.MLNX20241126.d9aa3dff-0.1.2410114) ...
+Setting up infiniband-diags (2410mlnx54-1.2410068) ...
+Setting up mlnx-ofed-kernel-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Loading new mlnx-ofed-kernel-24.10.OFED.24.10.1.1.4.1 DKMS files...
+First Installation: checking all kernels...
+Building only for 6.8.12-4-pve
+Building for architecture x86_64
+Building initial module for 6.8.12-4-pve
+# This step took a few minutes.
+
+Done.
+Forcing installation of mlnx-ofed-kernel
+
+mlx_compat.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+ib_core.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+ib_cm.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+iw_cm.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+ib_umad.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+ib_uverbs.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+rdma_cm.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+rdma_ucm.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlxfw.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlx5_core.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlx5_ib.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+ib_ipoib.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlxdevm.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+irdma.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlx5-vfio-pci.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+mlx5_vdpa.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+Running the post_install script:
+
+------------------------------------------
+----- mlnx-ofed-kernel post-install ------
+
+Going to build and install module 'srp' for kernel 6.8.12-4-pve.
+Sign command: /lib/modules/6.8.12-4-pve/build/scripts/sign-file
+Signing key: /var/lib/dkms/mok.key
+Public certificate (MOK): /var/lib/dkms/mok.pub
+Creating symlink /var/lib/dkms/srp/24.10.OFED.24.10.1.1.4.1/source -> /usr/src/srp-24.10.OFED.24.10.1.1.4.1
+
+Building module:
+Cleaning build area...
+make -j64 KERNELRELEASE=6.8.12-4-pve -j16 KVER=6.8.12-4-pve K_BUILD=/lib/modules/6.8.12-4-pve/build.......
+Signing module /var/lib/dkms/srp/24.10.OFED.24.10.1.1.4.1/build/./ib_srp.ko
+Signing module /var/lib/dkms/srp/24.10.OFED.24.10.1.1.4.1/build/./scsi/scsi_transport_srp.ko
+Cleaning build area...
+Forcing installation of srp
+
+ib_srp.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+scsi_transport_srp.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+
+Going to build and install module 'iser' for kernel 6.8.12-4-pve.
+Sign command: /lib/modules/6.8.12-4-pve/build/scripts/sign-file
+Signing key: /var/lib/dkms/mok.key
+Public certificate (MOK): /var/lib/dkms/mok.pub
+Creating symlink /var/lib/dkms/iser/24.10.OFED.24.10.1.1.4.1/source -> /usr/src/iser-24.10.OFED.24.10.1.1.4.1
+
+Building module:
+Cleaning build area...
+make -j64 KERNELRELEASE=6.8.12-4-pve -j16 KVER=6.8.12-4-pve K_BUILD=/lib/modules/6.8.12-4-pve/build........
+Signing module /var/lib/dkms/iser/24.10.OFED.24.10.1.1.4.1/build/./ib_iser.ko
+Cleaning build area...
+Forcing installation of iser
+
+ib_iser.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+
+Going to build and install module 'isert' for kernel 6.8.12-4-pve.
+Sign command: /lib/modules/6.8.12-4-pve/build/scripts/sign-file
+Signing key: /var/lib/dkms/mok.key
+Public certificate (MOK): /var/lib/dkms/mok.pub
+Creating symlink /var/lib/dkms/isert/24.10.OFED.24.10.1.1.4.1/source -> /usr/src/isert-24.10.OFED.24.10.1.1.4.1
+
+Building module:
+Cleaning build area...
+make -j64 KERNELRELEASE=6.8.12-4-pve -j16 KVER=6.8.12-4-pve K_BUILD=/lib/modules/6.8.12-4-pve/build.....
+Signing module /var/lib/dkms/isert/24.10.OFED.24.10.1.1.4.1/build/./ib_isert.ko
+Cleaning build area...
+Forcing installation of isert
+
+ib_isert.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+
+Package 'mlnx-nfsrdma-dkms' is not installed, skipping module 'mlnx-nfsrdma'.
+
+Package 'mlnx-nvme-dkms' is not installed, skipping module 'mlnx-nvme'.
+
+Package 'fwctl-dkms' is not installed, skipping module 'fwctl'.
+
+Package 'mlx5_fwctl-dkms' is not installed, skipping module 'mlx5_fwctl'.
+------------------------------------------
+
+depmod...
+Setting up srptools (2410mlnx54-1.2410068) ...
+Setting up libnl-route-3-dev:amd64 (3.7.0-0.2+b1) ...
+Setting up ibacm (2410mlnx54-1.2410068) ...
+Created symlink /etc/systemd/system/rdma-hw.target.wants/ibacm.service → /lib/systemd/system/ibacm.service.
+Unit /lib/systemd/system/ibacm.service is added as a dependency to a non-existent unit rdma-hw.target.
+Could not execute systemctl:  at /usr/bin/deb-systemd-invoke line 145.
+Setting up rdmacm-utils (2410mlnx54-1.2410068) ...
+Setting up libibverbs-dev:amd64 (2410mlnx54-1.2410068) ...
+Setting up librdmacm-dev:amd64 (2410mlnx54-1.2410068) ...
+Processing triggers for initramfs-tools (0.142+deb12u1) ...
+update-initramfs: Generating /boot/initrd.img-6.8.12-4-pve
+Running hook script 'zz-proxmox-boot'..
+Re-executing '/etc/kernel/postinst.d/zz-proxmox-boot' in new private mount namespace..
+No /etc/kernel/proxmox-boot-uuids found, skipping ESP sync.
+Processing triggers for libc-bin (2.36-9+deb12u9) ...
+Processing triggers for man-db (2.11.2-2) ...
+Setting up isert-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Removing old isert-24.10.OFED.24.10.1.1.4.1 DKMS files...
+Module isert-24.10.OFED.24.10.1.1.4.1 for kernel 6.8.12-4-pve (x86_64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ib_isert.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.8.12-4-pve/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module isert-24.10.OFED.24.10.1.1.4.1 completely from the DKMS tree.
+Loading new isert-24.10.OFED.24.10.1.1.4.1 DKMS files...
+First Installation: checking all kernels...
+Building only for 6.8.12-4-pve
+Building for architecture x86_64
+Building initial module for 6.8.12-4-pve
+Done.
+Forcing installation of isert
+
+ib_isert.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+Setting up iser-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Removing old iser-24.10.OFED.24.10.1.1.4.1 DKMS files...
+Module iser-24.10.OFED.24.10.1.1.4.1 for kernel 6.8.12-4-pve (x86_64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ib_iser.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.8.12-4-pve/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module iser-24.10.OFED.24.10.1.1.4.1 completely from the DKMS tree.
+Loading new iser-24.10.OFED.24.10.1.1.4.1 DKMS files...
+First Installation: checking all kernels...
+Building only for 6.8.12-4-pve
+Building for architecture x86_64
+Building initial module for 6.8.12-4-pve
+Done.
+Forcing installation of iser
+
+ib_iser.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+Setting up srp-dkms (24.10.OFED.24.10.1.1.4.1-1) ...
+Removing old srp-24.10.OFED.24.10.1.1.4.1 DKMS files...
+Module srp-24.10.OFED.24.10.1.1.4.1 for kernel 6.8.12-4-pve (x86_64).
+Before uninstall, this module version was ACTIVE on this kernel.
+
+ib_srp.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.8.12-4-pve/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+
+scsi_transport_srp.ko:
+ - Uninstallation
+   - Deleting from: /lib/modules/6.8.12-4-pve/updates/dkms/
+ - Original module
+   - No original module was found for this module on this kernel.
+   - Use the dkms install command to reinstall any previous module version.
+depmod...
+Deleting module srp-24.10.OFED.24.10.1.1.4.1 completely from the DKMS tree.
+Loading new srp-24.10.OFED.24.10.1.1.4.1 DKMS files...
+First Installation: checking all kernels...
+Building only for 6.8.12-4-pve
+Building for architecture x86_64
+Building initial module for 6.8.12-4-pve
+Done.
+Forcing installation of srp
+
+ib_srp.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+
+scsi_transport_srp.ko:
+Running module version sanity check.
+ - Original module
+ - Installation
+   - Installing to /lib/modules/6.8.12-4-pve/updates/dkms/
+depmod...
+Setting up mlnx-ofed-basic (24.10-1.1.4.0) ...
+# This- was added after I documented the original command.
+root@kube02:/etc/apt/sources.list.d# apt-get install mstflint
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libc-ares2 libyang2
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  libboost-filesystem1.74.0 libjsoncpp25 libmuparser2v5
+The following NEW packages will be installed:
+  libboost-filesystem1.74.0 libjsoncpp25 libmuparser2v5 mstflint
+0 upgraded, 4 newly installed, 0 to remove and 110 not upgraded.
+Need to get 0 B/2,500 kB of archives.
+After this operation, 19.7 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Selecting previously unselected package libboost-filesystem1.74.0:amd64.
+(Reading database ... 154022 files and directories currently installed.)
+Preparing to unpack .../libboost-filesystem1.74.0_1.74.0+ds1-21_amd64.deb ...
+Unpacking libboost-filesystem1.74.0:amd64 (1.74.0+ds1-21) ...
+Selecting previously unselected package libjsoncpp25:amd64.
+Preparing to unpack .../libjsoncpp25_1.9.5-4_amd64.deb ...
+Unpacking libjsoncpp25:amd64 (1.9.5-4) ...
+Selecting previously unselected package libmuparser2v5:amd64.
+Preparing to unpack .../libmuparser2v5_2.3.3-0.1_amd64.deb ...
+Unpacking libmuparser2v5:amd64 (2.3.3-0.1) ...
+Selecting previously unselected package mstflint.
+Preparing to unpack .../mstflint_4.21.0+1-1_amd64.deb ...
+Unpacking mstflint (4.21.0+1-1) ...
+Setting up libboost-filesystem1.74.0:amd64 (1.74.0+ds1-21) ...
+Setting up libjsoncpp25:amd64 (1.9.5-4) ...
+Setting up libmuparser2v5:amd64 (2.3.3-0.1) ...
+Setting up mstflint (4.21.0+1-1) ...
+Processing triggers for libc-bin (2.36-9+deb12u9) ...
+Processing triggers for man-db (2.11.2-2) ...
