@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grocy
+  namespace: external-services
+spec:
+  type: ExternalName
+  externalName: grocy.svr.xtremeownage.com
+  ports:
+    - name: http
+      port: 80
+
+---
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grocy
+  namespace: external-services
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`grocy.kube.xtremeownage.com`)
+      kind: Rule
+      services:
+        - name: grocy
+          port: 80
+          scheme: http
