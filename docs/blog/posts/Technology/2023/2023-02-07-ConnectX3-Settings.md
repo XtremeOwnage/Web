@@ -20,7 +20,7 @@ This guide is specific to ethernet mode, but, may or may not work with infiniban
 !!! warn
         A newer version of this post is available now.
 
-[See: ConnectX Guide](../2025/2025-05-15-ConnectX-Helpers.md)
+[See: ConnectX Guide](../2025/ConnectX-Helpers.md)
 
 
 ## Software Needed
