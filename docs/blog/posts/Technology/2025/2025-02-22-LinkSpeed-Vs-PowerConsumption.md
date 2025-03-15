@@ -39,7 +39,7 @@ For this post- I will benchmark and determine the impact.
 
 ### Hardware
 
-The hardware being tested, is a Dell Optiplex 5060SFF, with a 100G Mellonax ConnectX-4 NIC. [More Details](https://static.xtremeownage.com/blog/2024/2024-homelab-status/#optiplex-sffs){target=_blank}
+The hardware being tested, is a Dell Optiplex 5060SFF, with a 100G Mellanox ConnectX-4 NIC. [More Details](https://static.xtremeownage.com/blog/2024/2024-homelab-status/#optiplex-sffs){target=_blank}
 
 The NIC being tested is a Mellanox ConnectX-4 CX-416A 100GBe Dual Port NIC [eBay: ConnectX-4 CX-416A](https://ebay.us/W0nsy0){target=_blank}[^ebay]
 

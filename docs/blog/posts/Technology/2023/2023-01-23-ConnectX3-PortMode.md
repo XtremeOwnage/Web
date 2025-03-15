@@ -3,6 +3,7 @@ title: "ConnectX-3 Set Port Mode to ETH/IB"
 date: 2023-01-23
 tags:
   - Homelab
+  - Networking/Mellanox
 ---
 
 # ConnectX-3 Set Port Mode to ETH/IB
@@ -15,9 +16,16 @@ After once again googling how to change the mode over, I figured I would just qu
 
 <!-- more -->
 
+## Depreciated!!!!
+
+!!! warn
+        A newer version of this post is available now.
+
+[See: ConnectX Guide](../2025/2025-05-15-ConnectX-Helpers.md)
+
 ## Why would you change this?
 
-Mellonax NICs can support traffic in either Ethernet mode, or Infiniband Mode. 
+Mellanox NICs can support traffic in either Ethernet mode, or Infiniband Mode. 
 
 In ethernet mode, they function exactly like you would expect a NIC to work. However, in Infiniband mode, they work quite a bit different, and may require special drivers and software to perform correctly.
 
