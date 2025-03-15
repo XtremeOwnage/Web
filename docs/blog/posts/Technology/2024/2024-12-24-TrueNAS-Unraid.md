@@ -137,4 +137,4 @@ Its easy to make VMs. Its easy to make containers. Its easy to add shares.
 
 ## Summary
 
-A very short post- Originally this content was apart of [2024 Homelab Summary](./2024-12-20-homelab-2024.md){target=_blank}, However, I broke it out to have its own post.
+A very short post- Originally this content was apart of [2024 Homelab Summary](./homelab-2024.md){target=_blank}, However, I broke it out to have its own post.

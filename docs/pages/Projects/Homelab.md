@@ -14,5 +14,5 @@ My goal is to publish at least a yearly report on whats new, the current status,
 
 ### 2024
 
-- **[2024 Homelab Summary](../../blog/posts/Technology/2024/2024-12-28-homelab-2024.md)**: An in-depth summary of my homelab, hardware, networking, etc.
+- **[2024 Homelab Summary](../../blog/posts/Technology/2024/homelab-2024.md)**: An in-depth summary of my homelab, hardware, networking, etc.
 - **[2024 Networking Refresh](../../blog/posts/Technology/2024/2024-11-23-Network-Refresh.md)**: Networking changes, redoing vlans, routing, etc.
