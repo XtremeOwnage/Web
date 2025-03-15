@@ -15,6 +15,14 @@ This guide is specific to ethernet mode, but, may or may not work with infiniban
 
 <!-- more -->
 
+## Depreciated!!!!
+
+!!! warn
+        A newer version of this post is available now.
+
+[See: ConnectX Guide](../2025/2025-05-15-ConnectX-Helpers.md)
+
+
 ## Software Needed
 
 To perform general configuration of the ConnectX-3, we will need....
