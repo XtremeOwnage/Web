@@ -88,7 +88,7 @@ Mellanox Infiniband NICs (Every one of the listed Mellanox NICs) can be ran in e
 
 I personally prefer Mellanox NICs. In my experiences, these are the best bang for the buck, are generally really cheap, plug and play, and have been extremely reliable.
 
-In my experiences, Intel, Mellonax, and Chelsio have all been plug and play with both Linux and Windows.
+In my experiences, Intel, Mellanox, and Chelsio have all been plug and play with both Linux and Windows.
 
 ## Switches
 
