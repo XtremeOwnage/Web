@@ -1,5 +1,5 @@
 ---
-title: DIN Mount Closet - Part 1
+title: DIN Mount Closet Part 1
 date: 2025-02-13
 tags:
     - Homelab
@@ -367,3 +367,5 @@ Weather stripping was added which will help to avoid scratching the wall, and to
 Part 1 of this post is specifically about building the frame.
 
 For Part 2, we will start mounting DIN rails, networking components, cable management, etc.
+
+### [Part 2](din-closet-2.md)
