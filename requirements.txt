@@ -13,5 +13,6 @@ mkdocs-material[imaging]
 mkdocs-minify-plugin
 mkdocs-redirects
 mkdocs-rss-plugin
+mkdocs-table-reader-plugin
 pymdown-extensions
 tzdata

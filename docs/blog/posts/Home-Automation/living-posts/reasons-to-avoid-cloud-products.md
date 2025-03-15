@@ -18,6 +18,13 @@ This is intended to be a “living” post which will be updated as I add more i
 
 This section will go over major issues reported, by year. Major issues are categorized as massive privacy breaches, discontinued / depreciated services, and extended outages.
 
+### 2016
+
+#### Staples Connect - Discontinued
+
+* <https://www.retaildive.com/news/staples-replacing-connect-with-third-party-smart-home-system/423867/>{target=_blank}
+* <http://www.thedigitalmediazone.com/2016/06/04/staples-disconnect/>{target=_blank}
+
 ### 2019
 
 #### Google/Nest - Works with nest discontinued
@@ -262,10 +269,73 @@ While- MyQ has been very troublesome for years, In november, they officially ann
 
 * <https://chamberlaingroup.com/press/a-message-about-our-decision-to-prevent-unauthorized-usage-of-myq>
 * <https://www.home-assistant.io/blog/2023/11/06/removal-of-myq-integration/>
+* <https://www.theverge.com/23949612/chamberlain-myq-smart-garage-door-controller-homebridge-integrations>
 
 So... if you take hint from the multitude of issues over the last few years.... officially, home assistant will no longer work with myQ.
 
 They did start a "Works with MyQ" program, however, the list of supported integrations is more of a joke, then a practicality. 
+
+#### Mazda - Cease and desist letter sent to maintainer of integration library
+
+* <https://www.home-assistant.io/blog/2023/10/13/removal-of-mazda-connected-services-integration/>
+* <https://github.com/github/dmca/blob/master/2023/10/2023-10-10-mazda.md>
+
+As a result of the library's maintainer literally being threated with legal action.... Mazda integrations are no longer available.
+
+### 2024
+
+#### Ariston - Constant API Issues[^internet-of-trash]
+
+* <https://github.com/fustom/ariston-remotethermo-home-assistant-v3/issues/361>
+
+Nothing worse then an API which is constantly breaking.
+
+#### Viron Astral Pool Chlorinator
+
+* <https://community.home-assistant.io/t/viron-astral-pool-chlorinatorgo-integration/375495/408>
+
+Updated their API, forced internet connections. Basically broke all local integrations.
+
+#### Ecobee - No longer allowing API Access
+
+*<https://www.home-assistant.io/integrations/ecobee>
+
+On the plus side, You can integrate these with homekit still.
+
+#### Shark - API no longer accessible - Integration Broken
+
+* <https://github.com/JeffResc/sharkiq/issues/51>
+
+
+#### Tplink/Kasa - KL135 bulbs reset without internet
+
+* <https://www.reddit.com/r/TPLinkKasa/comments/x3pyh4/kl135_bulbs_keep_resetting_themselves/>
+
+I personally keep all of my IOT devices 100% isolated from the internet, and the rest of my LAN. This is unacceptable.
+
+### 2025
+
+#### Tesla - Charging money for API Access
+
+* <https://mashable.com/article/tesla-api-pricing>
+* <https://developer.tesla.com/docs/fleet-api/billing-and-limits>
+
+#### Bambu - Limiting 3rd party access. 
+
+This- is not specifically cloud- as these products are locally accessed and controlled, however, I feel it deserves a spot on this list.
+
+* <https://blog.bambulab.com/firmware-update-introducing-new-authorization-control-system-2/>
+* <https://github.com/greghesp/ha-bambulab/issues/833#issuecomment-2596570305>
+
+This firmware update will make it to where many actions requires authorization in order to be executed.
+
+Not- YOUR authorization, but, "Official" authorization.
+
+Have a 3d printing dashboard in home assistant, where you have buttons to start/stop printing, etc?
+
+More or less- you are about to lose the ability to set/write anything to your Bambu products.
+
+Yet another reason to look for user-servicable firmware.
 
 ## On-Going Issues
 
@@ -384,3 +454,7 @@ As this is a living post, if you feel anything is missing, or incorrect, please 
 * 4/20/2022 – Created initial post.
 * 4/12/2022 – Added more references from THIS post.
 * 12/1/2022 - Migrated post to static site. Updated/followed up on a few of the entries.
+
+### Footnotes
+
+[^internet-of-trash]: This record was pulled from https://github.com/unixorn/internet-of-trash

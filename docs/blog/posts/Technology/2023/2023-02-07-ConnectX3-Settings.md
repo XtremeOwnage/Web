@@ -4,6 +4,7 @@ date: 2023-01-23
 tags:
   - Homelab
   - Networking
+  - Networking/Mellanox
 ---
 
 # How to configure ConnectX-3 via Linux
@@ -13,6 +14,14 @@ A quick guide on how to set common options with the ConnectX-3, via linux, witho
 This guide is specific to ethernet mode, but, may or may not work with infiniband mode.
 
 <!-- more -->
+
+## Depreciated!!!!
+
+!!! warn
+        A newer version of this post is available now.
+
+[See: ConnectX Guide](../2025/2025-05-15-ConnectX-Helpers.md)
+
 
 ## Software Needed
 
