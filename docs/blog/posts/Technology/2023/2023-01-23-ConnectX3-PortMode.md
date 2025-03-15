@@ -3,6 +3,7 @@ title: "ConnectX-3 Set Port Mode to ETH/IB"
 date: 2023-01-23
 tags:
   - Homelab
+  - Networking/Mellonax
 ---
 
 # ConnectX-3 Set Port Mode to ETH/IB
