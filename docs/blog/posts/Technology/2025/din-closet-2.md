@@ -193,4 +193,4 @@ And, then I just slid the "shelf" onto the mount. It locked securely into place 
 
 Thats, honestly it for this section. The only remaining item is to start mounting networking hardware.
 
-I will make part 3 for that. 
+In [Part 3](din-closet-3.md), all of the networking components will be mounted and this project will be completed.
