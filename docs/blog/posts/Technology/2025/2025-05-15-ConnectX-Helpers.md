@@ -670,7 +670,7 @@ In the above output, Kube01 has a CX-4121A, while Kube02/Kube05 have CX-416A
 
 The back of the card "should" contain both a sticker, and label on the PCB with the specific model of your card.
 
-![alt text](./assets-cx4/cx4121c.png)
+![alt text](./assets-cx4/cx4121c.webP)
 
 This was from a dead card 25G CX-4121C I had on hand. It is a CX-4121C
 
@@ -678,15 +678,15 @@ Digging through my stash, I found a few more examples.
 
 Here is the CX-416A 100G NIC used in Kube02, and Kube05 currently.
 
-![alt text](assets-cx4/cx416a.png)
+![alt text](assets-cx4/cx416a.webP)
 
 Here is an older CX-311A-XCAT (Single-port 10G. Dirt cheap. But old.)
 
-![alt text](assets-cx4/cx311a-xcat.png)
+![alt text](assets-cx4/cx311a-xcat.webP)
 
 And, finally, a ConnectX-3 CX-354A (Dual-Port 40G Ethernet / 56G Infiniband)
 
-![alt text](assets-cx4/cx354a.png)
+![alt text](assets-cx4/cx354a.webP)
 
 #### Find Firmware
 
@@ -724,7 +724,7 @@ Using both the part number, and PSID, we can locate the correct firmware.
 !!! info
         If you cannot exactly match the part number, look through the various categories and try to match the PSID.
 
-![alt text](assets-cx4/psid-match.png)
+![alt text](assets-cx4/psid-match.webP)
 
 Copy the download link for later.
 
@@ -749,11 +749,11 @@ But- lets start at the [ConnectX-4 LX Firmware](https://network.nvidia.com/suppo
 
 We know this is a CX-4121A, based on the back of the card.
 
-![](assets-cx4/cx4121c.png)
+![](assets-cx4/cx4121c.webP)
 
 However, we run into an issue- this doesn't help us narrow it down.
 
-![alt text](assets-cx4/4121c-fw-q.png)
+![alt text](assets-cx4/4121c-fw-q.webP)
 
 So- at this point, you have to do a tiny bit of guess work.
 
@@ -765,7 +765,7 @@ And search through each category until you find `2420110034`
 
 In this example, I found the matching partial PSID under "MCX4121A-ACAT"
 
-![alt text](assets-cx4/MCX4121A-ACAT.png)
+![alt text](assets-cx4/MCX4121A-ACAT.webP)
 
 The resulting URL being: `https://www.mellanox.com/downloads/firmware/fw-ConnectX4Lx-rel-14_32_1900-MCX4121A-ACA_Ax-UEFI-14.25.17-FlexBoot-3.6.502.bin.zip`
 
