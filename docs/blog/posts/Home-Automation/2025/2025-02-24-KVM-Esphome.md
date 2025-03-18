@@ -148,7 +148,25 @@ At this point, all of the physical modifications are done.
 
 Once you have initially flashed the ESP, you can reassemble the case.
 
+## Q&A, Issues, etc.
 
+### Why does it take so long to switch between PCs?
+
+The reason there is such a long delay when switching devices is due to the lack of EDID emulation.
+
+The delay when switching between PCs on a cheap KVM switch happens because it physically disconnects and reconnects the display each time you switch. 
+
+Without EDID emulation, each PC thinks the monitor has been unplugged and replugged, causing it to reinitialize the display settings.
+
+With EDID emulation, the KVM switch presents a constant virtual display to each connected PC, making the system believe the monitor is always connected. This prevents resolution changes, window repositioning, and eliminates the delay caused by display detection during switching.
+
+### Your Soldering is horrible
+
+I know. But- fit for use, fit for purpose. It will do its job until this KVM is disposed of.
+
+### Why didn't you use a HDMI KVM, they are cheaper & easier to work with.
+
+Because all of the PCs I need to control have 
 
 ### To Do...
 
