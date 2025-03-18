@@ -453,7 +453,7 @@ We can use mstflint to get details about the currently installed firmware.
 **Command**:
 
 ``` bash
-mstclint -d $CX_ADDRESS query
+mstflint -d $CX_ADDRESS query
 ```
 
 **Output**:
@@ -698,7 +698,7 @@ We can download firmware from Nvidia.
         Don't come at me with pitchforks with Nvidia moves these links... again...
 
 * [Master Listing](https://network.nvidia.com/support/firmware/firmware-downloads/){target=_blank}
-* [ConnectX-3 EN Firmware](https://network.nvidia.com/support/firmware/connectx4en/){target=_blank}
+* [ConnectX-3 EN Firmware](https://network.nvidia.com/support/firmware/connectx3en/){target=_blank}
 * [ConnectX-3 Pro EN Firmware](https://network.nvidia.com/support/firmware/connectx3proen/){target=_blank}
 * [ConnectX-4 LX Firmware](https://network.nvidia.com/support/firmware/connectx4lxen/){target=_blank}
 * [ConnectX-4 EN Firmware](https://network.nvidia.com/support/firmware/connectx4en/){target=_blank}
@@ -798,7 +798,7 @@ wget $FW_URL
 # Extract Firmware
 unzip $FW_ARCHIVE_NAME
 # Burn the new firmware.
-mstflint -d $CX_ADDRESS -i $FW_FILE_NAME burn --allow_psid_change
+mstflint --allow_psid_change -d $CX_ADDRESS -i $FW_FILE_NAME burn 
 
 # Finally, cleanup the files we downloaded.
 rm $FW_ARCHIVE_NAME
@@ -844,7 +844,7 @@ rm $FW_FILE_NAME
         root@kube05:~# unzip $FW_ARCHIVE_NAME
         Archive:  fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
         inflating: fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin
-        root@kube05:~# mstflint -d $CX_ADDRESS -i $FW_FILE_NAME burn --allow_psid_change
+        root@kube05:~# mstflint --allow_psid_change -d $CX_ADDRESS -i $FW_FILE_NAME burn
 
         Current FW version on flash:  12.28.2006
         New FW version:               12.28.2302
@@ -879,7 +879,7 @@ Done.
 This will stop the flashing process. To, enable changing the PSID, we can use this flag: `--allow_psid_change`
 
 ``` bash
-root@kube01:~/mlnx# mstflint -d $CX_ADDRESS -i $FW_FILE_NAME burn --allow_psid_change
+root@kube01:~/mlnx# mstflint --allow_psid_change -d $CX_ADDRESS -i $FW_FILE_NAME burn
 Done.
     Current FW version on flash:  14.14.2320
     New FW version:               14.32.1900
