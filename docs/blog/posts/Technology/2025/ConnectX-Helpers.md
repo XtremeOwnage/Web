@@ -698,7 +698,7 @@ We can download firmware from Nvidia.
         Don't come at me with pitchforks with Nvidia moves these links... again...
 
 * [Master Listing](https://network.nvidia.com/support/firmware/firmware-downloads/){target=_blank}
-* [ConnectX-3 EN Firmware](https://network.nvidia.com/support/firmware/connectx4en/){target=_blank}
+* [ConnectX-3 EN Firmware](https://network.nvidia.com/support/firmware/connectx3en/){target=_blank}
 * [ConnectX-3 Pro EN Firmware](https://network.nvidia.com/support/firmware/connectx3proen/){target=_blank}
 * [ConnectX-4 LX Firmware](https://network.nvidia.com/support/firmware/connectx4lxen/){target=_blank}
 * [ConnectX-4 EN Firmware](https://network.nvidia.com/support/firmware/connectx4en/){target=_blank}
