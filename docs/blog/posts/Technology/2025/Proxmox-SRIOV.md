@@ -1,4 +1,24 @@
 
+## Enable IOMMU
+
+Source: https://www.reddit.com/r/Proxmox/comments/cm81tc/tutorial_enabling_sriov_for_intel_nic_x550t2_on/
+
+intel_iommu=on iommu=pt
+
+update-grub
+
+## Enable Modules
+
+Source: https://www.reddit.com/r/Proxmox/comments/cm81tc/tutorial_enabling_sriov_for_intel_nic_x550t2_on/
+
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+
+update-initramfs -u -k all
+
+reboot
 
 ## SystemD Script
 
