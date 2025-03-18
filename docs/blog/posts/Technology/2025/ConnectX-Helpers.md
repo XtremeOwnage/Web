@@ -453,7 +453,7 @@ We can use mstflint to get details about the currently installed firmware.
 **Command**:
 
 ``` bash
-mstclint -d $CX_ADDRESS query
+mstflint -d $CX_ADDRESS query
 ```
 
 **Output**:
