@@ -45,6 +45,9 @@ Details will be given below in this post.
 
 This will NOT route any traffic over the VPN. Those steps will be provided later in this post.
 
+!!! warning
+    You will need to modify the variables at the top of the script.
+
 ```
 ### These variables MUST be changed
 
@@ -52,34 +55,34 @@ This will NOT route any traffic over the VPN. Those steps will be provided later
 # Set the peer's endpoint here. (Under [peer] section of config)
 # Remove the port!
 
-: global peer_endpoint_ip 1.20.30.40
+: global peerEndpointIP 1.20.30.40
 # Set the peer's port here (The port from [Peer].Endpoint)
-: global peer_endpoint_port 51820
+: global peerEndpointPort 51820
 
 ## Set Public/Private Keys
 # Put your peer's public key here. (Under [peer] section of config)
-: global peer_key "PsLFVA2NRBa0P8zXiwHN8LqD11e3weemHoduXs8XBns="
+: global peerPublicKey "PsLFVA2NRBa0P8zXiwHN8LqD11e3weemHoduXs8XBns="
 # Put your private key here. (Under [interface] section of config)
-: global vpn_private_key "gMe7NtkQJdnxeFc5jmdke+CNY45Y/aN1ugLpiMF9X3g="
+: global myPrivateKey "gMe7NtkQJdnxeFc5jmdke+CNY45Y/aN1ugLpiMF9X3g="
 
 ## Set Local IPs
 # This is the IP address from the [Interface] section of the configuration from our provider.
-: global vpn_local_ip 10.2.0.2
+: global myLocalIP 10.2.0.2
 # This is the local IP address from the Peer. It is not listed in the configuration I received- however, 
 # We can assume is is a /30 subnet, which leaves... 10.2.0.1. Also- this matches the DNS received in the upstream configuration.
-: global peer_local_ip 10.2.0.1
+: global peerLocalIP 10.2.0.1
 
 ### These variables can optionally be changed, if needed.
 # Set a name for the interface
-: global vpn_interface_name "WG-VPN-OUT"
+: global vpnInterfaceName "WG-VPN-OUT"
 # Set a name for the interface list which will contain "outbound" VPNs
-: global vpn_interface_list_name "Outbound_VPN"
+: global vpnInterfaceListName "Outbound_VPN"
 # Set local port. (Only need to change if it is already in use by another connection)
-: global vpn_local_port 22580
+: global vpnLocalPort 22580
 # Name of the new routing-table which will be used to force clients over VPN connections
-: global vpn_table_name "force-vpn"
+: global vpnRoutingTableName "force-vpn"
 # Name of the firewall chain which will be used for VPN traffic
-: global vpn_chain_name_in "OUTBOUND_VPN-IN"
+: global vpnFirewallChainNameIn "OUTBOUND_VPN-IN"
 
 ### Below here, creates the correct configurations.
 
@@ -87,45 +90,45 @@ This will NOT route any traffic over the VPN. Those steps will be provided later
 
 # Create interface
 /interface wireguard
-add listen-port=$vpn_local_port mtu=1420 name=$vpn_interface_name private-key=$vpn_private_key
+add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
 
 # Create the peer
 /interface wireguard peers
-add allowed-address=0.0.0.0/0 comment=$vpn_interface_name endpoint-address=$peer_endpoint_ip endpoint-port=$peer_endpoint_port interface=$vpn_interface_name public-key=$peer_key
+add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
 
 # Create Interface List
 /interface list
-add comment="Outbound VPN Interfaces" name=$vpn_interface_list_name
+add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
 
 # Add VPN Interface to list
 /interface list member
-add comment="Remote VPN Peer" interface=$vpn_interface_name list=$vpn_interface_list_name
+add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
 
 # Create IP Address
 /ip address
-add address=$vpn_local_ip/30 comment=$vpn_interface_name interface=$vpn_interface_name network=$vpn_local_ip
+add address=$myLocalIP/30 comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
 
 # Create Routing Table. This will force the specified clients to route over the VPN.
 /routing/table
-add disabled=no name=$vpn_table_name fib
+add disabled=no name=$vpnRoutingTableName fib
 
 # Create Routes to force traffic over VPN.
 /ip/route
-add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peer_local_ip routing-table=$vpn_table_name scope=30 suppress-hw-offload=no target-scope=10
+add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
 # This create a blackhole route, which will drop outbound traffic if the VPN connection is down.
-add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpn_table_name scope=30 suppress-hw-offload=no
+add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
 
 # Create outbound NAT rule to masquerade traffic going over VPN.
 /ip firewall nat
-add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpn_interface_list_name
+add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
 
 # Create Firewall Rules. Only allow established connections. Drop everything else.
 /ip firewall filter
-add chain=input                 action=jump                     comment="Chain: $vpn_chain_name_in" in-interface-list=$vpn_interface_list_name jump-target=$vpn_chain_name_in
-add chain=$vpn_chain_name_in    action=fasttrack-connection     comment="Fasttrack: Related, Established" connection-state=established,related hw-offload=yes
-add chain=$vpn_chain_name_in    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
-add chain=$vpn_chain_name_in    action=drop                     comment="Drop: State: Invalid" connection-state=invalid
-add chain=$vpn_chain_name_in    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
+add chain=input                 action=jump                     comment="Chain: $vpnFirewallChainNameIn" in-interface-list=$vpnInterfaceListName jump-target=$vpnFirewallChainNameIn
+add chain=$vpnFirewallChainNameIn    action=fasttrack-connection     comment="Fasttrack: Related, Established" connection-state=established,related hw-offload=yes
+add chain=$vpnFirewallChainNameIn    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
+add chain=$vpnFirewallChainNameIn    action=drop                     comment="Drop: State: Invalid" connection-state=invalid
+add chain=$vpnFirewallChainNameIn    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
 
 # Create an address list containing the RFC1918 IPv4 subnet ranges. (Aka, Private IPv4 Ranges)
 /ip firewall address-list
@@ -136,9 +139,9 @@ add address=192.168.0.0/16 list=rfc1918
 # Create mangle rules, which will force the specific traffic to use the VPN-Only Routing Table
 /ip firewall mangle
 # This rule forces traffic via VPN for source IP address. Aka- force local hosts to use VPN
-add action=mark-routing chain=prerouting comment="Force VPN for Source Address"      dst-address-list=!rfc1918      new-routing-mark=$vpn_table_name src-address-list=Force_SRC_VPN
+add action=mark-routing chain=prerouting comment="Force VPN for Source Address"      dst-address-list=!rfc1918      new-routing-mark=$vpnRoutingTableName src-address-list=Force_SRC_VPN
 # This rule forces traffic via VPN for destination IP addresses. Aka, Specific hosts on the WAN, or specific websites.
-add action=mark-routing chain=prerouting comment="Force VPN for Destination Address" dst-address-list=Force_DST_VPN new-routing-mark=$vpn_table_name
+add action=mark-routing chain=prerouting comment="Force VPN for Destination Address" dst-address-list=Force_DST_VPN new-routing-mark=$vpnRoutingTableName
 ```
 
 !!! note
@@ -162,7 +165,7 @@ This creates a new wireguard interface, and associates the private key from the 
 
 # Create interface
 /interface wireguard
-add listen-port=$vpn_local_port mtu=1420 name=$vpn_interface_name private-key=$vpn_private_key
+add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
 ```
 
 #### Create the peer
@@ -171,7 +174,7 @@ This will create the remote peer. By specifying the endpoint here, the router wi
 
 ```
 /interface wireguard peers
-add allowed-address=0.0.0.0/0 comment=$vpn_interface_name endpoint-address=$peer_endpoint_ip endpoint-port=$peer_endpoint_port interface=$vpn_interface_name public-key=$peer_key
+add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
 ```
 
 #### Create Interface List
@@ -182,14 +185,14 @@ If- for example you had multiple outbound VPN connections to various providers, 
 
 ```
 /interface list
-add comment="Outbound VPN Interfaces" name=$vpn_interface_list_name
+add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
 ```
 
 Then- we add the VPN interface to the newly created list.
 
 ```
 /interface list member
-add comment="Remote VPN Peer" interface=$vpn_interface_name list=$vpn_interface_list_name
+add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
 ```
 
 #### Create IP Address
@@ -200,7 +203,7 @@ This line provisions our local IP address, for the VPN interface.
 
 ```
 /ip address
-add address=$vpn_local_ip/30 comment=$vpn_interface_name interface=$vpn_interface_name network=$vpn_local_ip
+add address=$myLocalIP/30 comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
 ```
 
 #### Create Routing Table. This will force the specified clients to route over the VPN.
@@ -211,7 +214,7 @@ To do this- we will first create a routing table. This- will not be used by anyt
 
 ```
 /routing/table
-add disabled=no name=$vpn_table_name fib
+add disabled=no name=$vpnRoutingTableName fib
 ```
 
 Next- we create the default route, which tells all traffic to route through the remote peer.
@@ -222,7 +225,7 @@ The distance here is set to 1, which will make this the preferred route.
 
 ```
 /ip/route
-add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peer_local_ip routing-table=$vpn_table_name scope=30 suppress-hw-offload=no target-scope=10
+add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
 ```
 Afterwards, A blackhole route is created with a higher distance then the default route.
 
@@ -231,7 +234,7 @@ When- the primary default route is marked as inactive due to the remote host bei
 This will "blackhole" the traffic. Ie- it gets dropped.
 
 ```
-add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpn_table_name scope=30 suppress-hw-offload=no
+add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
 ```
 
 #### Outbound NAT
@@ -244,7 +247,7 @@ So- I NAT outbound traffic going through any of the interfaces in the newly crea
 
 ```
 /ip firewall nat
-add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpn_interface_list_name
+add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
 ```
 
 #### Firewall Rules
@@ -255,22 +258,22 @@ Since- I have quite a few firewall rules, I prefer to use chains to organize rul
 /ip firewall filter
 
 # When traffic comes into any of the interfaces on the outbound VPN interface list, we will jump to the "VPN-IN Chain"
-add chain=input                 action=jump                     comment="Chain: $vpn_chain_name_in" in-interface-list=$vpn_interface_list_name jump-target=$vpn_chain_name_in
+add chain=input                 action=jump                     comment="Chain: $vpnFirewallChainNameIn" in-interface-list=$vpnInterfaceListName jump-target=$vpnFirewallChainNameIn
 
 ## The below rules are only applied against traffic matched by the above jump rule.
 
 # For any hardware-offloaded established connections, fast-track.
-add chain=$vpn_chain_name_in    action=fasttrack-connection     comment="Fasttrack: Related, Established" connection-state=established,related hw-offload=yes
+add chain=$vpnFirewallChainNameIn    action=fasttrack-connection     comment="Fasttrack: Related, Established" connection-state=established,related hw-offload=yes
 
 # Allow established, related sessions.
-add chain=$vpn_chain_name_in    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
+add chain=$vpnFirewallChainNameIn    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
 
 # Drop invalid packets.
-add chain=$vpn_chain_name_in    action=drop                     comment="Drop: State: Invalid" connection-state=invalid
+add chain=$vpnFirewallChainNameIn    action=drop                     comment="Drop: State: Invalid" connection-state=invalid
 
 # Drop... ALL packets.
 # This- will drop any inbound packets, which are not apart of an active, established session.
-add chain=$vpn_chain_name_in    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
+add chain=$vpnFirewallChainNameIn    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
 ```
 
 ## Route Specific Hosts through VPN (By Source IP/Mask)
@@ -290,13 +293,13 @@ add address=192.168.1.16 comment="IP Addresses in this list will only be allowed
 After the lists has been created, Add a mangle rule to force clients to use the new routing table created earlier, but only for traffic WAN-bound.
 
 !!! info
-    This uses the $vpn_table_name variable from the main script. This also uses the rfc1918 address-list created in the initial script.
+    This uses the $vpnRoutingTableName variable from the main script. This also uses the rfc1918 address-list created in the initial script.
 
     This mangle rule is created by the main script as well.
 
 ```
 /ip firewall mangle
-add action=mark-routing chain=prerouting comment="Force VPN for Source Address" dst-address-list=!rfc1918 new-routing-mark=$vpn_table_name src-address-list=Force_SRC_VPN
+add action=mark-routing chain=prerouting comment="Force VPN for Source Address" dst-address-list=!rfc1918 new-routing-mark=$vpnRoutingTableName src-address-list=Force_SRC_VPN
 ```
 
 Thats it. Any hosts in the `Force_SRC_VPN` address-list will now be forced to be routed over the VPN connection.
@@ -392,13 +395,13 @@ add comment="This executes the script which populates Force_DST_VPN address list
 Now we need to create another mangle rule to force the specified traffic to use the VPN-Only routing table.
 
 !!! info
-    This uses the $vpn_table_name variable from the main script.
+    This uses the $vpnRoutingTableName variable from the main script.
 
     This mangle rule is created by the main script as well.
 
 ```
 /ip firewall mangle
-add action=mark-routing chain=prerouting comment="Force VPN for Destination Address" dst-address-list=Force_DST_VPN new-routing-mark=$vpn_table_name
+add action=mark-routing chain=prerouting comment="Force VPN for Destination Address" dst-address-list=Force_DST_VPN new-routing-mark=$vpnRoutingTableName
 ```
 
 Thats... basically it.
