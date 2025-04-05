@@ -89,41 +89,33 @@ This will NOT route any traffic over the VPN. Those steps will be provided later
 ## Create Interface
 
 # Create interface
-/interface wireguard
-add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
+/interface/wireguard/add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
 
 # Create the peer
-/interface wireguard peers
-add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
+/interface/wireguard/peers/add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
 
 # Create Interface List
-/interface list
-add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
+/interface/list/add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
 
 # Add VPN Interface to list
-/interface list member
-add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
+/interface/list/member/add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
 
 # Create IP Address
-/ip address
-add address=$myLocalIP/30 comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
+/ip/address/add address="$myLocalIP/30" comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
 
 # Create Routing Table. This will force the specified clients to route over the VPN.
-/routing/table
-add disabled=no name=$vpnRoutingTableName fib
+/routing/table/add disabled=no name=$vpnRoutingTableName fib
 
 # Create Routes to force traffic over VPN.
-/ip/route
-add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
+/ip/route/add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
 # This create a blackhole route, which will drop outbound traffic if the VPN connection is down.
-add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
+/ip/route/add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
 
 # Create outbound NAT rule to masquerade traffic going over VPN.
-/ip firewall nat
-add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
+/ip/firewall/nat/add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
 
 # Create Firewall Rules. Only allow established connections. Drop everything else.
-/ip firewall filter
+/ip/firewall/filter
 add chain=input                 action=jump                     comment="Chain: $vpnFirewallChainNameIn" in-interface-list=$vpnInterfaceListName jump-target=$vpnFirewallChainNameIn
 add chain=$vpnFirewallChainNameIn    action=fasttrack-connection     comment="Fasttrack: Related, Established" connection-state=established,related hw-offload=yes
 add chain=$vpnFirewallChainNameIn    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
@@ -203,7 +195,7 @@ This line provisions our local IP address, for the VPN interface.
 
 ```
 /ip address
-add address=$myLocalIP/30 comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
+add address="$myLocalIP/30" comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
 ```
 
 #### Create Routing Table. This will force the specified clients to route over the VPN.
