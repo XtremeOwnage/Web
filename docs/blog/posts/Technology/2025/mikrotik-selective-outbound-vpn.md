@@ -126,10 +126,24 @@ add chain=$vpn_chain_name_in    action=fasttrack-connection     comment="Fasttra
 add chain=$vpn_chain_name_in    action=accept                   comment="Accept: Established, Related, Untracked" connection-state=established,related,untracked
 add chain=$vpn_chain_name_in    action=drop                     comment="Drop: State: Invalid" connection-state=invalid
 add chain=$vpn_chain_name_in    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
+
+# Create an address list containing the RFC1918 IPv4 subnet ranges. (Aka, Private IPv4 Ranges)
+/ip firewall address-list
+add address=10.0.0.0/8 list=rfc1918
+add address=172.16.0.0/12 list=rfc1918
+add address=192.168.0.0/16 list=rfc1918
+
+# Create mangle rules, which will force the specific traffic to use the VPN-Only Routing Table
+/ip firewall mangle
+# This rule forces traffic via VPN for source IP address. Aka- force local hosts to use VPN
+add action=mark-routing chain=prerouting comment="Force VPN for Source Address"      dst-address-list=!rfc1918      new-routing-mark=$vpn_table_name src-address-list=Force_SRC_VPN
+# This rule forces traffic via VPN for destination IP addresses. Aka, Specific hosts on the WAN, or specific websites.
+add action=mark-routing chain=prerouting comment="Force VPN for Destination Address" dst-address-list=Force_DST_VPN new-routing-mark=$vpn_table_name
 ```
 
-
-~Note- the above keys were randomly generated.... they don't work. Don't bother trying.~
+!!! note
+    The above keys were randomly generated.... they don't work anywhere.
+    Don't bother trying...
 
 ### More Details
 
@@ -271,17 +285,14 @@ To force specific hosts to route all traffic through VPN, we will use a simple p
 # Add clients to be forced through the outbound VPN.
 add address=192.168.1.8  comment="IP Addresses in this list will only be allowed to access the internet via VPN." list=Force_SRC_VPN
 add address=192.168.1.16 comment="IP Addresses in this list will only be allowed to access the internet via VPN." list=Force_SRC_VPN
-
-# Create an address list containing internal IPv4 subnet ranges. Aka, RFC1918
-add address=10.0.0.0/8 list=rfc1918
-add address=172.16.0.0/12 list=rfc1918
-add address=192.168.0.0/16 list=rfc1918
 ```
 
 After the lists has been created, Add a mangle rule to force clients to use the new routing table created earlier, but only for traffic WAN-bound.
 
 !!! info
-    This command uses the VPN table variable defined in the original script.
+    This uses the $vpn_table_name variable from the main script. This also uses the rfc1918 address-list created in the initial script.
+
+    This mangle rule is created by the main script as well.
 
 ```
 /ip firewall mangle
@@ -382,6 +393,8 @@ Now we need to create another mangle rule to force the specified traffic to use 
 
 !!! info
     This uses the $vpn_table_name variable from the main script.
+
+    This mangle rule is created by the main script as well.
 
 ```
 /ip firewall mangle
