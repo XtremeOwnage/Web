@@ -15,8 +15,8 @@ tags:
 This post outlines how to accomplish the following activities:
 
 1. Creating an interface for a remote wireguard VPN connection to an upstream VPN provider.
-2. Forcing specific websites over VPN.
-3. Forcing specific hosts over VPN.
+2. Forcing specific websites over VPN via Destination IP or DNS.
+3. Forcing specific hosts over VPN via Source IP.
 
 
 <!-- more -->
