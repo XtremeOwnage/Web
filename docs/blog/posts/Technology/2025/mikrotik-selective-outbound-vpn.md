@@ -159,8 +159,7 @@ This creates a new wireguard interface, and associates the private key from the 
 ## Create Interface
 
 # Create interface
-/interface wireguard
-add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
+/interface/wireguard/add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPrivateKey
 ```
 
 #### Create the peer
@@ -168,8 +167,7 @@ add listen-port=$vpnLocalPort mtu=1420 name=$vpnInterfaceName private-key=$myPri
 This will create the remote peer. By specifying the endpoint here, the router will automatically connect to the endpoint and maintain a connection.
 
 ```
-/interface wireguard peers
-add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
+/interface/wireguard/peers/add allowed-address=0.0.0.0/0 comment=$vpnInterfaceName endpoint-address=$peerEndpointIP endpoint-port=$peerEndpointPort interface=$vpnInterfaceName public-key=$peerPublicKey
 ```
 
 #### Create Interface List
@@ -179,15 +177,13 @@ To simplify other configurations, I am leveraging an interface list.
 If- for example you had multiple outbound VPN connections to various providers, you could just add the interfaces to this list, which will automatically apply the same firewall rules.
 
 ```
-/interface list
-add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
+/interface/list/add comment="Outbound VPN Interfaces" name=$vpnInterfaceListName
 ```
 
 Then- we add the VPN interface to the newly created list.
 
 ```
-/interface list member
-add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
+/interface/list/member/add comment="Remote VPN Peer" interface=$vpnInterfaceName list=$vpnInterfaceListName
 ```
 
 #### Create IP Address
@@ -197,8 +193,7 @@ We need to provision an IP address to allow routing to work.
 This line provisions our local IP address, for the VPN interface.
 
 ```
-/ip address
-add address="$myLocalIP/30" comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
+/ip/address/add address="$myLocalIP/30" comment=$vpnInterfaceName interface=$vpnInterfaceName network=$myLocalIP
 ```
 
 #### Create Routing Table. This will force the specified clients to route over the VPN.
@@ -208,8 +203,7 @@ The easiest way for us to route traffic over the VPN, is literally by routing th
 To do this- we will first create a routing table. This- will not be used by anything "yet"
 
 ```
-/routing/table
-add disabled=no name=$vpnRoutingTableName fib
+/routing/table/add disabled=no name=$vpnRoutingTableName fib
 ```
 
 Next- we create the default route, which tells all traffic to route through the remote peer.
@@ -219,8 +213,7 @@ Next- we create the default route, which tells all traffic to route through the 
 The distance here is set to 1, which will make this the preferred route.
 
 ```
-/ip/route
-add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
+/ip/route/add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
 ```
 Afterwards, A blackhole route is created with a higher distance then the default route.
 
@@ -229,7 +222,7 @@ When- the primary default route is marked as inactive due to the remote host bei
 This will "blackhole" the traffic. Ie- it gets dropped.
 
 ```
-add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
+/ip/route/add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
 ```
 
 #### Outbound NAT
@@ -241,8 +234,7 @@ One reason being- I don't want the remote VPN provider to know anything about my
 So- I NAT outbound traffic going through any of the interfaces in the newly created interface list.
 
 ```
-/ip firewall nat
-add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
+/ip/firewall/nat/add action=masquerade chain=srcnat comment="VPN Masquerade" out-interface-list=$vpnInterfaceListName
 ```
 
 #### Firewall Rules
