@@ -17,6 +17,8 @@ This post outlines how to accomplish the following activities:
 1. Creating an interface for a remote wireguard VPN connection to an upstream VPN provider.
 2. Forcing specific websites over VPN via Destination IP or DNS.
 3. Forcing specific hosts over VPN via Source IP.
+4. Route ALL traffic over VPN.
+5. Blocking traffic if VPN is down.
 
 
 <!-- more -->
@@ -108,6 +110,7 @@ This will NOT route any traffic over the VPN. Those steps will be provided later
 
 # Create Routes to force traffic over VPN.
 /ip/route/add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no target-scope=10
+
 # This create a blackhole route, which will drop outbound traffic if the VPN connection is down.
 /ip/route/add blackhole comment="Drop traffic if VPN is down" disabled=no distance=32 dst-address=0.0.0.0/0 gateway="" routing-table=$vpnRoutingTableName scope=30 suppress-hw-offload=no
 
@@ -268,7 +271,39 @@ add chain=$vpnFirewallChainNameIn    action=drop                     comment="Dr
 add chain=$vpnFirewallChainNameIn    action=drop                     comment="Drop All w/Log" log=yes log-prefix=DROP
 ```
 
-## Route Specific Hosts through VPN (By Source IP/Mask)
+## Selectively route traffic through VPN
+
+Depending on how you wish to leverage this, I have provided a few options below on how to either force all traffic over the VPN, or how to selectively choose traffic.
+
+This is more or less a modified version of the routes added by the earlier script, which only targets the main routing table, rather then the VPN-only table.
+
+### Route ALL Traffic through VPN.
+
+If, you want to force all traffic through VPN, this can be achieved a few different ways.
+
+#### Via default route on main routing table
+
+You can... add a default route, which sends all traffic through the VPN interface.
+
+`/ip/route/add check-gateway=ping comment="Use VPN" disabled=no distance=1 dst-address=0.0.0.0/0 gateway=$peerLocalIP routing-table=main scope=30 suppress-hw-offload=no target-scope=10`
+
+But, you need to make sure to add a route to ensure the VPN connection itself, is routed out the standard gateway.... Otherwise, the VPN connection won't work.
+
+Note- you will need to add your own gateway / interface here.
+
+`/ip/route/add comment="Route VPN over WAN" disabled=no distance=1 dst-address=$peerEndpointIP gateway=10.100.5.1 routing-table=main scope=30 suppress-hw-offload=no target-scope=10`
+
+#### Via mangle rules
+
+A simple mangle rule will route all outbound traffic through the forced-VPN routing table created by the original script.
+
+`/ip/firewall/mangle/add action=mark-routing chain=prerouting comment="Force VPN" dst-address-list=!rfc1918 new-routing-mark=$vpnRoutingTableName`
+
+#### Via routing rules
+
+You can leverage routing rules to also do the above. However, routing rules cannot reference interface lists, firewall address lists, etc. As such, I would prefer using the above two examples.
+
+### Route Specific Hosts through VPN (By Source IP/Mask)
 
 To force specific hosts to route all traffic through VPN, we will use a simple pre-routing rule.
 
@@ -298,7 +333,7 @@ Thats it. Any hosts in the `Force_SRC_VPN` address-list will now be forced to be
 
 If the VPN connection is down, the traffic will instead be dropped via the routing blackhole.
 
-## Route Specific Websites through VPN (By DNS)
+### Route Specific Websites through VPN (By DNS)
 
 This example shows how to force specific websites to be forced over the VPN connection.
 
@@ -399,7 +434,7 @@ add action=mark-routing chain=prerouting comment="Force VPN for Destination Addr
 Thats... basically it.
 
 
-### Testing destination WAN.
+#### Testing destination WAN.
 
 Using, a very well-known website with geopolitical restrictions, I added only the primary domain to an address list, and performed testing.
 
@@ -446,3 +481,15 @@ Here are a few of the various references I used to build these configurations:
 * <https://help.mikrotik.com/docs/spaces/ROS/pages/48660587/Mangle>{target=_blank}
 * <https://protonvpn.com/support/wireguard-mikrotik-routers/>{target=_blank}
 * <https://superuser.com/questions/999196/mikrotik-and-vpn-for-specific-web-sites-only>{target=_blank}
+
+The script created above was tested on a fresh Mikrotik RouterOS VM, and was confirmed to function as expected.
+
+There are MANY other ways of accomplishing the task of selective routing.... A few examples...
+
+1. Using dynamic routing protocols
+2. More in-depth routing rules.
+3. Using HTTP Proxy w/FW Rules
+4. Using Socks Proxy w/FW Rules.
+5. Using layer 7 firewall matchers (You- don't want to do this)
+
+However, I do feel- the steps above should give you a good start.
