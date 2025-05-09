@@ -46,6 +46,10 @@ James literally designed them. Every component has a related video series.
 
 ALU design, UART, Audio, Memory, File Systems... ALL of it.
 
+#### I want to do that- but, without AS much work.
+
+Then checkout [Ben Eater](https://www.youtube.com/@BenEater){target=_blank} where the focus of the channel is a 6501 CPU running on a breadboard. Many of the same topics are addressed, such as input, output, assembly... etc..
+
 ## Thats all nice, but, I just want to make a video game.
 
 If so- check out [Javid9](https://www.youtube.com/@javidx9/videos){target=_blank}
