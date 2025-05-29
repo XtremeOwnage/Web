@@ -74,7 +74,7 @@ Unraid Pros:
 2. The GUI is beautiful. Its simple. And its effective.
 3. Has honestly, one of the nicest user interfaces for hardware passthrough to VMs.
 4. Flexibility
-    - It can do XFS, ReiserFS, ZFS, or BTRFS. Unraid **ONLY** does ZFS.
+    - It can do XFS, ReiserFS, ZFS, or BTRFS. TrueNAS **ONLY** does ZFS.
     - In addition, It has the "Unraid Array", its special thing.
 5. Power Efficiency
     - Unraid's built in array, is the most power efficient option, for write-once, read-many. See [Power Efficient Storage](#power-efficient-storage)
