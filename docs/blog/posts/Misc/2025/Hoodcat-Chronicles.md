@@ -280,4 +280,12 @@ I would imagine, after 5 or 10 minutes worth of running, and seeing nothing but 
 
 While, hoodcat will not have the happiest ending, this does ensure he has the power to make his own ending rather then a game over provided to him after he would eventually fail to be re-homed.
 
+------------------------------
+
+As for Leia, her injuries quickly healed.
+
+![alt text](./hoodcat/l3.webP)
+
+She was nicely affected by the incident for a few days, however, she is completely back to normal now.
+
 The end.
