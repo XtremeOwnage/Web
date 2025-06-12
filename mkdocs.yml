@@ -86,6 +86,7 @@ plugins:
         - Kubernetes
         - Home-Automation
         - Home-Improvement
+        - Misc
         - Technology
         - Shop-Talk
         - Solar
