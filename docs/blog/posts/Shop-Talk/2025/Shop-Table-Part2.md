@@ -8,7 +8,9 @@ tags:
 
 # Shop Table - Part 2 - Wheels & Tool Mounts
 
-In oct 2024, I built a table out of steel plate, and angle-iron.
+In [Part 1](../2024/Shop-Table-Part1.md){target=_blank}, I built a solid steel shop table from plate and angle-iron.
+
+This- was the end result. A simple, solid table.
 
 ![A photo showing the end result.](../2024/Shop-Table/finished.webP)
 
@@ -174,6 +176,8 @@ After fully disassembling, everything was again pressure washed, and left to dry
 I did, find the bolt which holds the vise nut in plate, was compromised/broken. I replaced this with a new grade 8 bolt.
 
 ![Photo showing the broken bolt used to hold the vise nut.](./Shop-Table/vise-6.webP)
+
+One last thing not pictured- I used some fine-grit sand paper to lightly sand the rust from the hardened surfaces of the vise. After knocking up the surface rust, I coated everything with light oil to prevent it from rusting in the future.
 
 ### Fabricating a vise mount
 
