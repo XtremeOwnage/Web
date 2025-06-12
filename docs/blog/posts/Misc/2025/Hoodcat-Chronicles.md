@@ -7,7 +7,7 @@ date: 2025-06-12
 
 This- is the tale of hood-cat. The cat who decided to break into my house, assert dominance over my cat, pee on my chair, and make himself at home.
 
-![alt text](./hoodcat/hc-2.png)
+![alt text](./hoodcat/hc-2.webP)
 
 <!-- more -->
 
@@ -23,7 +23,7 @@ When we went into the garage looking for the cat, an unknown orange cat was sitt
 
 After searching high and low, I finally located Leia who was cowering under the freezer.
 
-![alt text](./hoodcat/cat-under-freezer.png)
+![alt text](./hoodcat/cat-under-freezer.webP)
 
 Investigation of Leia, identified she had a wound on her rear-right leg, causing a minor limp.
 
@@ -37,7 +37,7 @@ For- those who read this blog- you may have noticed my [FADD / Cat Taser](../../
 
 So, the first thing I noticed, was Luke (My dumbass cat) decided to come into the house as well, shortly after I went to sleep around midnight.
 
-![alt text](./hoodcat/luke-1.png)
+![alt text](./hoodcat/luke-1.webP)
 
 Luke, was converted to an outside kitty, after demonstrating... to not be very responsible. He would get the zoomies at nighttime, and literally jump and crawl on EVERYTHING in sight. His guilt every morning would instantly give away, he did something he shouldn't have. So- he became an outside cat.
 
@@ -45,35 +45,35 @@ Luke, was converted to an outside kitty, after demonstrating... to not be very r
 
 Around 0411, Leia was spotted outside of the garage.
 
-![alt text](./hoodcat/leia-1.png)
+![alt text](./hoodcat/leia-1.webP)
 
 At 0418, Hoodcat can be seen sneaking into the garage.
 
-![alt text](./hoodcat/0418.png)
+![alt text](./hoodcat/0418.webP)
 
 #### 0430
 
 At 0430, Hoodcat was detected by indoor cameras.
 
-![alt text](./hoodcat/h1.png)
+![alt text](./hoodcat/h1.webP)
 
 Now- while I don't have every inch of the house covered in cameras, I did have enough footage to determine what was happening.
 
 Shortly after making his appearance, Hoodcat was seen trying to get under my chair. The importance here- That is one of Leia's hiding spots.
 
-![alt text](./hoodcat/h2.png)
+![alt text](./hoodcat/h2.webP)
 
 He then, proceeded to look at, and smell everything. Climbing on top of the furniture, the kitchen. etc.
 
-![alt text](./hoodcat/h3.png)
+![alt text](./hoodcat/h3.webP)
 
 After, he sat in Leia's favorite spot- she did not like this, and a standoff ensued.
 
-![alt text](./hoodcat/h4.png)
+![alt text](./hoodcat/h4.webP)
 
 After, 5 minutes of intense glaring, growing, and aggressive tail-swatting..... Hoodcat leaped.
 
-![alt text](./hoodcat/h5.png)
+![alt text](./hoodcat/h5.webP)
 
 Leia, being an indoor cat, since being rescued as a kitten, and having no combat experience, took the decision to run and hide.
 
@@ -81,11 +81,11 @@ They disappeared into the Kitchen area, where I do not have adequate coverage to
 
 However, I did notice Luke was watching, and cowering.
 
-![alt text](./hoodcat/l1.png)
+![alt text](./hoodcat/l1.webP)
 
 For, the next hour, he remained hidden, often peeking around objects, but, not allowing his presence to be seen.
 
-![alt text](./hoodcat/l2.png)
+![alt text](./hoodcat/l2.webP)
 
 Occasionally, he would peek around the corner to look, but, would go cower back behind cover. 
 
@@ -97,11 +97,11 @@ Around 0600, we woke up, at which point they were in the garage.
 
 Hoodcat gracefully walked out of the garage at 0605 when the sound of people was heard.
 
-![alt text](./hoodcat/h6.png)
+![alt text](./hoodcat/h6.webP)
 
 This- leads back to the earlier story- of my wife waking me, and finding the cat cowering under the freezer as hoodcat asserted dominance on top of the freezer.
 
-![alt text](./hoodcat/cat-under-freezer.png)
+![alt text](./hoodcat/cat-under-freezer.webP)
 
 Further investigation yielded Hoodcat had marked my garage, and my chair, with his atrocious scent.
 
@@ -120,7 +120,7 @@ I decided to build a trap for hoodcat. After taking inventory of options- I was 
 
 So, I built a trap.
 
-![alt text](./hoodcat/trap-1.png)
+![alt text](./hoodcat/trap-1.webP)
 
 The principal is simple. Unbalanced pieces of wood holds the weight of a 20lb barbell.
 
@@ -138,27 +138,27 @@ Zero permanent modifications were performed. This is all zip-ties.
 
 So, while digging through footage watching the trap, I noticed something interesting.
 
-![alt text](./hoodcat/t1.png)
+![alt text](./hoodcat/t1.webP)
 
 Notice- there are two pieces of meat.
 
 And... then there was one.
 
-![alt text](./hoodcat/t2.png)
+![alt text](./hoodcat/t2.webP)
 
 What happened??!? Did the trap not work?
 
 After digging through the footage, I found a Possum put her head in the door, grabbed the piece of meat, and left. The lack of greed, saved this possum from capture.
 
-![alt text](./hoodcat/t3.png)
+![alt text](./hoodcat/t3.webP)
 
 At 1000, I noticed my dumbass cat, Luke, trying to get the meat.
 
-![alt text](./hoodcat/t4.png)
+![alt text](./hoodcat/t4.webP)
 
 In his infinite wisdom, he also decided to jump on top of the trap, which of course, triggered it to close.
 
-![alt text](./hoodcat/t5.png)
+![alt text](./hoodcat/t5.webP)
 
 I called him to the door, and put him somewhere more secure for the night to keep him from being captured.
 
@@ -166,17 +166,17 @@ Afterwards, I had to reset the trap mechanism.
 
 At 11:54pm, Hoodcat showed up, curious about the smell of fresh turkey.
 
-![alt text](./hoodcat/t6.png)
+![alt text](./hoodcat/t6.webP)
 
 Interestingly, he laid near the cage for about 10 minutes.
 
-![alt text](./hoodcat/t7.png)
+![alt text](./hoodcat/t7.webP)
 
 And, then another cat showed up. I'm going to refer to this cat as Lackey.
 
 Hoodcat watched as lackey investigated the trap, and eventually became trapped inside.
 
-![alt text](./hoodcat/t8.png)
+![alt text](./hoodcat/t8.webP)
 
 Hoodcat watched for a couple of minutes, until walking away, leaving Lackey trapped.
 
@@ -184,23 +184,23 @@ Hoodcat watched for a couple of minutes, until walking away, leaving Lackey trap
 
 After a while had passed, Hoodcat did return to try and save his comrade.
 
-![alt text](./hoodcat/t9.png)
+![alt text](./hoodcat/t9.webP)
 
 However, the trap door would not budge. He again left, which left Lackey sad and lonely. She kept look hoping he would return to save her. But, he never came.
 
-![alt text](./hoodcat/t10.png)
+![alt text](./hoodcat/t10.webP)
 
 Lackey DID attempt to escape, multiple times. And even practiced flying aerobics, but to no avail.
 
-![alt text](./hoodcat/t11.png)
+![alt text](./hoodcat/t11.webP)
 
 She even practiced for a career in tight-rope walking.
 
-![alt text](./hoodcat/t12.png)
+![alt text](./hoodcat/t12.webP)
 
 0430 on Friday morning, heavy thunderstorms came through the area, which terrified lackey.
 
-![alt text](./hoodcat/t13.png)
+![alt text](./hoodcat/t13.webP)
 
 These storms also woke me up, at which point I provided additional shelter to Lackey.
 
@@ -210,7 +210,7 @@ That morning I went to interview Lackey to attempt to determine the hiding locat
 
 Lacky, was visibly shaken from the storms this morning. 
 
-![alt text](./hoodcat/t14.png)
+![alt text](./hoodcat/t14.webP)
 
 #### Lackey's Interrogation
 
@@ -230,7 +230,7 @@ Lackey was checked for a chip, and provided proper vaccinations.
 
 Around 10pm on Friday night, Hoodcat made his appearance again. However, the trap did not properly trigger, leaving him free to leave.
 
-![alt text](./hoodcat/t15.png)
+![alt text](./hoodcat/t15.webP)
 
 Around 10:30pm, I reset the trap, and rebaited it.
 
@@ -242,7 +242,7 @@ Shortly after midnight, another cat had become trapped.
 
 Was it hoodcat? No. It was just my dumbass cat again.
 
-![alt text](./hoodcat/t16.png)
+![alt text](./hoodcat/t16.webP)
 
 Lucky for him, My wife woke up and checked the cameras around 4am, and let him out before heavy storms again hit the area.
 
@@ -258,7 +258,7 @@ Without a hitch, hoodcat had been captured.
 
 Once captured, Hoodcat did not make a noise. Not even a single meow for help.
 
-![alt text](./hoodcat/hc-1.png)
+![alt text](./hoodcat/hc-1.webP)
 
 As it was 11:30 at night, Hoodcat's holding cell was relocated to the garage, until the correct authorities could be contacted in the morning. Food and water were provided.
 
