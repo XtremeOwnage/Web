@@ -1,0 +1,3395 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Cars, Computer, and Code.">
+      
+      
+        <meta name="author" content="XtremeOwnage">
+      
+      
+        <link rel="canonical" href="https://Static.XtremeOwnage.com/blog/2025/mellanox-configuration-guide/">
+      
+      
+        <link rel="prev" href="../din-mount-closet-part-2/">
+      
+      
+        <link rel="next" href="../mikrotik-outbound-wireguard/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14+insiders-4.53.16">
+    
+    
+      
+        <title>Mellanox Configuration Guide - XtremeOwnage.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8cce3a28.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mellanox-connectx-nic-configuration-helper" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine base classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+
+        <!-- Link to home -->
+        <a href="../../.." title="XtremeOwnage.com"
+            class="md-header__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+            
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        XtremeOwnage.com
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        
+                        Mellanox Configuration Guide
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette -->
+        
+        <form class="md-header__option" data-md-component="palette">
+            
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+                data-md-color-scheme="default"
+                data-md-color-primary="grey"
+                data-md-color-accent="orange"  aria-hidden="true"  type="radio"
+                name="__palette" id="__palette_0" />
+            
+            
+        </form>
+        
+
+
+
+        <!-- Navigation tabs (sticky) -->
+        
+        
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/Projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <div class="header-social">
+            
+            <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </a>
+            
+            <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+            </a>
+            
+            <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+            </a>
+            
+            <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+            </a>
+            
+            <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+            </a>
+            
+        </div>
+
+        <!-- Button to open search modal -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        <!-- Repository information -->
+        
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="XtremeOwnage.com" class="md-nav__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+      
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+    </a>
+    XtremeOwnage.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/Projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Improvement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/misc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Misc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/shop-talk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop-Talk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/solar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tasks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Packages Used
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-mlnx-ofed-mstflint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install MLNX-OFED &amp; MSTFlint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install MLNX-OFED &amp; MSTFlint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#via-apt-get-for-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Via apt-get (For Proxmox)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-tarball-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RPM / Tarball / etc
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gathering-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gathering Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gathering Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-pci-address-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get PCI Address (Required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get PCI Address (Required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#via-lspci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via lspci
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-pci-address-from-interface-name-via-ethtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get PCI Address - From Interface Name - Via ethtool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set Variable
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-interface-name-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Interface Name (Required)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Interface Name (Required)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-logic-adapter-name-from-pci-address-via-sys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Logic Adapter Name - From PCI Address- via /sys
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-variable-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set Variable (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lspci-verbose-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lspci - Verbose Information
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manage-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manage Firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manage Firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-firmware-information" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Get Firmware Information
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get Firmware Information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#via-mstflint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via mstflint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-mlxfwmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via mlxfwmanager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-ethtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via ethtool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locate-new-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Locate New Firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Locate New Firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identify-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identify Card
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Identify Card">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#via-mlxfwmanager_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via mlxfwmanager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-physical-inspection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via Physical Inspection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Find Firmware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Find Firmware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-cx-416a-kube05" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example - CX-416A (Kube05)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-dell-branded-cx4121a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example - Dell-Branded CX4121A
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flash-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flash Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psid-mismatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSID Mismatch
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Read Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#via-ethtool_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via ethtool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-mlxconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        via mlxconfig
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Settings
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enabledisable-pxeiscsi-boot-set-boot-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable/Disable PXE/iSCSI Boot / Set Boot Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enabledisable-sr-iov" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable/Disable SR-IOV
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-saving-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power Saving Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-port-mode-infiniband-or-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set Port Mode Infiniband or Ethernet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistent-ethtool-tuning-hardware-offload-jumbo-frames-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistent Ethtool Tuning (Hardware offload, Jumbo Frames, etc)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Persistent Ethtool Tuning (Hardware offload, Jumbo Frames, etc)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-put-settings-in-etcnetworkinterfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1. Put settings in /etc/network/interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-custom-if-up-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2. Custom if-up script.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#which-nics-or-switches-to-buy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Which NICs or Switches to buy?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/avatar/XO.png" alt="XtremeOwnage">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          XtremeOwnage
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2025-03-15 00:00:00+00:00" class="md-ellipsis">Mar 15, 2025</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              28 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:homelab" class="md-tag">Homelab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking" class="md-tag">Networking</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking/mellanox" class="md-tag">Networking/Mellanox</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="mellanox-connectx-nic-configuration-helper">Mellanox ConnectX-NIC Configuration Helper<a class="headerlink" href="#mellanox-connectx-nic-configuration-helper" title="Permanent link">&para;</a></h1>
+<p>This post centralizes data for configuration of Mellanox ConnectX Series NIC (Tested with CX3, and CX4)</p>
+<!-- more -->
+
+<h2 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h2>
+<h3 id="packages-used">Packages Used<a class="headerlink" href="#packages-used" title="Permanent link">&para;</a></h3>
+<p>Packages Used:</p>
+<ul>
+<li>pciutils
+        - contains <code>lspci</code> used in this post.</li>
+<li>ethtool</li>
+<li>wget</li>
+<li>unzip
+        - Used for extracting .zip files. Suppose you could use a tar command too...</li>
+</ul>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>pciutils<span class="w"> </span>ethtool<span class="w"> </span>wget
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<details class="info">
+<summary>Install package output</summary>
+<pre><code>root@kube05:~# apt-get update &amp;&amp; apt-get install -y pciutils ethtool wget
+Hit:1 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:2 http://deb.debian.org/debian bookworm InRelease
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Hit:4 http://download.proxmox.com/debian/pve bookworm InRelease
+Hit:5 http://download.proxmox.com/debian/ceph-reef bookworm InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+pciutils is already the newest version (1:3.9.0-4).
+ethtool is already the newest version (1:6.1-1).
+The following packages were automatically installed and are no longer required:
+libc-ares2 libyang2
+Use 'apt autoremove' to remove them.
+The following packages will be upgraded:
+wget
+1 upgraded, 0 newly installed, 0 to remove and 30 not upgraded.
+Need to get 937 kB of archives.
+After this operation, 86.0 kB disk space will be freed.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 wget amd64 1.21.3-1+deb12u1 [937 kB]
+Fetched 937 kB in 0s (11.1 MB/s)
+apt-listchanges: Reading changelogs...
+(Reading database ... 63296 files and directories currently installed.)
+Preparing to unpack .../wget_1.21.3-1+deb12u1_amd64.deb ...
+Unpacking wget (1.21.3-1+deb12u1) over (1.21.3-1+b2) ...
+Setting up wget (1.21.3-1+deb12u1) ...
+Processing triggers for man-db (2.11.2-2) ...
+</code></pre>
+</details>
+<h3 id="install-mlnx-ofed-mstflint">Install MLNX-OFED &amp; MSTFlint<a class="headerlink" href="#install-mlnx-ofed-mstflint" title="Permanent link">&para;</a></h3>
+<p><code>mlnx-ofed</code> is the drivers and software for ConnectX IB/Ethernet NICs.</p>
+<p><code>mstflint</code> is software provided by Nvidia for the purpose of configuring ConnectX series network adapters. </p>
+<p>It is also used to update firmware.</p>
+<p>It is not required for all of the below tasks in this guide, however, does come in handy.</p>
+<h4 id="via-apt-get-for-proxmox">Via apt-get (For Proxmox)<a class="headerlink" href="#via-apt-get-for-proxmox" title="Permanent link">&para;</a></h4>
+<p>Here you go, straight to the point. This was the script I used this week for installing on proxmox.</p>
+<p><strong>Script</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## See available versions here: https://linux.mellanox.com/public/repo/mlnx_ofed/</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;latest&quot;</span>
+<span class="c1">## See available distributions here: https://linux.mellanox.com/public/repo/mlnx_ofed/latest/</span>
+<span class="nv">DISTRO</span><span class="o">=</span><span class="s2">&quot;debian12.1&quot;</span>
+wget<span class="w"> </span>-qO<span class="w"> </span>-<span class="w"> </span>https://www.mellanox.com/downloads/ofed/RPM-GPG-KEY-Mellanox<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-
+<span class="nb">cd</span><span class="w"> </span>/etc/apt/sources.list.d/
+wget<span class="w"> </span>https://linux.mellanox.com/public/repo/mlnx_ofed/<span class="nv">$VERSION</span>/<span class="nv">$DISTRO</span>/mellanox_mlnx_ofed.list
+apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>install<span class="w"> </span>mlnx-ofed-basic<span class="w"> </span>mstflint
+</code></pre></div>
+<p>See the <a href="https://linux.mellanox.com/public/repo/mlnx_ofed/" target="_blank">listing HERE</a> for available versions.</p>
+<p>For other distributions, look at the <a href="https://linux.mellanox.com/public/repo/mlnx_ofed/latest/">repository listing HERE</a></p>
+<p><strong>Output</strong>:</p>
+<p>As the output was quite long and verbose, I did not embed it on this page.</p>
+<p><a href="../../Technology/2025/assets-cx4/install-ofed-output.txt" target="_blank">View the raw output here</a>.</p>
+<h4 id="rpm-tarball-etc">RPM / Tarball / etc<a class="headerlink" href="#rpm-tarball-etc" title="Permanent link">&para;</a></h4>
+<p>If, you are using RPM, the directions will be slightly different for you.</p>
+<p><a href="https://network.nvidia.com/support/mlnx-ofed-public-repository/" target="_blank">(Official) Nvidia Networking Repository Documentation</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can download tarballs for the MLNX_OFED drivers from Nvidia. However, in my case it yielded "Unsupported distribution" using the debian 12 version, on my debian 12.1 proxmox hosts.</p>
+<p>The apt-get method, worked as expected.</p>
+</div>
+<h3 id="gathering-information">Gathering Information<a class="headerlink" href="#gathering-information" title="Permanent link">&para;</a></h3>
+<h4 id="get-pci-address-required">Get PCI Address (Required)<a class="headerlink" href="#get-pci-address-required" title="Permanent link">&para;</a></h4>
+<h5 id="via-lspci">via <code>lspci</code><a class="headerlink" href="#via-lspci" title="Permanent link">&para;</a></h5>
+<p>This step is required for basically everything else in this guide. You will need the PCIe address of your card. This is easily obtained using <code>lspci</code></p>
+<p><strong>Command</strong>: </p>
+<div class="highlight"><pre><span></span><code>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Mellanox
+</code></pre></div>
+<p><strong>Output</strong>: </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># One host with a 25G CX4</span>
+root@kube01:/etc/apt/sources.list.d#<span class="w"> </span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Mellanox
+<span class="m">01</span>:00.0<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27710<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="w"> </span>Lx<span class="o">]</span>
+<span class="m">01</span>:00.1<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27710<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="w"> </span>Lx<span class="o">]</span>
+
+<span class="c1"># On another host with a 100G CX4</span>
+root@kube02:~#<span class="w"> </span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Mellanox
+<span class="m">81</span>:00.0<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27700<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="o">]</span>
+<span class="m">81</span>:00.1<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27700<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="o">]</span>
+
+<span class="c1"># Another host, also, 100G CX4</span>
+root@kube05:~#<span class="w"> </span>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Mellanox
+<span class="m">01</span>:00.0<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27700<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="o">]</span>
+<span class="m">01</span>:00.1<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27700<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="o">]</span>
+</code></pre></div>
+<p>As all of my NICs are dual-port- there are two entries for each NIC.</p>
+<p>In the first example, you would want to take note of <code>01:00.0</code>, and <code>01:00.1</code>. This is the NIC's address.</p>
+<h5 id="get-pci-address-from-interface-name-via-ethtool">Get PCI Address - From Interface Name - Via ethtool<a class="headerlink" href="#get-pci-address-from-interface-name-via-ethtool" title="Permanent link">&para;</a></h5>
+<p>If- you have the adapter/interface name, you can use this to acquire the PCI address</p>
+<div class="highlight"><pre><span></span><code>ethtool<span class="w"> </span>-i<span class="w"> </span>enp1s0f0np0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;bus-info&quot;</span>
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre><span></span><code>root@kube01:~#<span class="w">  </span>ethtool<span class="w"> </span>-i<span class="w"> </span>enp1s0f0np0<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;bus-info&quot;</span>
+bus-info:<span class="w"> </span><span class="m">0000</span>:01:00.0
+</code></pre></div>
+<h5 id="set-variable">Set Variable<a class="headerlink" href="#set-variable" title="Permanent link">&para;</a></h5>
+<div class="admonition warning">
+<p class="admonition-title">Warning<p>To make it easier to run commands in this article, I will be using a variable to avoid needing to remember/retype the address name.</p>
+<p>If- you choose not to do this, you can instead replace <code>$CX_ADDRESS</code> in the provided scripts, with the address of your network adapter.</p>
+</p>
+</div>
+<p>To make it easier to run scripts or commands in this post, I am going to set a local variable containing the card's address. </p>
+<p>This will negate the need to remember, or type this in for every command.</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Replace the address, with the address of YOUR card.</span>
+<span class="c1"># If- like me, your cards have multiple ports, choose the .0 port.</span>
+<span class="nv">CX_ADDRESS</span><span class="o">=</span><span class="s2">&quot;81:00.0&quot;</span>
+</code></pre></div>
+<p>You can paste that directly into a bash prompt to set the variable.</p>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre><span></span><code>root@kube02:~#<span class="w"> </span><span class="nv">CX_ADDRESS</span><span class="o">=</span><span class="s2">&quot;81:00.0&quot;</span>
+root@kube02:~#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$CX_ADDRESS</span>
+<span class="m">81</span>:00.0
+</code></pre></div>
+<h4 id="get-interface-name-required">Get Interface Name (Required)<a class="headerlink" href="#get-interface-name-required" title="Permanent link">&para;</a></h4>
+<h5 id="get-logic-adapter-name-from-pci-address-via-sys">Get Logic Adapter Name - From PCI Address- via <code>/sys</code><a class="headerlink" href="#get-logic-adapter-name-from-pci-address-via-sys" title="Permanent link">&para;</a></h5>
+<p>To get the network interface name, we can simply <code>ls</code> <code>/sys</code></p>
+<p><strong>Command</strong>: </p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/sys/bus/pci/devices/0000:<span class="nv">$CX_ADDRESS</span>/net
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre><span></span><code>root@kube02:~#<span class="w"> </span>ls<span class="w"> </span>/sys/bus/pci/devices/0000:<span class="nv">$CX_ADDRESS</span>/net
+enp129s0f0np0
+</code></pre></div>
+<h5 id="set-variable-required">Set Variable (Required)<a class="headerlink" href="#set-variable-required" title="Permanent link">&para;</a></h5>
+<div class="admonition warning">
+<p class="admonition-title">Warning<p>To make it easier to run commands in this article, I will be using a variable to avoid needing to remember/retype the logical interface name.</p>
+<p>If- you choose not to do this, you can instead replace <code>$CX_INTERFACE</code> in the provided scripts, with the name of your network interface.</p>
+</p>
+</div>
+<p>Like before, to simplify this article, I will be using a variable containing the interface name.</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Replace the interface name here, with the interface name of YOUR card.</span>
+<span class="nv">CX_INTERFACE</span><span class="o">=</span><span class="s2">&quot;enp129s0f0np0&quot;</span>
+
+<span class="c1"># Alternatively, here is a command which will pick the FIRST interface listed.</span>
+<span class="nv">CX_INTERFACE</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>/sys/bus/pci/devices/0000<span class="se">\:</span><span class="nv">$CX_ADDRESS</span>/net/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span>
+
+<span class="c1"># Echo out, ensure the variables are correctly set.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CX_ADDRESS</span><span class="s2"> &gt; </span><span class="nv">$CX_INTERFACE</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">## From Kube02</span>
+root@kube02:~#<span class="w"> </span><span class="nv">CX_INTERFACE</span><span class="o">=</span><span class="k">$(</span>ls<span class="w"> </span>/sys/bus/pci/devices/0000<span class="se">\:</span><span class="nv">$CX_ADDRESS</span>/net/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span>
+root@kube02:~#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CX_ADDRESS</span><span class="s2"> &gt; </span><span class="nv">$CX_INTERFACE</span><span class="s2">&quot;</span>
+<span class="m">81</span>:00.0<span class="w"> </span>&gt;<span class="w"> </span>enp129s0f0np0
+
+<span class="c1">## From Kube01</span>
+root@kube01:~#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CX_ADDRESS</span><span class="s2"> &gt; </span><span class="nv">$CX_INTERFACE</span><span class="s2">&quot;</span>
+<span class="m">01</span>:00.0<span class="w"> </span>&gt;<span class="w"> </span>enp1s0f0np0
+
+<span class="c1">## From Kube05</span>
+root@kube05:/etc/apt/sources.list.d#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CX_ADDRESS</span><span class="s2"> &gt; </span><span class="nv">$CX_INTERFACE</span><span class="s2">&quot;</span>
+<span class="m">01</span>:00.0<span class="w"> </span>&gt;<span class="w"> </span>enp1s0f0np0
+</code></pre></div>
+<h4 id="lspci-verbose-information">Lspci - Verbose Information<a class="headerlink" href="#lspci-verbose-information" title="Permanent link">&para;</a></h4>
+<p><code>lspci</code> can be used to list many details regarding the card, such as allocated PCIe lanes, potential issues, ASPM status, speed, etc.</p>
+<p>This information is crucial for troubleshooting.</p>
+<p>Using the device ID, you can query the information as so:</p>
+<p><strong>Command</strong>: </p>
+<div class="highlight"><pre><span></span><code>lspci<span class="w"> </span>-s<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>-vvvvv
+</code></pre></div>
+<p><strong>Output</strong>: </p>
+<details class="note">
+<summary>Output from Kube01 (CX4121A)</summary>
+<div class="highlight"><pre><span></span><code>root@kube01:<span class="w"> </span><span class="nv">CX_ADDRESS</span><span class="o">=</span><span class="s2">&quot;01:00.0&quot;</span>
+root@kube01:/etc/apt/sources.list.d#<span class="w"> </span>lspci<span class="w"> </span>-s<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>-vvvvv
+<span class="m">01</span>:00.0<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27710<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="w"> </span>Lx<span class="o">]</span>
+<span class="w">        </span>Subsystem:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27710<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="w"> </span>Lx<span class="o">]</span>
+<span class="w">        </span>Control:<span class="w"> </span>I/O-<span class="w"> </span>Mem+<span class="w"> </span>BusMaster+<span class="w"> </span>SpecCycle-<span class="w"> </span>MemWINV-<span class="w"> </span>VGASnoop-<span class="w"> </span>ParErr-<span class="w"> </span>Stepping-<span class="w"> </span>SERR+<span class="w"> </span>FastB2B-<span class="w"> </span>DisINTx+
+<span class="w">        </span>Status:<span class="w"> </span>Cap+<span class="w"> </span>66MHz-<span class="w"> </span>UDF-<span class="w"> </span>FastB2B-<span class="w"> </span>ParErr-<span class="w"> </span><span class="nv">DEVSEL</span><span class="o">=</span>fast<span class="w"> </span>&gt;TAbort-<span class="w"> </span>&lt;TAbort-<span class="w"> </span>&lt;MAbort-<span class="w"> </span>&gt;SERR-<span class="w"> </span>&lt;PERR-<span class="w"> </span>INTx-
+<span class="w">        </span>Latency:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Cache<span class="w"> </span>Line<span class="w"> </span>Size:<span class="w"> </span><span class="m">64</span><span class="w"> </span>bytes
+<span class="w">        </span>Interrupt:<span class="w"> </span>pin<span class="w"> </span>A<span class="w"> </span>routed<span class="w"> </span>to<span class="w"> </span>IRQ<span class="w"> </span><span class="m">16</span>
+<span class="w">        </span>IOMMU<span class="w"> </span>group:<span class="w"> </span><span class="m">2</span>
+<span class="w">        </span>Region<span class="w"> </span><span class="m">0</span>:<span class="w"> </span>Memory<span class="w"> </span>at<span class="w"> </span><span class="m">92000000</span><span class="w"> </span><span class="o">(</span><span class="m">64</span>-bit,<span class="w"> </span>prefetchable<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="nv">size</span><span class="o">=</span>32M<span class="o">]</span>
+<span class="w">        </span>Expansion<span class="w"> </span>ROM<span class="w"> </span>at<span class="w"> </span><span class="m">95400000</span><span class="w"> </span><span class="o">[</span>disabled<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="nv">size</span><span class="o">=</span>1M<span class="o">]</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">60</span><span class="o">]</span><span class="w"> </span>Express<span class="w"> </span><span class="o">(</span>v2<span class="o">)</span><span class="w"> </span>Endpoint,<span class="w"> </span>MSI<span class="w"> </span><span class="m">00</span>
+<span class="w">                </span>DevCap:<span class="w"> </span>MaxPayload<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes,<span class="w"> </span>PhantFunc<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Latency<span class="w"> </span>L0s<span class="w"> </span>unlimited,<span class="w"> </span>L1<span class="w"> </span>unlimited
+<span class="w">                        </span>ExtTag+<span class="w"> </span>AttnBtn-<span class="w"> </span>AttnInd-<span class="w"> </span>PwrInd-<span class="w"> </span>RBE+<span class="w"> </span>FLReset+<span class="w"> </span>SlotPowerLimit<span class="w"> </span>75W
+<span class="w">                </span>DevCtl:<span class="w"> </span>CorrErr+<span class="w"> </span>NonFatalErr+<span class="w"> </span>FatalErr+<span class="w"> </span>UnsupReq+
+<span class="w">                        </span>RlxdOrd+<span class="w"> </span>ExtTag+<span class="w"> </span>PhantFunc-<span class="w"> </span>AuxPwr-<span class="w"> </span>NoSnoop+<span class="w"> </span>FLReset-
+<span class="w">                        </span>MaxPayload<span class="w"> </span><span class="m">256</span><span class="w"> </span>bytes,<span class="w"> </span>MaxReadReq<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes
+<span class="w">                </span>DevSta:<span class="w"> </span>CorrErr+<span class="w"> </span>NonFatalErr-<span class="w"> </span>FatalErr-<span class="w"> </span>UnsupReq+<span class="w"> </span>AuxPwr-<span class="w"> </span>TransPend-
+<span class="w">                </span>LnkCap:<span class="w"> </span>Port<span class="w"> </span><span class="c1">#0, Speed 8GT/s, Width x8, ASPM not supported</span>
+<span class="w">                        </span>ClockPM-<span class="w"> </span>Surprise-<span class="w"> </span>LLActRep-<span class="w"> </span>BwNot-<span class="w"> </span>ASPMOptComp+
+<span class="w">                </span>LnkCtl:<span class="w"> </span>ASPM<span class="w"> </span>Disabled<span class="p">;</span><span class="w"> </span>RCB<span class="w"> </span><span class="m">64</span><span class="w"> </span>bytes,<span class="w"> </span>Disabled-<span class="w"> </span>CommClk+
+<span class="w">                        </span>ExtSynch-<span class="w"> </span>ClockPM-<span class="w"> </span>AutWidDis-<span class="w"> </span>BWInt-<span class="w"> </span>AutBWInt-
+<span class="w">                </span>LnkSta:<span class="w"> </span>Speed<span class="w"> </span>8GT/s,<span class="w"> </span>Width<span class="w"> </span>x8
+<span class="w">                        </span>TrErr-<span class="w"> </span>Train-<span class="w"> </span>SlotClk+<span class="w"> </span>DLActive-<span class="w"> </span>BWMgmt-<span class="w"> </span>ABWMgmt-
+<span class="w">                </span>DevCap2:<span class="w"> </span>Completion<span class="w"> </span>Timeout:<span class="w"> </span>Range<span class="w"> </span>ABCD,<span class="w"> </span>TimeoutDis+<span class="w"> </span>NROPrPrP-<span class="w"> </span>LTR-
+<span class="w">                        </span>10BitTagComp-<span class="w"> </span>10BitTagReq-<span class="w"> </span>OBFF<span class="w"> </span>Not<span class="w"> </span>Supported,<span class="w"> </span>ExtFmt-<span class="w"> </span>EETLPPrefix-
+<span class="w">                        </span>EmergencyPowerReduction<span class="w"> </span>Not<span class="w"> </span>Supported,<span class="w"> </span>EmergencyPowerReductionInit-
+<span class="w">                        </span>FRS-<span class="w"> </span>TPHComp-<span class="w"> </span>ExtTPHComp-
+<span class="w">                        </span>AtomicOpsCap:<span class="w"> </span>32bit-<span class="w"> </span>64bit-<span class="w"> </span>128bitCAS-
+<span class="w">                </span>DevCtl2:<span class="w"> </span>Completion<span class="w"> </span>Timeout:<span class="w"> </span>50us<span class="w"> </span>to<span class="w"> </span>50ms,<span class="w"> </span>TimeoutDis-<span class="w"> </span>LTR-<span class="w"> </span>10BitTagReq-<span class="w"> </span>OBFF<span class="w"> </span>Disabled,
+<span class="w">                        </span>AtomicOpsCtl:<span class="w"> </span>ReqEn-
+<span class="w">                </span>LnkCap2:<span class="w"> </span>Supported<span class="w"> </span>Link<span class="w"> </span>Speeds:<span class="w"> </span><span class="m">2</span>.5-8GT/s,<span class="w"> </span>Crosslink-<span class="w"> </span>Retimer-<span class="w"> </span>2Retimers-<span class="w"> </span>DRS-
+<span class="w">                </span>LnkCtl2:<span class="w"> </span>Target<span class="w"> </span>Link<span class="w"> </span>Speed:<span class="w"> </span><span class="m">2</span>.5GT/s,<span class="w"> </span>EnterCompliance-<span class="w"> </span>SpeedDis-
+<span class="w">                        </span>Transmit<span class="w"> </span>Margin:<span class="w"> </span>Normal<span class="w"> </span>Operating<span class="w"> </span>Range,<span class="w"> </span>EnterModifiedCompliance-<span class="w"> </span>ComplianceSOS-
+<span class="w">                        </span>Compliance<span class="w"> </span>Preset/De-emphasis:<span class="w"> </span>-6dB<span class="w"> </span>de-emphasis,<span class="w"> </span>0dB<span class="w"> </span>preshoot
+<span class="w">                </span>LnkSta2:<span class="w"> </span>Current<span class="w"> </span>De-emphasis<span class="w"> </span>Level:<span class="w"> </span>-6dB,<span class="w"> </span>EqualizationComplete+<span class="w"> </span>EqualizationPhase1+
+<span class="w">                        </span>EqualizationPhase2+<span class="w"> </span>EqualizationPhase3+<span class="w"> </span>LinkEqualizationRequest-
+<span class="w">                        </span>Retimer-<span class="w"> </span>2Retimers-<span class="w"> </span>CrosslinkRes:<span class="w"> </span>unsupported
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">48</span><span class="o">]</span><span class="w"> </span>Vital<span class="w"> </span>Product<span class="w"> </span>Data
+<span class="w">                </span>Product<span class="w"> </span>Name:<span class="w"> </span>Mellanox<span class="w"> </span>ConnectX-4<span class="w"> </span>LX<span class="w"> </span>Dual<span class="w"> </span>Port<span class="w"> </span><span class="m">25</span><span class="w"> </span>GbE<span class="w"> </span>SFP<span class="w"> </span>Network<span class="w"> </span>Adapter
+<span class="w">                </span>Read-only<span class="w"> </span>fields:
+<span class="w">                        </span><span class="o">[</span>PN<span class="o">]</span><span class="w"> </span>Part<span class="w"> </span>number:<span class="w"> </span>020NJD
+<span class="w">                        </span><span class="o">[</span>EC<span class="o">]</span><span class="w"> </span>Engineering<span class="w"> </span>changes:<span class="w"> </span>A02
+<span class="w">                        </span><span class="o">[</span>MN<span class="o">]</span><span class="w"> </span>Manufacture<span class="w"> </span>ID:<span class="w"> </span><span class="m">1028</span>
+<span class="w">                        </span><span class="o">[</span>SN<span class="o">]</span><span class="w"> </span>Serial<span class="w"> </span>number:<span class="w"> </span>IL020NJD740316C40056
+<span class="w">                        </span><span class="o">[</span>VA<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>DSV1028VPDR.VER1.0
+<span class="w">                        </span><span class="o">[</span>VB<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>FFV14.14.23.20
+<span class="w">                        </span><span class="o">[</span>VC<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>NPY2
+<span class="w">                        </span><span class="o">[</span>VD<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>PMT78
+<span class="w">                        </span><span class="o">[</span>VE<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>NMVMellanox<span class="w"> </span>Technologies,<span class="w"> </span>Inc.
+<span class="w">                        </span><span class="o">[</span>VF<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>DTINIC
+<span class="w">                        </span><span class="o">[</span>VG<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>DCM10010010C512020010C514030010C516040010C521010010C523020010C525030010C527040010C5
+<span class="w">                        </span><span class="o">[</span>VH<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>L1D0
+<span class="w">                        </span><span class="o">[</span>RV<span class="o">]</span><span class="w"> </span>Reserved:<span class="w"> </span>checksum<span class="w"> </span>good,<span class="w"> </span><span class="m">3</span><span class="w"> </span>byte<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>reserved
+<span class="w">                </span>End
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>9c<span class="o">]</span><span class="w"> </span>MSI-X:<span class="w"> </span>Enable+<span class="w"> </span><span class="nv">Count</span><span class="o">=</span><span class="m">64</span><span class="w"> </span>Masked-
+<span class="w">                </span>Vector<span class="w"> </span>table:<span class="w"> </span><span class="nv">BAR</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">offset</span><span class="o">=</span><span class="m">00002000</span>
+<span class="w">                </span>PBA:<span class="w"> </span><span class="nv">BAR</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">offset</span><span class="o">=</span><span class="m">00003000</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>c0<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>Specific<span class="w"> </span>Information:<span class="w"> </span><span class="nv">Len</span><span class="o">=</span><span class="m">18</span><span class="w"> </span>&lt;?&gt;
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">40</span><span class="o">]</span><span class="w"> </span>Power<span class="w"> </span>Management<span class="w"> </span>version<span class="w"> </span><span class="m">3</span>
+<span class="w">                </span>Flags:<span class="w"> </span>PMEClk-<span class="w"> </span>DSI-<span class="w"> </span>D1-<span class="w"> </span>D2-<span class="w"> </span><span class="nv">AuxCurrent</span><span class="o">=</span>375mA<span class="w"> </span>PME<span class="o">(</span>D0-,D1-,D2-,D3hot-,D3cold+<span class="o">)</span>
+<span class="w">                </span>Status:<span class="w"> </span>D0<span class="w"> </span>NoSoftRst+<span class="w"> </span>PME-Enable-<span class="w"> </span><span class="nv">DSel</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">DScale</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>PME-
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">100</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Alternative<span class="w"> </span>Routing-ID<span class="w"> </span>Interpretation<span class="w"> </span><span class="o">(</span>ARI<span class="o">)</span>
+<span class="w">                </span>ARICap:<span class="w"> </span>MFVC-<span class="w"> </span>ACS-,<span class="w"> </span>Next<span class="w"> </span>Function:<span class="w"> </span><span class="m">1</span>
+<span class="w">                </span>ARICtl:<span class="w"> </span>MFVC-<span class="w"> </span>ACS-,<span class="w"> </span>Function<span class="w"> </span>Group:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">110</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Advanced<span class="w"> </span>Error<span class="w"> </span>Reporting
+<span class="w">                </span>UESta:<span class="w">  </span>DLP-<span class="w"> </span>SDES-<span class="w"> </span>TLP-<span class="w"> </span>FCP-<span class="w"> </span>CmpltTO-<span class="w"> </span>CmpltAbrt-<span class="w"> </span>UnxCmplt-<span class="w"> </span>RxOF-<span class="w"> </span>MalfTLP-<span class="w"> </span>ECRC-<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>UEMsk:<span class="w">  </span>DLP-<span class="w"> </span>SDES-<span class="w"> </span>TLP-<span class="w"> </span>FCP-<span class="w"> </span>CmpltTO-<span class="w"> </span>CmpltAbrt-<span class="w"> </span>UnxCmplt-<span class="w"> </span>RxOF-<span class="w"> </span>MalfTLP-<span class="w"> </span>ECRC-<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>UESvrt:<span class="w"> </span>DLP+<span class="w"> </span>SDES-<span class="w"> </span>TLP-<span class="w"> </span>FCP+<span class="w"> </span>CmpltTO-<span class="w"> </span>CmpltAbrt-<span class="w"> </span>UnxCmplt-<span class="w"> </span>RxOF+<span class="w"> </span>MalfTLP+<span class="w"> </span>ECRC-<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>CESta:<span class="w">  </span>RxErr-<span class="w"> </span>BadTLP-<span class="w"> </span>BadDLLP-<span class="w"> </span>Rollover-<span class="w"> </span>Timeout-<span class="w"> </span>AdvNonFatalErr+
+<span class="w">                </span>CEMsk:<span class="w">  </span>RxErr-<span class="w"> </span>BadTLP-<span class="w"> </span>BadDLLP-<span class="w"> </span>Rollover-<span class="w"> </span>Timeout-<span class="w"> </span>AdvNonFatalErr+
+<span class="w">                </span>AERCap:<span class="w"> </span>First<span class="w"> </span>Error<span class="w"> </span>Pointer:<span class="w"> </span><span class="m">04</span>,<span class="w"> </span>ECRCGenCap+<span class="w"> </span>ECRCGenEn-<span class="w"> </span>ECRCChkCap+<span class="w"> </span>ECRCChkEn-
+<span class="w">                        </span>MultHdrRecCap-<span class="w"> </span>MultHdrRecEn-<span class="w"> </span>TLPPfxPres-<span class="w"> </span>HdrLogCap-
+<span class="w">                </span>HeaderLog:<span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>1c0<span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Secondary<span class="w"> </span>PCI<span class="w"> </span>Express
+<span class="w">                </span>LnkCtl3:<span class="w"> </span>LnkEquIntrruptEn-<span class="w"> </span>PerformEqu-
+<span class="w">                </span>LaneErrStat:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Kernel<span class="w"> </span>driver<span class="w"> </span><span class="k">in</span><span class="w"> </span>use:<span class="w"> </span>mlx5_core
+<span class="w">        </span>Kernel<span class="w"> </span>modules:<span class="w"> </span>mlx5_core
+</code></pre></div>
+</details>
+<details class="note">
+<summary>Output from Kube02 (CX416)</summary>
+<p>Here is the output from another server of mine with the 100G CX4</p>
+<div class="highlight"><pre><span></span><code>root@kube02:<span class="w"> </span><span class="nv">CX_ADDRESS</span><span class="o">=</span><span class="s2">&quot;81:00.0&quot;</span>
+root@kube02:~#<span class="w"> </span>lspci<span class="w"> </span>-vvvvv<span class="w"> </span>-s<span class="w"> </span><span class="nv">$CX_ADDRESS</span>
+<span class="m">81</span>:00.0<span class="w"> </span>Ethernet<span class="w"> </span>controller:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>MT27700<span class="w"> </span>Family<span class="w"> </span><span class="o">[</span>ConnectX-4<span class="o">]</span>
+<span class="w">        </span>Subsystem:<span class="w"> </span>Mellanox<span class="w"> </span>Technologies<span class="w"> </span>ConnectX-4<span class="w"> </span>Stand-up<span class="w"> </span>dual-port<span class="w"> </span>100GbE<span class="w"> </span>MCX416A-CCAT
+<span class="w">        </span>Control:<span class="w"> </span>I/O-<span class="w"> </span>Mem+<span class="w"> </span>BusMaster+<span class="w"> </span>SpecCycle-<span class="w"> </span>MemWINV-<span class="w"> </span>VGASnoop-<span class="w"> </span>ParErr-<span class="w"> </span>Stepping-<span class="w"> </span>SERR-<span class="w"> </span>FastB2B-<span class="w"> </span>DisINTx+
+<span class="w">        </span>Status:<span class="w"> </span>Cap+<span class="w"> </span>66MHz-<span class="w"> </span>UDF-<span class="w"> </span>FastB2B-<span class="w"> </span>ParErr-<span class="w"> </span><span class="nv">DEVSEL</span><span class="o">=</span>fast<span class="w"> </span>&gt;TAbort-<span class="w"> </span>&lt;TAbort-<span class="w"> </span>&lt;MAbort-<span class="w"> </span>&gt;SERR-<span class="w"> </span>&lt;PERR-<span class="w"> </span>INTx-
+<span class="w">        </span>Latency:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Interrupt:<span class="w"> </span>pin<span class="w"> </span>A<span class="w"> </span>routed<span class="w"> </span>to<span class="w"> </span>IRQ<span class="w"> </span><span class="m">407</span>
+<span class="w">        </span>NUMA<span class="w"> </span>node:<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>IOMMU<span class="w"> </span>group:<span class="w"> </span><span class="m">19</span>
+<span class="w">        </span>Region<span class="w"> </span><span class="m">0</span>:<span class="w"> </span>Memory<span class="w"> </span>at<span class="w"> </span>ca000000<span class="w"> </span><span class="o">(</span><span class="m">64</span>-bit,<span class="w"> </span>prefetchable<span class="o">)</span><span class="w"> </span><span class="o">[</span><span class="nv">size</span><span class="o">=</span>32M<span class="o">]</span>
+<span class="w">        </span>Expansion<span class="w"> </span>ROM<span class="w"> </span>at<span class="w"> </span>cd900000<span class="w"> </span><span class="o">[</span>disabled<span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="nv">size</span><span class="o">=</span>1M<span class="o">]</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">60</span><span class="o">]</span><span class="w"> </span>Express<span class="w"> </span><span class="o">(</span>v2<span class="o">)</span><span class="w"> </span>Endpoint,<span class="w"> </span>MSI<span class="w"> </span><span class="m">00</span>
+<span class="w">                </span>DevCap:<span class="w"> </span>MaxPayload<span class="w"> </span><span class="m">512</span><span class="w"> </span>bytes,<span class="w"> </span>PhantFunc<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Latency<span class="w"> </span>L0s<span class="w"> </span>unlimited,<span class="w"> </span>L1<span class="w"> </span>unlimited
+<span class="w">                        </span>ExtTag+<span class="w"> </span>AttnBtn-<span class="w"> </span>AttnInd-<span class="w"> </span>PwrInd-<span class="w"> </span>RBE+<span class="w"> </span>FLReset+<span class="w"> </span>SlotPowerLimit<span class="w"> </span>25W
+<span class="w">                </span>DevCtl:<span class="w"> </span>CorrErr+<span class="w"> </span>NonFatalErr+<span class="w"> </span>FatalErr+<span class="w"> </span>UnsupReq+
+<span class="w">                        </span>RlxdOrd+<span class="w"> </span>ExtTag+<span class="w"> </span>PhantFunc-<span class="w"> </span>AuxPwr-<span class="w"> </span>NoSnoop+<span class="w"> </span>FLReset-
+<span class="w">                        </span>MaxPayload<span class="w"> </span><span class="m">256</span><span class="w"> </span>bytes,<span class="w"> </span>MaxReadReq<span class="w"> </span><span class="m">4096</span><span class="w"> </span>bytes
+<span class="w">                </span>DevSta:<span class="w"> </span>CorrErr+<span class="w"> </span>NonFatalErr-<span class="w"> </span>FatalErr-<span class="w"> </span>UnsupReq+<span class="w"> </span>AuxPwr-<span class="w"> </span>TransPend-
+<span class="w">                </span>LnkCap:<span class="w"> </span>Port<span class="w"> </span><span class="c1">#0, Speed 8GT/s, Width x16, ASPM not supported</span>
+<span class="w">                        </span>ClockPM-<span class="w"> </span>Surprise-<span class="w"> </span>LLActRep-<span class="w"> </span>BwNot-<span class="w"> </span>ASPMOptComp+
+<span class="w">                </span>LnkCtl:<span class="w"> </span>ASPM<span class="w"> </span>Disabled<span class="p">;</span><span class="w"> </span>RCB<span class="w"> </span><span class="m">64</span><span class="w"> </span>bytes,<span class="w"> </span>Disabled-<span class="w"> </span>CommClk+
+<span class="w">                        </span>ExtSynch-<span class="w"> </span>ClockPM-<span class="w"> </span>AutWidDis-<span class="w"> </span>BWInt-<span class="w"> </span>AutBWInt-
+<span class="w">                </span>LnkSta:<span class="w"> </span>Speed<span class="w"> </span>8GT/s,<span class="w"> </span>Width<span class="w"> </span>x8<span class="w"> </span><span class="o">(</span>downgraded<span class="o">)</span>
+<span class="w">                        </span>TrErr-<span class="w"> </span>Train-<span class="w"> </span>SlotClk+<span class="w"> </span>DLActive-<span class="w"> </span>BWMgmt-<span class="w"> </span>ABWMgmt-
+<span class="w">                </span>DevCap2:<span class="w"> </span>Completion<span class="w"> </span>Timeout:<span class="w"> </span>Range<span class="w"> </span>ABC,<span class="w"> </span>TimeoutDis+<span class="w"> </span>NROPrPrP-<span class="w"> </span>LTR-
+<span class="w">                        </span>10BitTagComp-<span class="w"> </span>10BitTagReq-<span class="w"> </span>OBFF<span class="w"> </span>Not<span class="w"> </span>Supported,<span class="w"> </span>ExtFmt-<span class="w"> </span>EETLPPrefix-
+<span class="w">                        </span>EmergencyPowerReduction<span class="w"> </span>Not<span class="w"> </span>Supported,<span class="w"> </span>EmergencyPowerReductionInit-
+<span class="w">                        </span>FRS-<span class="w"> </span>TPHComp-<span class="w"> </span>ExtTPHComp-
+<span class="w">                        </span>AtomicOpsCap:<span class="w"> </span>32bit-<span class="w"> </span>64bit-<span class="w"> </span>128bitCAS-
+<span class="w">                </span>DevCtl2:<span class="w"> </span>Completion<span class="w"> </span>Timeout:<span class="w"> </span>65ms<span class="w"> </span>to<span class="w"> </span>210ms,<span class="w"> </span>TimeoutDis-<span class="w"> </span>LTR-<span class="w"> </span>10BitTagReq-<span class="w"> </span>OBFF<span class="w"> </span>Disabled,
+<span class="w">                        </span>AtomicOpsCtl:<span class="w"> </span>ReqEn-
+<span class="w">                </span>LnkCap2:<span class="w"> </span>Supported<span class="w"> </span>Link<span class="w"> </span>Speeds:<span class="w"> </span><span class="m">2</span>.5-8GT/s,<span class="w"> </span>Crosslink-<span class="w"> </span>Retimer-<span class="w"> </span>2Retimers-<span class="w"> </span>DRS-
+<span class="w">                </span>LnkCtl2:<span class="w"> </span>Target<span class="w"> </span>Link<span class="w"> </span>Speed:<span class="w"> </span>8GT/s,<span class="w"> </span>EnterCompliance-<span class="w"> </span>SpeedDis-
+<span class="w">                        </span>Transmit<span class="w"> </span>Margin:<span class="w"> </span>Normal<span class="w"> </span>Operating<span class="w"> </span>Range,<span class="w"> </span>EnterModifiedCompliance-<span class="w"> </span>ComplianceSOS-
+<span class="w">                        </span>Compliance<span class="w"> </span>Preset/De-emphasis:<span class="w"> </span>-6dB<span class="w"> </span>de-emphasis,<span class="w"> </span>0dB<span class="w"> </span>preshoot
+<span class="w">                </span>LnkSta2:<span class="w"> </span>Current<span class="w"> </span>De-emphasis<span class="w"> </span>Level:<span class="w"> </span>-6dB,<span class="w"> </span>EqualizationComplete+<span class="w"> </span>EqualizationPhase1+
+<span class="w">                        </span>EqualizationPhase2+<span class="w"> </span>EqualizationPhase3+<span class="w"> </span>LinkEqualizationRequest-
+<span class="w">                        </span>Retimer-<span class="w"> </span>2Retimers-<span class="w"> </span>CrosslinkRes:<span class="w"> </span>unsupported
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">48</span><span class="o">]</span><span class="w"> </span>Vital<span class="w"> </span>Product<span class="w"> </span>Data
+<span class="w">                </span>Product<span class="w"> </span>Name:<span class="w"> </span>CX416A<span class="w"> </span>-<span class="w"> </span>ConnectX-4<span class="w"> </span>QSFP28
+<span class="w">                </span>Read-only<span class="w"> </span>fields:
+<span class="w">                        </span><span class="o">[</span>PN<span class="o">]</span><span class="w"> </span>Part<span class="w"> </span>number:<span class="w"> </span>MCX416A-CCAT
+<span class="w">                        </span><span class="o">[</span>EC<span class="o">]</span><span class="w"> </span>Engineering<span class="w"> </span>changes:<span class="w"> </span>AG
+<span class="w">                        </span><span class="o">[</span>SN<span class="o">]</span><span class="w"> </span>Serial<span class="w"> </span>number:<span class="w"> </span>MT1838X04950
+<span class="w">                        </span><span class="o">[</span>V0<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>specific:<span class="w"> </span>PCIeGen3<span class="w"> </span>x16
+<span class="w">                        </span><span class="o">[</span>RV<span class="o">]</span><span class="w"> </span>Reserved:<span class="w"> </span>checksum<span class="w"> </span>good,<span class="w"> </span><span class="m">2</span><span class="w"> </span>byte<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>reserved
+<span class="w">                </span>End
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>9c<span class="o">]</span><span class="w"> </span>MSI-X:<span class="w"> </span>Enable+<span class="w"> </span><span class="nv">Count</span><span class="o">=</span><span class="m">64</span><span class="w"> </span>Masked-
+<span class="w">                </span>Vector<span class="w"> </span>table:<span class="w"> </span><span class="nv">BAR</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">offset</span><span class="o">=</span><span class="m">00002000</span>
+<span class="w">                </span>PBA:<span class="w"> </span><span class="nv">BAR</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">offset</span><span class="o">=</span><span class="m">00003000</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>c0<span class="o">]</span><span class="w"> </span>Vendor<span class="w"> </span>Specific<span class="w"> </span>Information:<span class="w"> </span><span class="nv">Len</span><span class="o">=</span><span class="m">18</span><span class="w"> </span>&lt;?&gt;
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">40</span><span class="o">]</span><span class="w"> </span>Power<span class="w"> </span>Management<span class="w"> </span>version<span class="w"> </span><span class="m">3</span>
+<span class="w">                </span>Flags:<span class="w"> </span>PMEClk-<span class="w"> </span>DSI-<span class="w"> </span>D1-<span class="w"> </span>D2-<span class="w"> </span><span class="nv">AuxCurrent</span><span class="o">=</span>375mA<span class="w"> </span>PME<span class="o">(</span>D0-,D1-,D2-,D3hot-,D3cold+<span class="o">)</span>
+<span class="w">                </span>Status:<span class="w"> </span>D0<span class="w"> </span>NoSoftRst+<span class="w"> </span>PME-Enable-<span class="w"> </span><span class="nv">DSel</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="nv">DScale</span><span class="o">=</span><span class="m">0</span><span class="w"> </span>PME-
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">100</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Advanced<span class="w"> </span>Error<span class="w"> </span>Reporting
+<span class="w">                </span>UESta:<span class="w">  </span>DLP-<span class="w"> </span>SDES-<span class="w"> </span>TLP-<span class="w"> </span>FCP-<span class="w"> </span>CmpltTO-<span class="w"> </span>CmpltAbrt-<span class="w"> </span>UnxCmplt-<span class="w"> </span>RxOF-<span class="w"> </span>MalfTLP-<span class="w"> </span>ECRC-<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>UEMsk:<span class="w">  </span>DLP-<span class="w"> </span>SDES-<span class="w"> </span>TLP-<span class="w"> </span>FCP-<span class="w"> </span>CmpltTO-<span class="w"> </span>CmpltAbrt+<span class="w"> </span>UnxCmplt+<span class="w"> </span>RxOF-<span class="w"> </span>MalfTLP-<span class="w"> </span>ECRC-<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>UESvrt:<span class="w"> </span>DLP+<span class="w"> </span>SDES-<span class="w"> </span>TLP+<span class="w"> </span>FCP+<span class="w"> </span>CmpltTO+<span class="w"> </span>CmpltAbrt-<span class="w"> </span>UnxCmplt-<span class="w"> </span>RxOF+<span class="w"> </span>MalfTLP+<span class="w"> </span>ECRC+<span class="w"> </span>UnsupReq-<span class="w"> </span>ACSViol-
+<span class="w">                </span>CESta:<span class="w">  </span>RxErr-<span class="w"> </span>BadTLP-<span class="w"> </span>BadDLLP-<span class="w"> </span>Rollover-<span class="w"> </span>Timeout-<span class="w"> </span>AdvNonFatalErr+
+<span class="w">                </span>CEMsk:<span class="w">  </span>RxErr+<span class="w"> </span>BadTLP+<span class="w"> </span>BadDLLP+<span class="w"> </span>Rollover+<span class="w"> </span>Timeout+<span class="w"> </span>AdvNonFatalErr+
+<span class="w">                </span>AERCap:<span class="w"> </span>First<span class="w"> </span>Error<span class="w"> </span>Pointer:<span class="w"> </span><span class="m">04</span>,<span class="w"> </span>ECRCGenCap+<span class="w"> </span>ECRCGenEn+<span class="w"> </span>ECRCChkCap+<span class="w"> </span>ECRCChkEn+
+<span class="w">                        </span>MultHdrRecCap-<span class="w"> </span>MultHdrRecEn-<span class="w"> </span>TLPPfxPres-<span class="w"> </span>HdrLogCap-
+<span class="w">                </span>HeaderLog:<span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span><span class="w"> </span><span class="m">00000000</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">150</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Alternative<span class="w"> </span>Routing-ID<span class="w"> </span>Interpretation<span class="w"> </span><span class="o">(</span>ARI<span class="o">)</span>
+<span class="w">                </span>ARICap:<span class="w"> </span>MFVC-<span class="w"> </span>ACS-,<span class="w"> </span>Next<span class="w"> </span>Function:<span class="w"> </span><span class="m">1</span>
+<span class="w">                </span>ARICtl:<span class="w"> </span>MFVC-<span class="w"> </span>ACS-,<span class="w"> </span>Function<span class="w"> </span>Group:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">180</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Single<span class="w"> </span>Root<span class="w"> </span>I/O<span class="w"> </span>Virtualization<span class="w"> </span><span class="o">(</span>SR-IOV<span class="o">)</span>
+<span class="w">                </span>IOVCap:<span class="w"> </span>Migration-<span class="w"> </span>10BitTagReq-<span class="w"> </span>Interrupt<span class="w"> </span>Message<span class="w"> </span>Number:<span class="w"> </span><span class="m">000</span>
+<span class="w">                </span>IOVCtl:<span class="w"> </span>Enable-<span class="w"> </span>Migration-<span class="w"> </span>Interrupt-<span class="w"> </span>MSE-<span class="w"> </span>ARIHierarchy+<span class="w"> </span>10BitTagReq-
+<span class="w">                </span>IOVSta:<span class="w"> </span>Migration-
+<span class="w">                </span>Initial<span class="w"> </span>VFs:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span>Total<span class="w"> </span>VFs:<span class="w"> </span><span class="m">8</span>,<span class="w"> </span>Number<span class="w"> </span>of<span class="w"> </span>VFs:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>Function<span class="w"> </span>Dependency<span class="w"> </span>Link:<span class="w"> </span><span class="m">00</span>
+<span class="w">                </span>VF<span class="w"> </span>offset:<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>stride:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>Device<span class="w"> </span>ID:<span class="w"> </span><span class="m">1014</span>
+<span class="w">                </span>Supported<span class="w"> </span>Page<span class="w"> </span>Size:<span class="w"> </span>000007ff,<span class="w"> </span>System<span class="w"> </span>Page<span class="w"> </span>Size:<span class="w"> </span><span class="m">00000001</span>
+<span class="w">                </span>Region<span class="w"> </span><span class="m">0</span>:<span class="w"> </span>Memory<span class="w"> </span>at<span class="w"> </span>00000000cc800000<span class="w"> </span><span class="o">(</span><span class="m">64</span>-bit,<span class="w"> </span>prefetchable<span class="o">)</span>
+<span class="w">                </span>VF<span class="w"> </span>Migration:<span class="w"> </span>offset:<span class="w"> </span><span class="m">00000000</span>,<span class="w"> </span>BIR:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span>1c0<span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Secondary<span class="w"> </span>PCI<span class="w"> </span>Express
+<span class="w">                </span>LnkCtl3:<span class="w"> </span>LnkEquIntrruptEn-<span class="w"> </span>PerformEqu-
+<span class="w">                </span>LaneErrStat:<span class="w"> </span><span class="m">0</span>
+<span class="w">        </span>Capabilities:<span class="w"> </span><span class="o">[</span><span class="m">230</span><span class="w"> </span>v1<span class="o">]</span><span class="w"> </span>Access<span class="w"> </span>Control<span class="w"> </span>Services
+<span class="w">                </span>ACSCap:<span class="w"> </span>SrcValid-<span class="w"> </span>TransBlk-<span class="w"> </span>ReqRedir-<span class="w"> </span>CmpltRedir-<span class="w"> </span>UpstreamFwd-<span class="w"> </span>EgressCtrl-<span class="w"> </span>DirectTrans-
+<span class="w">                </span>ACSCtl:<span class="w"> </span>SrcValid-<span class="w"> </span>TransBlk-<span class="w"> </span>ReqRedir-<span class="w"> </span>CmpltRedir-<span class="w"> </span>UpstreamFwd-<span class="w"> </span>EgressCtrl-<span class="w"> </span>DirectTrans-
+<span class="w">        </span>Kernel<span class="w"> </span>driver<span class="w"> </span><span class="k">in</span><span class="w"> </span>use:<span class="w"> </span>mlx5_core
+<span class="w">        </span>Kernel<span class="w"> </span>modules:<span class="w"> </span>mlx5_core
+</code></pre></div>
+</details>
+<h2 id="manage-firmware">Manage Firmware<a class="headerlink" href="#manage-firmware" title="Permanent link">&para;</a></h2>
+<h3 id="get-firmware-information">Get Firmware Information<a class="headerlink" href="#get-firmware-information" title="Permanent link">&para;</a></h3>
+<h4 id="via-mstflint">via mstflint<a class="headerlink" href="#via-mstflint" title="Permanent link">&para;</a></h4>
+<p>We can use mstflint to get details about the currently installed firmware.</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>mstflint<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>query
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<details class="info" open="open">
+<summary>From Kube02 (Older firmware)</summary>
+<pre><code>root@kube02:~# mstflint -d $CX_ADDRESS query
+Image type:            FS3
+FW Version:            12.28.2006
+FW Release Date:       15.9.2020
+Product Version:       12.28.2006
+Rom Info:              type=UEFI version=14.21.17 cpu=AMD64,AARCH64
+                type=PXE version=3.6.102 cpu=AMD64
+Description:           UID                GuidsNumber
+Base GUID:             98039b0300688698        4
+Base MAC:              98039b688698            4
+Image VSD:             N/A
+Device VSD:            N/A
+PSID:                  MT_2150110033
+Security Attributes:   N/A
+</code></pre>
+</details>
+<p>In the above case, this firmware is a bit out of date. We will be updating it later in this guide.</p>
+<details class="info">
+<summary>Output from Kube01 (Before Update / PSID Change)</summary>
+<pre><code>root@kube01:/etc/apt/sources.list.d# mstflint -d $CX_ADDRESS q
+Image type:            FS3
+FW Version:            14.14.2320
+FW Release Date:       10.5.2016
+Product Version:       rel-14_14_2320
+Rom Info:              type=UEFI version=14.9.50
+                type=PXE version=3.4.729
+Description:           UID                GuidsNumber
+Base GUID:             248a070300914da4        8
+Base MAC:              248a07914da4            8
+Image VSD:             N/A
+Device VSD:            N/A
+PSID:                  DEL2420110034
+Security Attributes:   N/A
+</code></pre>
+</details>
+<div class="admonition note">
+<p class="admonition-title">PSID Update<p>Take note of the PSID here- when I updated this card, I flashed back to OEM firmware, rather then the Dell? branded firmwire which was previously on it.</p>
+</p>
+</div>
+<details class="info">
+<summary>Output from Kube01 (After Update / PSID Change)</summary>
+<pre><code>root@kube01:~# mstflint -d $CX_ADDRESS query
+Image type:            FS3
+FW Version:            14.32.1900
+FW Release Date:       25.8.2024
+Product Version:       14.32.1900
+Rom Info:              type=UEFI version=14.25.17 cpu=AMD64,AARCH64
+                type=PXE version=3.6.502 cpu=AMD64
+Description:           UID                GuidsNumber
+Base GUID:             248a070300914da4        8
+Base MAC:              248a07914da4            8
+Image VSD:             N/A
+Device VSD:            N/A
+PSID:                  MT_2420110034
+Security Attributes:   N/A
+</code></pre>
+</details>
+<h4 id="via-mlxfwmanager">via mlxfwmanager<a class="headerlink" href="#via-mlxfwmanager" title="Permanent link">&para;</a></h4>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>mlxfwmanager
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<details class="info" open="open">
+<summary>From Kube02 (Older Firmware)</summary>
+<pre><code>root@kube02:~# mlxfwmanager
+Querying Mellanox devices firmware ...
+
+Device #1:
+----------
+
+Device Type:      ConnectX4
+Part Number:      MCX416A-CCA_Ax
+Description:      ConnectX-4 EN network interface card; 100GbE dual-port QSFP28; PCIe3.0 x16; ROHS R6
+PSID:             MT_2150110033
+PCI Device Name:  0000:81:00.0
+Base GUID:        98039b0300688698
+Base MAC:         98039b688698
+Versions:         Current        Available
+FW             12.28.2006     N/A
+PXE            3.6.0102       N/A
+UEFI           14.21.0017     N/A
+
+Status:           No matching image found
+</code></pre>
+</details>
+<details class="info">
+<summary>From Kube01 (BEFORE Updating Firmware)</summary>
+<pre><code>root@kube01:~/mlnx# mlxfwmanager
+Querying Mellanox devices firmware ...
+
+Device #1:
+----------
+
+Device Type:      ConnectX4LX
+Part Number:      020NJD_0MRT0D_Ax
+Description:      Mellanox 25GBE 2P ConnectX-4 Lx Adapter
+PSID:             DEL2420110034
+PCI Device Name:  0000:01:00.0
+Base MAC:         248a07914da4
+Versions:         Current        Available
+FW             14.14.2320     N/A
+PXE            3.4.0729       N/A
+UEFI           14.9.0050      N/A
+
+Status:           No matching image found
+</code></pre>
+</details>
+<details class="info">
+<summary>From Kube01 (Firmware Updated)</summary>
+<pre><code>root@kube01:~# mlxfwmanager
+Querying Mellanox devices firmware ...
+
+Device #1:
+----------
+
+Device Type:      ConnectX4LX
+Part Number:      MCX4121A-ACA_Ax
+Description:      ConnectX-4 Lx EN network interface card; 25GbE dual-port SFP28; PCIe3.0 x8; ROHS R6
+PSID:             MT_2420110034
+PCI Device Name:  0000:01:00.0
+Base MAC:         248a07914da4
+Versions:         Current        Available
+FW             14.32.1900     N/A
+PXE            3.6.0502       N/A
+UEFI           14.25.0017     N/A
+
+Status:           No matching image found
+</code></pre>
+</details>
+<h4 id="via-ethtool">via ethtool<a class="headerlink" href="#via-ethtool" title="Permanent link">&para;</a></h4>
+<p>You can use <code>ethtool -i</code> to get firmware information from an interface.</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>ethtool<span class="w"> </span>-i<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<div class="highlight"><pre><span></span><code>root@kube01:~#<span class="w"> </span>ethtool<span class="w"> </span>-i<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+driver:<span class="w"> </span>mlx5_core
+version:<span class="w"> </span><span class="m">6</span>.8.12-8-pve
+firmware-version:<span class="w"> </span><span class="m">14</span>.32.1900<span class="w"> </span><span class="o">(</span>MT_2420110034<span class="o">)</span>
+expansion-rom-version:
+bus-info:<span class="w"> </span><span class="m">0000</span>:01:00.0
+supports-statistics:<span class="w"> </span>yes
+supports-test:<span class="w"> </span>yes
+supports-eeprom-access:<span class="w"> </span>no
+supports-register-dump:<span class="w"> </span>no
+supports-priv-flags:<span class="w"> </span>yes
+root@kube02:~#<span class="w"> </span>ethtool<span class="w"> </span>-i<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+driver:<span class="w"> </span>mlx5_core
+version:<span class="w"> </span><span class="m">6</span>.8.12-4-pve
+firmware-version:<span class="w"> </span><span class="m">12</span>.28.2006<span class="w"> </span><span class="o">(</span>MT_2150110033<span class="o">)</span>
+expansion-rom-version:
+bus-info:<span class="w"> </span><span class="m">0000</span>:81:00.0
+supports-statistics:<span class="w"> </span>yes
+supports-test:<span class="w"> </span>yes
+supports-eeprom-access:<span class="w"> </span>no
+supports-register-dump:<span class="w"> </span>no
+supports-priv-flags:<span class="w"> </span>yes
+root@kube05:~#<span class="w"> </span>ethtool<span class="w"> </span>-i<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+driver:<span class="w"> </span>mlx5_core
+version:<span class="w"> </span><span class="m">6</span>.8.12-8-pve
+firmware-version:<span class="w"> </span><span class="m">12</span>.28.2006<span class="w"> </span><span class="o">(</span>MT_2150110033<span class="o">)</span>
+expansion-rom-version:
+bus-info:<span class="w"> </span><span class="m">0000</span>:01:00.0
+supports-statistics:<span class="w"> </span>yes
+supports-test:<span class="w"> </span>yes
+supports-eeprom-access:<span class="w"> </span>no
+supports-register-dump:<span class="w"> </span>no
+supports-priv-flags:<span class="w"> </span>yes
+</code></pre></div>
+<h3 id="locate-new-firmware">Locate New Firmware<a class="headerlink" href="#locate-new-firmware" title="Permanent link">&para;</a></h3>
+<p>The first task we need to do, is identify the card.</p>
+<h4 id="identify-card">Identify Card<a class="headerlink" href="#identify-card" title="Permanent link">&para;</a></h4>
+<h5 id="via-mlxfwmanager_1">via <code>mlxfwmanager</code><a class="headerlink" href="#via-mlxfwmanager_1" title="Permanent link">&para;</a></h5>
+<p>To find new firmware, we need the model of your network adapter.</p>
+<p>This is the "Part Number" field from <code>mlxfwmanager</code></p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>mlxfwmanager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Part Number|PSID&quot;</span><span class="w"> </span>
+</code></pre></div>
+<details class="info" open="open">
+<summary>Output</summary>
+<pre><code># Before updating with Dell Firmware
+root@kube01:~# mlxfwmanager | grep -E "Part Number|PSID"
+Part Number:      020NJD_0MRT0D_Ax
+PSID:             DEL2420110034
+# After updating &amp; flashing back to OEM Firmware
+root@kube01:~# mlxfwmanager | grep -E "Part Number|PSID"
+Part Number:      MCX4121A-ACA_Ax
+PSID:             MT_2420110034
+root@kube02:~# mlxfwmanager | grep -E "Part Number|PSID"
+Part Number:      MCX416A-CCA_Ax
+PSID:             MT_2150110033
+root@kube05:/etc/apt/sources.list.d# mlxfwmanager | grep -E "Part Number|PSID"
+Part Number:      MCX416A-CCA_Ax
+PSID:             MT_2150110033
+</code></pre>
+</details>
+<p>In the above output, Kube01 has a CX-4121A, while Kube02/Kube05 have CX-416A</p>
+<h5 id="via-physical-inspection">via Physical Inspection<a class="headerlink" href="#via-physical-inspection" title="Permanent link">&para;</a></h5>
+<p>The back of the card "should" contain both a sticker, and label on the PCB with the specific model of your card.</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/cx4121c.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/cx4121c.webP" /></a></p>
+<p>This was from a dead card 25G CX-4121C I had on hand. It is a CX-4121C</p>
+<p>Digging through my stash, I found a few more examples.</p>
+<p>Here is the CX-416A 100G NIC used in Kube02, and Kube05 currently.</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/cx416a.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/cx416a.webP" /></a></p>
+<p>Here is an older CX-311A-XCAT (Single-port 10G. Dirt cheap. But old.)</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/cx311a-xcat.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/cx311a-xcat.webP" /></a></p>
+<p>And, finally, a ConnectX-3 CX-354A (Dual-Port 40G Ethernet / 56G Infiniband)</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/cx354a.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/cx354a.webP" /></a></p>
+<h4 id="find-firmware">Find Firmware<a class="headerlink" href="#find-firmware" title="Permanent link">&para;</a></h4>
+<p>We can download firmware from Nvidia.</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>Links.. subject to change.</p>
+<p>Don't come at me with pitchforks with Nvidia moves these links... again...</p>
+</p>
+</div>
+<ul>
+<li><a href="https://network.nvidia.com/support/firmware/firmware-downloads/" target="_blank">Master Listing</a></li>
+<li><a href="https://network.nvidia.com/support/firmware/connectx3en/" target="_blank">ConnectX-3 EN Firmware</a></li>
+<li><a href="https://network.nvidia.com/support/firmware/connectx3proen/" target="_blank">ConnectX-3 Pro EN Firmware</a></li>
+<li><a href="https://network.nvidia.com/support/firmware/connectx4lxen/" target="_blank">ConnectX-4 LX Firmware</a></li>
+<li><a href="https://network.nvidia.com/support/firmware/connectx4en/" target="_blank">ConnectX-4 EN Firmware</a></li>
+</ul>
+<h5 id="example-cx-416a-kube05">Example - CX-416A (Kube05)<a class="headerlink" href="#example-cx-416a-kube05" title="Permanent link">&para;</a></h5>
+<p>For this demo, I will be updating the firmware for the CX-416A on Kube05.</p>
+<p>First- I navigate to the listings for <a href="https://network.nvidia.com/support/firmware/connectx4en/" target="_blank">ConnectX-4 EN Firmware</a>.</p>
+<p>Next, we need to locate the PSID.</p>
+<p>From the output from before- we have these details:</p>
+<div class="highlight"><pre><span></span><code>root@kube05:/etc/apt/sources.list.d#<span class="w"> </span>mlxfwmanager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Part Number|PSID&quot;</span>
+Part<span class="w"> </span>Number:<span class="w">      </span>MCX416A-CCA_Ax
+PSID:<span class="w">             </span>MT_2150110033
+</code></pre></div>
+<p>Using both the part number, and PSID, we can locate the correct firmware.</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>If you cannot exactly match the part number, look through the various categories and try to match the PSID.</p>
+</p>
+</div>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/psid-match.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/psid-match.webP" /></a></p>
+<p>Copy the download link for later.</p>
+<p>In this example, the link is: <code>https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip</code></p>
+<h5 id="example-dell-branded-cx4121a">Example - Dell-Branded CX4121A<a class="headerlink" href="#example-dell-branded-cx4121a" title="Permanent link">&para;</a></h5>
+<p>Using the data from Kube01, we have these details:</p>
+<div class="highlight"><pre><span></span><code>root@kube01:~#<span class="w"> </span>mlxfwmanager<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;Part Number|PSID|Description&quot;</span>
+Part<span class="w"> </span>Number:<span class="w">      </span>020NJD_0MRT0D_Ax
+PSID:<span class="w">             </span>DEL2420110034
+Description:<span class="w">      </span>Mellanox<span class="w"> </span>25GBE<span class="w"> </span>2P<span class="w"> </span>ConnectX-4<span class="w"> </span>Lx<span class="w"> </span>Adapter
+</code></pre></div>
+<p>The first thing to note- this is a Dell product number. As well, the PSID prefixed with "DEL", also hints at Dell.</p>
+<p>For this, getting the firmware was slightly tricker.</p>
+<p>But- lets start at the <a href="https://network.nvidia.com/support/firmware/connectx4lxen/" target="_blank">ConnectX-4 LX Firmware</a></p>
+<p>We know this is a CX-4121A, based on the back of the card.</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/cx4121c.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../../Technology/2025/assets-cx4/cx4121c.webP" /></a></p>
+<p>However, we run into an issue- this doesn't help us narrow it down.</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/4121c-fw-q.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/4121c-fw-q.webP" /></a></p>
+<p>So- at this point, you have to do a tiny bit of guess work.</p>
+<p>Take the original PSID: <code>DEL2420110034</code></p>
+<p>Strip the <code>DEL</code>, which leaves <code>2420110034</code></p>
+<p>And search through each category until you find <code>2420110034</code></p>
+<p>In this example, I found the matching partial PSID under "MCX4121A-ACAT"</p>
+<p><a class="glightbox" href="../../Technology/2025/assets-cx4/MCX4121A-ACAT.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2025/assets-cx4/MCX4121A-ACAT.webP" /></a></p>
+<p>The resulting URL being: <code>https://www.mellanox.com/downloads/firmware/fw-ConnectX4Lx-rel-14_32_1900-MCX4121A-ACA_Ax-UEFI-14.25.17-FlexBoot-3.6.502.bin.zip</code></p>
+<h3 id="flash-card">Flash Card<a class="headerlink" href="#flash-card" title="Permanent link">&para;</a></h3>
+<p>Since... I have a few of these to update, I am going to script out the process.</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>Normally, when updating firmware... Especially the NIC, I recommend you do so with a physically connected console (or IP-KVM).</p>
+<p>However, from my experiences doing this process- it can be done "relatively safely" over SSH as the firmware does not seem to apply until after boot.</p>
+</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using this URL as example: https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip</span>
+<span class="c1"># Set Firmware URL</span>
+<span class="nv">FW_URL</span><span class="o">=</span><span class="s2">&quot;https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip&quot;</span>
+<span class="c1"># Get the archive name from the URL.</span>
+<span class="nv">FW_ARCHIVE_NAME</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="nv">$FW_URL</span><span class="k">)</span>
+<span class="c1"># Get the resulting fw bin filename. (Remove the .zip extension)</span>
+<span class="nv">FW_FILE_NAME</span><span class="o">=</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FW_ARCHIVE_NAME</span><span class="s2">&quot;</span><span class="w"> </span>.zip<span class="k">)</span>
+
+<span class="c1"># Debug output</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Archive Name: </span><span class="nv">$FW_ARCHIVE_NAME</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Bin Name: </span><span class="nv">$FW_FILE_NAME</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PCI Address: </span><span class="nv">$CX_ADDRESS</span><span class="s2">&quot;</span>
+
+<span class="c1"># Download firmware</span>
+wget<span class="w"> </span><span class="nv">$FW_URL</span>
+<span class="c1"># Extract Firmware</span>
+unzip<span class="w"> </span><span class="nv">$FW_ARCHIVE_NAME</span>
+<span class="c1"># Burn the new firmware.</span>
+mstflint<span class="w"> </span>--allow_psid_change<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>-i<span class="w"> </span><span class="nv">$FW_FILE_NAME</span><span class="w"> </span>burn<span class="w"> </span>
+
+<span class="c1"># Finally, cleanup the files we downloaded.</span>
+rm<span class="w"> </span><span class="nv">$FW_ARCHIVE_NAME</span>
+rm<span class="w"> </span><span class="nv">$FW_FILE_NAME</span>
+</code></pre></div>
+<details class="info">
+<summary>Output from Kube05</summary>
+<pre><code>root@kube05:~# # Using this URL as example: https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
+root@kube05:~# # Set Firmware URL
+root@kube05:~# FW_URL="https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip"
+root@kube05:~# # Get the archive name from the URL.
+root@kube05:~# FW_ARCHIVE_NAME=$(basename $FW_URL)
+root@kube05:~# # Get the resulting fw bin filename. (Remove the .zip extension)
+root@kube05:~# FW_FILE_NAME=$(basename "$FW_ARCHIVE_NAME" .zip)
+root@kube05:~#
+root@kube05:~# # Debug output
+root@kube05:~# echo "Archive Name: $FW_ARCHIVE_NAME"
+Archive Name: fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
+root@kube05:~# echo "Bin Name: $FW_FILE_NAME"
+Bin Name: fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin
+root@kube05:~# echo "PCI Address: $CX_ADDRESS"
+PCI Address: 01:00.0
+root@kube05:~#
+root@kube05:~# # Download firmware
+root@kube05:~# wget $FW_URL
+--2025-03-15 09:32:44--  https://www.mellanox.com/downloads/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
+Resolving www.mellanox.com (www.mellanox.com)... 23.220.161.68, 23.220.161.71
+Connecting to www.mellanox.com (www.mellanox.com)|23.220.161.68|:443... connected.
+HTTP request sent, awaiting response... 301 Moved Permanently
+Location: https://content.mellanox.com/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip [following]
+--2025-03-15 09:32:44--  https://content.mellanox.com/firmware/fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
+Resolving content.mellanox.com (content.mellanox.com)... 107.178.241.102
+Connecting to content.mellanox.com (content.mellanox.com)|107.178.241.102|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2366377 (2.3M) [application/zip]
+Saving to: ‘fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip’
+
+fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-Fl 100%[========================================================================================================================================&gt;]   2.26M  8.35MB/s    in 0.3s
+
+2025-03-15 09:32:45 (8.35 MB/s) - ‘fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip’ saved [2366377/2366377]
+
+root@kube05:~# # Extract Firmware
+root@kube05:~# unzip $FW_ARCHIVE_NAME
+Archive:  fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin.zip
+inflating: fw-ConnectX4-rel-12_28_2302-MCX416A-CCA_Ax-UEFI-14.21.17-FlexBoot-3.6.102.bin
+root@kube05:~# mstflint --allow_psid_change -d $CX_ADDRESS -i $FW_FILE_NAME burn
+
+Current FW version on flash:  12.28.2006
+New FW version:               12.28.2302
+
+FSMST_INITIALIZE -   OK
+Writing Boot image component -   OK
+-I- To load new FW run mstfwreset or reboot machine.
+root@kube05:~# rm $FW_ARCHIVE_NAME
+root@kube05:~# rm $FW_FILE_NAME
+</code></pre>
+</details>
+<h3 id="psid-mismatch">PSID Mismatch<a class="headerlink" href="#psid-mismatch" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Info<p>This flag is already included with the above script.</p>
+<p>However- this dedicated section was added to assist others with this issue.</p>
+</p>
+</div>
+<p>If you have a Dell/HP branded version, you may run into a PSID Mismatch.</p>
+<p>You will receive this error:</p>
+<div class="highlight"><pre><span></span><code>root@kube01:~/mlnx#<span class="w"> </span>mstflint<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>-i<span class="w"> </span><span class="nv">$FW_FILE_NAME</span><span class="w"> </span>burn
+Done.
+<span class="w">    </span>Current<span class="w"> </span>FW<span class="w"> </span>version<span class="w"> </span>on<span class="w"> </span>flash:<span class="w">  </span><span class="m">14</span>.14.2320
+<span class="w">    </span>New<span class="w"> </span>FW<span class="w"> </span>version:<span class="w">               </span><span class="m">14</span>.32.1900
+
+
+-E-<span class="w"> </span>PSID<span class="w"> </span>mismatch.<span class="w"> </span>The<span class="w"> </span>PSID<span class="w"> </span>on<span class="w"> </span>flash<span class="w"> </span><span class="o">(</span>DEL2420110034<span class="o">)</span><span class="w"> </span>differs<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>PSID<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>given<span class="w"> </span>image<span class="w"> </span><span class="o">(</span>MT_2420110034<span class="o">)</span>.
+</code></pre></div>
+<p>This will stop the flashing process. To, enable changing the PSID, we can use this flag: <code>--allow_psid_change</code></p>
+<div class="highlight"><pre><span></span><code>root@kube01:~/mlnx#<span class="w"> </span>mstflint<span class="w"> </span>--allow_psid_change<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>-i<span class="w"> </span><span class="nv">$FW_FILE_NAME</span><span class="w"> </span>burn
+Done.
+<span class="w">    </span>Current<span class="w"> </span>FW<span class="w"> </span>version<span class="w"> </span>on<span class="w"> </span>flash:<span class="w">  </span><span class="m">14</span>.14.2320
+<span class="w">    </span>New<span class="w"> </span>FW<span class="w"> </span>version:<span class="w">               </span><span class="m">14</span>.32.1900
+
+
+<span class="w">    </span>You<span class="w"> </span>are<span class="w"> </span>about<span class="w"> </span>to<span class="w"> </span>replace<span class="w"> </span>current<span class="w"> </span>PSID<span class="w"> </span>on<span class="w"> </span>flash<span class="w"> </span>-<span class="w"> </span><span class="s2">&quot;DEL2420110034&quot;</span><span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>different<span class="w"> </span>PSID<span class="w"> </span>-<span class="w"> </span><span class="s2">&quot;MT_2420110034&quot;</span>.
+<span class="w">    </span>Note:<span class="w"> </span>It<span class="w"> </span>is<span class="w"> </span>highly<span class="w"> </span>recommended<span class="w"> </span>not<span class="w"> </span>to<span class="w"> </span>change<span class="w"> </span>the<span class="w"> </span>PSID.
+
+<span class="w">  </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span><span class="k">continue</span><span class="w"> </span>?<span class="w"> </span><span class="o">(</span>y/n<span class="o">)</span><span class="w"> </span><span class="o">[</span>n<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>y
+Burning<span class="w"> </span>FW<span class="w"> </span>image<span class="w"> </span>without<span class="w"> </span>signatures<span class="w"> </span>-<span class="w">   </span><span class="m">1</span>%
+
+Burning<span class="w"> </span>FW<span class="w"> </span>image<span class="w"> </span>without<span class="w"> </span>signatures<span class="w"> </span>-<span class="w"> </span>OK
+Restoring<span class="w"> </span>signature<span class="w">                     </span>-<span class="w"> </span>OK
+-I-<span class="w"> </span>To<span class="w"> </span>load<span class="w"> </span>new<span class="w"> </span>FW<span class="w"> </span>run<span class="w"> </span>mstfwreset<span class="w"> </span>or<span class="w"> </span>reboot<span class="w"> </span>machine.
+</code></pre></div>
+<p>After, you will have a card with Mellanox firmware, instead of Dell/HP/etc firmware.</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h3 id="read-configuration">Read Configuration<a class="headerlink" href="#read-configuration" title="Permanent link">&para;</a></h3>
+<h4 id="via-ethtool_1">via <code>ethtool</code><a class="headerlink" href="#via-ethtool_1" title="Permanent link">&para;</a></h4>
+<p><code>ethtool</code> can be used to query information from ethernet interfaces.</p>
+<p>Please read <a href="https://man7.org/linux/man-pages/man8/ethtool.8.html" target="_blank">ethtool manpages</a> for additional options.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query basic information, link modes, FEC, Speed, Duplex, etc...</span>
+<span class="c1"># Ie. Layer 2 Data / Parameters</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Layer 2 Configuration&quot;</span>
+ethtool<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+<span class="c1"># Show ring / buffer parameters</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Ring parameters&quot;</span>
+ethtool<span class="w"> </span>-g<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+<span class="c1"># Hardware Offload Parameters</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Offload Parameters&quot;</span>
+ethtool<span class="w"> </span>-k<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+<span class="c1"># Driver Information</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Driver Information&quot;</span>
+ethtool<span class="w"> </span>-i<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+<span class="c1"># Coalesce Configuration</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Pause Information&quot;</span>
+ethtool<span class="w"> </span>-c<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+<span class="c1"># Channel Configuration</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Channel Information&quot;</span>
+ethtool<span class="w"> </span>-l<span class="w"> </span><span class="nv">$CX_INTERFACE</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info<p>ethtool can also set parameters. However, these changes are not persistent!</p>
+<p>The changes would need to be saved somewhere, or placed in a script.</p>
+</p>
+</div>
+<details class="info">
+<summary>Output from Kube01</summary>
+<pre><code>root@kube01:~# # Query basic information, link modes, FEC, Speed, Duplex, etc...
+root@kube01:~# # Ie. Layer 2 Data / Parameters
+root@kube01:~# echo "Layer 2 Configuration"
+Layer 2 Configuration
+root@kube01:~# ethtool $CX_INTERFACE
+Settings for enp1s0f0np0:
+        Supported ports: [ Backplane ]
+        Supported link modes:   1000baseKX/Full
+                                10000baseKR/Full
+                                25000baseCR/Full
+                                25000baseKR/Full
+                                25000baseSR/Full
+        Supported pause frame use: Symmetric
+        Supports auto-negotiation: Yes
+        Supported FEC modes: None        RS      BASER
+        Advertised link modes:  1000baseKX/Full
+                                10000baseKR/Full
+                                25000baseCR/Full
+                                25000baseKR/Full
+                                25000baseSR/Full
+        Advertised pause frame use: Symmetric
+        Advertised auto-negotiation: Yes
+        Advertised FEC modes: RS
+        Speed: 25000Mb/s
+        Duplex: Full
+        Auto-negotiation: on
+        Port: Direct Attach Copper
+        PHYAD: 0
+        Transceiver: internal
+        Supports Wake-on: d
+        Wake-on: d
+        Link detected: yes
+root@kube01:~# # Show ring / buffer parameters
+root@kube01:~# echo "Ring parameters"
+Ring parameters
+root@kube01:~# ethtool -g $CX_INTERFACE
+Ring parameters for enp1s0f0np0:
+Pre-set maximums:
+RX:             8192
+RX Mini:        n/a
+RX Jumbo:       n/a
+TX:             8192
+Current hardware settings:
+RX:             1024
+RX Mini:        n/a
+RX Jumbo:       n/a
+TX:             1024
+RX Buf Len:             n/a
+CQE Size:               n/a
+TX Push:        off
+TCP data split: off
+root@kube01:~# # Hardware Offload Parameters
+root@kube01:~# echo "Offload Parameters"
+Offload Parameters
+root@kube01:~# ethtool -k $CX_INTERFACE
+Features for enp1s0f0np0:
+rx-checksumming: on
+tx-checksumming: on
+        tx-checksum-ipv4: off [fixed]
+        tx-checksum-ip-generic: on
+        tx-checksum-ipv6: off [fixed]
+        tx-checksum-fcoe-crc: off [fixed]
+        tx-checksum-sctp: off [fixed]
+scatter-gather: on
+        tx-scatter-gather: on
+        tx-scatter-gather-fraglist: off [fixed]
+tcp-segmentation-offload: on
+        tx-tcp-segmentation: on
+        tx-tcp-ecn-segmentation: off [fixed]
+        tx-tcp-mangleid-segmentation: off
+        tx-tcp6-segmentation: on
+generic-segmentation-offload: on
+generic-receive-offload: on
+large-receive-offload: off
+rx-vlan-offload: on
+tx-vlan-offload: on
+ntuple-filters: off
+receive-hashing: on
+highdma: on [fixed]
+rx-vlan-filter: on
+vlan-challenged: off [fixed]
+tx-lockless: off [fixed]
+netns-local: off [fixed]
+tx-gso-robust: off [fixed]
+tx-fcoe-segmentation: off [fixed]
+tx-gre-segmentation: on
+tx-gre-csum-segmentation: on
+tx-ipxip4-segmentation: off [fixed]
+tx-ipxip6-segmentation: off [fixed]
+tx-udp_tnl-segmentation: on
+tx-udp_tnl-csum-segmentation: on
+tx-gso-partial: on
+tx-tunnel-remcsum-segmentation: off [fixed]
+tx-sctp-segmentation: off [fixed]
+tx-esp-segmentation: off [fixed]
+tx-udp-segmentation: on
+tx-gso-list: off [fixed]
+fcoe-mtu: off [fixed]
+tx-nocache-copy: off
+loopback: off [fixed]
+rx-fcs: off
+rx-all: off
+tx-vlan-stag-hw-insert: on
+rx-vlan-stag-hw-parse: off [fixed]
+rx-vlan-stag-filter: on [fixed]
+l2-fwd-offload: off [fixed]
+hw-tc-offload: off
+esp-hw-offload: off [fixed]
+esp-tx-csum-hw-offload: off [fixed]
+rx-udp_tunnel-port-offload: on
+tls-hw-tx-offload: off [fixed]
+tls-hw-rx-offload: off [fixed]
+rx-gro-hw: off [fixed]
+tls-hw-record: off [fixed]
+rx-gro-list: off
+macsec-hw-offload: on
+rx-udp-gro-forwarding: off
+hsr-tag-ins-offload: off [fixed]
+hsr-tag-rm-offload: off [fixed]
+hsr-fwd-offload: off [fixed]
+hsr-dup-offload: off [fixed]
+root@kube01:~# # Driver Information
+root@kube01:~# echo "Driver Information"
+Driver Information
+root@kube01:~# ethtool -i $CX_INTERFACE
+driver: mlx5_core
+version: 6.8.12-8-pve
+firmware-version: 14.32.1900 (MT_2420110034)
+expansion-rom-version:
+bus-info: 0000:01:00.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: yes
+root@kube01:~# # Coalesce Configuration
+root@kube01:~# echo "Pause Information"
+Pause Information
+root@kube01:~# ethtool -c $CX_INTERFACE
+Coalesce parameters for enp1s0f0np0:
+Adaptive RX: on  TX: on
+stats-block-usecs: n/a
+sample-interval: n/a
+pkt-rate-low: n/a
+pkt-rate-high: n/a
+
+rx-usecs: 8
+rx-frames: 128
+rx-usecs-irq: n/a
+rx-frames-irq: n/a
+
+tx-usecs: 8
+tx-frames: 128
+tx-usecs-irq: n/a
+tx-frames-irq: n/a
+
+rx-usecs-low: n/a
+rx-frame-low: n/a
+tx-usecs-low: n/a
+tx-frame-low: n/a
+
+rx-usecs-high: n/a
+rx-frame-high: n/a
+tx-usecs-high: n/a
+tx-frame-high: n/a
+
+CQE mode RX: on  TX: off
+
+root@kube01:~# # Channel Configuration
+root@kube01:~# echo "Channel Information"
+Channel Information
+root@kube01:~# ethtool -l $CX_INTERFACE
+Channel parameters for enp1s0f0np0:
+Pre-set maximums:
+RX:             n/a
+TX:             n/a
+Other:          n/a
+Combined:       12
+Current hardware settings:
+RX:             n/a
+TX:             n/a
+Other:          n/a
+Combined:       12
+root@kube01:~#
+</code></pre>
+</details>
+<h4 id="via-mlxconfig">via <code>mlxconfig</code><a class="headerlink" href="#via-mlxconfig" title="Permanent link">&para;</a></h4>
+<p><code>mlxconfig</code> does exactly what its name says. It gets, and sets configurations.</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>Unlike ethtool, changes made using <code>mlxconfig</code> are persistent.</p>
+</p>
+</div>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code>mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>query
+</code></pre></div>
+<p><strong>Output</strong>:</p>
+<details class="info">
+<summary>From Kube01</summary>
+<pre><code>root@kube01:~# mlxconfig -d $CX_ADDRESS q
+
+Device #1:
+----------
+
+Device type:        ConnectX4LX
+Name:               MCX4121A-ACA_Ax
+Description:        ConnectX-4 Lx EN network interface card; 25GbE dual-port SFP28; PCIe3.0 x8; ROHS R6
+Device:             01:00.0
+
+Configurations:                                          Next Boot
+        MEMIC_BAR_SIZE                              0
+        MEMIC_SIZE_LIMIT                            _256KB(1)
+        FLEX_PARSER_PROFILE_ENABLE                  0
+        FLEX_IPV4_OVER_VXLAN_PORT                   0
+        ROCE_NEXT_PROTOCOL                          254
+        PF_NUM_OF_VF_VALID                          False(0)
+        NON_PREFETCHABLE_PF_BAR                     False(0)
+        VF_VPD_ENABLE                               False(0)
+        STRICT_VF_MSIX_NUM                          False(0)
+        VF_NODNIC_ENABLE                            False(0)
+        NUM_PF_MSIX_VALID                           True(1)
+        NUM_OF_VFS                                  8
+        NUM_OF_PF                                   2
+        SRIOV_EN                                    False(0)
+        PF_LOG_BAR_SIZE                             5
+        VF_LOG_BAR_SIZE                             0
+        NUM_PF_MSIX                                 63
+        NUM_VF_MSIX                                 11
+        INT_LOG_MAX_PAYLOAD_SIZE                    AUTOMATIC(0)
+        PCIE_CREDIT_TOKEN_TIMEOUT                   0
+        ACCURATE_TX_SCHEDULER                       False(0)
+        PARTIAL_RESET_EN                            False(0)
+        SW_RECOVERY_ON_ERRORS                       False(0)
+        RESET_WITH_HOST_ON_ERRORS                   False(0)
+        PCI_BUS0_RESTRICT_SPEED                     PCI_GEN_1(0)
+        PCI_BUS0_RESTRICT_ASPM                      False(0)
+        PCI_BUS0_RESTRICT_WIDTH                     PCI_X1(0)
+        PCI_BUS0_RESTRICT                           False(0)
+        PCI_DOWNSTREAM_PORT_OWNER                   Array[0..15]
+        CQE_COMPRESSION                             BALANCED(0)
+        IP_OVER_VXLAN_EN                            False(0)
+        MKEY_BY_NAME                                False(0)
+        UCTX_EN                                     True(1)
+        PCI_ATOMIC_MODE                             PCI_ATOMIC_DISABLED_EXT_ATOMIC_ENABLED(0)
+        TUNNEL_ECN_COPY_DISABLE                     False(0)
+        LRO_LOG_TIMEOUT0                            6
+        LRO_LOG_TIMEOUT1                            7
+        LRO_LOG_TIMEOUT2                            8
+        LRO_LOG_TIMEOUT3                            13
+        ICM_CACHE_MODE                              DEVICE_DEFAULT(0)
+        TX_SCHEDULER_BURST                          0
+        LOG_MAX_QUEUE                               17
+        LOG_DCR_HASH_TABLE_SIZE                     14
+        MAX_PACKET_LIFETIME                         0
+        DCR_LIFO_SIZE                               16384
+        NUM_OF_PLANES_P1                            0
+        NUM_OF_PLANES_P2                            0
+        IB_PROTO_WIDTH_EN_MASK_P1                   0
+        IB_PROTO_WIDTH_EN_MASK_P2                   0
+        ROCE_CC_PRIO_MASK_P1                        255
+        ROCE_CC_CNP_MODERATION_P1                   DEVICE_DEFAULT(0)
+        ROCE_CC_PRIO_MASK_P2                        255
+        ROCE_CC_CNP_MODERATION_P2                   DEVICE_DEFAULT(0)
+        CLAMP_TGT_RATE_AFTER_TIME_INC_P1            True(1)
+        CLAMP_TGT_RATE_P1                           False(0)
+        RPG_TIME_RESET_P1                           300
+        RPG_BYTE_RESET_P1                           32767
+        RPG_THRESHOLD_P1                            1
+        RPG_MAX_RATE_P1                             0
+        RPG_AI_RATE_P1                              5
+        RPG_HAI_RATE_P1                             50
+        RPG_GD_P1                                   11
+        RPG_MIN_DEC_FAC_P1                          50
+        RPG_MIN_RATE_P1                             1
+        RATE_TO_SET_ON_FIRST_CNP_P1                 0
+        DCE_TCP_G_P1                                1019
+        DCE_TCP_RTT_P1                              1
+        RATE_REDUCE_MONITOR_PERIOD_P1               4
+        INITIAL_ALPHA_VALUE_P1                      1023
+        MIN_TIME_BETWEEN_CNPS_P1                    4
+        CNP_802P_PRIO_P1                            6
+        CNP_DSCP_P1                                 48
+        CLAMP_TGT_RATE_AFTER_TIME_INC_P2            True(1)
+        CLAMP_TGT_RATE_P2                           False(0)
+        RPG_TIME_RESET_P2                           300
+        RPG_BYTE_RESET_P2                           32767
+        RPG_THRESHOLD_P2                            1
+        RPG_MAX_RATE_P2                             0
+        RPG_AI_RATE_P2                              5
+        RPG_HAI_RATE_P2                             50
+        RPG_GD_P2                                   11
+        RPG_MIN_DEC_FAC_P2                          50
+        RPG_MIN_RATE_P2                             1
+        RATE_TO_SET_ON_FIRST_CNP_P2                 0
+        DCE_TCP_G_P2                                1019
+        DCE_TCP_RTT_P2                              1
+        RATE_REDUCE_MONITOR_PERIOD_P2               4
+        INITIAL_ALPHA_VALUE_P2                      1023
+        MIN_TIME_BETWEEN_CNPS_P2                    4
+        CNP_802P_PRIO_P2                            6
+        CNP_DSCP_P2                                 48
+        LLDP_NB_DCBX_P1                             False(0)
+        LLDP_NB_RX_MODE_P1                          OFF(0)
+        LLDP_NB_TX_MODE_P1                          OFF(0)
+        LLDP_NB_DCBX_P2                             False(0)
+        LLDP_NB_RX_MODE_P2                          OFF(0)
+        LLDP_NB_TX_MODE_P2                          OFF(0)
+        ROCE_RTT_RESP_DSCP_P1                       0
+        ROCE_RTT_RESP_DSCP_MODE_P1                  DEVICE_DEFAULT(0)
+        ROCE_RTT_RESP_DSCP_P2                       0
+        ROCE_RTT_RESP_DSCP_MODE_P2                  DEVICE_DEFAULT(0)
+        DCBX_IEEE_P1                                True(1)
+        DCBX_CEE_P1                                 True(1)
+        DCBX_WILLING_P1                             True(1)
+        DCBX_IEEE_P2                                True(1)
+        DCBX_CEE_P2                                 True(1)
+        DCBX_WILLING_P2                             True(1)
+        KEEP_ETH_LINK_UP_P1                         True(1)
+        KEEP_IB_LINK_UP_P1                          False(0)
+        KEEP_LINK_UP_ON_BOOT_P1                     False(0)
+        KEEP_LINK_UP_ON_STANDBY_P1                  False(0)
+        DO_NOT_CLEAR_PORT_STATS_P1                  False(0)
+        AUTO_POWER_SAVE_LINK_DOWN_P1                False(0)
+        KEEP_ETH_LINK_UP_P2                         True(1)
+        KEEP_IB_LINK_UP_P2                          False(0)
+        KEEP_LINK_UP_ON_BOOT_P2                     False(0)
+        KEEP_LINK_UP_ON_STANDBY_P2                  False(0)
+        DO_NOT_CLEAR_PORT_STATS_P2                  False(0)
+        AUTO_POWER_SAVE_LINK_DOWN_P2                False(0)
+        NUM_OF_VL_P1                                _4_VLs(3)
+        NUM_OF_TC_P1                                _8_TCs(0)
+        NUM_OF_PFC_P1                               8
+        VL15_BUFFER_SIZE_P1                         0
+        NUM_OF_VL_P2                                _4_VLs(3)
+        NUM_OF_TC_P2                                _8_TCs(0)
+        NUM_OF_PFC_P2                               8
+        VL15_BUFFER_SIZE_P2                         0
+        DUP_MAC_ACTION_P1                           LAST_CFG(0)
+        SRIOV_IB_ROUTING_MODE_P1                    LID(1)
+        IB_ROUTING_MODE_P1                          LID(1)
+        DUP_MAC_ACTION_P2                           LAST_CFG(0)
+        SRIOV_IB_ROUTING_MODE_P2                    LID(1)
+        IB_ROUTING_MODE_P2                          LID(1)
+        PHY_FEC_OVERRIDE_P1                         DEVICE_DEFAULT(0)
+        PHY_FEC_OVERRIDE_P2                         DEVICE_DEFAULT(0)
+        PF_SD_GROUP                                 0
+        ROCE_CONTROL                                ROCE_ENABLE(2)
+        PCI_WR_ORDERING                             per_mkey(0)
+        MULTI_PORT_VHCA_EN                          False(0)
+        PORT_OWNER                                  True(1)
+        ALLOW_RD_COUNTERS                           True(1)
+        RENEG_ON_CHANGE                             True(1)
+        TRACER_ENABLE                               True(1)
+        IP_VER                                      IPv4(0)
+        BOOT_UNDI_NETWORK_WAIT                      0
+        UEFI_HII_EN                                 True(1)
+        BOOT_DBG_LOG                                False(0)
+        UEFI_LOGS                                   DISABLED(0)
+        BOOT_VLAN                                   1
+        LEGACY_BOOT_PROTOCOL                        NONE(0)
+        BOOT_INTERRUPT_DIS                          False(0)
+        BOOT_LACP_DIS                               False(0)
+        BOOT_VLAN_EN                                True(1)
+        BOOT_PKEY                                   0
+        DYNAMIC_VF_MSIX_TABLE                       False(0)
+        EXP_ROM_UEFI_ARM_ENABLE                     False(0)
+        EXP_ROM_UEFI_x86_ENABLE                     False(0)
+        EXP_ROM_PXE_ENABLE                          True(1)
+        ADVANCED_PCI_SETTINGS                       False(0)
+        SAFE_MODE_THRESHOLD                         10
+        SAFE_MODE_ENABLE                            True(1)
+</code></pre>
+</details>
+<h2 id="common-settings">Common Settings<a class="headerlink" href="#common-settings" title="Permanent link">&para;</a></h2>
+<p>Note, these configurations are all set using <code>mlxconfig</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>You can also configure the network adapters at boot-time, by pressing the displayed key-combination during the boot process.</p>
+<p>This method, might be a bit easier for you.</p>
+</p>
+</div>
+<p>If- you have a dual-port NIC, you will need to set many of these commands for BOTH PCI Addresses.</p>
+<p>To view all support configurations, with documentation, use this command:</p>
+<div class="highlight"><pre><span></span><code>mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span>show_confs
+</code></pre></div>
+<p>I will be using these variables for the below configurations. </p>
+<p>If- your adapter does not have multiple PHYSICAL addresses displayed- remove the line referencing CX_ADDRESS_2</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>Physical is mentioned here, as these cards support SR-IOV, which will present multiple "virtual" copies of the card, which can be directly passed into virtual machines, kubernetes, etc.</p>
+</p>
+</div>
+<div class="highlight"><pre><span></span><code>lspci<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Mellanox
+
+<span class="c1"># Fill in your addresses.</span>
+<span class="nv">CX_ADDRESS_1</span><span class="o">=</span><span class="s2">&quot;01:00.0&quot;</span>
+<span class="nv">CX_ADDRESS_2</span><span class="o">=</span><span class="s2">&quot;01:00.1&quot;</span>
+</code></pre></div>
+<h3 id="enabledisable-pxeiscsi-boot-set-boot-parameters">Enable/Disable PXE/iSCSI Boot / Set Boot Parameters<a class="headerlink" href="#enabledisable-pxeiscsi-boot-set-boot-parameters" title="Permanent link">&para;</a></h3>
+<p>I personally, don't PXE boot my hypervisors. As such, eliminating the extra 30+ seconds during boot, is ideal for me.</p>
+<p><a href="https://docs.nvidia.com/networking/display/prebootdriversv15/nic+configuration#src-99400801_NICConfiguration-LegacyBootProtocol" target="_blank">Configuration Documentation</a></p>
+<p>This can also be set to do iSCSI boot as well. (aka, You can boot from an iSCSI disk on a remote NAS)</p>
+<p>Each physical port is set independantly. </p>
+<p>The NICs support IPv4, and 6, Vlans, PXE and iSCSI, and quite a few other boot-related settings.</p>
+<p><strong>Command</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Set desired mode: Options:</span>
+<span class="c1"># - None </span>
+<span class="c1"># - PXE - With failover </span>
+<span class="c1"># - iSCSI - Will failover to PXE after failures</span>
+<span class="c1"># - PXE_WO_FAIL_ISCSI - PXE without failover to iSCSI</span>
+<span class="c1"># - ISCSI_WO_FAIL_PXE - iSCSI boot without failover to PXE</span>
+
+<span class="nv">CX_1_BOOTMODE</span><span class="o">=</span><span class="s2">&quot;None&quot;</span>
+<span class="nv">CX_2_BOOTMODE</span><span class="o">=</span><span class="s2">&quot;None&quot;</span>
+
+<span class="c1">## Enable, or Disable setting vlan for PXE/iSCSI boot</span>
+<span class="nv">CX_1_BOOT_VLAN_ENABLE</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">CX_2_BOOT_VLAN_ENABLE</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1">## Sets the VLAN used for PXE/iSCSI boot (if the above setting is enabled.)</span>
+<span class="nv">CX_1_BOOT_VLAN</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">CX_2_BOOT_VLAN</span><span class="o">=</span><span class="m">1</span>
+
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS_1</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">LEGACY_BOOT_PROTOCOL</span><span class="o">=</span><span class="nv">$CX_1_BOOTMODE</span><span class="w"> </span><span class="nv">BOOT_VLAN_EN</span><span class="o">=</span><span class="nv">$CX_1_BOOT_VLAN_ENABLE</span><span class="w"> </span><span class="nv">BOOT_VLAN</span><span class="o">=</span><span class="nv">$CX_1_BOOT_VLAN</span>
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS_2</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">LEGACY_BOOT_PROTOCOL</span><span class="o">=</span><span class="nv">$CX_2_BOOTMODE</span><span class="w"> </span><span class="nv">BOOT_VLAN_EN</span><span class="o">=</span><span class="nv">$CX_2_BOOT_VLAN_ENABLE</span><span class="w"> </span><span class="nv">BOOT_VLAN</span><span class="o">=</span><span class="nv">$CX_2_BOOT_VLAN</span>
+</code></pre></div>
+<p>If- you want to enable booting PXE/iSCSI via these NIC's, I'd recommend using the boot-time configuration utility, as it exposes the options in a much easier to use way.</p>
+<h3 id="enabledisable-sr-iov">Enable/Disable SR-IOV<a class="headerlink" href="#enabledisable-sr-iov" title="Permanent link">&para;</a></h3>
+<p>SR-IOV is used to present multiple "virtual" copies of your physical NIC. These instances can be passed into a VM, allowing the VM <strong>DIRECT</strong> access to the network, skipping the hypervisor's networking stack.</p>
+<p>The benefit here- is potentially dramatically increased networking performance. However- there are some trade-offs...</p>
+<p>A few examples being-</p>
+<ol>
+<li>Proxmox firewall rules will have no-effect</li>
+<li>Work-arounds are needed for VM to be able to talk to Host, and vise-versa.</li>
+</ol>
+<p>Each physical port is set independantly. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1 = Enable, 0 = Disable</span>
+<span class="nv">CX_1_SRIOV</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">CX_2_SRIOV</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># Set number of VFS (SRIOV Virtual Functions)</span>
+<span class="nv">CX_1_SRIOV_NUMVFS</span><span class="o">=</span><span class="m">16</span>
+<span class="nv">CX_2_SRIOV_NUMVFS</span><span class="o">=</span><span class="m">16</span>
+
+<span class="c1"># Set the desired configurations.</span>
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS_1</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">SRIOV_EN</span><span class="o">=</span><span class="nv">$CX_1_SRIOV</span><span class="w"> </span><span class="nv">NUM_OF_VFS</span><span class="o">=</span><span class="nv">$CX_1_SRIOV_NUMVFS</span>
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS_2</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">SRIOV_EN</span><span class="o">=</span><span class="nv">$CX_2_SRIOV</span><span class="w"> </span><span class="nv">NUM_OF_VFS</span><span class="o">=</span><span class="nv">$CX_2_SRIOV_NUMVFS</span>
+</code></pre></div>
+<h3 id="power-saving-features">Power Saving Features<a class="headerlink" href="#power-saving-features" title="Permanent link">&para;</a></h3>
+<p>Here are a few power savings features:</p>
+<div class="admonition info">
+<p class="admonition-title">Info<p>YES. The ConnectX-4 cards supports ASPM.</p>
+<p>Doesn't work for you? Update your firmware. The feature is relatively new. Make sure you have a ConnextX-4 or higher.</p>
+<div class="highlight"><pre><span></span><code>root@kube01:~#<span class="w"> </span>lspci<span class="w"> </span>-vvvv<span class="w"> </span>-s<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ASPM
+<span class="w">        </span>LnkCap:<span class="w"> </span>Port<span class="w"> </span><span class="c1">#0, Speed 8GT/s, Width x8, ASPM L1, Exit Latency L1 &lt;4us</span>
+<span class="w">                </span>ClockPM-<span class="w"> </span>Surprise-<span class="w"> </span>LLActRep-<span class="w"> </span>BwNot-<span class="w"> </span>ASPMOptComp+
+<span class="w">        </span>LnkCtl:<span class="w"> </span>ASPM<span class="w"> </span>L1<span class="w"> </span>Enabled<span class="p">;</span><span class="w"> </span>RCB<span class="w"> </span><span class="m">64</span><span class="w"> </span>bytes,<span class="w"> </span>Disabled-<span class="w"> </span>CommClk+
+</code></pre></div>
+</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nv">settings</span><span class="o">=(</span>
+<span class="c1"># 1 = Power down NIC when not in use, 0 = Keep Link Powered</span>
+<span class="w">    </span><span class="s2">&quot;AUTO_POWER_SAVE_LINK_DOWN_P1=1&quot;</span>
+<span class="w">    </span><span class="s2">&quot;AUTO_POWER_SAVE_LINK_DOWN_P2=1&quot;</span>
+<span class="c1"># 0 = ASPM Enabled, 1 = ASPM Disabled</span>
+<span class="w">    </span><span class="s2">&quot;PCI_BUS0_RESTRICT_ASPM=0&quot;</span>
+<span class="o">)</span>
+
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">settings</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="set-port-mode-infiniband-or-ethernet">Set Port Mode Infiniband or Ethernet<a class="headerlink" href="#set-port-mode-infiniband-or-ethernet" title="Permanent link">&para;</a></h3>
+<p>ConnectX-4 infiniband NICs can set each port individually to either Infiniband mode, or Ethernet mode.</p>
+<p>For most cases, unless you have a Infiniband switch, running in IB mode, and the knowlege/setup for IB, you should be running in ethernet mode.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">settings</span><span class="o">=(</span>
+<span class="w">        </span><span class="c1"># 1 = Infiniband, 2 = Ethernet</span>
+<span class="w">        </span><span class="nv">LINK_TYPE_P1</span><span class="o">=</span><span class="m">2</span>
+<span class="w">        </span><span class="nv">LINK_TYPE_P2</span><span class="o">=</span><span class="m">2</span>
+<span class="o">)</span>
+
+
+<span class="c1"># Set the desired configurations.</span>
+mlxconfig<span class="w"> </span>-d<span class="w"> </span><span class="nv">$CX_ADDRESS</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">settings</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="persistent-ethtool-tuning-hardware-offload-jumbo-frames-etc">Persistent Ethtool Tuning (Hardware offload, Jumbo Frames, etc)<a class="headerlink" href="#persistent-ethtool-tuning-hardware-offload-jumbo-frames-etc" title="Permanent link">&para;</a></h3>
+<p>As ethtool changes are not directly persistent... We need to fix that.</p>
+<h4 id="method-1-put-settings-in-etcnetworkinterfaces">Method 1. Put settings in /etc/network/interfaces<a class="headerlink" href="#method-1-put-settings-in-etcnetworkinterfaces" title="Permanent link">&para;</a></h4>
+<p>This method is simple, just add the correct settings to <code>/etc/network/interfaces</code></p>
+<div class="highlight"><span class="filename">/etc/network/interfaces</span><pre><span></span><code>iface<span class="w"> </span>enp1s0<span class="w"> </span>inet<span class="w"> </span>dhcp
+<span class="w">    </span><span class="c1"># Ring Buffer Size</span>
+<span class="w">    </span><span class="nv">HARDWARE_DMA_RING_rx</span><span class="o">=</span><span class="m">8192</span>
+<span class="w">    </span><span class="nv">HARDWARE_DMA_RING_tx</span><span class="o">=</span><span class="m">8192</span>
+<span class="w">    </span><span class="c1"># Hardware Offload Features</span>
+<span class="w">    </span><span class="nv">OFFLOAD_rx</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tso</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_gso</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_gso_partial</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_gro</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_lro</span><span class="o">=</span>off
+<span class="w">    </span><span class="nv">OFFLOAD_rxvlan</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_txvlan</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_rxhash</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_rx_vlan_filter</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_gre_segmentation</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_gre_csum_segmentation</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_udp_tnl_segmentation</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_udp_tnl_csum_segmentation</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_tx_udp_segmentation</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_rx_udp_tunnel_port_offload</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">OFFLOAD_macsec_hw_offload</span><span class="o">=</span>off
+<span class="w">    </span><span class="c1"># Disable Flow Control</span>
+<span class="w">    </span><span class="nv">IF_ETHERNET_PAUSE_rx</span><span class="o">=</span>off
+<span class="w">    </span><span class="nv">IF_ETHERNET_PAUSE_tx</span><span class="o">=</span>off
+<span class="w">    </span><span class="c1"># Enable Adaptive Coalescing</span>
+<span class="w">    </span><span class="nv">HARDWARE_IRQ_COALESCE_adaptive_rx</span><span class="o">=</span>on
+<span class="w">    </span><span class="nv">HARDWARE_IRQ_COALESCE_adaptive_tx</span><span class="o">=</span>on
+<span class="w">    </span><span class="c1"># Disable Wake on LAN</span>
+<span class="w">    </span><span class="nv">IF_ETHERNET_WOL</span><span class="o">=</span>d
+</code></pre></div>
+<h4 id="method-2-custom-if-up-script">Method 2. Custom if-up script.<a class="headerlink" href="#method-2-custom-if-up-script" title="Permanent link">&para;</a></h4>
+<p>(This- is the method I went with. I feel, its easier to maintain.)</p>
+<p>Copy and paste the below block into a terminal. It will automatically create the script.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CUSTOM_SCRIPT_NAME</span><span class="o">=</span><span class="s2">&quot;ethtool-custom&quot;</span>
+<span class="c1"># Create empty file</span>
+touch<span class="w"> </span>/etc/network/if-up.d/<span class="nv">$CUSTOM_SCRIPT_NAME</span>
+<span class="c1"># Mark as executable</span>
+chmod<span class="w"> </span>+x<span class="w"> </span>/etc/network/if-up.d/<span class="nv">$CUSTOM_SCRIPT_NAME</span>
+<span class="c1"># Create script using text-editor.</span>
+<span class="c1"># The rest of the lines will be automatially added.</span>
+nano<span class="w"> </span>/etc/network/if-up.d/<span class="nv">$CUSTOM_SCRIPT_NAME</span>
+<span class="c1">#!/bin/bash</span>
+
+<span class="nv">IFACE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">  </span>enp1s0f0np0<span class="p">|</span>enp1s0f1np1<span class="o">)</span>
+<span class="w">    </span><span class="c1"># Increase ring buffer size</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rx<span class="w"> </span><span class="m">8192</span><span class="w"> </span>tx<span class="w"> </span><span class="m">8192</span>
+<span class="w">    </span><span class="c1"># Enable hardware checksum</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rx<span class="w"> </span>on<span class="w"> </span>tx<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># TCP Segmentation Offload</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>tso<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Generic Segmentation Offload</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>gso<span class="w"> </span>on<span class="w"> </span>tx-gso-partial<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Generic Receive Offload</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>gro<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># DISABLE large receive offload - Known to cause issues with certain applications</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>lro<span class="w"> </span>off
+<span class="w">    </span><span class="c1"># Enable Vlan Offload TX &amp; TX</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rxvlan<span class="w"> </span>on<span class="w"> </span>txvlan<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Enable receive hashing</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rxhash<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Enable receive vlan filtering</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rx-vlan-filter<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># More segmentation-related features</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>tx-gre-segmentation<span class="w"> </span>on<span class="w"> </span>tx-gre-csum-segmentation<span class="w"> </span>on<span class="w"> </span>tx-udp_tnl-segmentation<span class="w"> </span>on<span class="w"> </span>tx-udp_tnl-csum-segmentation<span class="w"> </span>on<span class="w"> </span>tx-udp-segmentation<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># No idea.</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rx-udp_tunnel-port-offload<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Disable Macsec hardware offload - Adds additional overhead if we aren&#39;t using this.</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-K<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>macsec-hw-offload<span class="w"> </span>off
+<span class="w">    </span><span class="c1"># Disable Flow-Control</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-A<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>rx<span class="w"> </span>off<span class="w"> </span>tx<span class="w"> </span>off
+<span class="w">    </span><span class="c1"># Set Coalescing parameters to reduce Interrupts, adaptive if possible.</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>adaptive-rx<span class="w"> </span>on<span class="w"> </span>adaptive-tx<span class="w"> </span>on
+<span class="w">    </span><span class="c1"># Disable Wake on LAN.</span>
+<span class="w">    </span>ethtool<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$IFACE</span><span class="s2">&quot;</span><span class="w"> </span>wol<span class="w"> </span>d
+<span class="w">    </span><span class="p">;;</span>
+<span class="w">  </span><span class="c1">#eth1)</span>
+<span class="w">    </span><span class="c1"># eth1- specific goes here.</span>
+<span class="w">    </span><span class="c1"># ;;</span>
+<span class="w">  </span>*<span class="o">)</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Did not match expected interface name. No actions taken&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Interface Name: </span><span class="nv">$IFACE</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<p>To test, execute the script and pass the first argument as the interface name</p>
+<details class="info">
+<summary>Kube01 Results</summary>
+<pre><code>root@kube01:/etc/network/if-up.d# ./ethtool-custom  enp1s0f0np0
+Actual changes:
+tx-checksum-ipv4: off [requested on]
+tx-checksum-ipv6: off [requested on]
+tx-checksum-fcoe-crc: off [requested on]
+tx-checksum-sctp: off [requested on]
+Actual changes:
+tx-tcp-ecn-segmentation: off [requested on]
+root@kube01:/etc/network/if-up.d# ./ethtool-custom  enp1s0f1np1
+Actual changes:
+tx-checksum-ipv4: off [requested on]
+tx-checksum-ipv6: off [requested on]
+tx-checksum-fcoe-crc: off [requested on]
+tx-checksum-sctp: off [requested on]
+Actual changes:
+tx-tcp-ecn-segmentation: off [requested on]
+tx-tcp-mangleid-segmentation: on
+</code></pre>
+</details>
+<details class="info">
+<summary>Kube05 Results</summary>
+<pre><code>root@kube05:~# /etc/network/if-up.d/$CUSTOM_SCRIPT_NAME enp1s0f0np0
+Actual changes:
+tx-checksum-ipv4: off [requested on]
+tx-checksum-ipv6: off [requested on]
+tx-checksum-fcoe-crc: off [requested on]
+tx-checksum-sctp: off [requested on]
+Actual changes:
+tx-tcp-ecn-segmentation: off [requested on]
+tx-tcp-mangleid-segmentation: on
+root@kube05:~# /etc/network/if-up.d/$CUSTOM_SCRIPT_NAME enp1s0f1np1
+Actual changes:
+tx-checksum-ipv4: off [requested on]
+tx-checksum-ipv6: off [requested on]
+tx-checksum-fcoe-crc: off [requested on]
+tx-checksum-sctp: off [requested on]
+Actual changes:
+tx-tcp-ecn-segmentation: off [requested on]
+tx-tcp-mangleid-segmentation: on
+root@kube05:~#
+</code></pre>
+</details>
+<h2 id="other">Other<a class="headerlink" href="#other" title="Permanent link">&para;</a></h2>
+<h3 id="which-nics-or-switches-to-buy">Which NICs or Switches to buy?<a class="headerlink" href="#which-nics-or-switches-to-buy" title="Permanent link">&para;</a></h3>
+<p>If- you are looking to buy 10/25/40/100G NICs, please see <a href="../../2024/2024-10g-or-faster/">This Post</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 XtremeOwnage.com
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="www.reddit.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="static.xtremeownage.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.footnote.tooltips", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.ad38c271.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.eb438620.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

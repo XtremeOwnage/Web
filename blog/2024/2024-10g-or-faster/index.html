@@ -1,0 +1,3283 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Cars, Computer, and Code.">
+      
+      
+        <meta name="author" content="XtremeOwnage">
+      
+      
+        <link rel="canonical" href="https://Static.XtremeOwnage.com/blog/2024/2024-10g-or-faster/">
+      
+      
+        <link rel="prev" href="../rancher--k3s-how-to-upgrade/">
+      
+      
+        <link rel="next" href="../my-history-with-unraid/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14+insiders-4.53.16">
+    
+    
+      
+        <title>2024 10G Or Faster - XtremeOwnage.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8cce3a28.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10g-or-faster-networking-options" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine base classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+
+        <!-- Link to home -->
+        <a href="../../.." title="XtremeOwnage.com"
+            class="md-header__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+            
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        XtremeOwnage.com
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        
+                        2024 10G Or Faster
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette -->
+        
+        <form class="md-header__option" data-md-component="palette">
+            
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+                data-md-color-scheme="default"
+                data-md-color-primary="grey"
+                data-md-color-accent="orange"  aria-hidden="true"  type="radio"
+                name="__palette" id="__palette_0" />
+            
+            
+        </form>
+        
+
+
+
+        <!-- Navigation tabs (sticky) -->
+        
+        
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/Projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <div class="header-social">
+            
+            <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </a>
+            
+            <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+            </a>
+            
+            <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+            </a>
+            
+            <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+            </a>
+            
+            <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+            </a>
+            
+        </div>
+
+        <!-- Button to open search modal -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        <!-- Repository information -->
+        
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="XtremeOwnage.com" class="md-nav__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+      
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+    </a>
+    XtremeOwnage.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/Projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Improvement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/misc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Misc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/shop-talk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop-Talk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/solar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#network-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Network Adapters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Adapters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#switches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Switches
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Switches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mikrotik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs518-16xs-2xq-rm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS518-16XS-2XQ-RM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs510-8xs-2xq-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS510-8XS-2XQ-IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs504-4xq-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS504-4XQ-IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs326-4c20g2qrm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS326-4C+20G+2Q+RM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs310-1g-5s-4sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS310-1G-5S-4S+IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs309-1g-8sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS309-1G-8S+IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs305-1g-4sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS305-1G-4S+IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-crs304-4xg-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CRS304-4XG-IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-css610-8g-2sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CSS610-8G-2S+IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mikrotik-css318-16g-2sin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mikrotik CSS318-16G-2S+IN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brocade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brocade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Brocade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#brocade-icx6610" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brocade ICX6610
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brocade-icx6450" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brocade ICX6450
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brocade-icx7150" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brocade ICX7150
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#brocade-icx7250" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Brocade ICX7250
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mellanox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mellanox
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mellanox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mellanox-sx6036" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mellanox SX6036
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other Models
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unifi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unifi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unifi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unifi-usw-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unifi USW-Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unifi-usw-pro-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unifi USW-Pro-Aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disclaimers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disclaimers
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/avatar/XO.png" alt="XtremeOwnage">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          XtremeOwnage
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-18 00:00:00+00:00" class="md-ellipsis">Dec 18, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              13 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:homelab" class="md-tag">Homelab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking" class="md-tag">Networking</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking/mikrotik" class="md-tag">Networking/Mikrotik</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking/unifi" class="md-tag">Networking/Unifi</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="10g-or-faster-networking-options">10G or faster networking options.<a class="headerlink" href="#10g-or-faster-networking-options" title="Permanent link">&para;</a></h1>
+<p>Want connectivity faster then 10G?</p>
+<p>Well- I have a list of NICs, switches, and notes.</p>
+<!-- more -->
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This content is <strong>NOT</strong> sponsored.</p>
+<p>I do personally own these switch models mentioned below:
+    - Unifi USW-Aggregation
+    - Mikrotik CRS504-4XQ
+    - Mikrotik CSS610-8G-2S+
+    - Brocade ICX6610-48P
+    - Brocade ICX6610-48
+    - Brocade ICX6450-24P</p>
+<p>These switches were purchased by myself, with no undisclosed benefits.</p>
+<p>This post DOES include affiliate links. More information at the bottom of this post.</p>
+</div>
+<h2 id="network-adapters">Network Adapters<a class="headerlink" href="#network-adapters" title="Permanent link">&para;</a></h2>
+<p>Note- price estimates last updated Dec 18, 2024.</p>
+<p>I do not recommend picking up the 10G NICs. Instead, Spend 5 or 10$ more, and pick up one of the newer 25G NICs. They are compatible with 10G, but- are an entire generation newer.</p>
+<p>This is also not a complete list. This list will be updated as I discover new NICs worthy of being added.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Make</th>
+<th align="left">Model</th>
+<th align="left">Ports</th>
+<th align="left">Type</th>
+<th align="left">Multi-Gig</th>
+<th align="left">Speed</th>
+<th align="left">Generation</th>
+<th align="left">Price</th>
+<th align="left">Link</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Chelsio</td>
+<td align="left">T520-CR</td>
+<td align="left">Dual</td>
+<td align="left">SFP+</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">Chelsio T5</td>
+<td align="left">$30-$70</td>
+<td align="left"><a href="https://ebay.us/H1GmFL" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Chelsio</td>
+<td align="left">T540-CR</td>
+<td align="left">Quad</td>
+<td align="left">SFP+</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">Chelsio T5</td>
+<td align="left">$40-$100</td>
+<td align="left"><a href="https://ebay.us/toNXXN" target="_blank">eBay Link</a></td>
+<td align="left">One of the few quad 10G NICs.</td>
+</tr>
+<tr>
+<td align="left">Chelsio</td>
+<td align="left">T580-CR</td>
+<td align="left">Dual</td>
+<td align="left">QSFP+</td>
+<td align="left">No</td>
+<td align="left">40G</td>
+<td align="left">Chelsio T5</td>
+<td align="left">$20-$60</td>
+<td align="left"><a href="https://ebay.us/VO9Ced" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Chelsio</td>
+<td align="left">T6225-CR</td>
+<td align="left">Dual</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">Chelsio T6</td>
+<td align="left">$50-$150</td>
+<td align="left"><a href="https://ebay.us/2W7XGR" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Dell</td>
+<td align="left">099GTM<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></td>
+<td align="left">Dual</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">500 Series</td>
+<td align="left">$10-$20</td>
+<td align="left"><a href="https://ebay.us/7Q2TDQ" target="_blank">eBay Link</a></td>
+<td align="left">Compatible with many Dell servers (e.g., R730XD). Not picky with modules. 2x1G + 2x10G RJ45. Intel X540.</td>
+</tr>
+<tr>
+<td align="left">Dell</td>
+<td align="left">6VDPG<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup></td>
+<td align="left">Quad</td>
+<td align="left">SFP+</td>
+<td align="left">No</td>
+<td align="left">2x 1G + 2x 10G</td>
+<td align="left">700 Series</td>
+<td align="left">$20-30</td>
+<td align="left"><a href="https://ebay.us/6Rr1p9" target="_blank">eBay Link</a></td>
+<td align="left">I do NOT recommend getting this NIC. It is extremely picky with modules.</td>
+</tr>
+<tr>
+<td align="left">Dell</td>
+<td align="left">R887V<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></td>
+<td align="left">Quad</td>
+<td align="left">RJ45<sup id="fnref5:3"><a class="footnote-ref" href="#fn:3">3</a></sup></td>
+<td align="left">No</td>
+<td align="left">2x 1G + 2x 10G</td>
+<td align="left">ConnectX-4</td>
+<td align="left">$10-$20</td>
+<td align="left"><a href="https://ebay.us/dKP98K" target="_blank">eBay Link</a></td>
+<td align="left">Compatible with many Dell servers (e.g., R730XD). Not picky with modules.</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">E810-CQDA2</td>
+<td align="left">Dual</td>
+<td align="left">QSFP28</td>
+<td align="left">No</td>
+<td align="left">100G</td>
+<td align="left">800 Series</td>
+<td align="left">$260+</td>
+<td align="left"><a href="https://ebay.us/9FxJUh" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">E810-CQDA2</td>
+<td align="left">Single</td>
+<td align="left">QSFP28</td>
+<td align="left">No</td>
+<td align="left">100G</td>
+<td align="left">800 Series</td>
+<td align="left">$300+</td>
+<td align="left"><a href="https://ebay.us/z0N0yl" target="_blank">eBay Link</a></td>
+<td align="left">Oddly, the single port version costs more then the dual-port version.</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">E810-XXVDA2</td>
+<td align="left">Dual</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">800 Series</td>
+<td align="left">$150+</td>
+<td align="left"><a href="https://ebay.us/hmeIPp" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">E810-XXVDA4</td>
+<td align="left">Quad</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">800 Series</td>
+<td align="left">$200-300</td>
+<td align="left"><a href="https://ebay.us/MmhHBX" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">I226-T1</td>
+<td align="left">Single</td>
+<td align="left">RJ45</td>
+<td align="left">Yes*</td>
+<td align="left">2.5G</td>
+<td align="left">nan</td>
+<td align="left">nan</td>
+<td align="left"><a href="https://ebay.us/MXNZ3C" target="_blank">eBay Link</a></td>
+<td align="left">2.5G/1G Adapter. Not the best reviewed NICs.</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">X540-T2</td>
+<td align="left">Dual</td>
+<td align="left">RJ45<sup id="fnref4:3"><a class="footnote-ref" href="#fn:3">3</a></sup></td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">500 Series</td>
+<td align="left">$15-$30</td>
+<td align="left"><a href="https://ebay.us/VkKMRt" target="_blank">eBay Link</a></td>
+<td align="left">These work well when you need a copper 10G link.</td>
+</tr>
+<tr>
+<td align="left">Intel</td>
+<td align="left">X550-T2</td>
+<td align="left">Dual</td>
+<td align="left">RJ45<sup id="fnref3:3"><a class="footnote-ref" href="#fn:3">3</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">500 Series</td>
+<td align="left">$70-120</td>
+<td align="left"><a href="https://ebay.us/a4t2eK" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX314A</td>
+<td align="left">Dual</td>
+<td align="left">QSFP+</td>
+<td align="left">No</td>
+<td align="left">40G</td>
+<td align="left">ConnectX-3</td>
+<td align="left">$10-$20</td>
+<td align="left"><a href="https://ebay.us/Cz7Kih" target="_blank">eBay Link</a></td>
+<td align="left">Recommend newer NICs (e.g., ConnectX-4). Can support 10G with SFP -&gt; QSFP adapter.</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX354A</td>
+<td align="left">Dual</td>
+<td align="left">QSFP+</td>
+<td align="left">No</td>
+<td align="left">40G</td>
+<td align="left">ConnectX-3</td>
+<td align="left">$10-$20</td>
+<td align="left"><a href="https://ebay.us/fXd3Dw" target="_blank">eBay Link</a></td>
+<td align="left">Recommend newer NICs (e.g., ConnectX-4). Can support 10G with SFP -&gt; QSFP adapter.</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX4121A</td>
+<td align="left">Dual</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">ConnectX-4</td>
+<td align="left">$30-$40</td>
+<td align="left"><a href="https://ebay.us/Pm5SzF" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX416A</td>
+<td align="left">Dual</td>
+<td align="left">QSFP28</td>
+<td align="left">No</td>
+<td align="left">100G</td>
+<td align="left">ConnectX-4</td>
+<td align="left">$100-$200</td>
+<td align="left"><a href="https://ebay.us/Glpsya" target="_blank">eBay Link</a></td>
+<td align="left">This is the NIC I use in most of my servers.</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX455</td>
+<td align="left">Single</td>
+<td align="left">QSFP28</td>
+<td align="left">No</td>
+<td align="left">100G</td>
+<td align="left">ConnectX-4</td>
+<td align="left">$100</td>
+<td align="left"><a href="https://ebay.us/lhTWMZ" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">CX516A</td>
+<td align="left">Dual</td>
+<td align="left">QSFP28</td>
+<td align="left">No</td>
+<td align="left">100G</td>
+<td align="left">ConnectX-5</td>
+<td align="left">$150-$300</td>
+<td align="left"><a href="https://ebay.us/rJTayB" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">MCX311A-XCAT</td>
+<td align="left">Single</td>
+<td align="left">SFP+</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">ConnectX-3</td>
+<td align="left">$15-$25</td>
+<td align="left"><a href="https://ebay.us/V9Q6Eq" target="_blank">eBay Link</a></td>
+<td align="left">ASPM broken on newer Intel CPUs; works with <code>mlx4_core</code>. Recommended to choose 25G.</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">MCX312B</td>
+<td align="left">Dual</td>
+<td align="left">SFP+</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">ConnectX-3</td>
+<td align="left">$30-$40</td>
+<td align="left"><a href="https://ebay.us/aU5gI7" target="_blank">eBay Link</a></td>
+<td align="left">Consider ConnectX-4 10/25G instead.</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">MCX4111A</td>
+<td align="left">Single</td>
+<td align="left">SFP28</td>
+<td align="left">No</td>
+<td align="left">25G</td>
+<td align="left">ConnectX-4</td>
+<td align="left">$20-$40</td>
+<td align="left"><a href="https://ebay.us/5dn58j" target="_blank">eBay Link</a></td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">TP-Link</td>
+<td align="left">TX201</td>
+<td align="left">Single</td>
+<td align="left">RJ45<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup></td>
+<td align="left">Yes*</td>
+<td align="left">2.5G</td>
+<td align="left">nan</td>
+<td align="left">30$</td>
+<td align="left"><a href="https://amzn.to/3ZNYPrc" target="_blank">Amazon</a></td>
+<td align="left">1/2.5G</td>
+</tr>
+<tr>
+<td align="left">TP-Link</td>
+<td align="left">TX401</td>
+<td align="left">Single</td>
+<td align="left">RJ45<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">nan</td>
+<td align="left">100$</td>
+<td align="left"><a href="https://amzn.to/41JI0R1" target="_blank">Amazon</a></td>
+<td align="left">1/2.5/5/10G</td>
+</tr>
+</tbody>
+</table>
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
+<p>Please keep in mind, compatible speeds for a given network adapter.</p>
+<p>25G NICs will nearly always also support 10G. (and slower)</p>
+<p>100G NICs, can generally support anything less.</p>
+<p>If you wish to run a 40/50/100G NIC at 10G, you will need a QSFP+ to SFP+ Adapter.</p>
+<p>Only NICs which specify "Multi-Gig" are capable of 2.5G, or 5G. (TP-Link NICs &amp; Intel i226 are the only NICs flagged at this time)</p>
+<p>56Gbit/s is infiniband only, and only applies when running a Mellanox NIC, in IB mode, when connected to a supported infiniband switch.</p>
+<p>Mellanox Infiniband NICs (Every one of the listed Mellanox NICs) can be ran in either ethernet mode (where they behave like a normal NIC), or Infiniband mode. I strongly recommend ETH mode. <a href="../../2023/connectx-3-set-port-mode-to-ethib/" target="_blank">Guide: Switch Port Mode</a></p>
+<p>I personally prefer Mellanox NICs. In my experiences, these are the best bang for the buck, are generally really cheap, plug and play, and have been extremely reliable.</p>
+<p>In my experiences, Intel, Mellanox, and Chelsio have all been plug and play with both Linux and Windows.</p>
+<h2 id="switches">Switches<a class="headerlink" href="#switches" title="Permanent link">&para;</a></h2>
+<p>Note, ALL switches listed, are MANAGED switches, with support for vlans.</p>
+<h3 id="table">Table<a class="headerlink" href="#table" title="Permanent link">&para;</a></h3>
+<p>Notes:
+- Data used from manufacturer spec-sheets when possible.
+- Footnotes are included for additional context.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Manufacturer</th>
+<th align="left">Model</th>
+<th align="left">Layer 3</th>
+<th align="left">Max Speed</th>
+<th align="left">RJ45</th>
+<th align="left">SFP</th>
+<th align="left">SFP+</th>
+<th align="left">QSFP+</th>
+<th align="left">Multigig</th>
+<th align="left">Noise</th>
+<th align="left">Power</th>
+<th align="left">POE</th>
+<th align="left">Price</th>
+<th align="left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6450-24</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">37.9 dBA</td>
+<td align="left">20-37w</td>
+<td align="left">No</td>
+<td align="left">100$</td>
+<td align="left"><a href="https://ebay.us/SKYkEf" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6450-24P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">39.2 dBA</td>
+<td align="left">21-400w<sup id="fnref6:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">100$</td>
+<td align="left"><a href="https://ebay.us/siRiXg" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6450-48</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">37.2 dBA</td>
+<td align="left">30-55w</td>
+<td align="left">No</td>
+<td align="left">60-100$</td>
+<td align="left"><a href="https://ebay.us/9AEKgc" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6450-48P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">55.5 dBA</td>
+<td align="left">31-776w<sup id="fnref5:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">60-100$</td>
+<td align="left"><a href="https://ebay.us/S6zO6l" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6610-24</td>
+<td align="left">Yes</td>
+<td align="left">40G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">16<sup id="fnref7:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">2<sup id="fnref8:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">No</td>
+<td align="left">39.6 - 48.7 dB</td>
+<td align="left">120-140w</td>
+<td align="left">No</td>
+<td align="left">100$</td>
+<td align="left"><a href="https://ebay.us/5zmgIB" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6610-24P</td>
+<td align="left">Yes</td>
+<td align="left">40G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">16<sup id="fnref5:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">2<sup id="fnref6:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">No</td>
+<td align="left">39.6 - 48.7 dB</td>
+<td align="left">120-140w</td>
+<td align="left">Yes</td>
+<td align="left">100-140$</td>
+<td align="left"><a href="https://ebay.us/siRiXg" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6610-48</td>
+<td align="left">Yes</td>
+<td align="left">40G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">16<sup id="fnref3:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">2<sup id="fnref4:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">No</td>
+<td align="left">39.6 - 48.7 dB</td>
+<td align="left">165-185w</td>
+<td align="left">No</td>
+<td align="left">60-100$</td>
+<td align="left"><a href="https://ebay.us/9AEKgc" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 6610-48P</td>
+<td align="left">Yes</td>
+<td align="left">40G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">16<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">2<sup id="fnref2:15"><a class="footnote-ref" href="#fn:15">10</a></sup></td>
+<td align="left">No</td>
+<td align="left">39.6 - 48.7 dB</td>
+<td align="left">165-185w</td>
+<td align="left">Yes</td>
+<td align="left">60-100$</td>
+<td align="left"><a href="https://ebay.us/S6zO6l" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7250-24</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">41.9 dBA</td>
+<td align="left">39-57w</td>
+<td align="left">No</td>
+<td align="left">75-120$</td>
+<td align="left"><a href="https://ebay.us/EKSlYP" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7250-24P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">44.7 dBA</td>
+<td align="left">48-454w<sup id="fnref4:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">75-120$</td>
+<td align="left"><a href="https://ebay.us/p5Pc00" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7250-48</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">44.5 dBA</td>
+<td align="left">50-70w</td>
+<td align="left">No</td>
+<td align="left">90-140$</td>
+<td align="left"><a href="https://ebay.us/7MIENz" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7250-48P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">45.9 dBA</td>
+<td align="left">70-942w<sup id="fnref3:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">90-140$</td>
+<td align="left"><a href="https://ebay.us/7MIENz" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7150-24</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">14-24w</td>
+<td align="left">No</td>
+<td align="left">150-300$</td>
+<td align="left"><a href="https://ebay.us/xyIY9P" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7150-24P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">24</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">41.4 dBA</td>
+<td align="left">32-472w<sup id="fnref2:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">150-300$</td>
+<td align="left"><a href="https://ebay.us/xyIY9P" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7150-48</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">24-39w</td>
+<td align="left">No</td>
+<td align="left">250-600$</td>
+<td align="left"><a href="https://ebay.us/DwwSW3" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Brocade</td>
+<td align="left">ICX 7150-48P</td>
+<td align="left">Yes</td>
+<td align="left">10G</td>
+<td align="left">48</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">41.8 dBA</td>
+<td align="left">47-491w<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">9</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">250-600$</td>
+<td align="left"><a href="https://ebay.us/DwwSW3" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6036</td>
+<td align="left">Yes</td>
+<td align="left">40/56G<sup id="fnref4:11"><a class="footnote-ref" href="#fn:11">7</a></sup></td>
+<td align="left">2</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">36</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">?? - 231w</td>
+<td align="left">No</td>
+<td align="left">100-120$</td>
+<td align="left"><a href="https://ebay.us/1xRY4X" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX1036</td>
+<td align="left">Yes</td>
+<td align="left">40/56G<sup id="fnref3:11"><a class="footnote-ref" href="#fn:11">7</a></sup></td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">36</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">78 - 100w?</td>
+<td align="left">No</td>
+<td align="left">600$ ??</td>
+<td align="left"><a href="https://ebay.us/7B2XRJ" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6012</td>
+<td align="left">Yes</td>
+<td align="left">40/56G<sup id="fnref2:11"><a class="footnote-ref" href="#fn:11">7</a></sup></td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">12</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">28w - ??</td>
+<td align="left">No</td>
+<td align="left">eBay</td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6018</td>
+<td align="left">Yes</td>
+<td align="left">40/56G<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">7</a></sup></td>
+<td align="left">2</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">18</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">??</td>
+<td align="left">No</td>
+<td align="left">100-250$</td>
+<td align="left"><a href="https://ebay.us/tGO58A" target="_blank">eBay</a></td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6005<sup id="fnref3:10"><a class="footnote-ref" href="#fn:10">6</a></sup></td>
+<td align="left">No</td>
+<td align="left">56G IB Only</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">12</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">??</td>
+<td align="left">No</td>
+<td align="left">eBay</td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6015<sup id="fnref2:10"><a class="footnote-ref" href="#fn:10">6</a></sup></td>
+<td align="left">No</td>
+<td align="left">56G IB Only</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">18</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">??</td>
+<td align="left">No</td>
+<td align="left">eBay</td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mellanox</td>
+<td align="left">SX6025<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">6</a></sup></td>
+<td align="left">No</td>
+<td align="left">56G IB Only</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">36</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">??</td>
+<td align="left">No</td>
+<td align="left">eBay</td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS304-4XG-IN</td>
+<td align="left">Yes**<sup id="fnref8:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">10G</td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">Yes</td>
+<td align="left">Fanless</td>
+<td align="left">7-21w</td>
+<td align="left">No</td>
+<td align="left">199$</td>
+<td align="left"><a href="https://amzn.to/49IPBBn" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS305-1G-4S+IN</td>
+<td align="left">Yes**<sup id="fnref7:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">10G</td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">10-18w</td>
+<td align="left">No</td>
+<td align="left">120$</td>
+<td align="left"><a href="https://amzn.to/41JLinl" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS309-1G-8S+IN</td>
+<td align="left">Yes**<sup id="fnref6:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">10G</td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">17-23w</td>
+<td align="left">No</td>
+<td align="left">269$</td>
+<td align="left"><a href="https://amzn.to/4goepAX" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS310-1G-5S-4S+IN</td>
+<td align="left">Yes**<sup id="fnref5:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">10G</td>
+<td align="left">1</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Nearly Silent</td>
+<td align="left">8-20w</td>
+<td align="left">No</td>
+<td align="left">199$</td>
+<td align="left"><a href="https://amzn.to/3BOA7ix" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS326-4C+20G+2Q+RM</td>
+<td align="left">Yes**<sup id="fnref4:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">40G</td>
+<td align="left">20-24+1</td>
+<td align="left">-</td>
+<td align="left">0-4</td>
+<td align="left">2</td>
+<td align="left">Yes</td>
+<td align="left">36-54 dBA</td>
+<td align="left">31-70w</td>
+<td align="left">No</td>
+<td align="left">999$</td>
+<td align="left"><a href="https://amzn.to/41DhRmU" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS504-4XQ-IN</td>
+<td align="left">Yes**<sup id="fnref3:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">100G</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">4<sup id="fnref2:12"><a class="footnote-ref" href="#fn:12">8</a></sup></td>
+<td align="left">Yes</td>
+<td align="left">Nearly Silent</td>
+<td align="left">11-41w</td>
+<td align="left">No</td>
+<td align="left">650$</td>
+<td align="left"><a href="https://amzn.to/41BckgE" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS510-8XS-2XQ-IN</td>
+<td align="left">Yes**<sup id="fnref2:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">100G</td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">2</td>
+<td align="left">Yes</td>
+<td align="left">Silent - 40 dBA</td>
+<td align="left">15-45w</td>
+<td align="left">No</td>
+<td align="left">999$</td>
+<td align="left"><a href="https://amzn.to/3P7QtGd" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CRS518-16XS-2XQ-RM</td>
+<td align="left">Yes**<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">11</a></sup></td>
+<td align="left">100G</td>
+<td align="left">1</td>
+<td align="left">-</td>
+<td align="left">16<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">12</a></sup></td>
+<td align="left">2<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">8</a></sup></td>
+<td align="left">No</td>
+<td align="left">Nearly Silent</td>
+<td align="left">15-95w</td>
+<td align="left">No</td>
+<td align="left">1,595$</td>
+<td align="left"><a href="https://amzn.to/4gmFiVZ" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CSS318-16G-2S+IN</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">16</td>
+<td align="left">-</td>
+<td align="left">2</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">10-13w</td>
+<td align="left">No</td>
+<td align="left">139$</td>
+<td align="left">nan</td>
+</tr>
+<tr>
+<td align="left">Mikrotik</td>
+<td align="left">CSS610-8G-2S+IN</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">2</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Fanless</td>
+<td align="left">5-11w</td>
+<td align="left">No</td>
+<td align="left">110$</td>
+<td align="left"><a href="https://amzn.to/3VNWTOB" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Unifi</td>
+<td align="left">USW-Aggregation</td>
+<td align="left">No</td>
+<td align="left">10G</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">8</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Silent?</td>
+<td align="left">10-30w</td>
+<td align="left">No</td>
+<td align="left">269$</td>
+<td align="left"><a href="https://amzn.to/3VLJ9DG" target="_blank">Amazon</a></td>
+</tr>
+<tr>
+<td align="left">Unifi</td>
+<td align="left">USW-Pro-Aggregation</td>
+<td align="left">Yes**<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">13</a></sup></td>
+<td align="left">25G</td>
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">32</td>
+<td align="left">-</td>
+<td align="left">No</td>
+<td align="left">Unknown</td>
+<td align="left">?? - 100w</td>
+<td align="left">No</td>
+<td align="left">899$</td>
+<td align="left"><a href="https://amzn.to/400Zs1X" target="_blank">Amazon</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mikrotik">Mikrotik<a class="headerlink" href="#mikrotik" title="Permanent link">&para;</a></h3>
+<p>All of the listed Mikrotik options are acquired new.</p>
+<p>Mikrotik hardware will either run RouterOS, or SwOS.</p>
+<p>SwOS is a very basic interface, which only exposes basic layer 2 switching, and vlan functionality.</p>
+<p>RouterOS, exposes the kitchen sink of networking features.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning<p>Do- check for hardware offload for the features you are interested in, however, as non-hardware offloaded features may have a gimped backplane connection.</p>
+<p>For example- My CRS504-4XQ can handle line-speed 100G routing, without breaking a sweat.</p>
+<p>If I enable a non-offloaded feature, such as smart-queues, NAT, or non-offloaded filtering- it would need to be process by the CPU. The CPU link works at <a href="https://cdn.mikrotik.com/web-assets/rb_images/2162_hi_res.png" target="_blank">1Gbps MAX</a></p>
+<p>This is 100 times slower.</p>
+</p>
+</div>
+<p>I have found Amazon to be the best place to buy. Mikrotik only sells to other distributors.</p>
+<h4 id="mikrotik-crs518-16xs-2xq-rm">Mikrotik CRS518-16XS-2XQ-RM<a class="headerlink" href="#mikrotik-crs518-16xs-2xq-rm" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $1,595</li>
+<li><strong>Capabilities:</strong><ul>
+<li>2x 100G QSFP+, 16x25G SFP+, 1x 10/100M RJ45</li>
+<li>This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Runs RouterOS Only.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/4gmFiVZ" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs518_16xs_2xq" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs518-16xs-2xq-rm-review-cheaper-25gbe-and-100gbe-switching-marvell" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs510-8xs-2xq-in">Mikrotik CRS510-8XS-2XQ-IN<a class="headerlink" href="#mikrotik-crs510-8xs-2xq-in" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $999</li>
+<li><strong>Capabilities:</strong><ul>
+<li>2x 100G QSFP+, 8x25G SFP+, 1x 10/100M RJ45</li>
+<li>This is a layer 3 switch. If using this for routing, make sure your features are hardware offloaded. The CPU is not very powerful.</li>
+<li>Can be powered via POE.</li>
+<li>This- is essentially the same hardware as the CRS504-4XQ, but, with two of the 100G QSFP+ ports instead broken out into 8x 25G SFP+</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Runs RouterOS Only.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/3P7QtGd" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs510_8xs_2xq_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs510-8xs-2xq-in-review-8-port-25gbe-2-port-100gbe-switch-marvell/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs504-4xq-in">Mikrotik CRS504-4XQ-IN<a class="headerlink" href="#mikrotik-crs504-4xq-in" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $650</li>
+<li><strong>Capabilities:</strong><ul>
+<li>Ports can support ONE OF:<ul>
+<li>1x 100GBe</li>
+<li>1x 40GBe</li>
+<li>4x 25GBe</li>
+<li>4x 10GBe</li>
+</ul>
+</li>
+<li>Silent and low power usage (~25W without load).<ul>
+<li>With 3x 100G + 4x10G, This switch consumes around 35 watts in my lab.</li>
+</ul>
+</li>
+<li>Cheapest 100GBe switch option. (One of the cheapest options for 25G too)</li>
+<li>This is a layer 3 switch.</li>
+<li>Can be powered via POE.</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Use the 1G port for management only; it does not share a backplane.</li>
+<li>This is the central layer 3 router for my lab. Excellent switch.</li>
+<li>Runs RouterOS Only.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/41BckgE" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs504_4xq_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs504-4xq-in-review-momentus-4x-100gbe-and-25gbe-desktop-switch-marvell/3/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs326-4c20g2qrm">Mikrotik CRS326-4C+20G+2Q+RM<a class="headerlink" href="#mikrotik-crs326-4c20g2qrm" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $999</li>
+<li><strong>Capabilities:</strong><ul>
+<li>20x Multi-gig RJ45 (1/2.5/5G)</li>
+<li>4x "Combo" ports. Either Multi-gig RJ45, or 10G SFP+</li>
+<li>1x 10/100m Management Port</li>
+<li>Noisy at startup, but, pretty quiet when running.</li>
+<li>Layer 3** (If you use this as a router, make SURE the features you will be using are hardware offloaded. If the CPU processes packets- performance will be very, very slow.)</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>RouterOSv7</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/41DhRmU" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs326_4c_20g_2q_rm" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs326-4c20g2qrm-switch-review-2-5gbe-10gbe-and-40gbe-marvell-qualcomm/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs310-1g-5s-4sin">Mikrotik CRS310-1G-5S-4S+IN<a class="headerlink" href="#mikrotik-crs310-1g-5s-4sin" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $199</li>
+<li><strong>Capabilities:</strong><ul>
+<li>5x 1G SFP, 4x 10G SFP+, 1x 1G RJ45</li>
+<li>Nearly silent. Low energy</li>
+<li>Layer 3 (Limited to around 1G of routing throughput.)</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>SwOS or RouterOSv7</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="hhttps://amzn.to/3BOA7ix" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs310_1g_5s_4s_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs310-1g-5s-4sin-fiber-switch/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs309-1g-8sin">Mikrotik CRS309-1G-8S+IN<a class="headerlink" href="#mikrotik-crs309-1g-8sin" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $269</li>
+<li><strong>Capabilities:</strong><ul>
+<li>8 port SFP+, with 1x 1G RJ45</li>
+<li>Silent and efficient.</li>
+<li>Can be powered via POE</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>While this is a layer 3 switch- It does not have dedicated hardware offload, but, can offer reasonable routing performance (not linespeed!)</li>
+<li>Can run either RouterOS, or SwOS</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/4goepAX" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs309_1g_8s_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs309-1g-8sin-review-inexpensive-8x-10gbe-switch/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs305-1g-4sin">Mikrotik CRS305-1G-4S+IN<a class="headerlink" href="#mikrotik-crs305-1g-4sin" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $120</li>
+<li><strong>Capabilities:</strong><ul>
+<li>4-port 10G Layer 3 switch.</li>
+<li>Silent and efficient.</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>While this is a layer 3 switch- It does not have dedicated hardware offload, and is barely capable of routing 1Gbit/s. I only recommend using this for layer 2.</li>
+<li>Can run either RouterOS, or SwOS    </li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/41JLinl" target="_blank">Amazon</a>    </li>
+<li><a href="https://mikrotik.com/product/crs305_1g_4s_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs305-1g-4sin-review-4-port-must-have-10gbe-switch/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-crs304-4xg-in">Mikrotik CRS304-4XG-IN<a class="headerlink" href="#mikrotik-crs304-4xg-in" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $199</li>
+<li><strong>Capabilities:</strong><ul>
+<li>4 port layer 3 10G switch with 1x 1G Management Port</li>
+<li>Silent and Efficient.</li>
+<li>Very cost-effective 10G router.</li>
+<li>This is a layer 3 switch.</li>
+<li>Can be powered via POE.</li>
+<li>Multi-gig capabilities (2.5G, 5G)</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Use the 1G port for management only; it does not share a backplane.</li>
+<li>This is the central layer 3 router for my lab. Excellent switch.</li>
+<li>Runs RouterOS Only.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/49IPBBn" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/crs304_4xg_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs304-4xg-in-review-this-is-a-must-have-10gbase-t-marvell-switch/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-css610-8g-2sin">Mikrotik CSS610-8G-2S+IN<a class="headerlink" href="#mikrotik-css610-8g-2sin" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $139</li>
+<li><strong>Capabilities:</strong><ul>
+<li>16x1G + 2x 10G SFP+</li>
+<li>Silent and efficient.</li>
+<li>Layer 2</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>SwOS only. </li>
+<li>I have been personally running one of these for 2 years now. Simple, and effective.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://amzn.to/3VNWTOB" target="_blank">Amazon</a></li>
+<li><a href="https://mikrotik.com/product/css610_8g_2s_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-css610-8g-2sin-review-10gbe/" target="_blank">ServeTheHome</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="mikrotik-css318-16g-2sin">Mikrotik CSS318-16G-2S+IN<a class="headerlink" href="#mikrotik-css318-16g-2sin" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $139</li>
+<li><strong>Capabilities:</strong><ul>
+<li>16x1G + 2x 10G SFP+</li>
+<li>Silent and efficient.</li>
+<li>Layer 2</li>
+</ul>
+</li>
+<li><strong>Notes</strong>:<ul>
+<li>SwOS only.     </li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://mikrotik.com/product/css318_16g_2s_in" target="_blank">Mikrotik</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="brocade">Brocade<a class="headerlink" href="#brocade" title="Permanent link">&para;</a></h3>
+<p>All of the following brocade switches are acquired used, from eBay or other sources.</p>
+<p>If you decide on picking up a brocade switch, I strongly recommend checking out <a href="https://fohdeesha.com/docs/brocade-overview.html" target="_blank">Fohdeesha's Website</a></p>
+<p>These are best acquired from eBay, or other resellers.</p>
+<h4 id="brocade-icx6610">Brocade ICX6610<a class="headerlink" href="#brocade-icx6610" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $100 (Can go as low as $40)</li>
+<li><strong>Capabilities:</strong><ul>
+<li>Line-speed Layer 3 routing across all ports.</li>
+<li>2x 40G QSFP, 16x 10G SFP+, 48x 1G POE.</li>
+<li>Supports BGP, OSPF, RIP, NTP, and DHCP server.</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li><strong>EXTREMELY</strong> loud. (Extremely difficult to make these quieter)</li>
+<li>High power consumption (~150W average).</li>
+<li>Absolute unit of a switch. Can get these dirt-cheap. Just- be prepared for it to be hot and loud.</li>
+<li>Comes in 24, or 48 port variants, with, and without POE.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://ebay.us/T1tiQ8" target="_blank">Ebay</a></li>
+<li><a href="https://fohdeesha.com/docs/fcx.html" target="_blank">Fohdeesha</a> This is a setup guide, along with license unlocks, etc. Make <strong>SURE</strong> to go through these steps.</li>
+<li><a href="https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6610.pdf" target="_blank">Datasheet</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="brocade-icx6450">Brocade ICX6450<a class="headerlink" href="#brocade-icx6450" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $60 average</li>
+<li><strong>Capabilities:</strong><ul>
+<li>4x 10G SFP + 24 or 48 port options (POE optional).</li>
+<li>Supports OSPF and RIP (no BGP).</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Fan mods are easy and can reduce power usage (~40-50W).</li>
+<li>Runs nearly silent with fan mods.</li>
+<li>Comes in 24, or 48 port variants, with, and without POE.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://ebay.us/t4VL0U" target="_blank">Ebay</a></li>
+<li><a href="https://fohdeesha.com/docs/icx6450.html" target="_blank">Fohdeesha</a> This is a setup guide, along with license unlocks, etc. Make <strong>SURE</strong> to go through these steps.</li>
+<li><a href="https://webresources.ruckuswireless.com/pdf/datasheets/ds-icx-6430-6450.pdf" target="_blank">Datasheet</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="brocade-icx7150">Brocade ICX7150<a class="headerlink" href="#brocade-icx7150" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $100-150 average</li>
+<li><strong>Capabilities:</strong><ul>
+<li>4-8 10G SFP+, 24-48 1G, with optional POE. Depending on configuration.</li>
+<li>Supports OSPF and RIP (no BGP).</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Very quiet. Silent when ran in fanless mode.</li>
+<li>Comes in 24, or 48 port variants, with, and without POE.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://ebay.us/wyo9XF" target="_blank">Ebay</a></li>
+<li><a href="https://fohdeesha.com/docs/icx7150.html" target="_blank">Fohdeesha</a> This is a setup guide, along with license unlocks, etc. Make <strong>SURE</strong> to go through these steps.</li>
+<li><a href="https://www.commscope.com/globalassets/digizuite/61729-ds-icx-7150.pdf" target="_blank">Datasheet</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="brocade-icx7250">Brocade ICX7250<a class="headerlink" href="#brocade-icx7250" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $50-150 average</li>
+<li><strong>Capabilities:</strong><ul>
+<li>4-8 10G SFP+, 24-48 1G, with optional POE. Depending on configuration.</li>
+<li>Supports OSPF and RIP (no BGP).</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>Pretty quiet under normal working conditions. 40-45dBA on spec sheets.</li>
+<li>Can be ran in fanless mode with reduced POE output.</li>
+<li>Comes in 24, or 48 port variants, with, and without POE.</li>
+<li>30-50w consumption at idle, without POE. From spec sheets.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://ebay.us/t4VL0U" target="_blank">Ebay</a></li>
+<li><a href="https://fohdeesha.com/docs/icx7250.html" target="_blank">Fohdeesha</a> This is a setup guide, along with license unlocks, etc. Make <strong>SURE</strong> to go through these steps.</li>
+<li><a href="https://docs.commscope.com/bundle/icx7250-installguide/page/GUID-A333FDA4-68CA-46D1-BB78-4A2B7F1DA37C.html" target="_blank">Datasheet</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="mellanox">Mellanox<a class="headerlink" href="#mellanox" title="Permanent link">&para;</a></h3>
+<p>You can pick up used Mellanox infiniband switches for pretty cheap.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The unmanaged switches are drastically cheaper for a reason.</p>
+<p>They <strong>REQUIRE</strong> an external subnet manager. AFAIK, they are also infiniband-mode only.</p>
+<p>For- these reasons, only links to the MANAGED switches are included.</p>
+<p>The models ending with an odd-number are unmanaged.</p>
+</div>
+<h4 id="mellanox-sx6036">Mellanox SX6036<a class="headerlink" href="#mellanox-sx6036" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $75-150 average</li>
+<li><strong>Capabilities:</strong><ul>
+<li>36 QSFP+ (40 / 56GBe)</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>This switch supports infiniband.</li>
+<li>This- is a very cost-effective switch, for 40GBe. (or 56G infiniband)</li>
+<li>As I do not own one of these- I cannot give more details.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://ebay.us/pcaJgV" target="_blank">Ebay</a></li>
+<li><a href="https://www.netsolutionworks.com/datasheets/Mellanox_SX6036_SpecSheet.pdf" target="_blank">Specs</a></li>
+<li><a href="https://cw.infinibandta.org/files/showcase_product/120330.104655.244.PB_SX6036.pdf" target="_blank">Datasheet</a></li>
+<li><a href="https://www.storagereview.com/review/mellanox-sx6036-56gb-infiniband-switch-review" target="_blank">Storage Review</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="other-models">Other Models<a class="headerlink" href="#other-models" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX1036_SpecSheet.pdf" target="_blank">SX1036 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6005_SpecSheet.pdf" target="_blank">SX6005 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6012_SpecSheet.pdf" target="_blank">SX6012 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6015_SpecSheet.pdf" target="_blank">SX6015 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6018_SpecSheet.pdf" target="_blank">SX6018 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6025_SpecSheet.pdf" target="_blank">SX6025 Brief</a></li>
+<li><a href="../../../assets/pdfs/mellanox/Mellanox_SX6036_SpecSheet.pdf" target="_blank">SX6036 Brief</a></li>
+</ul>
+<h3 id="unifi">Unifi<a class="headerlink" href="#unifi" title="Permanent link">&para;</a></h3>
+<p>Unifi's switches are silent, and efficient.</p>
+<p>I generally recommend buying these from Unifi.</p>
+<h4 id="unifi-usw-aggregation">Unifi USW-Aggregation<a class="headerlink" href="#unifi-usw-aggregation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $269</li>
+<li><strong>Capabilities:</strong><ul>
+<li>8x SFP+ (10GBe)</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>8 port layer 2 10G Switch. Silent.</li>
+<li>My switch with all 8 ports in use, with either fiber modules, or DACs, uses around 10w average.</li>
+<li>A solid layer 2 switch.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://store.ui.com/us/en/products/usw-aggregation" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/3BnGbyA" target="_blank">Amazon</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="unifi-usw-pro-aggregation">Unifi USW-Pro-Aggregation<a class="headerlink" href="#unifi-usw-pro-aggregation" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Price:</strong> $899</li>
+<li><strong>Capabilities:</strong><ul>
+<li>28x 10G SFP+</li>
+<li>4x 25G SFP+<ul>
+<li><strong>NOTE</strong>: Does not support mixed speed!! All of these ports must run at the same speed. </li>
+<li>Either- all four are 25G, or all four are 10G. </li>
+<li>Mixed speed is supported for 10G or below.</li>
+<li>This means, you CANNOT run 2x 25G, and 2x 10G. They will instead run at 4x 10G.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Notes:</strong><ul>
+<li>32 port "layer 3" switch.</li>
+<li>I <strong>STRONGLY</strong> do not recommend buying a Unifi switch, for its layer 3 capabilities. If you buy this switch, Then consider it a layer 2 switch.</li>
+</ul>
+</li>
+<li><strong>Links</strong>:<ul>
+<li><a href="https://store.ui.com/us/en/products/usw-aggregation" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/4foKEP9" target="_blank">Amazon</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="additional-notes">Additional Notes<a class="headerlink" href="#additional-notes" title="Permanent link">&para;</a></h2>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Most NICs arrive ready to use. Use <code>ethtool</code> to adjust hardware offload parameters if needed:
+    <a href="../../2023/connectx-3-configuration/">Documentation on ConnectX-3 Configuration</a></p>
+</li>
+<li>
+<p>For setting port modes between ETH/IB:
+    <a href="../../2023/connectx-3-set-port-mode-to-ethib/">Documentation on ETH/IB Mode</a></p>
+</li>
+</ul>
+<h2 id="disclaimers">Disclaimers<a class="headerlink" href="#disclaimers" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">This content is not sponsored</p>
+<p>None of the content, or products used in this post was sponsored.</p>
+<p>Any products tested, were purchased out of my pocket, and tested without cooperation with the manufacturer.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Amazon Affiliate Links Used</p>
+<p>This post <strong>DOES</strong> include Amazon affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.</p>
+<p>You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.</p>
+<p>I do not display advertisements on this site. As such, the only compensation from this service, comes from affiliate links. I do not ask for, or even accept donations. </p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">E-Bay Affiliate Links Used</p>
+<p>This post <strong>DOES</strong> include EBay affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.</p>
+<p>You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.</p>
+<p>I do not display advertisements on this site. As such, the only compensation from this service, comes from affiliate links. I do not ask for, or even accept donations. </p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<pre><code>The Dell R887V is based on the ConnectX-4 CX4121C
+
+While the rx3x generation is not listed as compatible- I CAN confirm this does work in my r730XD.
+</code></pre>
+<p><a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<pre><code>These are dirt-cheap for a reason. I strongly recommend buying ConnectX-4 or newer NICs.
+
+The price difference is not much, and they are better supported.
+</code></pre>
+<p><a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<pre><code>I generally recommend avoiding RJ45 for 10G.
+
+The SFP+ modules use 10GBase-T. These run extremely hot, and have high energy consumption.
+</code></pre>
+<p><a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<pre><code>This is DELL Specific.
+
+I can confirm this works on both r720XD, and r730XD.
+
+Please do research to ensure if this is compatible with your chassis.
+</code></pre>
+<p><a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<pre><code>This is DELL Specific.
+
+Do NOT buy this unless you are absolutely certain this is what you want.
+
+These are EXTREMELY picky on modules. I was unable to get my server to boot without a supported module.
+
+Neither my Cisco, Mellanox, or Unifi SFP+ modules, or DACs would function.
+</code></pre>
+<p><a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>Unmanaged Infiniband Switch.</p>
+<p>REQUIRES external subnet manager.</p>
+<p>Does not support ethernet mode to my knowledge.</p>
+<p>Do not buy these, unless you know EXACTLY what you are purchasing.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:10" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:10" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>56Gb when running in Infiniband Mode.</p>
+<p>Supports 1/10/40G in ethernet mode.</p>
+<p>Note- IPoIB packets are processed by the CPU of the host typically- Do not recommend using IPoIB.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:11" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:11" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:11" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>This Mikroktik switch can support various speed configurations.</p>
+<p>Each QSFP+ port can do ONE of:</p>
+<ol>
+<li>1x 100G</li>
+<li>1x 50G</li>
+<li>1x 40G</li>
+<li>4x 25G</li>
+<li>4x 10G</li>
+<li>4x 5G</li>
+<li>4x 2.5G</li>
+<li>4x 1G</li>
+<li>4x 100M</li>
+</ol>
+<p><a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:12" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>This includes POE loads.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:14" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:14" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:14" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:14" title="Jump back to footnote 9 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:14" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Two of the rear 40G ports can only be used in 4x10G breakout.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref7:15" title="Jump back to footnote 10 in the text">&#8617;</a><a class="footnote-backref" href="#fnref8:15" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>Mikrotik hardware can perform layer 3 routing without having dedicated hardware offload.</p>
+<p>If using the layer 3 functionality, double-check Mikrotik's documentation to ensure your required features are hardware offloaded.</p>
+<p>The majority of Mikrotik switches have limited CPU, and are not very effective for doing high-speed routing without hardware offload.&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref7:16" title="Jump back to footnote 11 in the text">&#8617;</a><a class="footnote-backref" href="#fnref8:16" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>These SFP+ ports are 25GBe.&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Don't buy a Unifi switch for its layer 3 capabilities. </p>
+<p>You will be disappointed. Treat these as a layer 2 switch, and you will sleep better at night.&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 XtremeOwnage.com
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="www.reddit.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="static.xtremeownage.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.footnote.tooltips", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.ad38c271.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.eb438620.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
