@@ -3,6 +3,7 @@ title: "Building a Shop Table - Part 1"
 date: 2024-10-22
 tags:
   - Shop-Talk/Welding
+  - Shop-Talk/Fabrication
 ---
 
 # Shop Table - Part 1

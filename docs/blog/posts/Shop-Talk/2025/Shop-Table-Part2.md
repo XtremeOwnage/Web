@@ -3,9 +3,10 @@ title: "Building a Shop Table - Part 2"
 date: 2025-06-10
 tags:
   - Shop-Talk/Welding
+  - Shop-Talk/Fabrication
 ---
 
-# Shop Table - Part 2
+# Shop Table - Part 2 - Wheels & Tool Mounts
 
 In oct 2024, I built a table out of steel plate, and angle-iron.
 
