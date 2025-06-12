@@ -1,0 +1,20 @@
+root@kube02:/sys/block# rados bench -p scbench 10 seq
+hints = 1
+  sec Cur ops   started  finished  avg MB/s  cur MB/s last lat(s)  avg lat(s)
+    0       0         0         0         0         0           -           0
+    1      15       470       455   1819.44      1820   0.0448876   0.0335432
+    2      16       896       880   1759.61      1700   0.0522185   0.0351857
+    3      15      1263      1248   1663.12      1472   0.0235014   0.0373049
+    4      16      1771      1755   1754.26      2028   0.0273848     0.03547
+Total time run:       4.25073
+Total reads made:     1878
+Read size:            4194304
+Object size:          4194304
+Bandwidth (MB/sec):   1767.23
+Average IOPS:         441
+Stddev IOPS:          58.0711
+Max IOPS:             507
+Min IOPS:             368
+Average Latency(s):   0.0352129
+Max latency(s):       0.307092
+Min latency(s):       0.0065911

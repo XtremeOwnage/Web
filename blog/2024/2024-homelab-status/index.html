@@ -1,0 +1,3464 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Cars, Computer, and Code.">
+      
+      
+        <meta name="author" content="XtremeOwnage">
+      
+      
+        <link rel="canonical" href="https://Static.XtremeOwnage.com/blog/2024/2024-homelab-status/">
+      
+      
+        <link rel="prev" href="../gitea---slow-dashboard/">
+      
+      
+        <link rel="next" href="../../2025/proxmox---delete-pvedata-pool/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14+insiders-4.53.16">
+    
+    
+      
+        <title>2024 Homelab status - XtremeOwnage.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8cce3a28.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#my-homelab-end-of-2024" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine base classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+
+        <!-- Link to home -->
+        <a href="../../.." title="XtremeOwnage.com"
+            class="md-header__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+            
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        XtremeOwnage.com
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        
+                        2024 Homelab status
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette -->
+        
+        <form class="md-header__option" data-md-component="palette">
+            
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+                data-md-color-scheme="default"
+                data-md-color-primary="grey"
+                data-md-color-accent="orange"  aria-hidden="true"  type="radio"
+                name="__palette" id="__palette_0" />
+            
+            
+        </form>
+        
+
+
+
+        <!-- Navigation tabs (sticky) -->
+        
+        
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/Projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <div class="header-social">
+            
+            <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </a>
+            
+            <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+            </a>
+            
+            <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+            </a>
+            
+            <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+            </a>
+            
+            <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+            </a>
+            
+        </div>
+
+        <!-- Button to open search modal -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        <!-- Repository information -->
+        
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="XtremeOwnage.com" class="md-nav__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+      
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+    </a>
+    XtremeOwnage.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/Projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Improvement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/misc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Misc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/shop-talk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop-Talk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/solar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pictures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pictures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pictures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rack-itself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rack itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power Delivery
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compute
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compute">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#servers-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Servers / Hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Servers / Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optiplex-sffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optiplex SFFs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optiplex-micros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optiplex Micros
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optiplex Micros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#left-optiplex-micro-3070m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Left) Optiplex Micro 3070m
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#right-optiplex-7050m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Right) Optiplex 7050m
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rack-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rack Servers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rack Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#top-dell-r730xd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Top) Dell R730XD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bottom-dell-r720xd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Bottom) Dell R720XD
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#applications-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Applications / Services
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Applications / Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proxmox
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kubernetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unraid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unraid
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storage-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage - Hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage - Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dell-md1220" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dell MD1220
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dell-md1200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dell MD1200
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synology-ds423" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synology DS423+
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Storage - Software
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Storage - Software">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ceph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ceph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unraid_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unraid
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Unraid">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unraids-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unraid's Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synology" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synology
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Power">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mains-power-delivery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mains power delivery
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mains power delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mains-power-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mains Power Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exterior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exterior
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#garage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Garage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-rack-power" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Rack Power
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server Rack Power">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-closet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking Closet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-rack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server Rack
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#networking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Networking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#networking-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking - Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-diagrams" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking - Diagrams
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Networking - Diagrams">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logical-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logical Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#physical-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Physical Diagram
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-security-acls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking - Security / ACLs.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Networking - Services
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Networking - Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dhcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DHCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ntp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues-complaints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issues / Complaints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issues / Complaints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ceph_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ceph
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lan-seperation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LAN Seperation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unifi-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unifi Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rack-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rack Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rack Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rack-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rack Hardware
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rack Hardware">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rack-itself_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rack Itself
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#front-of-rack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Front of Rack
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rear-of-rack-top" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rear of Rack - Top
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rear-of-rack-middle-power-cable-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rear of Rack - Middle (Power cable organization)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#thin-ethernet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Thin" ethernet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fiber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fiber
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fiber-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fiber Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DACs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misc Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Misc Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#velcro-strips" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Velcro Strips
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#footnotes-disclaimers-etc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footnotes, Disclaimers, etc...
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Footnotes, Disclaimers, etc...">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disclaimers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disclaimers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#footnotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Footnotes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/avatar/XO.png" alt="XtremeOwnage">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          XtremeOwnage
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-28 00:00:00+00:00" class="md-ellipsis">Dec 28, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              31 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:homelab" class="md-tag">Homelab</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="my-homelab-end-of-2024">My homelab - End of 2024<a class="headerlink" href="#my-homelab-end-of-2024" title="Permanent link">&para;</a></h1>
+<p>This post will go over my lab, as a whole as of December 2024.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-front.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of the front of my rack" src="../../Technology/2024/assets-2024-lab/rack-front.webP" /></a></p>
+<!-- more -->
+
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>I will split this post into a few sections.</p>
+<ol>
+<li><a href="#compute">Compute</a><ul>
+<li>Discuss the servers, and workloads.</li>
+</ul>
+</li>
+<li><a href="#storage">Storage</a><ul>
+<li>Discuss the various types of storage used.</li>
+<li>Backups</li>
+</ul>
+</li>
+<li><a href="#power">Power</a><ul>
+<li>How is my lab powered? </li>
+<li>Solar-powered lab</li>
+<li>How are outages handled?</li>
+</ul>
+</li>
+<li><a href="#networking">Networking</a><ul>
+<li>A overview of how the network is setup, technologies used.</li>
+</ul>
+</li>
+<li><a href="#issues--complaints">Issues / Complaints"</a><ul>
+<li>What I want to improve on.</li>
+</ul>
+</li>
+<li><a href="#rack-organization">Rack Accessories, Organization, Cables</a><ul>
+<li>This- is the section for things seen in the rack. Finger trays, custom enclosures, the rear-mounted power management, etc.</li>
+<li>This section also includes links to all of the cables used, Ethernet, Fiber, DACs, SAS, etc.</li>
+<li>If anyone is looking for any of the specific products you see in my rack, I will include links.</li>
+</ul>
+</li>
+</ol>
+<p>But- first, a brief overview.</p>
+<h3 id="pictures">Pictures<a class="headerlink" href="#pictures" title="Permanent link">&para;</a></h3>
+<h4 id="rack-itself">Rack itself<a class="headerlink" href="#rack-itself" title="Permanent link">&para;</a></h4>
+<p>This, is the front of my rack.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-front.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of the front of my rack" src="../../Technology/2024/assets-2024-lab/rack-front.webP" /></a></p>
+<p>This- is the bottom, rear of the rack.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-rear-bottom.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of the bottom, rear of my rack" src="../../Technology/2024/assets-2024-lab/rack-rear-bottom.webP" /></a></p>
+<p>This, is the top-rear. I have my PDUs, and ATS mounted here.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-rear-top.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of the top, rear of my rack. Two PDUs, and a ATS visible" src="../../Technology/2024/assets-2024-lab/rack-rear-top.webP" /></a></p>
+<p>This, is the top of the rack, looking down. (The ESP you see is a BT proxy for Home Assistant)</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-top-down.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Looking from the top, down inside of the rack." src="../../Technology/2024/assets-2024-lab/rack-top-down.webP" /></a></p>
+<p>When- I am not working on my rack, It lives in the closet.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/closet-rack.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of the rack hidden away in the closet" src="../../Technology/2024/assets-2024-lab/closet-rack.webP" /></a></p>
+<h4 id="power-delivery">Power Delivery<a class="headerlink" href="#power-delivery" title="Permanent link">&para;</a></h4>
+<p>I will go into this more in-depth further down- but, I have a pretty comprehensive power delivery system, with a few redundancies</p>
+<p><a class="glightbox" href="../../Solar/assets/FinishedProduct_2.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture of my mains panels, inverter, batteries, and other electrical gizmos in the garage" src="../../Solar/assets/FinishedProduct_2.webP" /></a></p>
+<p><a class="glightbox" href="../../Solar/assets/ExteriorWall_Finished.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Exterior wall of the house with transfer switch, meter can, shutoff, and other boxes" src="../../Solar/assets/ExteriorWall_Finished.webP" /></a></p>
+<h2 id="compute">Compute<a class="headerlink" href="#compute" title="Permanent link">&para;</a></h2>
+<h3 id="servers-hardware">Servers / Hardware<a class="headerlink" href="#servers-hardware" title="Permanent link">&para;</a></h3>
+<p>For servers, I have a balance between small, efficient hardware and enterprise servers.</p>
+<p>I run 5 machines, 24x7. The compute element of my lab uses around 350-400 watts.</p>
+<p>ALL of my servers run Proxmox as the base OS. </p>
+<h4 id="optiplex-sffs">Optiplex SFFs<a class="headerlink" href="#optiplex-sffs" title="Permanent link">&para;</a></h4>
+<p>First- I have a pair of optiplex SFFs- These are the "core" compute elements of my lab.</p>
+<p>These machines are reasonably efficient, and quite flexible. </p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/SFFs-Circled.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture showing the SFFs in my rack with a red square" src="../../Technology/2024/assets-2024-lab/SFFs-Circled.webP" /></a></p>
+<ul>
+<li>2x Optiplex 5060 SFF <a href="https://ebay.us/UVsUiU" target="_blank">Ebay: Optiplex 5060 SFF</a><sup id="fnref15:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>i7-8700 (6c / 12t @ 3.20ghz)</li>
+<li>64G DDR4 (MAX Ram: 64G, 4 DIMMs, No ECC)</li>
+<li>LSI 9287-8e SAS HBA (External) <a href="https://ebay.us/O73eWN">eBay: LSI 9287-8e</a><sup id="fnref16:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>This connects to the MD1220 disk shelf, which contains both SAS and SATA SSDs primarily used for CEPH.</li>
+<li>Each SFF, has access to "Half" of the shelf. (The shelf is running in "split" mode)</li>
+</ul>
+</li>
+<li>Mellanox ConnectX-4 CX-416A 100GBe Dual Port NIC <a href="https://ebay.us/W0nsy0" target="_blank">eBay: ConnectX-4 CX-416A</a><sup id="fnref17:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>This is the primary network connection.</li>
+<li>One port on each host connects to the 100G switch</li>
+<li>The other port, is used for failover, and is connected to my 10G Unifi Aggregation Switch.</li>
+<li>I picked these up for around 125$ each.</li>
+</ul>
+</li>
+<li>128G Kioxia NVMe <a href="https://ebay.us/r4L130" target="_blank">eBay: 128G Kioxia NVMe</a><sup id="fnref18:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>These things are dirt-cheap, and make great boot drives.</li>
+</ul>
+</li>
+<li><strong>Power</strong>: These machines average around 50 watts. <ul>
+<li>These are the backbone of my ceph cluster, which houses the majority of my lab's storage.</li>
+<li>100GBe + SAS Controllers, does not do any favors for energy consumption.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>These machines are literally the backbone of my ceph cluster. The i7-8700 offers pretty good performance, and runs the bulk of my VMs.</p>
+<h4 id="optiplex-micros">Optiplex Micros<a class="headerlink" href="#optiplex-micros" title="Permanent link">&para;</a></h4>
+<p>Next up, I have a pair of Optiplex Micros.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/Optiplex-Micros.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture showing the Optiplex Micros in my rack, Circled" src="../../Technology/2024/assets-2024-lab/Optiplex-Micros.webP" /></a></p>
+<details class="note">
+<summary>If- you are curious about the enclosure- Its homemade in my garage (Click to expand..)</summary>
+<p>I honestly, was not very happy with the outcome of this enclosure- However, it does work well.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/micro-enclosure-1.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../../Technology/2024/assets-2024-lab/micro-enclosure-1.webP" /></a></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/micro-enclosure-2.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../../Technology/2024/assets-2024-lab/micro-enclosure-2.webP" /></a></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/micro-enclosure-3.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../../Technology/2024/assets-2024-lab/micro-enclosure-3.webP" /></a></p>
+<p>All of the imperfections are hidden by blanks.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/micro-enclosure-4.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="" src="../../Technology/2024/assets-2024-lab/micro-enclosure-4.webP" /></a></p>
+</details>
+<h5 id="left-optiplex-micro-3070m">(Left) Optiplex Micro 3070m<a class="headerlink" href="#left-optiplex-micro-3070m" title="Permanent link">&para;</a></h5>
+<p><a href="https://ebay.us/oCNyPq" target="_blank">eBay: Optiplex 3070m</a><sup id="fnref:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></p>
+<p>Specs:</p>
+<ul>
+<li><strong>CPU</strong>: i5-9500t (6c / 6t @ 2.20ghz)</li>
+<li><strong>RAM</strong>: 24G DDR4</li>
+<li><strong>Boot Drive</strong>: Samsung 980 1T <a href="https://amzn.to/4gM0ZhU" target="_blank">[Amazon]</a><sup id="fnref33:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+<li><strong>NVR Storage</strong>: Samsung 870 QVO 4T SATA <a href="https://amzn.to/3DsBtjH" target="_blank">[Amazon]</a><sup id="fnref34:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup><ul>
+<li>This- is the primary storage for my NVR.</li>
+<li>SSD is used here instead of spinning rust for power efficiency. </li>
+<li>Also, makes accessing historical footage, snappy fast.</li>
+</ul>
+</li>
+<li><strong>Power</strong>: This machine averages around 20w, while running my NVR 24/7/365.</li>
+</ul>
+<p>While this machine is inside of my proxmox cluster, its primary purpose is to run my NVR.</p>
+<p>It runs a Blue Iris VM, with over a handful of 5MP Reolink POE Cameras. It does an amazing job of it.</p>
+<p>It also runs a kubernetes VM, where Frigate runs. Frigate has a USB-Type C Coral TPU attached for object detection.</p>
+<h5 id="right-optiplex-7050m">(Right) Optiplex 7050m<a class="headerlink" href="#right-optiplex-7050m" title="Permanent link">&para;</a></h5>
+<p><a href="https://ebay.us/GXjVcD" target="_blank">eBay: Optiplex 7050m</a><sup id="fnref2:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></p>
+<p>Specs:</p>
+<ul>
+<li><strong>CPU</strong>: i7-6700 (4c / 8t # 3.40ghz)</li>
+<li><strong>RAM</strong>: 16G DDR4</li>
+<li><strong>Boot Drive</strong>: 256G Liteon SATA SSD</li>
+<li><strong>VM Storage</strong>: 1T Samsung 980 1TB</li>
+<li><strong>Power</strong>: 10w average.</li>
+</ul>
+<p>This, is one of the oldest machines in my lab. Its extremely efficient, and it works very well.</p>
+<p>Its silent. Its efficient.</p>
+<p>This is also the ONLY machine I have local storage for VMs. </p>
+<p>This machine hosts my Home Assistant VM, and a backup DNS server, both of which are on local storage.</p>
+<p>These- are on local storage- to ensure my home assistant remains working, even when I break my network....</p>
+<h4 id="rack-servers">Rack Servers<a class="headerlink" href="#rack-servers" title="Permanent link">&para;</a></h4>
+<p>Now- we get to the big hardware.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-servers.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="The two dell rack servers in my rack circled" src="../../Technology/2024/assets-2024-lab/rack-servers.webP" /></a></p>
+<h5 id="top-dell-r730xd">(Top) Dell R730XD<a class="headerlink" href="#top-dell-r730xd" title="Permanent link">&para;</a></h5>
+<p><a href="https://ebay.us/z2Fhg0">[Ebay: Dell R730XD]</a><sup id="fnref3:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></p>
+<ul>
+<li><strong>Processor</strong>: 2x <a href="https://www.intel.com/content/www/us/en/products/sku/91768/intel-xeon-processor-e52697a-v4-40m-cache-2-60-ghz/specifications.html" target="_blank">E5-2697a V4</a> (16c / 32t @ 2.6/3.6ghz ). Total: 32c, 64t</li>
+<li><strong>Memory</strong>: 256GB DDR4 ECC (16 of 24 DIMMs populated)</li>
+<li><strong>Primary NIC</strong>: 100Gbit Mellanox CX-4 <a href="https://ebay.us/W0nsy0" target="_blank">[eBay]</a><sup id="fnref12:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></li>
+<li><strong>Secondary NIC</strong>: Dell 8887V ConnectX-4121C Dual port 25GBe <a href="https://ebay.us/xaBbgX" target="_blank">[eBay]</a><sup id="fnref13:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>Not used. These- are honestly DIRT cheap. They are literally only 11$ as of right now.</li>
+<li>Very nice NIC though.</li>
+</ul>
+</li>
+<li><strong>Storage</strong>: <ul>
+<li>16x M.2 NVMe<ul>
+<li>I really like my NVMe. If you can't tell.</li>
+</ul>
+</li>
+<li>4x 16T 3.5" SATA</li>
+<li>8x 8T 3.5" SATA</li>
+<li>32G Samsung FIT<ul>
+<li>This runs Clover bootloader. My r730xd cannot boot from the M.2 which contains proxmox.</li>
+<li>So- I have a thumb drive which contains clover, which automatically boots into proxmox.</li>
+</ul>
+</li>
+<li>32G Samsung FIT<ul>
+<li>Unraid's Boot Drive</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HBA</strong>: Dell P2R3R PERC HBA330 Mini <a href="https://ebay.us/ro1bQe">[eBay]</a><sup id="fnref14:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>This is a JBOD-ONLY HBA. I replaced the raid HBA with this, for use with ZFS.</li>
+<li>This is passed directly into the Unraid VM.</li>
+</ul>
+</li>
+<li><strong>Power Consumption</strong>: Yes.<ul>
+<li>This server is an energy hog.</li>
+<li><strong>Average Consumption</strong>: 238w</li>
+</ul>
+</li>
+</ul>
+<details class="note">
+<summary>Expansion Slot Details. Click to expand</summary>
+<ul>
+<li><strong>Slot 1</strong>: "Generic" dual M.2 cards <a href="https://amzn.to/4fLf0vL" target="_blank">[Amazon]</a><sup id="fnref29:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup><ul>
+<li>2x Samsung 1T PM963 Enterprise NVMe <a href="https://ebay.us/sjMRc8" target="_blank">[eBay]</a><sup id="fnref11:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></li>
+<li><a href="../../2023/adding-more-nvme-to-my-r730xd/" target="_blank">Blog Post: Installing more NVMe into the r730XD</a></li>
+<li>4x4 bifurcation</li>
+</ul>
+</li>
+<li><strong>Slot 2</strong>: "Generic" dual M.2 cards <a href="https://amzn.to/4fLf0vL" target="_blank">[Amazon]</a><sup id="fnref30:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup><ul>
+<li>2x Samsung 1T PM963 Enterprise NVMe <a href="https://ebay.us/sjMRc8" target="_blank">[eBay]</a><sup id="fnref10:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></li>
+<li>4x4 bifurcation</li>
+</ul>
+</li>
+<li><strong>Slot 3</strong>: Mellanox ConnectX-4 CX-416A 100GBe Dual Port NIC <a href="https://ebay.us/W0nsy0" target="_blank">[eBay]</a><sup id="fnref6:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>This is the primary network adapter used. </li>
+<li>Installed in one of the x8 short slots. (Limits max throughput to around 60Gbit/s)</li>
+<li>No bifurcation</li>
+</ul>
+</li>
+<li><strong>Slot 4</strong>: Asus Hyper M.2 <a href="https://amzn.to/404xvX5" target="_blank">[Amazon]</a><sup id="fnref31:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup><ul>
+<li>4x Samsung 1T PM963 Enterprise NVMe <a href="https://ebay.us/sjMRc8" target="_blank">[eBay]</a><sup id="fnref9:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></li>
+<li>4x4x4x4 bifurcation</li>
+</ul>
+</li>
+<li><strong>Slot 5</strong>: Quad M.2 PLX Switch<ul>
+<li><a href="../../2022/r720xd-bifurcation/" target="_blank">Post: Adding Bifurcation to the r720XD</a> (More detail about the cards, what cards to get, installation, etc.)</li>
+<li>These were originally used in the r720xd, but, are now used in the r730xd too, just to squeeze in a few more M.2</li>
+<li>No bifurcation</li>
+<li>1x Samsung 1T PM963 Enterprise NVMe <a href="https://ebay.us/sjMRc8" target="_blank">[eBay]</a><sup id="fnref8:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup><ul>
+<li>Proxmox Boot Drive</li>
+</ul>
+</li>
+<li>2x Samsung 970 Evo Plus NVMe<ul>
+<li>Unraid ZFS Cache Pool (Mirrored)</li>
+</ul>
+</li>
+<li>1x Samsung 970 Evo NVMe<ul>
+<li>Unraid "Scratch/Cache" Pool</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Slot 6</strong>: Asus Hyper M.2 <a href="https://amzn.to/404xvX5" target="_blank">[Amazon]</a><sup id="fnref32:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup><ul>
+<li>4x Samsung 1T PM963 Enterprise NVMe <a href="https://ebay.us/sjMRc8" target="_blank">[eBay]</a><sup id="fnref7:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></li>
+<li>4x4x4x4 bifurcation</li>
+</ul>
+</li>
+</ul>
+</details>
+<p>A fair amount of hardware is passed directly into Unraid.</p>
+<details class="note">
+<summary>Unraid Passthrough Hardware (Click to expand)</summary>
+<ul>
+<li>Unraid VM<ul>
+<li><strong>CPU</strong>: 32 Cores (Logical, Not Physical)</li>
+<li><strong>Memory</strong>: 64G</li>
+<li>2x Samsung 970 Evo Plus NVMe<ul>
+<li>These are used in a Mirrored ZFS Pool, INSIDE of Unraid. This- is my primary cache pool.</li>
+</ul>
+</li>
+<li>1x Samsung 970 EVO 1TB<ul>
+<li>This is used as another cache pool, for certain applications which are frequently writing data.</li>
+<li>Non-redundant.</li>
+</ul>
+</li>
+<li>8x 8T Seagate Exos<ul>
+<li>In 2021, I ordered 12x of these USED.</li>
+<li>It will be 2025 in less than two weeks, I have only had to return a single drive.</li>
+<li>Four of these are used in a ZFS Striped Mirror combination, for my "Important" data.</li>
+<li>One is used in the main Unraid "Array"</li>
+</ul>
+</li>
+<li>4x 16T Sata<ul>
+<li>Three are WD Drives. The fourth is a Seagate Iron Wolf.</li>
+<li>These form the main Unraid "Array", where I do bulk storage duties.</li>
+</ul>
+</li>
+<li>32G Samsung FIT<ul>
+<li>This is my original flash drive for unraid, purchased in 2020.</li>
+<li>This is Unraid's boot drive.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Purpose</p>
+<p>This server's primary purpose is to host the Unraid VM, and its associated storage.</p>
+<p>It also hosts a significant amount of NVMe storage used with Ceph.</p>
+<p>I have HA rules configured to try to prioritize other hardware, as the other hardware uses less energy for a given amount of compute.</p>
+<p>HOWEVER- This machine has enough resources to literally host EVERYTHING. It has LITERALLY half of the resources.</p>
+<p>64 of the 102 CPUs is from this machine. 256G of the 416GB of ram is from this machine.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/proxmox-resources.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing resources available for proxmox" src="../../Technology/2024/assets-2024-lab/proxmox-resources.webP" /></a></p>
+<p>Maintenance is much easier when you have enough resources to live-migrate multiple machines at a time.</p>
+<p>This machine was acquired after my <a href="../../2023/death-of-my-poweredge-r720xd/" target="_blank">R720 Died at the beginning of 2023.</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Unraid's Purpose</p>
+<p>The primary purpose of Unraid, is for my "Media center".</p>
+<p>It hosts plex, along with a handful of containers which supports media streaming.</p>
+<p>It is also my primary SMB, and NFS host.</p>
+</div>
+<h5 id="bottom-dell-r720xd">(Bottom) Dell R720XD<a class="headerlink" href="#bottom-dell-r720xd" title="Permanent link">&para;</a></h5>
+<p>The r720XD is the server which was used in my <a href="../../../pages/Projects/40G-NAS/" target="_blank">40G NAS Project</a>.</p>
+<p>After it <a href="../../2023/death-of-my-poweredge-r720xd/">died last year</a>, the r730xd was picked up to replace it. </p>
+<p>Its use case: Storage for DDR3 DIMMs, Unused 10G NICs, Extra HBAs, etc.</p>
+<p>It makes a very useful drawer in my rack.</p>
+<details class="note">
+<summary>R720XD Specs</summary>
+<ul>
+<li><strong>CPU</strong>: 2x <a href="https://www.intel.com/content/www/us/en/products/sku/75273/intel-xeon-processor-e52667-v2-25m-cache-3-30-ghz/specifications.html" target="_blank">Intel Xeon E5-2667v2</a><ul>
+<li>8c / 16t @ 3.3/4.0Ghz</li>
+</ul>
+</li>
+<li><strong>Memory</strong>: 128G DDR3</li>
+<li><strong>HBA</strong>: Dell Perc H310 Flashed to IT Mode<ul>
+<li><a href="https://fohdeesha.com/docs/H310-full.html" target="_blank">Fohdeesha Guide</a></li>
+</ul>
+</li>
+</ul>
+</details>
+<h3 id="applications-services">Applications / Services<a class="headerlink" href="#applications-services" title="Permanent link">&para;</a></h3>
+<h4 id="proxmox">Proxmox<a class="headerlink" href="#proxmox" title="Permanent link">&para;</a></h4>
+<p>As previously stated, Proxmox runs bare metal on all of my servers. </p>
+<p>It has built in ceph cluster management, built in firewall rules, ACLs... It has built in backups, and overall, its just a fantastic base OS.</p>
+<p>Once upon a time, I did run Kubernetes (microk8s) bare metal. However, while out on a work-related trip, The cluster decided to.... Not work.</p>
+<p>Everything was wiped the following week, and Proxmox was installed bare metal. It has been that way ever since.</p>
+<h4 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h4>
+<p>Kubernetes is used to run around 90% of my containers. </p>
+<p>I am currently running Rancher + K3s. </p>
+<p>My K3s cluster has 7 VMs, scattered amongst the various servers. </p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/k3s-vms-summary.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the proxmox summary for my k3s pool" src="../../Technology/2024/assets-2024-lab/k3s-vms-summary.webP" /></a></p>
+<ol>
+<li>rancher<ul>
+<li>This is a VM which only runs a single docker container, containing rancher.<ul>
+<li>I do this, to allow me to separately upgrade and maintain rancher, as rancher itself, is used to upgrade and maintain the cluster.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rke-master-1<ul>
+<li>This is the master server. I only run a single master, as I rely on hypervisor redundancy here.<ul>
+<li>A single master reduces complexity, where the proxmox cluster itself, can handle the redundancy.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>k8s-admin<ul>
+<li>Generic admin box. Gotta manage the cluster!</li>
+</ul>
+</li>
+<li>Worker VMs (4)<ul>
+<li>1-3, have HA policies which prefers a specific machine. In this case, Both SFFs, and the r730XD get a VM.</li>
+<li>In the event of issues, cluster maintenance, these VMs are free to migrate as needed.</li>
+<li>rke-worker-4, this node is tainted to only allow NVR-related activities to run. It is pinned to the optiplex micro which runs my NVR.</li>
+</ul>
+</li>
+</ol>
+<h4 id="unraid">Unraid<a class="headerlink" href="#unraid" title="Permanent link">&para;</a></h4>
+<p>Unraid itself, is running as a VM, on the R730XD. It is noted here as it runs all of the "media-related" compute.</p>
+<p>Aka, all of the associated docker containers, runs directly on unraid.</p>
+<h2 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h2>
+<p>Storage for my lab is provided by a few different means.</p>
+<ol>
+<li>CEPH<ul>
+<li>Ceph provides the primary storage used for both Proxmox VMs, LXCs, and Kubernetes containers.</li>
+<li>Hosted by both <a href="#optiplex-sffs">Optiplex SFFs</a> as well as the <a href="#top-dell-r730xd">R730XD</a>.</li>
+<li><a href="../../2023/proxmox---building-a-ceph-cluster/">Blog Post: Building a ceph cluster</a><ul>
+<li>While- I have quite a few more OSDs now, and have 100G networking instead of 10G- Its still the same basic cluster.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Unraid<ul>
+<li>Unraid provides SMB, and NFS storage.</li>
+<li>Its primary use-case is providing energy efficient BULK storage.</li>
+<li>As noted <a href="#top-dell-r730xd">above</a>, it is running as a VM on the r730xd.</li>
+</ul>
+</li>
+<li>Synology<ul>
+<li>This is used for backups only.</li>
+<li><a href="../backup-strategies/" target="_blank">Blog Post: My Backup Strategies</a><ul>
+<li>This goes over how backups are performed from Kubernetes, Unraid, and Proxmox.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Inside of the rack- you may have noticed the storage arrays as well.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To note, While I really enjoy the flexibility and reliability of ceph- </p>
+<p>I don't feel it is the perfect solution for my needs. Its just the best solution I have tested so far.</p>
+<p>Ideally, I'd love a better solution, which is Distributed, Flexible, and Reliable.... That also integrates with Proxmox &amp; Kubernetes.</p>
+<p>Perhaps 2025 will bring something.....<sup id="fnref:NotAHint"><a class="footnote-ref" href="#fn:NotAHint">1</a></sup></p>
+</div>
+<h3 id="storage-hardware">Storage - Hardware<a class="headerlink" href="#storage-hardware" title="Permanent link">&para;</a></h3>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/storage-circled.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the various storage hardware circled" src="../../Technology/2024/assets-2024-lab/storage-circled.webP" /></a></p>
+<h4 id="dell-md1220">Dell MD1220<a class="headerlink" href="#dell-md1220" title="Permanent link">&para;</a></h4>
+<p><a href="https://ebay.us/NV0dY1" target="_blank">Ebay: Dell MD1220</a><sup id="fnref4:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup></p>
+<p>Specs:</p>
+<ul>
+<li><strong>Bays</strong>: 24x 2.5" SAS / SATA</li>
+<li><strong>Controllers</strong>: 2x 6Gbit SAS</li>
+<li><strong>Power Consumption</strong>: 45 watts. Empty shelf will use 35-40 watts.</li>
+</ul>
+<details class="note">
+<summary>Purpose</summary>
+<p>This storage shelf's only purpose is to present a JBOD of SSDs to the two <a href="#optiplex-sffs">Optiplex SFFs</a>. </p>
+<p>All of the installed SSDs are used by ceph.</p>
+<p>This shelf is running in "Split Mode". This "Splits" the shelf between  both SFFs.</p>
+<p>For- more information, please read the <a href="https://dl.dell.com/manuals/common/powervault-md12xx-om-en-us.pdf" target="_blank">MD1200 series manual</a>, Page 19-20.</p>
+</details>
+<p>As a random note- my shelf arrived with 24x 2.5" 15k SAS disks. Nearly 300 watts worth of them.</p>
+<h4 id="dell-md1200">Dell MD1200<a class="headerlink" href="#dell-md1200" title="Permanent link">&para;</a></h4>
+<p>Specs:</p>
+<ul>
+<li><strong>Bays</strong>: 12 3.5" SAS / SATA</li>
+<li><strong>Controllers</strong>: 2x 6Gbit SAS</li>
+<li><strong>Power Consumption</strong>: Empty shelf will use 35-40 watts.<ul>
+<li>Fully loaded with 3.5" disks, this shelf will consume around 150w, 24/7.</li>
+<li>3.5" disks, 8-12w each.</li>
+</ul>
+</li>
+</ul>
+<details class="note">
+<summary>Purpose</summary>
+<p>This shelf does not yet have a purpose.</p>
+<p>I have been trying to decide between two potential use-cases.</p>
+<ol>
+<li>Moving all of my unraid storage to this shelf, giving unraid the ability to migrate around the cluster, as SAS can multipath.</li>
+<li>Offline / Cold storage.</li>
+</ol>
+<p>Until a purpose has been determined, this shelf is powered off.</p>
+</details>
+<h4 id="synology-ds423">Synology DS423+<a class="headerlink" href="#synology-ds423" title="Permanent link">&para;</a></h4>
+<p>I picked this model specifically, due to its Intel processor. </p>
+<p>If- I ever wanted to repurpose this into a plex streaming box, the integrated quicksync iGPU would become extremely handy.</p>
+<details class="note">
+<summary>Hardware Specs</summary>
+<ul>
+<li><strong>CPU</strong>: Intel Celeron J4125</li>
+<li><strong>RAM</strong>: 18GB<ul>
+<li>2GB is on the board itself.</li>
+<li>I added an additional 16G Curcial stick. Max "Officially" supported RAM is 6GB. Can confirm, it works. Exact ram used is linked below.</li>
+<li><a href="https://amzn.to/3ZKXQs5" target="_blank">Amazon</a><sup id="fnref28:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+<li><a href="https://www.newegg.com/crucial-16gb-260-pin-ddr4-so-dimm/p/N82E16820156262" target="_blank">Newegg</a></li>
+</ul>
+</li>
+<li><strong>Storage</strong>: 4x 8T Seagate Exos</li>
+<li><strong>Storage (NVMe)</strong>: 1x Samsung 970 Evo.<ul>
+<li>Used as READ cache.</li>
+</ul>
+</li>
+</ul>
+</details>
+<p>As stated above- this box's sole purpose is backups, and replication.</p>
+<p><a href="../backup-strategies/" target="_blank">Read more: My backup strategies</a> (This post details exactly how it is used.)</p>
+<p>Also notable- I am using SMB, NFS, and iSCSI Multipathing to get 2Gbits of throughput consistently. This was much more effective then using LACP.</p>
+<p><a href="../synology-multipath/" target="_blank">Post: How to: Synology Multipathing</a> (Outlines how to configure SMB, NFS, and iSCSI multipathing to take FULL advantage of multiple NICs without using LACP.)</p>
+<h3 id="storage-software">Storage - Software<a class="headerlink" href="#storage-software" title="Permanent link">&para;</a></h3>
+<h4 id="ceph">Ceph<a class="headerlink" href="#ceph" title="Permanent link">&para;</a></h4>
+<p>Ceph is the primary storage used for my VMs, Containers, LXCs, etc.</p>
+<p>The cluster consists of both <a href="#optiplex-sffs">SFFs</a>, and the <a href="#top-dell-r730xd">R730XD</a>. </p>
+<p>A total of 17 SSDs are used as OSDs in my cluster currently. 8 NVMes hosted by the r730xd, the rest enterprise SATA or SAS SSDs inside of the Optiplex SFFs, or the <a href="#dell-md1220">MD1220</a>.</p>
+<p>The reason I use ceph- is not performance... but, rather reliability, and flexibility.</p>
+<p>In terms of flexibility, both proxmox and kubernetes have built-in support for Ceph storage. Spinning up storage for new containers, VMs, LXCs... is effortless as a result.</p>
+<p>In terms of reliability, as long as ONE of the three storage nodes is online, My storage is fully usable. I run 3 copies of each piece of data, which is distributed across all three nodes.</p>
+<p>Performance, is nothing to write home about. I'll just note- it works. And performance isn't an issue.... (Although, I don't have any workloads hosted on ceph, which are I/O dependant.)</p>
+<p>If- you want to learn more about my ceph cluster setup, I have my <a href="../../2023/proxmox---building-a-ceph-cluster/" target="_blank">Ceph Cluster: Documentation</a>.</p>
+<h4 id="unraid_1">Unraid<a class="headerlink" href="#unraid_1" title="Permanent link">&para;</a></h4>
+<p>Ok, so, I have went back and forth over the years between Unraid, and TrueNAS.</p>
+<p>If- you want to know more about why I use Unraid these days, Please see <a href="../my-history-with-unraid/" target="_blank">My history with Unraid &amp; TrueNAS</a></p>
+<p>But- for now, I will summarize why I use Unraid-</p>
+<ol>
+<li>Its simple.</li>
+<li>Its reliable.</li>
+<li>It works.</li>
+<li>Its flexible.</li>
+<li>It is THE most efficient way (power-wise) for storing large libraries of write once, read many files. <ul>
+<li>It ONLY needs to spin up a single HDD to access a given file, instead of spinning up an entire array.</li>
+</ul>
+</li>
+</ol>
+<h5 id="unraids-purpose">Unraid's Purpose<a class="headerlink" href="#unraids-purpose" title="Permanent link">&para;</a></h5>
+<p>Unraid has a simple purpose in my lab.</p>
+<p>It provides file shares. Both NFS, and SMB.</p>
+<p>It provides BULK data over FILE shares. (Aka, When I need to store dozens of terabytes of data.... Like Archiving linux ISOs)</p>
+<p>It provides ZFS pools for data I want to keep very safe. In addition to having <a href="https://github.com/jimsalterjrs/sanoid" target="_blank">sanoid configured</a>, Its data is backed up daily to my synology.</p>
+<p>It does not host ANY block storage. It DOES run docker containers, specifically related to "media". I run them here, instead of my kubernetes cluster to remove the need to transmit bulk data over the network.</p>
+<h4 id="synology">Synology<a class="headerlink" href="#synology" title="Permanent link">&para;</a></h4>
+<p>My synology's primary use-case, is backups. </p>
+<p>If- you didn't see the post already- <a href="../backup-strategies/" target="_blank">My backup strategies</a></p>
+<p>The above post- will detail how the synology is used, with details, screenshots, etc.</p>
+<p>It does run a single container for minio. This container ONLY replicates data from the minio instance hosted on my Unraid server.</p>
+<h2 id="power">Power<a class="headerlink" href="#power" title="Permanent link">&para;</a></h2>
+<p>Power- is the element of my lab which has received the most attention and funding.</p>
+<p>As- the power in my city has been historically unstable, and unreliable- I have taken many steps to attempt to compensate.</p>
+<p>Back in 2021, I <a href="https://xtremeownage.com/2021/06/12/portable-2-4kwh-power-supply-ups/" target="_blank">built a homemade UPS out of a hand truck, and a LiFePO4 battery</a>. It has went through quite a few outages, and has held up beautifully. Although- It might be replaced very soon..... with <a href="./2024-12-20-solar-generator-ups.md" target="_blank">a solar generator</a><sup id="fnref:ThisISaHint"><a class="footnote-ref" href="#fn:ThisISaHint">2</a></sup>.</p>
+<p>In 2022, I made the decision to completely redo the power for my entire house, and outfit the entire home with solar power generation, and battery backup for EVERYTHING. This project was completed early 2023.</p>
+<p>If- you are interested to learn more about this project- Please see.... <a href="../../../pages/Projects/Solar-Project/" target="_blank">My Solar Project</a></p>
+<p>Nonetheless- Lets dig into how everything works.</p>
+<h3 id="mains-power-delivery">Mains power delivery<a class="headerlink" href="#mains-power-delivery" title="Permanent link">&para;</a></h3>
+<h4 id="mains-power-diagram">Mains Power Diagram<a class="headerlink" href="#mains-power-diagram" title="Permanent link">&para;</a></h4>
+<p>Here is a diagram which details the flow of mains power through my house.</p>
+<pre class="mermaid"><code>flowchart LR
+    UTILITY["Utility Pole"] --&gt; Meter
+    subgraph Exterior
+        Meter
+        Shutoff["Grid Disconnect Switch"]
+        ATS["Automation Transfer Switch"]        
+    end
+
+    subgraph Garage     
+        MainPanel["Main Breaker Panel"]
+        BackupPanel["Critical Loads Panel"]
+        Battery["Battery Bank"]
+        Inverter["Main Inverter"]
+        Inverter2["AC to DC Charger"]
+    end
+
+    subgraph Exterior2["Exterior"]
+        Generator
+    end
+
+    subgraph Loads
+        Server["Server Room"]
+        L["Various Loads"]
+    end
+
+    Meter --&gt; Shutoff --&gt; | Grid Up| ATS --&gt; MainPanel --&gt; L
+
+    Shutoff --&gt; Inverter --&gt; BackupPanel --&gt; Server
+
+    BackupPanel -.-&gt; | Grid Down| ATS
+
+    Battery --&gt; Inverter
+
+    Generator -.-&gt; |AC| Inverter2 -.-&gt; |48V DC|Battery</code></pre>
+<p>Lets start on the exterior of the house.</p>
+<h4 id="exterior">Exterior<a class="headerlink" href="#exterior" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-exterior.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the various boxes on the exterior of my house, annotated" src="../../Technology/2024/assets-2024-lab/power-exterior.webP" /></a></p>
+<p>Power comes into my meter from the pole- this part is pretty standard.</p>
+<p>After, the first box, is just a switch which will isolate my house from the GRID. </p>
+<p>Next- we enter the ATS (Automation transfer switch). This- is where most of the magic happens.</p>
+<div class="admonition info">
+<p class="admonition-title">How the ATS is configured</p>
+<p>My main breaker panel connects to the transfer switch.</p>
+<p>When in "normal" operation, the transfer switch is connected to the grid. </p>
+<p>However, when grid frequency, voltage goes out of spec, the ATS will switch to "backup" mode. </p>
+<p>In backup mode, The transfer switch is fed from a 60amp breaker in my "Critical loads panel", which is fed directly from the inverter.</p>
+<p>This means- when the grid goes down- the entire house is powered directly from the inverter.</p>
+</div>
+<p>In addition, there is a rapid shutdown breaker, which will cause the solar panels to become inactive.</p>
+<p>All of the needed cables enter a race, which leads to the garage on the other side of the house.</p>
+<h4 id="garage">Garage<a class="headerlink" href="#garage" title="Permanent link">&para;</a></h4>
+<p>Inside of the garage, is where all of the fancy hardware is stored.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-garage.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture showing the inside of my garage, with loads of electrical panels annotated with purpose" src="../../Technology/2024/assets-2024-lab/power-garage.webP" /></a></p>
+<p>Note- this is an older picture- I have moved the battery rack, and installed an additional box which contains hardware for monitoring energy.</p>
+<p><a href="../../2023/home-solar-project---part-3---monitoring/" target="_blank">Post: Adding Per-Breaker Energy Monitoring</a> (This post details both the software, and hardware used to monitor energy consumption.)</p>
+<p>Power enters the garage through the bottom box, and goes inside of the cable race. From there- the main breaker panel is fed directly from the transfer switch.</p>
+<p>The Inverter, is connected on the MAINS side of the transfer switch.</p>
+<p>The critical loads panel, is connected directly to the inverter. </p>
+<p>The rack on the left currently contains a total of 20kwh of LiFEPO4 batteries, with 4/6 bays filled. The inverter is capable of 10-12kw continuous power, and up to 24kw peak bursts.</p>
+<p>It is fully capable of running the ENTIRE HOUSE, including the central AC unit, when fully off grid.</p>
+<p>A year or so back- this was tested. After a 100mph wind gust knocked out power for nearly two zipcodes, I <a href="../../2023/home-solar-project---weather-disaster---lessons-learned/" target="_blank">ran completely off grid for most of a week</a> (Of course- everything was documented, including lessons learned)</p>
+<p>The server rack, is fed directly from the critical loads panel. If grid power drops, there is a maximum of 6ms before it is powered from battery.</p>
+<p>Honestly- there is no need for a UPS at this point.</p>
+<details class="note" open="open">
+<summary>Generator Power</summary>
+<p>In the event the batteries are nearly discharged, and the sun is not shining, I will start up the <a href="https://www.harborfreight.com/9000-watt-gas-powered-portable-generator-with-co-secure-technology-carb-72935.html" target="_blank">Harbor freight predator 9000 generator.</a></p>
+<p>This- is not an inverter generator, and tends to produce pretty noisy power when under load.</p>
+<p>This is documented <a href="../../2023/home-solar-project---weather-disaster---lessons-learned/" target="_blank">in this post</a></p>
+<p>To compensate for this, The generator feeds directly into a <a href="https://signaturesolar.com/eg4-chargeverter-gc-48v-100a-battery-charger-5120w-output-240-120v-input/" target="_blank">5,000 watt 48V DC Charger</a>, which feeds directly into the battery bank.</p>
+<p>Then, the 12kw <a href="https://www.sol-ark.com/residential/12k-essentials-inverter/" target="_blank">sol-ark 12k</a> produces clean pure sine wave power from the provided DC.</p>
+</details>
+<p>Before- we move to the server rack- there is one other thing to note-</p>
+<p><a href="../surge-protection/" target="_blank">Multiple forms of surge protection are used</a>.</p>
+<h3 id="server-rack-power">Server Rack Power<a class="headerlink" href="#server-rack-power" title="Permanent link">&para;</a></h3>
+<h4 id="diagram">Diagram<a class="headerlink" href="#diagram" title="Permanent link">&para;</a></h4>
+<p>With the mains power out of the way, lets dig into my miniature data center itself, starting with a diagram.</p>
+<pre class="mermaid"><code>flowchart LR
+    Breaker
+    Outlet
+    UPS
+    Surge["Inline Surge Arrestor"]
+
+    subgraph rack["Server Rack"]
+        PDU1
+        PDU2
+        ATS
+        Servers
+    end
+
+    subgraph closet["Networking Closet"]
+        WAN["WAN Router / Firewall"] --&gt; UPS2
+        LAN["LAN Router / Firewall"] --&gt; UPS2
+        POE["POE Switches"] --&gt; UPS2
+        UPS2["Small UPS"]
+    end
+
+
+    Servers --&gt; PDU1 &amp; PDU2
+    PDU1 &amp; PDU2 --&gt; ATS
+    ATS --&gt; | UPS Inline| UPS
+    ATS --&gt; | UPS Out of line | Surge
+    UPS --&gt; Surge
+    Outlet --&gt; Breaker
+    UPS2 --&gt; Surge
+    Surge --&gt; Outlet</code></pre>
+<h4 id="networking-closet">Networking Closet<a class="headerlink" href="#networking-closet" title="Permanent link">&para;</a></h4>
+<p>One goal of mine, is to allow the house to resume "normal operation" even if my entire rack of servers is offline.</p>
+<p>To do this, The main "LAN/WAN" is handled with low-power hardware.</p>
+<ol>
+<li>Unifi UXG-Lite<ul>
+<li><strong>Link</strong>: <a href="https://store.ui.com/us/en/products/uxg-lite" target="_blank">Unifi</a></li>
+<li>This is the primary LAN/WAN Firewall/Router at the time of this post.</li>
+<li>Very soon, a Mikrotik HEX Refresh will become the primary WAN Router/Firewall, leaving the Unifi for LAN duties.</li>
+<li><strong>Consumption</strong>: MAX 3.8 watts</li>
+</ul>
+</li>
+<li>2x Unifi USW-Lite-8-POE<ul>
+<li><strong>Link</strong>: <a href="https://store.ui.com/us/en/category/switching-utility/products/usw-lite-8-poe" target="_blank">Unifi</a></li>
+<li>One of these powers a pair of access points, as well as a pair of <a href="https://store.ui.com/us/en/category/switching-utility/products/usw-flex" target="_blank">usw-flex</a> switches located in the living room, and garage.</li>
+<li>The other, powers all of my POE security cameras.</li>
+<li><strong>Consumption</strong>: MAX 8w (Excluding POE Consumption)</li>
+<li>Note- If the <a href="https://store.ui.com/us/en/category/switching-utility/collections/pro-ultra/products/usw-ultra" target="_blank">USW-Ultra</a> existed when I installed these... there wouldn't be two POE switches.<ul>
+<li>I will note, I did attempt to run a <a href="https://amzn.to/4fqWUyV" target="_blank">TPLink TL-SG1005P</a><sup id="fnref27:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup> for my POE cameras. However- it caused them to frequently crash. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>These devices are powered with a small, dedicated cyber power UPS unit. In the event of catastrophic failure, loss of solar, generator, and battery- This would keep the primary LAN/WAN online, along with the security cameras.</p>
+<h4 id="server-rack">Server Rack<a class="headerlink" href="#server-rack" title="Permanent link">&para;</a></h4>
+<p>On the rear of the server rack, I have the incoming power supply.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-rack.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing both PDUs, and the ATS mounted at the rear of my rack" src="../../Technology/2024/assets-2024-lab/power-rack.webP" /></a></p>
+<p>I have a pair of vertiv rPDUs to distribute power to my servers. These are 120v PDUs, with individually switched AND metered outlets. These units also cluster together.</p>
+<p>I did a full write-up of the capabilities here: <a href="../metered-switch-pdu/" target="_blank">Vertiv rPDU</a></p>
+<p>Overall- these units have been OUTSTANDING. I am- still working on creating a MQTT-based integration which connects them to both <a href="https://www.home-assistant.io/" target="_blank">home assistant</a>, and <a href="https://emoncms.org/" target="_blank">emoncms.</a></p>
+<p>If- you are interested in this- <a href="https://github.com/XtremeOwnage/rPDU2MQTT" target="_blank">please checkout rPDU2MQTT on GitHub</a>.</p>
+<p>I do this- because I like to be able to visualize every single watt which travels through my house.</p>
+<p>This is an older picture, and far more monitoring has been added since. Nearly every light fixture, every device. There are very few things I don't have monitored now for the entire house.</p>
+<p><a class="glightbox" href="../../Home-Automation/2023/assets-energy-flow/energy-usage-sankey-earlier.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing a sankey diagram, with all of my loads displayed" src="../../Home-Automation/2023/assets-energy-flow/energy-usage-sankey-earlier.webP" /></a></p>
+<p>I do have a related post for <a href="../../2023/home-assistant---energy-flow-diagram/" target="_blank">Building energy flow diagram in home assistant</a></p>
+<details class="note">
+<summary>Why emoncms</summary>
+<p>I do often get asked why I use Emoncms, when Home Assistant exists, Influx, Prometheus, etc...</p>
+<p>The reason is- Its STUPID simple, and reliable. It does one thing. It collects and stores data.</p>
+<p>Not- in a database, but, in a simple flat-file format, where YEARS of energy data at a 15 second interval, only takes up a few kilobytes.</p>
+<p>The simplicity is key here. I need it to be as reliable as possible. And- it achieves this.</p>
+<p>Home assistant, occasionally has an update, which will rename entities, causing the energy data to break. As well, occasionally, something will happen, which just destroys its energy diagrams. </p>
+<p>I have 4 years of data in emoncms. If something is not reporting in data, it will let me know. Things do NOT change in here, without me explicitly changing them.</p>
+<p>So, TLDR; Its all about consistency, and reliability. Ecmoncms can run on a potato, and has zero external dependencies.</p>
+</details>
+<h2 id="networking">Networking<a class="headerlink" href="#networking" title="Permanent link">&para;</a></h2>
+<p>I have a reasonably complex network setup, involving multiple routers, firewalls, switches etc.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/networking-circled.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="This is a picture of the front of my rack, with the networking hardware circled" src="../../Technology/2024/assets-2024-lab/networking-circled.webP" /></a></p>
+<p>Not Displayed- The closet where my rack resides, also contains.. a few switches, and other small hardware.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As a note, this post is being written in parallel with <a href="../2024-network-revamp/" target="_blank">my 2024 Network Refresh</a>. </p>
+<p>I am documenting this in the state it was before that project, since that project will not be fully implemented this year.</p>
+</div>
+<p>First- I will break this into the hardware used, and then explain routing, topologies, etc.</p>
+<h3 id="networking-hardware">Networking - Hardware<a class="headerlink" href="#networking-hardware" title="Permanent link">&para;</a></h3>
+<p>In the current state, My entire network consists of Unifi gear, and Mikrotik gear.</p>
+<p>Unifi gear, is fantastic at making a single plane of glass. </p>
+<p>It is absolutely horrible, if you want to use layer 3 switches. <a href="../rant-unifi-layer-3/" target="_blank">Post: Why you shouldn't buy a L3 Unifi Switch</a></p>
+<p>Also, "POE" and "10G", results in the same switch costing twice as much.</p>
+<p>As such, my lab is slowly transitioning away from Unifi, to contain more Mikrotik gear.</p>
+<p>I have no plans on completely moving away, but, instead wish to use the best piece of gear, where it makes sense.</p>
+<p>Ie- Unifi is extremely good at managing "LAN" subnets, and clients.</p>
+<p>Mikrotik, is extremely capable in terms of features, and its layer 3 routers, work exactly as one would expect.</p>
+<p>Also- When debugging- EVERYTHING on the Mikrotik is in real time. Debugging on Unifi can be a huge pain.</p>
+<details open="open">
+<summary>Unifi Hardware</summary>
+<ol>
+<li><strong>Unifi: UXG-Lite</strong>: <ul>
+<li>Primary WAN Firewall/Router.</li>
+<li>Primary LAN Router.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/uxg-lite" target="_blank">Unifi</a></li>
+<li><a href="https://www.amazon.com/dp/B0CW2DZZ3Z" target="_blank">Amazon</a><sup id="fnref:noamazon"><a class="footnote-ref" href="#fn:noamazon">5</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Unifi: USW-Pro-24</strong>:<ul>
+<li>Horrible excuse for a "Layer 3" switch. <a href="../rant-unifi-layer-3/" target="_blank">Post: Why you shouldn't buy a L3 Unifi Switch</a></li>
+<li>Primary 1G switch for server rack.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/USW-Pro-24" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/41NVR8Y" target="_blank">Amazon</a><sup id="fnref26:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Unifi: USW-Aggregation</strong>:<ul>
+<li>Primary 10G Switch, for Server rack.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/usw-aggregation" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/40cY6S0" target="_blank">Amazon</a><sup id="fnref25:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Unifi: UAP-AC-Pro</strong>:<ul>
+<li>Wireless Access Point</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/uap-ac-pro" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/4gzSJSw0" target="_blank">Amazon</a><sup id="fnref24:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Unifi: U6 Pro</strong>:<ul>
+<li>Wireless Access Point</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/u6-pro" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/3DxGV4K" target="_blank">Amazon</a><sup id="fnref23:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3x <strong>Unifi: USW-Flex-Mini</strong>:<ul>
+<li>I have these scattered around. One in the garage, one in the livingroom. etc.</li>
+<li>POE-powered layer 2 switches. Not many features, but, for 29$ each- they do EXACTLY what I need them to do.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/usw-flex-mini" target="_blank">Unifi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2x <strong>Unifi: USW Lite 8 POE</strong>:<ul>
+<li>When I picked up all of my gear, Unifi didn't have a cost-effective POE switch, such as the <a href="https://store.ui.com/us/en/category/switching-utility/collections/pro-ultra">USW-Ultra</a></li>
+<li>So... I have a pair of these.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/products/usw-lite-8-poe" target="_blank">Unifi</a></li>
+<li><a href="https://amzn.to/3PfjMGM" target="_blank">Amazon</a><sup id="fnref22:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Ubiquity EdgeMAX / EdgeRouter</strong>:<ul>
+<li>This has been in my home for over a decade. It was my primary router/firewall for most of the last decade. It serves live as my IOT/Security firewall these days.</li>
+<li>Links<ul>
+<li><a href="https://store.ui.com/us/en/category/wired-edge-max-routing/products/er-x" target="_blank">Unifi</a></li>
+<li>Not- the same model. Also, out of stock.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<details open="open">
+<summary>Mikrotik Hardware</summary>
+<ol>
+<li><strong>Mikrotik: CRS504-4XQ</strong>:<ul>
+<li>This is the "CORE" L3 Router for my network, and handles routing for all of my 10G, 25G, and 100G links.</li>
+<li>I love this switch. Just saying.</li>
+<li>Links<ul>
+<li><a href="https://mikrotik.com/product/crs504_4xq_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-crs504-4xq-in-review-momentus-4x-100gbe-and-25gbe-desktop-switch-marvell/" target="_blank">ServeTheHome</a></li>
+<li><a href="https://amzn.to/41WmFUv" target="_blank">Amazon</a><sup id="fnref21:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Mikrotik: CSS610-8G-2S+</strong>:<ul>
+<li>The switch in my office. </li>
+<li>Its simple. Its stupid. It works.</li>
+<li>Links<ul>
+<li><a href="https://mikrotik.com/product/css610_8g_2s_in" target="_blank">Mikrotik</a></li>
+<li><a href="https://www.servethehome.com/mikrotik-css610-8g-2sin-review-10gbe/" target="_blank">ServeTheHome</a></li>
+<li><a href="https://amzn.to/4gWSmBv" target="_blank">Amazon</a><sup id="fnref20:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Mikrotik: hEX Refresh</strong>:<ul>
+<li>This- will soon be the primary WAN firewall. Until then though- it exists.<ul>
+<li>See <a href="../2024-network-revamp/" target="_blank">2024 Network Refresh</a></li>
+</ul>
+</li>
+<li>Note- this was released VERY recently. If you want one- don't accidentally order one of the older versions.</li>
+<li>Make sure you are getting the EU50G. Its significantly faster then the other hEX variants.... for the same price.</li>
+<li>Links<ul>
+<li><a href="https://mikrotik.com/product/hex_2024" target="_blank">Mikrotik</a></li>
+<li><a href="https://amzn.to/4gPdOrU" target="_blank">Amazon</a><sup id="fnref19:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<h3 id="networking-diagrams">Networking - Diagrams<a class="headerlink" href="#networking-diagrams" title="Permanent link">&para;</a></h3>
+<h4 id="logical-diagram">Logical Diagram<a class="headerlink" href="#logical-diagram" title="Permanent link">&para;</a></h4>
+<p>Here is my logical routing diagram.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note- IP Subnets, VLAN Identifiers, and ASNs have been randomized.</p>
+<p>Subnet Masks remain the same.</p>
+</div>
+<p>Note, All routers propagate routing information using OSPF. The UXG, EdgeRouter, and Mikrotik all have direct access to each other.</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph OUTER
+        WAN 
+    end
+
+    WAN--&gt; | PPPoe| UXG
+
+
+    subgraph BGP["Core 172.16.1.0/24 (OSPF)"]
+        UXG["Unifi UXG-Lite &lt;br /&gt;172.16.1.1"]
+        EDGEMAX["EdgeRouter &lt;br /&gt;172.16.1.3"]        
+        100G["Mikrotik 100G &lt;br /&gt;172.16.1.4"]
+    end
+
+    100G --&gt; TRUSTED
+    100G --&gt; LAN2
+    EDGEMAX --&gt; SECURE
+    UXG --&gt; LAN
+
+
+    subgraph TRUSTED["Servers 192.168.10.0/22"]
+        direction LR
+        V_Server["V_Server  &lt;br /&gt;vlan 14&lt;br /&gt;192.168.10.0/24"]
+        V_Kubernetes["V_Kubernetes  &lt;br /&gt;vlan 18&lt;br /&gt;192.168.11.0/24"]
+        V_RKE["V_RKE  &lt;br /&gt;vlan 22&lt;br /&gt;192.168.13.0/24"]
+    end
+
+    subgraph SECURE["SECURE 192.168.20.0/22"]
+        direction LR
+        V_MGMT["V_MGMT &lt;br /&gt;vlan 50&lt;br /&gt;192.168.20.0/24"]   
+        V_SECURE["V_SECURE  &lt;br /&gt;vlan 25&lt;br /&gt;192.168.21.0/24"]   
+        V_IOT["V_IOT &lt;br /&gt;vlan 30&lt;br /&gt;192.168.22.0/24"]  
+    end
+
+    subgraph LAN2["Internal 10.10.128.0/18"]
+        direction LR
+        V_LAN_10G["V_LAN_10G &lt;br /&gt;vlan 75&lt;br /&gt;10.10.128.0/24"]
+    end
+
+    subgraph LAN["LAN 10.20.0.0/16"]
+        direction LR
+        V_LAN["V_LAN &lt;br /&gt;10.20.1.0/24"]
+        V_LAN_Isolated["V_LAN_Isolated &lt;br /&gt;10.20.2.0/24"]
+    end</code></pre>
+<h4 id="physical-diagram">Physical Diagram<a class="headerlink" href="#physical-diagram" title="Permanent link">&para;</a></h4>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Office
+        WAN --&gt; |GPON| MC["Media Converter"]
+        OfficeSwitch["Mikrotik CSS610-8G-2S"]
+
+        OfficeSwitch --&gt; |10G DAC| PC1
+        OfficeSwitch --&gt; |1G| PC2 &amp; PC3
+        PC1["Gaming / Main PC"]
+        PC2["Work PC"]
+        PC3["Wife PC"]
+    end
+
+    MC --&gt; |1G CAT6| USW1
+    OfficeSwitch --&gt; | 10G SM Fiber| AGG
+
+    subgraph Closet
+        USW1["Closet-Switch (Unifi USW Lite 8 POE)"]
+        USW2["Security-Switch (Unifi USW Lite 8 POE)"]
+
+        USW2 --&gt; |CAT6 POE| Security["Security Cameras"]
+        USW1 --&gt; |CAT6 POE| LivingroomSwitch &amp; GarageSwitch
+        LivingroomSwitch["USW-Flex-Lite (Livingroom)"]   
+        GarageSwitch["USW-Flex-Lite (Garage)"]
+
+        USW1 --&gt; |CAT6 POE| UAPACPRO &amp; U6PRO
+        UAPACPRO["Unifi: UAP-AC-PRO AP"]
+        U6PRO["Unifi: U6 Pro AP"]
+    end
+
+
+
+    USW1 &amp; USW2 --&gt; |Bonded 1G| CORE
+    subgraph Rack
+        CORE["Unifi: USW-Pro-24"]
+        AGG["Unifi: USW-Aggregation"]
+        EDGE["Ubquiti: EdgeRouter 5"]
+        100G["Mikrotik: CRS504-4XQ"]
+        UXG["Unifi: UXG-Lite"]
+
+        CORE &lt;--&gt; |10G MM| AGG &lt;--&gt; |10G MM| 100G &lt;-.-&gt; |"10G MM (STP Down)"| CORE
+        CORE --&gt; |2x 1G| EDGE &amp; UXG
+
+        100G --&gt; |100G DAC| KUBE01["Optiplex 5070"]
+        100G --&gt; |100G DAC| KUBE02["Dell R730XD"]
+        CORE --&gt; |1G| KUBE04["Optiplex 3070m"]
+        100G --&gt; |100G DAC| KUBE05["Optiplex 5070"]
+        CORE --&gt; |1G| KUBE06["Optiplex 7050m"]
+        CORE --&gt; |2x 1G| NAS["Synology"]
+    end</code></pre>
+<p>Sorry- the physical diagram is a hair messy.</p>
+<p>A few notes-</p>
+<ol>
+<li>My WAN enters through my office, where its GPON is converted to ethernet.<ul>
+<li>This feeds into a dedicated vlan on one of the switches in my closet.</li>
+<li>The core switch then connects this vlan to the UXG-Lite. (a dedicated link exists for LAN traffic)</li>
+</ul>
+</li>
+<li>There is a redundant loop between the switches in my server rack. STP is used to ensure we don't have loops.</li>
+<li>Not displayed- All of the 100G-connected servers also have a 10G failover link to the 10G switch.</li>
+<li>The various routers all propage routing information using OSPF.</li>
+</ol>
+<h3 id="networking-security-acls">Networking - Security / ACLs.<a class="headerlink" href="#networking-security-acls" title="Permanent link">&para;</a></h3>
+<p>All WAN-related ACLs are currently handled by the UXG-Lite, including port forwarding.</p>
+<p>All ACLs related to my IOT devices, and Security cameras, are handled by the Edgemax/EdgeRouter.</p>
+<p>All ACLs related to my server, are handled directly inside of proxmox. Its built in firewall maangement, works great for what is needed.</p>
+<p>Additional ACls are defined inside of my kubernetes cluster, where needed.</p>
+<h3 id="networking-services">Networking - Services<a class="headerlink" href="#networking-services" title="Permanent link">&para;</a></h3>
+<h4 id="dhcp">DHCP<a class="headerlink" href="#dhcp" title="Permanent link">&para;</a></h4>
+<p>DHCP is handled by...</p>
+<ol>
+<li>UXG manages DHCP for its networks.</li>
+<li>Technitium handles DHCP for the "LAN 10G" network, as well as all of the server/kubernetes subnets.</li>
+<li>The Edgemax handles DHCP for its Security, Management, and IOT subnets.</li>
+</ol>
+<h4 id="dns">DNS<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h4>
+<p>DNS is handled by....</p>
+<ol>
+<li>Technitium is my primary DNS server.</li>
+<li>Unifi forwards DNS requests to it, for its subnets.</li>
+<li>A BIND9 server, using zone transfers is the secondary DNS, and is capable of processing traffic in the event Techitum is down for maintenance.</li>
+<li>EdgeMAX functions as a DNS forwarder server for its subnets<ul>
+<li>IOT Subnets do NOT have DNS. None. By design.</li>
+</ul>
+</li>
+</ol>
+<h4 id="ntp">NTP<a class="headerlink" href="#ntp" title="Permanent link">&para;</a></h4>
+<p>NTP is handled by my Proxmox servers. </p>
+<p>An ansible playbook automatially provisions Chrony, running as a time server, and autoamtially adds them to an internal NTP pool.</p>
+<p>All other servers, networking devices are configured to use this internal pool.</p>
+<h2 id="issues-complaints">Issues / Complaints<a class="headerlink" href="#issues-complaints" title="Permanent link">&para;</a></h2>
+<h4 id="ceph_1">Ceph<a class="headerlink" href="#ceph_1" title="Permanent link">&para;</a></h4>
+<p>Ceph, is a love and hate relationship for me.</p>
+<p>As I said above- its EXTREMELY flexible, and very reliable.</p>
+<p>However- I get a FRACTION of the IOPs out of it, as I have put into it.</p>
+<p>I have been keeping my eye out for anything which can offer the same level of integration, but, with vastly improved performance.</p>
+<h4 id="lan-seperation">LAN Seperation<a class="headerlink" href="#lan-seperation" title="Permanent link">&para;</a></h4>
+<p>My big project this year, is the <a href="../2024-network-revamp/" target="_blank">Networking Revamp</a>. </p>
+<p>Reason being- I want what I do in my lab, to not affect the LAN at all. </p>
+<p>Meaning- if I go yank the power cord for all of my servers- my wife shouldn't notice a thing, at least, in terms of the internet.</p>
+<p>So- the goal is to move the entire LAN-area of the network, outside of my server rack.</p>
+<h4 id="unifi-gateway">Unifi Gateway<a class="headerlink" href="#unifi-gateway" title="Permanent link">&para;</a></h4>
+<p>My biggest complaint here, there is no "native/builtin" support in Unifi for handling my IPv6 GIF tunnels.</p>
+<p>Without that support- I don't have working IPv6 WAN. That- will be fixed soon though, when the Mikrotik hEX replaces the Unifi as the primary WAN router.</p>
+<h2 id="rack-organization">Rack Organization<a class="headerlink" href="#rack-organization" title="Permanent link">&para;</a></h2>
+<p>This section is soley dedicated to links of products used in my rack. Think.... Cable management, Brackets, etc.</p>
+<p>There is nothing technical documented in this section, its all just product links.</p>
+<h3 id="rack-hardware">Rack Hardware<a class="headerlink" href="#rack-hardware" title="Permanent link">&para;</a></h3>
+<h4 id="rack-itself_1">Rack Itself<a class="headerlink" href="#rack-itself_1" title="Permanent link">&para;</a></h4>
+<p>The rack itself, is a Startech 4-Post 25U Rack.</p>
+<ul>
+<li><a href="https://amzn.to/49ZPstx" target="_blank">Amazon: Startec 4U 24U Rack</a><sup id="fnref18:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<h4 id="front-of-rack">Front of Rack<a class="headerlink" href="#front-of-rack" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-front-organizational-features.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Picture show all organizational elements of the front of the rack, circled" src="../../Technology/2024/assets-2024-lab/rack-front-organizational-features.webP" /></a></p>
+<details class="info" open="open">
+<summary>#1 - Startech 2U Finger Duct</summary>
+<ul>
+<li><a href="https://amzn.to/4fEwBoI" target="_blank">Amazon: Startech 2U Finger Duct</a><sup id="fnref17:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>Having previously used patch panels, with keystones, and other options- this is my favorite option so far.</p>
+<p>Not- because its used to hide a mess of wires....</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/finger-tray.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing clean, organized cables behind the fingers tray" src="../../Technology/2024/assets-2024-lab/finger-tray.webP" /></a></p>
+<p>But- because its extremely easy to maintain.</p>
+<p>Keystone panels look nice, but, can be a challenge to maintain. Especially- if you color code them like my old panel. </p>
+</details>
+<details class="info" open="open">
+<summary>#2 - (NoName) 1U Blanks</summary>
+<ul>
+<li><a href="https://amzn.to/4fDj4y2" target="_blank">Amazon: 1U Blanks - 5 Pack</a><sup id="fnref16:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>Blanks are seriously the difference between an "OK" looking rack, and a "Great" looking rack.</p>
+<p>A 5-pack of no-name 1U blanks did the job for me.</p>
+</details>
+<details class="info" open="open">
+<summary>#3 - Startech 2U Shelf</summary>
+<ul>
+<li><a href="https://amzn.to/4gMy11O" target="_blank">Amazon: Startech 2U Shelf</a><sup id="fnref15:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>A simple shelf on my rack is used to hold the Optiplex SFFs, and my Synology.</p>
+<p>As a note, it sags when loaded with all of the hardware I have on top of it. </p>
+<p>The below disk shelf provides verticle support &amp; stability. It has full-depth rails.</p>
+</details>
+<details class="info" open="open">
+<summary>#4 - (NoName) 1U Brush Panel</summary>
+<ul>
+<li><a href="https://amzn.to/41Wlx3q" target="_blank">Amazon: 1U Brush Panel</a><sup id="fnref14:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>So, the challenge for this particular location was handling the passthrough of not only the massive, fat 100GBe DACs.... But the front-positioned power cables from the CRS504.</p>
+<p>I settled for using a simple brush panel. </p>
+</details>
+<h4 id="rear-of-rack-top">Rear of Rack - Top<a class="headerlink" href="#rear-of-rack-top" title="Permanent link">&para;</a></h4>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-rear-annotated.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the Top-Rear of the rack, with rack-hardware annotated" src="../../Technology/2024/assets-2024-lab/rack-rear-annotated.webP" /></a></p>
+<details class="info" open="open">
+<summary>#1 - Cable Matters 1U Keystone Panel</summary>
+<ul>
+<li><a href="https://amzn.to/4gwF4f2" target="_blank">Amazon: Cable Matters 1U Keystone Panel</a><sup id="fnref13:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>Nothing much to say here- But, Cable matters does produce a solid panel.</p>
+<p>As a bonus, it has "hooks" for cable ties, or velcro.</p>
+<p>In the future, I will be mounting one of these inside of the closet itself, to help cleanup and terminate the incoming cables.</p>
+</details>
+<details class="info" open="open">
+<summary>#2 - (NoName) 4U Wall Mount</summary>
+<p>For everyone who has read this far- I'm going to assume this is the part you are interested in.</p>
+<p>How did you verticle mount the PDUs and ATS.</p>
+<p>WELL, the solution, was actually extremely simple. A simple wall-mount.</p>
+<ul>
+<li><a href="https://amzn.to/41UoAJp" target="_blank">Amazon: 19 Inch 4U Heavy Duty Vertical Wall Mountable Rack</a><sup id="fnref12:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>Seriously, thats it. Its attached using standard cage-nuts, and a few 3/4" washers.</p>
+<details class="note">
+<summary>A bit more history (Click to expand, if interested)</summary>
+<p>This- is actually the 2nd attempt at verticle mount.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/rack-rear-verticle-original.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the original 4U verticle rear-mount" src="../../Technology/2024/assets-2024-lab/rack-rear-verticle-original.webP" /></a></p>
+<p>Originally, I used a <a href="https://amzn.to/4fIGG46" target="_blank">Amazon: Startech 2U Wall-Mount Shelf</a><sup id="fnref10:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup>, with <a href="https://amzn.to/3Dy5mz9" target="_blank">Amazon: Startech 2U 4in spacers</a><sup id="fnref11:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup> to help "distance" the shelf from the rack.</p>
+<p>Since- the shelf was not intended to be rack-mounted, I did need to drill out holes which aligned to standard cage nut spacing.</p>
+<p>The issue I encountered- my PDUs are not 1U. They are 1.5U, which caused issues when I tried to add an ATS, as seen above.</p>
+<p>When I decided to pick up a 2nd vertiv PDU, I went ahead and swapped to the 4U rack instead.</p>
+<p>I mounted it flush to the rack-rails as the new unit had the correct width, and had correctly spaced holes which aligned to cage nuts.</p>
+<p>The original 2U unit, required drilling out holes which aligned with my cage-nuts.</p>
+</details>
+</details>
+<h4 id="rear-of-rack-middle-power-cable-organization">Rear of Rack - Middle (Power cable organization)<a class="headerlink" href="#rear-of-rack-middle-power-cable-organization" title="Permanent link">&para;</a></h4>
+<p>On the rear of the rack- hopefully you have noticed the effort I put into cable managment here!</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-cables-1.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the rear of the rack, with the fingers trays circled in red" src="../../Technology/2024/assets-2024-lab/power-cables-1.webP" /></a></p>
+<p>The solution used here, is just a <strong>PAIR</strong> of no-name fingers trays.</p>
+<details class="note" open="open">
+<summary>Why</summary>
+<p>Honestly, after spending all of the time and effort cleaning up the front of the rack, I really wanted to try and make the rear pretty as well.</p>
+<p>Verticle PDUs for 24U racks are pretty hard to come by. And if you want both switched AND individually metered- its extremely difficult to find in a price that I was willing to pay.</p>
+<p>So- I needed a good way to help organize and clean up the wires, a set of fingers trays- did the job fantastically, with a little help from some velcro.</p>
+</details>
+<p>PAIR- is bolded, as this is literally a pair of finger trys, with a spacer.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-cables-2.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the finger trays screwed togather, inside of the aforementioned startech 2U spacer" src="../../Technology/2024/assets-2024-lab/power-cables-2.webP" /></a></p>
+<p>Remember.... the spacer that was originally used for holding the verticle shelf containing the PDUs? Well- it lives here now.</p>
+<p>Products-</p>
+<ul>
+<li><a href="https://amzn.to/3DxZPIC" target="_blank">Amazon: 2 Pack 1U Finger Duct</a><sup id="fnref8:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+<li><a href="https://amzn.to/3Dy5mz9" target="_blank">Amazon: Startech 2U 4in spacers</a><sup id="fnref9:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>The particular "qiaoyoubang" 1u ducts used- are actually extremely solid, stamped steel construction.</p>
+<p>I chose these particular units, due to the large openings between the fingers, which is plenty of room for power cables to fit without rubbing.</p>
+<p>Here is one final picture showing the top of the cable trays, which was taken before I acquired a 2nd PDU.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/power-cables-3.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the finger trays holding power cables" src="../../Technology/2024/assets-2024-lab/power-cables-3.webP" /></a></p>
+<p>Overall- I am extremely happy with how this turned out.</p>
+<h3 id="cables">Cables<a class="headerlink" href="#cables" title="Permanent link">&para;</a></h3>
+<h4 id="thin-ethernet">"Thin" ethernet<a class="headerlink" href="#thin-ethernet" title="Permanent link">&para;</a></h4>
+<p>One factor which really helped cleanup the mess of wires going through my rack- was just by using thinner cables.</p>
+<ul>
+<li><a href="https://amzn.to/3W2wJaH" target="_blank">Amazon: Monoprice Cat6A 5ft 10-pack</a><sup id="fnref5:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+<li><a href="https://amzn.to/4fHp7l3" target="_blank">Amazon: Monoprice Cat6A 3ft 10-pack</a><sup id="fnref6:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+<li><a href="https://amzn.to/3VZEqP2" target="_blank">Amazon: Monoprice Cat6A 1ft 10-pack</a><sup id="fnref7:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>So- the first thing I will note- these DO work for both POE, and for 10G.</p>
+<p>The cables, also come in different color combinations.</p>
+<p>I have been using these cables for years, and I am a huge fan of them.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-2024-lab/monoprice-slim-orders.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing multiple monoprice orders in my cart" src="../../Technology/2024/assets-2024-lab/monoprice-slim-orders.webP" /></a></p>
+<p>When I redid all of the cable management this year, I replaced all of the remaining standard CAT6 with these slim cables.</p>
+<h4 id="fiber">Fiber<a class="headerlink" href="#fiber" title="Permanent link">&para;</a></h4>
+<p>For my fiber- I have a few different sources.</p>
+<ul>
+<li><a href="https://amzn.to/40izDK3" target="_blank">Amazon: 6-Pack 1ft OM3</a><sup id="fnref4:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>You can see ONE of these used to link between my USW-PRO-24 and my USW-Aggregation</p>
+<ul>
+<li><a href="https://www.fs.com/products/40205.html" target="_blank">FS.com: 66ft OS2</a><sup id="fnref8:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+</ul>
+<p>I am using two runs of this fiber to link between my server closet, and my office. This is the yellow fiber you see running through the rack.</p>
+<p>It is single-mode fiber, running at 10G.</p>
+<ul>
+<li><a href="https://www.fs.com/products/88534.html" target="_blank">FS.com: 5ft OM4</a><sup id="fnref6:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+<li><a href="https://www.fs.com/products/40180.html" target="_blank">FS.com: 3ft OM4</a><sup id="fnref7:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+</ul>
+<p>I am using multi-mode patch cables from fs.com. </p>
+<p>These are used to connect the 10G switch, to my individual servers. (Note- Failover link only! 100G link is the primary)</p>
+<p>These are the blue runs of fiber you see running through the rack.</p>
+<h4 id="fiber-modules">Fiber Modules<a class="headerlink" href="#fiber-modules" title="Permanent link">&para;</a></h4>
+<p>I use fs.com modules exclusively for my fiber connections.</p>
+<ul>
+<li><a href="https://www.fs.com/products/65336.html" target="_blank">FS.com: UF-MM-10G (Unifi 10G Multimode)</a><sup id="fnref2:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+<li><a href="https://www.fs.com/products/31443.html" target="_blank">FS.com: 10G-SFPP-SR (Brocade 10G Multimode)</a><sup id="fnref3:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+<li><a href="https://www.fs.com/products/65334.html" target="_blank">FS.com: MFM1T02A-SR (Mellanox 10G Multimode)</a><sup id="fnref4:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+<li><a href="https://www.fs.com/products/111897.html" target="_blank">FS.com: SFP-10G-LR-I (Cisco 10G Singlemode)</a><sup id="fnref5:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup></li>
+</ul>
+<p>Honestly, I have a combination of these modules, with Brocade, Cisco, and Unifi compatible.</p>
+<p>I really have not had any compatability issues between these modules, and any of the switches I have, regardless of if they are mismatched.</p>
+<h4 id="dacs">DACs<a class="headerlink" href="#dacs" title="Permanent link">&para;</a></h4>
+<p>For 10G DACs, I honestly usually just buy whatever is the cheapest on eBay.</p>
+<p>I DO have a handful of legitimate cisco twinax cables, which are fanstatic. But- I have never had any issue with buying cheap DACs from eBay.</p>
+<p>For the 100G DACs, I am using <a href="https://www.fs.com/products/116122.html" target="_blank">FS.com: 1.5m 100G Twinax</a><sup id="fnref:noaff"><a class="footnote-ref" href="#fn:noaff">6</a></sup>.</p>
+<p>However, I actually purchased these cables from here: <a href="https://ebay.us/8x2IOP" target="_blank">eBay: FS 100G DAC 116122</a><sup id="fnref5:ebay"><a class="footnote-ref" href="#fn:ebay">3</a></sup>. (13$ less. Came brand-new in original packaging too)</p>
+<h4 id="sas">SAS<a class="headerlink" href="#sas" title="Permanent link">&para;</a></h4>
+<p>For SAS cables, I am using <a href="https://amzn.to/4fyBtMg" target="_blank">Amazon: Monoprice 2 Meter SFF-8088</a><sup id="fnref:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></p>
+<h3 id="misc-organization">Misc Organization<a class="headerlink" href="#misc-organization" title="Permanent link">&para;</a></h3>
+<h4 id="velcro-strips">Velcro Strips<a class="headerlink" href="#velcro-strips" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://amzn.to/4gUHNPo" target="_blank">Amazon: 120pcs Velcro</a><sup id="fnref3:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>I have found these off-brand/no-name velro strips to be extremely handy when doing cable management.</p>
+<p>If- you use zip-ties, I'd recommend you give these a try. For the 5$ it currently costs, you can't go wrong.</p>
+<p>There is no a single zip-tie in my rack, that I am currently aware of- I replaced all of them with these velcro strips.</p>
+<p>I use these same strips all over my house, my office, anywhere I need to organize cables togather.</p>
+<ul>
+<li><a href="https://amzn.to/420nADD" target="_blank">Amazon: Self-Adhesive Cable Clips</a><sup id="fnref2:amazon"><a class="footnote-ref" href="#fn:amazon">4</a></sup></li>
+</ul>
+<p>While not visible- I use these cable clips inside of the rails of my rack to hold fiber, and ethernet in place.</p>
+<p>Don't- put these on your wall. They will damage the wall when you try to remove them.</p>
+<p>But- these are a simple item I have found to be quite effective for doing cable management.</p>
+<p>Note- Not suitable for power cables- only thinner cables.</p>
+<h2 id="footnotes-disclaimers-etc">Footnotes, Disclaimers, etc...<a class="headerlink" href="#footnotes-disclaimers-etc" title="Permanent link">&para;</a></h2>
+<h3 id="disclaimers">Disclaimers<a class="headerlink" href="#disclaimers" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">This content is not sponsored</p>
+<p>None of the content, or products used in this post was sponsored.</p>
+<p>Any products tested, were purchased out of my pocket, and tested without cooperation with the manufacturer.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Affiliate Links Used</p>
+<p>This post <strong>DOES</strong> include affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.</p>
+<p>You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.</p>
+<p>As a disclaimer, I do not display advertisements on this site. I do not accept donations.</p>
+<p>As such, the only compensation from this service, comes from affiliate links.</p>
+<p>I am a normal person, who plays with these projects in my spare time. </p>
+<p>I do not run a company with sponsored youtube channels. </p>
+<p>If you see a product linked on my blog, It means I paid for it out of my pocket, for my own personal uses, unless otherwise noted.</p>
+<p>This blog exists for the sole reason, of documenting my various projects and experiences, to share with others.</p>
+<p>If, you do not wish to use the links, you are under no obligation to click them.</p>
+</div>
+<h3 id="footnotes">Footnotes<a class="headerlink" href="#footnotes" title="Permanent link">&para;</a></h3>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:NotAHint">
+<p>Note- I am not hinting at anything here.&#160;<a class="footnote-backref" href="#fnref:NotAHint" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ThisISaHint">
+<p>This IS hinting at an upcoming project...&#160;<a class="footnote-backref" href="#fnref:ThisISaHint" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ebay">
+<div class="admonition info">
+<p class="admonition-title">E-Bay Affiliate Links Used</p>
+<p>This post <strong>DOES</strong> include EBay affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.</p>
+<p>You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.</p>
+<p>I do not display advertisements on this site. As such, the only compensation from this service, comes from affiliate links. I do not ask for, or even accept donations.</p>
+</div>
+<p><a class="footnote-backref" href="#fnref:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref7:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref8:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref9:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref10:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref11:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref12:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref13:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref14:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref15:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref16:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref17:ebay" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref18:ebay" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:amazon">
+<div class="admonition info">
+<p class="admonition-title">Amazon Affiliate Links Used</p>
+<p>This post <strong>DOES</strong> include Amazon affiliate links. If you found this content useful, please consider buying the products displayed using the provided links.</p>
+<p>You will pay the same amount as normal, however, it does provide a small benefit to me. This benefit is usually used to purchase other products and hardware for which I can review / blog about.</p>
+<p>I do not display advertisements on this site. As such, the only compensation from this service, comes from affiliate links. I do not ask for, or even accept donations.</p>
+</div>
+<p><a class="footnote-backref" href="#fnref:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref7:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref8:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref9:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref10:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref11:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref12:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref13:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref14:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref15:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref16:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref17:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref18:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref19:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref20:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref21:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref22:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref23:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref24:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref25:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref26:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref27:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref28:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref29:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref30:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref31:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref32:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref33:amazon" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref34:amazon" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:noamazon">
+<p>This is a non-affiliated Amazon link.&#160;<a class="footnote-backref" href="#fnref:noamazon" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:noaff">
+<p>Non-affiliated&#160;<a class="footnote-backref" href="#fnref:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref6:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref7:noaff" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref8:noaff" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 XtremeOwnage.com
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="www.reddit.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="static.xtremeownage.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.footnote.tooltips", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.ad38c271.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.eb438620.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

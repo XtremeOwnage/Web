@@ -1,0 +1,25 @@
+body {
+/* background-color: red !important; */
+}
+
+.md-tabs{
+    width: 50%;
+}
+.header-social {
+    width: 20%;
+    overflow-y:hidden;
+    /* CSS Isn't my thing. Sue me. */
+    margin-top: 12px;    
+    text-align: right;
+}
+
+.md-container{
+   
+}
+.md-main{
+
+}
+
+.md-grid{
+    max-width: 80rem;
+}

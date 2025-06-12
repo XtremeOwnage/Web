@@ -1,0 +1,2085 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Cars, Computer, and Code.">
+      
+      
+        <meta name="author" content="XtremeOwnage">
+      
+      
+        <link rel="canonical" href="https://Static.XtremeOwnage.com/blog/2024/detecting-a-packetloss--latency-issue/">
+      
+      
+        <link rel="prev" href="../proxmox---debian-cloud-init-templates/">
+      
+      
+        <link rel="next" href="../proxmox---random-error-fixes/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14+insiders-4.53.16">
+    
+    
+      
+        <title>Detecting a packetloss / latency issue - XtremeOwnage.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8cce3a28.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#detecting-a-weird-packet-loss-issue" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine base classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+
+        <!-- Link to home -->
+        <a href="../../.." title="XtremeOwnage.com"
+            class="md-header__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+            
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        XtremeOwnage.com
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        
+                        Detecting a packetloss / latency issue
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette -->
+        
+        <form class="md-header__option" data-md-component="palette">
+            
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+                data-md-color-scheme="default"
+                data-md-color-primary="grey"
+                data-md-color-accent="orange"  aria-hidden="true"  type="radio"
+                name="__palette" id="__palette_0" />
+            
+            
+        </form>
+        
+
+
+
+        <!-- Navigation tabs (sticky) -->
+        
+        
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/Projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <div class="header-social">
+            
+            <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </a>
+            
+            <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+            </a>
+            
+            <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+            </a>
+            
+            <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+            </a>
+            
+            <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+            </a>
+            
+        </div>
+
+        <!-- Button to open search modal -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        <!-- Repository information -->
+        
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="XtremeOwnage.com" class="md-nav__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+      
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+    </a>
+    XtremeOwnage.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/Projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Improvement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/misc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Misc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/shop-talk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop-Talk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/solar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Symptoms
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Symptoms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-at-the-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting at the Mikrotik
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-ping-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multi-Ping (Python)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-at-the-usw-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Starting at the USW-24
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uxg-lite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UXG-Lite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-root-cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The root cause
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps-enable-snmp-on-the-uxg-lite-unsupported" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps? Enable SNMP on the UXG-Lite (Unsupported)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-was-this-issue-so-hard-to-pinpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why was this issue so hard to pinpoint?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why was this issue so hard to pinpoint?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reason-1-my-uxg-lite-does-not-support-snmp-to-export-data-back-to-a-central-location-have-its-data-in-librenms-would-have-made-it-much-easier-to-pinpoint-the-exact-location" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reason #1- My UXG-Lite does not "SUPPORT" snmp to export data back to a central location. Have its data, in LibreNMS, would have made it much easier to pinpoint the exact location.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reason-2-i-have-a-overly-complex-network-with-7-switches-and-4-routers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reason #2- I have a overly complex network, with 7 switches, and 4 routers.
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reason #2- I have a overly complex network, with 7 switches, and 4 routers.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-large-reason-for-this-is-performance-based" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A large reason for this- is performance-based.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#another-reason-is-reliability-oriented" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Another reason- is reliability-oriented.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Concerns.
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#farewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Farewall
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/avatar/XO.png" alt="XtremeOwnage">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          XtremeOwnage
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-07-10 00:00:00+00:00" class="md-ellipsis">Jul 10, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              19 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:homelab" class="md-tag">Homelab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:networking" class="md-tag">Networking</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="detecting-a-weird-packet-loss-issue">Detecting a weird packet loss issue.<a class="headerlink" href="#detecting-a-weird-packet-loss-issue" title="Permanent link">&para;</a></h1>
+<p>So- I recently installed a <a href="https://amzn.to/3Ll3sTa" target="_blank">Quad 100G Mikrotik CRS504-4XQ-IN Router</a> into my lab recently and moved a few servers over to 100G NICs.</p>
+<p>Around the time I did this- I also started experiencing tons of random, hard to pinpoint instances of latency across my network.</p>
+<p>I validated flow-control was enabled for the network- and I checked various port counters to look for errors.</p>
+<p>This- issue took me around a week or two to finally pinpoint.... this post- is going through a bit of the steps taken.</p>
+<!-- more -->
+
+<h2 id="the-symptoms">The Symptoms<a class="headerlink" href="#the-symptoms" title="Permanent link">&para;</a></h2>
+<p>The symptoms- were rather unique.</p>
+<ul>
+<li>Web pages would pause for up to 10 seconds before loading.</li>
+<li>Some mobile apps (clash of clans) would randomly disconnect with connection issues.</li>
+<li>Random latency and disconnects occurring throughout my network. </li>
+<li>Very little detectable packet-loss. This- is key.</li>
+<li>The symptoms almost resembled what occurs when you have a STP loop causing a port to flap up and down.</li>
+</ul>
+<h3 id="starting-at-the-mikrotik">Starting at the Mikrotik<a class="headerlink" href="#starting-at-the-mikrotik" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>admin@sw-100g<span class="o">]</span><span class="w"> </span>&gt;<span class="w"> </span>/interface<span class="w"> </span>print<span class="w"> </span>stats
+Flags:<span class="w"> </span>R<span class="w"> </span>-<span class="w"> </span>RUNNING<span class="p">;</span><span class="w"> </span>S<span class="w"> </span>-<span class="w"> </span>SLAVE
+Columns:<span class="w"> </span>NAME,<span class="w"> </span>RX-BYTE,<span class="w"> </span>TX-BYTE,<span class="w"> </span>RX-PACKET,<span class="w"> </span>TX-PACKET,<span class="w"> </span>RX-DROP,<span class="w"> </span>TX-DROP,<span class="w"> </span>TX-QUEUE-DROP,<span class="w"> </span>RX-ERROR,<span class="w"> </span>TX-ERROR
+<span class="w"> </span><span class="c1">#    NAME                  RX-BYTE            TX-BYTE      RX-PACKET      TX-PACKET  RX-DROP  TX-DROP  TX-QUEUE-DROP  RX-ERROR  TX-ERROR</span>
+<span class="w"> </span><span class="m">0</span><span class="w"> </span>R<span class="w">  </span>ether1<span class="w">            </span><span class="m">201</span><span class="w"> </span><span class="m">163</span><span class="w"> </span><span class="m">444</span><span class="w">      </span><span class="m">3</span><span class="w"> </span><span class="m">040</span><span class="w"> </span><span class="m">455</span><span class="w"> </span><span class="m">588</span><span class="w">      </span><span class="m">2</span><span class="w"> </span><span class="m">264</span><span class="w"> </span><span class="m">797</span><span class="w">      </span><span class="m">2</span><span class="w"> </span><span class="m">543</span><span class="w"> </span><span class="m">603</span><span class="w">        </span><span class="m">0</span><span class="w">        </span><span class="m">0</span><span class="w">              </span><span class="m">1</span><span class="w">         </span><span class="m">0</span><span class="w">         </span><span class="m">0</span>
+<span class="p">;;;</span><span class="w"> </span>Kube01:<span class="w"> </span>100G
+<span class="w"> </span><span class="m">1</span><span class="w"> </span>RS<span class="w"> </span>qsfp28-1-1<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">969</span><span class="w"> </span><span class="m">461</span><span class="w"> </span><span class="m">776</span><span class="w"> </span><span class="m">402</span><span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">316</span><span class="w"> </span><span class="m">576</span><span class="w"> </span><span class="m">813</span><span class="w"> </span><span class="m">413</span><span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">381</span><span class="w"> </span><span class="m">885</span><span class="w"> </span><span class="m">242</span><span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">640</span><span class="w"> </span><span class="m">058</span><span class="w"> </span><span class="m">300</span><span class="w">                               </span><span class="m">26</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">2</span><span class="w">    </span>qsfp28-1-2<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">3</span><span class="w">    </span>qsfp28-1-3<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">4</span><span class="w">    </span>qsfp28-1-4<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="p">;;;</span><span class="w"> </span>Kube02:<span class="w"> </span>100G
+<span class="w"> </span><span class="m">5</span><span class="w"> </span>RS<span class="w"> </span>qsfp28-2-1<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">740</span><span class="w"> </span><span class="m">746</span><span class="w"> </span><span class="m">241</span><span class="w"> </span><span class="m">766</span><span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">137</span><span class="w"> </span><span class="m">569</span><span class="w"> </span><span class="m">536</span><span class="w"> </span><span class="m">280</span><span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">741</span><span class="w"> </span><span class="m">858</span><span class="w"> </span><span class="m">272</span><span class="w">  </span><span class="m">1</span><span class="w"> </span><span class="m">520</span><span class="w"> </span><span class="m">825</span><span class="w"> </span><span class="m">302</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">6</span><span class="w">    </span>qsfp28-2-2<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">7</span><span class="w">    </span>qsfp28-2-3<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="w"> </span><span class="m">8</span><span class="w">    </span>qsfp28-2-4<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="p">;;;</span><span class="w"> </span>Kube05:<span class="w"> </span>100G
+<span class="w"> </span><span class="m">9</span><span class="w"> </span>RS<span class="w"> </span>qsfp28-3-1<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">152</span><span class="w"> </span><span class="m">472</span><span class="w"> </span><span class="m">555</span><span class="w"> </span><span class="m">949</span><span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="m">509</span><span class="w"> </span><span class="m">013</span><span class="w"> </span><span class="m">890</span><span class="w"> </span><span class="m">640</span><span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">125</span><span class="w"> </span><span class="m">952</span><span class="w"> </span><span class="m">515</span><span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="m">224</span><span class="w"> </span><span class="m">145</span><span class="w"> </span><span class="m">002</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">10</span><span class="w">    </span>qsfp28-3-2<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">11</span><span class="w">    </span>qsfp28-3-3<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">12</span><span class="w">    </span>qsfp28-3-4<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="p">;;;</span><span class="w"> </span>Uplink:<span class="w"> </span>Core<span class="w"> </span>Switch<span class="w"> </span>Port<span class="w"> </span><span class="m">26</span>
+<span class="m">13</span><span class="w"> </span>RS<span class="w"> </span>qsfp28-4-1<span class="w">    </span><span class="m">128</span><span class="w"> </span><span class="m">030</span><span class="w"> </span><span class="m">532</span><span class="w"> </span><span class="m">966</span><span class="w">    </span><span class="m">173</span><span class="w"> </span><span class="m">290</span><span class="w"> </span><span class="m">502</span><span class="w"> </span><span class="m">219</span><span class="w">    </span><span class="m">122</span><span class="w"> </span><span class="m">095</span><span class="w"> </span><span class="m">521</span><span class="w">    </span><span class="m">150</span><span class="w"> </span><span class="m">966</span><span class="w"> </span><span class="m">404</span><span class="w">                              </span><span class="m">486</span><span class="w">                    </span>
+<span class="m">14</span><span class="w">    </span>qsfp28-4-2<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">15</span><span class="w">    </span>qsfp28-4-3<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">16</span><span class="w">    </span>qsfp28-4-4<span class="w">                  </span><span class="m">0</span><span class="w">                  </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">                                </span><span class="m">0</span><span class="w">                    </span>
+<span class="m">17</span><span class="w"> </span>R<span class="w">  </span>bridge1<span class="w">                     </span><span class="m">0</span><span class="w">            </span><span class="m">541</span><span class="w"> </span><span class="m">473</span><span class="w">              </span><span class="m">0</span><span class="w">          </span><span class="m">3</span><span class="w"> </span><span class="m">139</span><span class="w">        </span><span class="m">0</span><span class="w">        </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">         </span><span class="m">0</span><span class="w">         </span><span class="m">0</span>
+<span class="m">18</span><span class="w"> </span>R<span class="w">  </span>lo<span class="w">                  </span><span class="m">1</span><span class="w"> </span><span class="m">051</span><span class="w"> </span><span class="m">258</span><span class="w">          </span><span class="m">1</span><span class="w"> </span><span class="m">051</span><span class="w"> </span><span class="m">258</span><span class="w">          </span><span class="m">6</span><span class="w"> </span><span class="m">252</span><span class="w">          </span><span class="m">6</span><span class="w"> </span><span class="m">252</span><span class="w">        </span><span class="m">0</span><span class="w">        </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">         </span><span class="m">0</span><span class="w">         </span><span class="m">0</span>
+<span class="p">;;;</span><span class="w"> </span>V_SERVER
+<span class="m">19</span><span class="w"> </span>R<span class="w">  </span>vlan4<span class="w">                       </span><span class="m">0</span><span class="w">            </span><span class="m">538</span><span class="w"> </span><span class="m">162</span><span class="w">              </span><span class="m">0</span><span class="w">          </span><span class="m">3</span><span class="w"> </span><span class="m">124</span><span class="w">        </span><span class="m">0</span><span class="w">        </span><span class="m">0</span><span class="w">              </span><span class="m">0</span><span class="w">         </span><span class="m">0</span><span class="w">         </span><span class="m">0</span>
+</code></pre></div>
+<p>While there are a few TX drops on the uplink port going back to my Unifi USW-24-PRO core switch, 486 out of the millions of packets- isn't very concerning. Since, I updated all of the firmware for my switches, and routers yesterday- that is likely the cause of those drops.</p>
+<p>Having- had lots of issues with STP / RSTP in the past- I decided to check the logs for flapping interfaces.</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>admin@sw-100g<span class="o">]</span><span class="w"> </span>&gt;<span class="w"> </span>/interface<span class="w"> </span>print<span class="w"> </span>stats
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:50<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:50<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:50<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>start
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:50<span class="w"> </span>bridge,info<span class="w"> </span>hardware<span class="w"> </span>offloading<span class="w"> </span>activated<span class="w"> </span>on<span class="w"> </span>bridge<span class="w"> </span><span class="s2">&quot;bridge1&quot;</span><span class="w"> </span>ports:<span class="w"> </span>qsfp28-4-1,qsfp28-3-1,qsfp28-1-1,qsfp28-2-1
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>over
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-3-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-3-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-1-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-1-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-2-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">06</span>:42:53<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-2-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:40<span class="w"> </span>interface,info<span class="w"> </span>qsfp28-4-1<span class="w"> </span>link<span class="w"> </span>down
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:40<span class="w"> </span>interface,info<span class="w"> </span>qsfp28-4-1<span class="w"> </span>link<span class="w"> </span>up<span class="w"> </span><span class="o">(</span>speed<span class="w"> </span>10G,<span class="w"> </span>full<span class="w"> </span>duplex<span class="o">)</span>
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:40<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>becomes<span class="w"> </span>Designated
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:41<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>becomes<span class="w"> </span>Root
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:41<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:41<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:41<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>start
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">13</span>:07:43<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>over
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:35<span class="w"> </span>interface,info<span class="w"> </span>qsfp28-4-1<span class="w"> </span>link<span class="w"> </span>down
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>interface,info<span class="w"> </span>qsfp28-4-1<span class="w"> </span>link<span class="w"> </span>up<span class="w"> </span><span class="o">(</span>speed<span class="w"> </span>10G,<span class="w"> </span>full<span class="w"> </span>duplex<span class="o">)</span>
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>becomes<span class="w"> </span>Designated
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>becomes<span class="w"> </span>Root
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>learning
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>forwarding
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:38<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>start
+<span class="w"> </span><span class="m">07</span>-10<span class="w"> </span><span class="m">17</span>:10:40<span class="w"> </span>bridge,stp<span class="w"> </span>qsfp28-4-1:0<span class="w"> </span>TCHANGE<span class="w"> </span>over
+</code></pre></div>
+<p>Note- most of the events you see above- was due to me changing around parameters. I did notice a high amount of RX-Pauses, and decided to see if toggling flow-control off would do anything of value. (It didn't)</p>
+<p>After- not finding anything really of use- I decided to try a few difference approaches....</p>
+<h3 id="multi-ping-python">Multi-Ping (Python)<a class="headerlink" href="#multi-ping-python" title="Permanent link">&para;</a></h3>
+<p>After digging down quite a few rabbit holes, I started running <a href="https://pypi.org/project/ping-multi-ext/" target="_blank">Python- multi-ping-ext</a>. This- is a simple python project, which pings multiple hosts at the same time, and keeps track of latency and failures.</p>
+<p>And- it didn't take long for it to spot the issues.
+<a class="glightbox" href="../../Technology/2024/assets-packet-loss/multi-ping-failures.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing interfaces belonging to my UXG-Lite dropping packets" src="../../Technology/2024/assets-packet-loss/multi-ping-failures.webP" /></a></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-packet-loss/multi-ping-failures-2.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../Technology/2024/assets-packet-loss/multi-ping-failures-2.webP" /></a></p>
+<p>For back-story, my network has 4 different routers, handling various pieces.</p>
+<p>All of my 1G networking, is routed via the UXG-Lite (10.100.1.1, 10.255.253.1)</p>
+<p>Most of my 10G networking, is routed by the USW-24-PRO (10.255.253.2)</p>
+<p>10.255.253.3, is one of my internal routers for various 10G subnets. BUT- for traffic to reach it, it typically goes through the UXG-Lite, due to... Unifi's crappy layer 3 switch support.</p>
+<p>The next question..... Where is this packet loss coming from? </p>
+<h3 id="starting-at-the-usw-24">Starting at the USW-24<a class="headerlink" href="#starting-at-the-usw-24" title="Permanent link">&para;</a></h3>
+<p>Since- Unifi gives basically no details of use via the GUI / Interface, lets dig into the switch itself.</p>
+<div class="highlight"><pre><span></span><code>(UBNT) #show interface ethernet all
+
+Port      Bytes Tx         Bytes Rx         Packets Tx       Packets Rx       Utilization Tx (%)   Utilization Rx (%)
+------    --------         --------         ----------       ----------       ------------------   ------------------
+0/1       45309732962      78659561832      50079930         67805477         1                   12
+0/2       53058446789      1779656951       47792959         9648488          0                   0
+0/3       38979425716      39846249001      51526480         51914192         0                   0
+0/4       1173970958       174831946        2073311          1073446          0                   0
+0/5       8343943807       109783344193     18746036         76815417         0                   0
+0/6       24066682019      537929824        16833100         1724027          0                   0
+0/7       0                0                0                0                0                   0
+0/8       0                0                0                0                0                   0
+0/9       0                0                0                0                0                   0
+0/10      95260623684      141818291159     102760702        128171969        1                   13
+0/11      0                0                0                0                0                   0
+0/12      0                0                0                0                0                   0
+0/13      4861040          1268167          57094            17508            0                   0
+0/14      29821762         22472576         175979           47169            0                   0
+0/15      0                0                0                0                0                   0
+0/16      4799011          1204238          56230            16791            0                   0
+0/17      48800564         665190853        501605           566173           0                   0
+0/18      50779467155      3861213785       40912085         14892259         11                  0
+0/19      0                0                0                0                0                   0
+0/20      0                0                0                0                0                   0
+0/21      0                0                0                0                0                   0
+0/22      320095833288     61377643284      284889253        183029549        3                   0
+0/23      6988361559       256695727474     102007331        200475378        0                   2
+0/24      37968718630      13602255975      57136717         41141882         0                   0
+0/25      23447404365      23682097617      18507312         22317363         1                   0
+0/26      399311466370     371416678133     331286549        322562623        0                   0
+3/1       98368179751      80439218783      97872889         77453965         0                   6
+3/2       32410625826      110321274017     35579136         78539444         0                   0
+</code></pre></div>
+<p>Looking at the specific interface for the UXG-Lite, does not show anything of concern either.</p>
+<div class="highlight"><pre><span></span><code>(UBNT) #show interface 0/10
+
+Packets Received Without Error................. 128826893
+Packets Received With Error.................... 0
+Broadcast Packets Received..................... 91668
+Receive Packets Discarded...................... 18
+Packets Transmitted Without Errors............. 103061722
+Transmit Packets Discarded..................... 54
+Transmit Packet Errors......................... 0
+Collision Frames............................... 0
+Number of link down events..................... 0
+Load Interval.................................. 300
+Bits Per Second Received....................... 120304808
+Bits Per Second Transmitted.................... 15672624
+Packets Per Second Received.................... 10643
+Packets Per Second Transmitted................. 3365
+Percent Utilization Received................... 12%
+Percent Utilization Transmitted................ 1%
+Time Since Counters Last Cleared............... 1 day 0 hr 59 min 11 sec
+</code></pre></div>
+<p>Really- nothing of value to see....</p>
+<h3 id="uxg-lite">UXG-Lite<a class="headerlink" href="#uxg-lite" title="Permanent link">&para;</a></h3>
+<p>Nearly instantly, after looking at the port counters- the issue was very clear.</p>
+<p>The primary bridge appears to be dropping tons of packets.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:~#<span class="w"> </span>netstat<span class="w"> </span>--statistics
+Ip:
+<span class="w">    </span>Forwarding:<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="m">29023746</span><span class="w"> </span>total<span class="w"> </span>packets<span class="w"> </span>received
+<span class="w">    </span><span class="m">25114294</span><span class="w"> </span>forwarded
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>incoming<span class="w"> </span>packets<span class="w"> </span>discarded
+<span class="w">    </span><span class="m">3747325</span><span class="w"> </span>incoming<span class="w"> </span>packets<span class="w"> </span>delivered
+<span class="w">    </span><span class="m">29195929</span><span class="w"> </span>requests<span class="w"> </span>sent<span class="w"> </span>out
+<span class="w">    </span><span class="m">1709</span><span class="w"> </span>outgoing<span class="w"> </span>packets<span class="w"> </span>dropped
+<span class="w">    </span><span class="m">44</span><span class="w"> </span>dropped<span class="w"> </span>because<span class="w"> </span>of<span class="w"> </span>missing<span class="w"> </span>route
+<span class="w">    </span><span class="m">15</span><span class="w"> </span>reassemblies<span class="w"> </span>required
+<span class="w">    </span><span class="m">5</span><span class="w"> </span>packets<span class="w"> </span>reassembled<span class="w"> </span>ok
+<span class="w">    </span><span class="m">1</span><span class="w"> </span>fragments<span class="w"> </span>failed
+Icmp:
+<span class="w">    </span><span class="m">995633</span><span class="w"> </span>ICMP<span class="w"> </span>messages<span class="w"> </span>received
+<span class="w">    </span><span class="m">17</span><span class="w"> </span>input<span class="w"> </span>ICMP<span class="w"> </span>message<span class="w"> </span>failed
+<span class="w">    </span>ICMP<span class="w"> </span>input<span class="w"> </span>histogram:
+<span class="w">        </span>destination<span class="w"> </span>unreachable:<span class="w"> </span><span class="m">259</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>requests:<span class="w"> </span><span class="m">826570</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>replies:<span class="w"> </span><span class="m">168804</span>
+<span class="w">    </span><span class="m">1080204</span><span class="w"> </span>ICMP<span class="w"> </span>messages<span class="w"> </span>sent
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>ICMP<span class="w"> </span>messages<span class="w"> </span>failed
+<span class="w">    </span>ICMP<span class="w"> </span>output<span class="w"> </span>histogram:
+<span class="w">        </span>destination<span class="w"> </span>unreachable:<span class="w"> </span><span class="m">80875</span>
+<span class="w">        </span>redirect:<span class="w"> </span><span class="m">3819</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>requests:<span class="w"> </span><span class="m">168940</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>replies:<span class="w"> </span><span class="m">826570</span>
+IcmpMsg:
+<span class="w">        </span>InType0:<span class="w"> </span><span class="m">168804</span>
+<span class="w">        </span>InType3:<span class="w"> </span><span class="m">259</span>
+<span class="w">        </span>InType8:<span class="w"> </span><span class="m">826570</span>
+<span class="w">        </span>OutType0:<span class="w"> </span><span class="m">826570</span>
+<span class="w">        </span>OutType3:<span class="w"> </span><span class="m">80875</span>
+<span class="w">        </span>OutType5:<span class="w"> </span><span class="m">3819</span>
+<span class="w">        </span>OutType8:<span class="w"> </span><span class="m">168940</span>
+Tcp:
+<span class="w">    </span><span class="m">78978</span><span class="w"> </span>active<span class="w"> </span>connection<span class="w"> </span>openings
+<span class="w">    </span><span class="m">31357</span><span class="w"> </span>passive<span class="w"> </span>connection<span class="w"> </span>openings
+<span class="w">    </span><span class="m">36080</span><span class="w"> </span>failed<span class="w"> </span>connection<span class="w"> </span>attempts
+<span class="w">    </span><span class="m">3</span><span class="w"> </span>connection<span class="w"> </span>resets<span class="w"> </span>received
+<span class="w">    </span><span class="m">3</span><span class="w"> </span>connections<span class="w"> </span>established
+<span class="w">    </span><span class="m">2494553</span><span class="w"> </span>segments<span class="w"> </span>received
+<span class="w">    </span><span class="m">2540942</span><span class="w"> </span>segments<span class="w"> </span>sent<span class="w"> </span>out
+<span class="w">    </span><span class="m">337</span><span class="w"> </span>segments<span class="w"> </span>retransmitted
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>bad<span class="w"> </span>segments<span class="w"> </span>received
+<span class="w">    </span><span class="m">37405</span><span class="w"> </span>resets<span class="w"> </span>sent
+Udp:
+<span class="w">    </span><span class="m">142428</span><span class="w"> </span>packets<span class="w"> </span>received
+<span class="w">    </span><span class="m">116282</span><span class="w"> </span>packets<span class="w"> </span>to<span class="w"> </span>unknown<span class="w"> </span>port<span class="w"> </span>received
+<span class="w">    </span><span class="m">370</span><span class="w"> </span>packet<span class="w"> </span>receive<span class="w"> </span>errors
+<span class="w">    </span><span class="m">507393</span><span class="w"> </span>packets<span class="w"> </span>sent
+<span class="w">    </span><span class="m">370</span><span class="w"> </span>receive<span class="w"> </span>buffer<span class="w"> </span>errors
+<span class="w">    </span><span class="m">0</span><span class="w"> </span>send<span class="w"> </span>buffer<span class="w"> </span>errors
+<span class="w">    </span>IgnoredMulti:<span class="w"> </span><span class="m">3072</span>
+UdpLite:
+TcpExt:
+<span class="w">    </span><span class="m">41567</span><span class="w"> </span>TCP<span class="w"> </span>sockets<span class="w"> </span>finished<span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>fast<span class="w"> </span>timer
+<span class="w">    </span><span class="m">67157</span><span class="w"> </span>delayed<span class="w"> </span>acks<span class="w"> </span>sent
+<span class="w">    </span><span class="m">7842</span><span class="w"> </span>delayed<span class="w"> </span>acks<span class="w"> </span>further<span class="w"> </span>delayed<span class="w"> </span>because<span class="w"> </span>of<span class="w"> </span>locked<span class="w"> </span>socket
+<span class="w">    </span>Quick<span class="w"> </span>ack<span class="w"> </span>mode<span class="w"> </span>was<span class="w"> </span>activated<span class="w"> </span><span class="m">244</span><span class="w"> </span><span class="nb">times</span>
+<span class="w">    </span><span class="m">4061</span><span class="w"> </span>packets<span class="w"> </span>directly<span class="w"> </span>queued<span class="w"> </span>to<span class="w"> </span>recvmsg<span class="w"> </span>prequeue
+<span class="w">    </span><span class="m">1405</span><span class="w"> </span>bytes<span class="w"> </span>directly<span class="w"> </span><span class="k">in</span><span class="w"> </span>process<span class="w"> </span>context<span class="w"> </span>from<span class="w"> </span>backlog
+<span class="w">    </span>TCPDirectCopyFromPrequeue:<span class="w"> </span><span class="m">16537</span>
+<span class="w">    </span><span class="m">950638</span><span class="w"> </span>packet<span class="w"> </span>headers<span class="w"> </span>predicted
+<span class="w">    </span><span class="m">4</span><span class="w"> </span>packet<span class="w"> </span>headers<span class="w"> </span>predicted<span class="w"> </span>and<span class="w"> </span>directly<span class="w"> </span>queued<span class="w"> </span>to<span class="w"> </span>user
+<span class="w">    </span><span class="m">422349</span><span class="w"> </span>acknowledgments<span class="w"> </span>not<span class="w"> </span>containing<span class="w"> </span>data<span class="w"> </span>payload<span class="w"> </span>received
+<span class="w">    </span><span class="m">576758</span><span class="w"> </span>predicted<span class="w"> </span>acknowledgments
+<span class="w">    </span>TCPDSACKUndo:<span class="w"> </span><span class="m">3</span>
+<span class="w">    </span><span class="m">12</span><span class="w"> </span>congestion<span class="w"> </span>windows<span class="w"> </span>recovered<span class="w"> </span>without<span class="w"> </span>slow<span class="w"> </span>start<span class="w"> </span>after<span class="w"> </span>partial<span class="w"> </span>ack
+<span class="w">    </span><span class="m">1</span><span class="w"> </span>retransmits<span class="w"> </span><span class="k">in</span><span class="w"> </span>slow<span class="w"> </span>start
+<span class="w">    </span>TCPTimeouts:<span class="w"> </span><span class="m">52</span>
+<span class="w">    </span>TCPLossProbes:<span class="w"> </span><span class="m">253</span>
+<span class="w">    </span>TCPLossProbeRecovery:<span class="w"> </span><span class="m">2</span>
+<span class="w">    </span>TCPDSACKOldSent:<span class="w"> </span><span class="m">244</span>
+<span class="w">    </span>TCPDSACKRecv:<span class="w"> </span><span class="m">221</span>
+<span class="w">    </span>TCPDSACKIgnoredNoUndo:<span class="w"> </span><span class="m">115</span>
+<span class="w">    </span>TCPSpuriousRTOs:<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>TCPSackShiftFallback:<span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>IPReversePathFilter:<span class="w"> </span><span class="m">3261</span>
+<span class="w">    </span>TCPRcvCoalesce:<span class="w"> </span><span class="m">44097</span>
+<span class="w">    </span>TCPOFOQueue:<span class="w"> </span><span class="m">294</span>
+<span class="w">    </span>TCPSpuriousRtxHostQueues:<span class="w"> </span><span class="m">17</span>
+<span class="w">    </span>TCPAutoCorking:<span class="w"> </span><span class="m">1185</span>
+<span class="w">    </span>TCPSynRetrans:<span class="w"> </span><span class="m">107</span>
+<span class="w">    </span>TCPOrigDataSent:<span class="w"> </span><span class="m">1469084</span>
+<span class="w">    </span>TCPHystartTrainDetect:<span class="w"> </span><span class="m">4</span>
+<span class="w">    </span>TCPHystartTrainCwnd:<span class="w"> </span><span class="m">66</span>
+<span class="w">    </span>TCPACKSkippedSeq:<span class="w"> </span><span class="m">10</span>
+IpExt:
+<span class="w">    </span>InNoRoutes:<span class="w"> </span><span class="m">2524</span>
+<span class="w">    </span>InMcastPkts:<span class="w"> </span><span class="m">16772</span>
+<span class="w">    </span>OutMcastPkts:<span class="w"> </span><span class="m">34423</span>
+<span class="w">    </span>InBcastPkts:<span class="w"> </span><span class="m">21278</span>
+<span class="w">    </span>OutBcastPkts:<span class="w"> </span><span class="m">17548</span>
+<span class="w">    </span>InOctets:<span class="w"> </span><span class="m">24232842554</span>
+<span class="w">    </span>OutOctets:<span class="w"> </span><span class="m">45517272843</span>
+<span class="w">    </span>InMcastOctets:<span class="w"> </span><span class="m">1118364</span>
+<span class="w">    </span>OutMcastOctets:<span class="w"> </span><span class="m">1828988</span>
+<span class="w">    </span>InBcastOctets:<span class="w"> </span><span class="m">1251369</span>
+<span class="w">    </span>OutBcastOctets:<span class="w"> </span><span class="m">567758</span>
+<span class="w">    </span>InNoECTPkts:<span class="w"> </span><span class="m">32780595</span>
+<span class="w">    </span>InECT1Pkts:<span class="w"> </span><span class="m">9</span>
+<span class="w">    </span>InECT0Pkts:<span class="w"> </span><span class="m">2296</span>
+<span class="w">    </span>InCEPkts:<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:~#<span class="w"> </span>netstat<span class="w"> </span>-i
+Kernel<span class="w"> </span>Interface<span class="w"> </span>table
+Iface<span class="w">      </span>MTU<span class="w">    </span>RX-OK<span class="w"> </span>RX-ERR<span class="w"> </span>RX-DRP<span class="w"> </span>RX-OVR<span class="w">    </span>TX-OK<span class="w"> </span>TX-ERR<span class="w"> </span>TX-DRP<span class="w"> </span>TX-OVR<span class="w"> </span>Flg
+br0<span class="w">       </span><span class="m">1500</span><span class="w">   </span><span class="m">176609</span><span class="w">      </span><span class="m">0</span><span class="w">  </span><span class="m">18411</span><span class="w"> </span><span class="m">0</span><span class="w">        </span><span class="m">238268</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>BMRU
+br13<span class="w">      </span><span class="m">1500</span><span class="w">     </span><span class="m">4191</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w">          </span><span class="m">2580</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>BMRU
+eth0<span class="w">      </span><span class="m">1500</span><span class="w"> </span><span class="m">107188671</span><span class="w">      </span><span class="m">0</span><span class="w">     </span><span class="m">88</span><span class="w"> </span><span class="m">415</span><span class="w">    </span><span class="m">135637148</span><span class="w">      </span><span class="m">0</span><span class="w">    </span><span class="m">519</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>BMRU
+eth1<span class="w">      </span><span class="m">1500</span><span class="w"> </span><span class="m">45873230</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">3</span><span class="w"> </span><span class="m">0</span><span class="w">      </span><span class="m">16769419</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>BMRU
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:~#<span class="w"> </span>ip<span class="w"> </span>-s<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>br0
+<span class="m">13</span>:<span class="w"> </span>br0:<span class="w"> </span>&lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt;<span class="w"> </span>mtu<span class="w"> </span><span class="m">1500</span><span class="w"> </span>qdisc<span class="w"> </span>noqueue<span class="w"> </span>state<span class="w"> </span>UP<span class="w"> </span>mode<span class="w"> </span>DEFAULT<span class="w"> </span>group<span class="w"> </span>default<span class="w"> </span>qlen<span class="w"> </span><span class="m">1000</span>
+<span class="w">    </span>link/ether<span class="w"> </span>d8:b3:70:8d:e8:b4<span class="w"> </span>brd<span class="w"> </span>ff:ff:ff:ff:ff:ff
+<span class="w">    </span>RX:<span class="w"> </span>bytes<span class="w">  </span>packets<span class="w">  </span>errors<span class="w">  </span>dropped<span class="w"> </span>missed<span class="w">  </span>mcast
+<span class="w">    </span><span class="m">44763888</span><span class="w">   </span><span class="m">177339</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">18520</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span>
+<span class="w">    </span>TX:<span class="w"> </span>bytes<span class="w">  </span>packets<span class="w">  </span>errors<span class="w">  </span>dropped<span class="w"> </span>carrier<span class="w"> </span>collsns
+<span class="w">    </span><span class="m">78755044</span><span class="w">   </span><span class="m">238774</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">       </span><span class="m">0</span>
+</code></pre></div>
+<p>br0 is the primary interface which receives incoming traffic. Given, its high packet loss- this certainly explains the random latency, and disconnects.</p>
+<p>The amount of current throughput, isn't very high- under 100Mbit/s.</p>
+<div class="highlight"><pre><span></span><code>top<span class="w"> </span>-<span class="w"> </span><span class="m">19</span>:45:13<span class="w"> </span>up<span class="w"> </span><span class="m">1</span><span class="w"> </span>day,<span class="w">  </span><span class="m">1</span>:54,<span class="w">  </span><span class="m">1</span><span class="w"> </span>user,<span class="w">  </span>load<span class="w"> </span>average:<span class="w"> </span><span class="m">2</span>.82,<span class="w"> </span><span class="m">2</span>.38,<span class="w"> </span><span class="m">2</span>.30
+Tasks:<span class="w"> </span><span class="m">144</span><span class="w"> </span>total,<span class="w">   </span><span class="m">1</span><span class="w"> </span>running,<span class="w"> </span><span class="m">143</span><span class="w"> </span>sleeping,<span class="w">   </span><span class="m">0</span><span class="w"> </span>stopped,<span class="w">   </span><span class="m">0</span><span class="w"> </span>zombie
+%Cpu<span class="o">(</span>s<span class="o">)</span>:<span class="w"> </span><span class="m">11</span>.2<span class="w"> </span>us,<span class="w">  </span><span class="m">4</span>.2<span class="w"> </span>sy,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>ni,<span class="w"> </span><span class="m">73</span>.2<span class="w"> </span>id,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>wa,<span class="w">  </span><span class="m">2</span>.2<span class="w"> </span>hi,<span class="w">  </span><span class="m">9</span>.2<span class="w"> </span>si,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>st
+MiB<span class="w"> </span>Mem<span class="w"> </span>:<span class="w">    </span><span class="m">974</span>.1<span class="w"> </span>total,<span class="w">    </span><span class="m">172</span>.7<span class="w"> </span>free,<span class="w">    </span><span class="m">261</span>.1<span class="w"> </span>used,<span class="w">    </span><span class="m">540</span>.3<span class="w"> </span>buff/cache
+MiB<span class="w"> </span>Swap:<span class="w">    </span><span class="m">768</span>.0<span class="w"> </span>total,<span class="w">    </span><span class="m">761</span>.1<span class="w"> </span>free,<span class="w">      </span><span class="m">6</span>.9<span class="w"> </span>used.<span class="w">    </span><span class="m">530</span>.4<span class="w"> </span>avail<span class="w"> </span>Mem
+
+<span class="w">    </span>PID<span class="w"> </span>USER<span class="w">      </span>PR<span class="w">  </span>NI<span class="w">    </span>VIRT<span class="w">    </span>RES<span class="w">    </span>SHR<span class="w"> </span>S<span class="w">  </span>%CPU<span class="w">  </span>%MEM<span class="w">     </span>TIME+<span class="w"> </span>COMMAND
+<span class="w">   </span><span class="m">2165</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">115492</span><span class="w">  </span><span class="m">23928</span><span class="w">  </span><span class="m">16488</span><span class="w"> </span>S<span class="w">  </span><span class="m">18</span>.0<span class="w">   </span><span class="m">2</span>.4<span class="w"> </span><span class="m">127</span>:56.77<span class="w"> </span>ubios-udapi-ser
+<span class="w">      </span><span class="m">3</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">7</span>.4<span class="w">   </span><span class="m">0</span>.0<span class="w">  </span><span class="m">63</span>:56.26<span class="w"> </span>ksoftirqd/0
+<span class="w">   </span><span class="m">2729</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">671156</span><span class="w">   </span><span class="m">7360</span><span class="w">   </span><span class="m">2232</span><span class="w"> </span>S<span class="w">   </span><span class="m">3</span>.2<span class="w">   </span><span class="m">0</span>.7<span class="w">  </span><span class="m">47</span>:30.15<span class="w"> </span>utmdaemon
+<span class="w">  </span><span class="m">50759</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">380824</span><span class="w">  </span><span class="m">35984</span><span class="w">  </span><span class="m">22152</span><span class="w"> </span>S<span class="w">   </span><span class="m">1</span>.3<span class="w">   </span><span class="m">3</span>.6<span class="w">  </span><span class="m">11</span>:34.95<span class="w"> </span>dpi-flow-stats
+<span class="m">2083016</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">    </span><span class="m">8920</span><span class="w">   </span><span class="m">3500</span><span class="w">   </span><span class="m">2728</span><span class="w"> </span>R<span class="w">   </span><span class="m">1</span>.0<span class="w">   </span><span class="m">0</span>.4<span class="w">   </span><span class="m">0</span>:00.26<span class="w"> </span>top
+<span class="w">   </span><span class="m">3284</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">101796</span><span class="w">  </span><span class="m">16896</span><span class="w">   </span><span class="m">9444</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.6<span class="w">   </span><span class="m">1</span>.7<span class="w">  </span><span class="m">31</span>:51.49<span class="w"> </span>mcad
+<span class="w">   </span><span class="m">3380</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">169904</span><span class="w">  </span><span class="m">12240</span><span class="w">   </span><span class="m">8784</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.6<span class="w">   </span><span class="m">1</span>.2<span class="w">  </span><span class="m">29</span>:59.01<span class="w"> </span>exe
+<span class="w">   </span><span class="m">1836</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">   </span><span class="m">25060</span><span class="w">   </span><span class="m">9744</span><span class="w">   </span><span class="m">8272</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">1</span>.0<span class="w">   </span><span class="m">5</span>:09.99<span class="w"> </span>utermd
+<span class="w">  </span><span class="m">51799</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">   </span><span class="m">43288</span><span class="w">    </span><span class="m">744</span><span class="w">    </span><span class="m">644</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.1<span class="w">   </span><span class="m">0</span>:22.12<span class="w"> </span>dpinger
+<span class="m">2062438</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">   </span><span class="m">14928</span><span class="w">   </span><span class="m">7308</span><span class="w">   </span><span class="m">6160</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.7<span class="w">   </span><span class="m">0</span>:00.59<span class="w"> </span>sshd
+<span class="m">2064428</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>D<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:00.72<span class="w"> </span>kworker/u4:3
+</code></pre></div>
+<p>Top, shows current load average, is pretty high- but, not overwhelming.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:~#<span class="w"> </span>ethtool<span class="w"> </span>-a<span class="w"> </span>eth0
+Pause<span class="w"> </span>parameters<span class="w"> </span><span class="k">for</span><span class="w"> </span>eth0:
+Autonegotiate:<span class="w">  </span>on
+RX:<span class="w">             </span>off
+TX:<span class="w">             </span>off
+RX<span class="w"> </span>negotiated:<span class="w">  </span>off
+TX<span class="w"> </span>negotiated:<span class="w">  </span>off
+</code></pre></div>
+<p>Looks like flow-control is disabled by default too. So, as a test- I decided to enable it.</p>
+<p><code>ethtool -A eth0 rx on tx on</code></p>
+<p>While- this decreased the amount of packet drops, and the frequency- this did not correct the issue.</p>
+<p>Looking through the logs- I notice tons of processes complaining about executions taking too long.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:/var/log#<span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">40</span><span class="w"> </span>-f<span class="w"> </span>messages<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>execution
+<span class="m">2024</span>-07-10T19:50:10-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1156ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>process-manager-child-exit<span class="w"> </span>post<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:13-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>557ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>nl-neighbors-poll<span class="w"> </span>timer<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:29-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>554ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>nl-neighbors-poll<span class="w"> </span>timer<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:33-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1047ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>ubios-udapi-server<span class="w"> </span><span class="o">(</span>single_filter_observer&lt;wan_failover_interfaces_iface_observer&gt;<span class="w"> </span>action<span class="w"> </span>tunovpnc1<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:34-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1034ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>ubios-udapi-server<span class="w"> </span><span class="o">(</span>single_filter_observer&lt;wan_failover_interfaces_iface_observer&gt;<span class="w"> </span>action<span class="w"> </span>tunovpnc1<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:35-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1075ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>process-manager-child-exit<span class="w"> </span>post<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:45-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1029ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>nl-neighbors-poll<span class="w"> </span>timer<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:58-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>910ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>ubios-udapi-server<span class="w"> </span><span class="o">(</span>single_filter_observer&lt;wan_failover_interfaces_iface_observer&gt;<span class="w"> </span>action<span class="w"> </span>tunovpnc1<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:50:59-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>931ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>ubios-udapi-server<span class="w"> </span><span class="o">(</span>single_filter_observer&lt;wan_failover_interfaces_iface_observer&gt;<span class="w"> </span>action<span class="w"> </span>tunovpnc1<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:51:00-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1001ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>process-manager-child-exit<span class="w"> </span>post<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:51:01-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>634ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>nl-neighbors-poll<span class="w"> </span>timer<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:51:17-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>752ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>io_context_ext<span class="w"> </span><span class="o">(</span>nl-neighbors-poll<span class="w"> </span>timer<span class="w"> </span>event<span class="o">)</span>
+<span class="m">2024</span>-07-10T19:51:23-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>utils-daemon:<span class="w"> </span>Routine<span class="w"> </span>execution<span class="w"> </span><span class="nb">time</span><span class="w"> </span>of<span class="w"> </span>1094ms<span class="w"> </span>exceeds<span class="w"> </span>expectations<span class="w"> </span><span class="k">in</span><span class="w"> </span>ubios-udapi-server<span class="w"> </span><span class="o">(</span>single_filter_observer&lt;wan_
+</code></pre></div>
+<p>More importantly, I noticed one of my OpenVPN clients was busy connecting over and over.</p>
+<div class="highlight"><pre><span></span><code><span class="m">2024</span>-07-10T19:51:50-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>process:<span class="w"> </span>Got<span class="w"> </span>process<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>event<span class="w"> </span><span class="k">for</span><span class="w"> </span>process<span class="w"> </span>openvpn-raw-1
+<span class="m">2024</span>-07-10T19:51:50-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>openvpn:<span class="w"> </span>tunnel<span class="w"> </span>tunovpnc1<span class="w"> </span>wasn<span class="s1">&#39;t being tracked</span>
+<span class="s1">2024-07-10T19:51:50-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: signal-out-notifier: Sending to mcad: EVT_VPN_ClientDisconnected server on /vpn/openvpn/raws/1</span>
+<span class="s1">2024-07-10T19:51:51-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: signal-out-notifier: Sending to mcad: EVT_VPN_ClientConnecting server on /vpn/openvpn/raws/1</span>
+<span class="s1">2024-07-10T19:51:51-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: process: Watchdog will restart process openvpn-raw-1 in 20s</span>
+<span class="s1">2024-07-10T19:52:11-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: process: Watchdog is restarting throttled process openvpn-raw-1</span>
+<span class="s1">2024-07-10T19:52:15-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: process: Got process exit event for process openvpn-raw-1</span>
+<span class="s1">2024-07-10T19:52:15-05:00 UniFiNext-GenGatewayLite ubios-udapi-server[2165]: openvpn: tunnel tunovpnc1 wasn&#39;</span>t<span class="w"> </span>being<span class="w"> </span>tracked
+<span class="m">2024</span>-07-10T19:52:15-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>signal-out-notifier:<span class="w"> </span>Sending<span class="w"> </span>to<span class="w"> </span>mcad:<span class="w"> </span>EVT_VPN_ClientDisconnected<span class="w"> </span>server<span class="w"> </span>on<span class="w"> </span>/vpn/openvpn/raws/1
+<span class="m">2024</span>-07-10T19:52:16-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>signal-out-notifier:<span class="w"> </span>Sending<span class="w"> </span>to<span class="w"> </span>mcad:<span class="w"> </span>EVT_VPN_ClientConnecting<span class="w"> </span>server<span class="w"> </span>on<span class="w"> </span>/vpn/openvpn/raws/1
+<span class="m">2024</span>-07-10T19:52:16-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>process:<span class="w"> </span>Watchdog<span class="w"> </span>will<span class="w"> </span>restart<span class="w"> </span>process<span class="w"> </span>openvpn-raw-1<span class="w"> </span><span class="k">in</span><span class="w"> </span>20s
+<span class="m">2024</span>-07-10T19:52:37-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>process:<span class="w"> </span>Watchdog<span class="w"> </span>is<span class="w"> </span>restarting<span class="w"> </span>throttled<span class="w"> </span>process<span class="w"> </span>openvpn-raw-1
+<span class="m">2024</span>-07-10T19:52:41-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>process:<span class="w"> </span>Got<span class="w"> </span>process<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>event<span class="w"> </span><span class="k">for</span><span class="w"> </span>process<span class="w"> </span>openvpn-raw-1
+<span class="m">2024</span>-07-10T19:52:41-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>openvpn:<span class="w"> </span>tunnel<span class="w"> </span>tunovpnc1<span class="w"> </span>wasn<span class="err">&#39;</span>t<span class="w"> </span>being<span class="w"> </span>tracked
+<span class="m">2024</span>-07-10T19:52:41-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>signal-out-notifier:<span class="w"> </span>Sending<span class="w"> </span>to<span class="w"> </span>mcad:<span class="w"> </span>EVT_VPN_ClientDisconnected<span class="w"> </span>server<span class="w"> </span>on<span class="w"> </span>/vpn/openvpn/raws/1
+<span class="m">2024</span>-07-10T19:52:42-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>signal-out-notifier:<span class="w"> </span>Sending<span class="w"> </span>to<span class="w"> </span>mcad:<span class="w"> </span>EVT_VPN_ClientConnecting<span class="w"> </span>server<span class="w"> </span>on<span class="w"> </span>/vpn/openvpn/raws/1
+<span class="m">2024</span>-07-10T19:52:42-05:00<span class="w"> </span>UniFiNext-GenGatewayLite<span class="w"> </span>ubios-udapi-server<span class="o">[</span><span class="m">2165</span><span class="o">]</span>:<span class="w"> </span>process:<span class="w"> </span>Watchdog<span class="w"> </span>will<span class="w"> </span>restart<span class="w"> </span>process<span class="w"> </span>openvpn-raw-1<span class="w"> </span><span class="k">in</span><span class="w"> </span>20s
+</code></pre></div>
+<h3 id="the-root-cause">The root cause<a class="headerlink" href="#the-root-cause" title="Permanent link">&para;</a></h3>
+<p>I decided to pause the failing connection, and to troubleshoot it later.</p>
+<p>Interesting enough- as soon as I paused it, I noticed a bunch of interesting.... updates.</p>
+<p>Also- while  digging around, I noticed one of my DDNS clients was failing. I went ahead and fix it.</p>
+<p>Afterwards, load dropped down to 1.5... and all noticeable packet loss stopped.</p>
+<div class="highlight"><pre><span></span><code>top<span class="w"> </span>-<span class="w"> </span><span class="m">20</span>:35:47<span class="w"> </span>up<span class="w"> </span><span class="m">1</span><span class="w"> </span>day,<span class="w">  </span><span class="m">2</span>:44,<span class="w">  </span><span class="m">1</span><span class="w"> </span>user,<span class="w">  </span>load<span class="w"> </span>average:<span class="w"> </span><span class="m">1</span>.52,<span class="w"> </span><span class="m">1</span>.56,<span class="w"> </span><span class="m">1</span>.65
+Tasks:<span class="w"> </span><span class="m">143</span><span class="w"> </span>total,<span class="w">   </span><span class="m">1</span><span class="w"> </span>running,<span class="w"> </span><span class="m">142</span><span class="w"> </span>sleeping,<span class="w">   </span><span class="m">0</span><span class="w"> </span>stopped,<span class="w">   </span><span class="m">0</span><span class="w"> </span>zombie
+%Cpu<span class="o">(</span>s<span class="o">)</span>:<span class="w">  </span><span class="m">9</span>.7<span class="w"> </span>us,<span class="w">  </span><span class="m">7</span>.2<span class="w"> </span>sy,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>ni,<span class="w"> </span><span class="m">76</span>.8<span class="w"> </span>id,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>wa,<span class="w">  </span><span class="m">2</span>.0<span class="w"> </span>hi,<span class="w">  </span><span class="m">4</span>.3<span class="w"> </span>si,<span class="w">  </span><span class="m">0</span>.0<span class="w"> </span>st
+MiB<span class="w"> </span>Mem<span class="w"> </span>:<span class="w">    </span><span class="m">974</span>.1<span class="w"> </span>total,<span class="w">    </span><span class="m">144</span>.0<span class="w"> </span>free,<span class="w">    </span><span class="m">264</span>.9<span class="w"> </span>used,<span class="w">    </span><span class="m">565</span>.2<span class="w"> </span>buff/cache
+MiB<span class="w"> </span>Swap:<span class="w">    </span><span class="m">768</span>.0<span class="w"> </span>total,<span class="w">    </span><span class="m">761</span>.4<span class="w"> </span>free,<span class="w">      </span><span class="m">6</span>.6<span class="w"> </span>used.<span class="w">    </span><span class="m">525</span>.7<span class="w"> </span>avail<span class="w"> </span>Mem
+
+<span class="w">    </span>PID<span class="w"> </span>USER<span class="w">      </span>PR<span class="w">  </span>NI<span class="w">    </span>VIRT<span class="w">    </span>RES<span class="w">    </span>SHR<span class="w"> </span>S<span class="w">  </span>%CPU<span class="w">  </span>%MEM<span class="w">     </span>TIME+<span class="w"> </span>COMMAND
+<span class="w">   </span><span class="m">3284</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">101796</span><span class="w">  </span><span class="m">16896</span><span class="w">   </span><span class="m">9444</span><span class="w"> </span>S<span class="w">   </span><span class="m">6</span>.8<span class="w">   </span><span class="m">1</span>.7<span class="w">  </span><span class="m">33</span>:06.78<span class="w"> </span>mcad
+<span class="w">   </span><span class="m">2165</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">117296</span><span class="w">  </span><span class="m">26396</span><span class="w">  </span><span class="m">16836</span><span class="w"> </span>S<span class="w">   </span><span class="m">6</span>.2<span class="w">   </span><span class="m">2</span>.6<span class="w"> </span><span class="m">132</span>:09.44<span class="w"> </span>ubios-udapi-ser
+<span class="w">   </span><span class="m">3380</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">169904</span><span class="w">  </span><span class="m">12240</span><span class="w">   </span><span class="m">8784</span><span class="w"> </span>S<span class="w">   </span><span class="m">3</span>.6<span class="w">   </span><span class="m">1</span>.2<span class="w">  </span><span class="m">31</span>:04.44<span class="w"> </span>exe
+<span class="w">   </span><span class="m">2729</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">671156</span><span class="w">   </span><span class="m">7360</span><span class="w">   </span><span class="m">2232</span><span class="w"> </span>S<span class="w">   </span><span class="m">2</span>.9<span class="w">   </span><span class="m">0</span>.7<span class="w">  </span><span class="m">48</span>:56.65<span class="w"> </span>utmdaemon
+<span class="m">2122585</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">    </span><span class="m">8908</span><span class="w">   </span><span class="m">3420</span><span class="w">   </span><span class="m">2660</span><span class="w"> </span>R<span class="w">   </span><span class="m">1</span>.0<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>:00.14<span class="w"> </span>top
+<span class="w">      </span><span class="m">3</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.6<span class="w">   </span><span class="m">0</span>.0<span class="w">  </span><span class="m">65</span>:22.61<span class="w"> </span>ksoftirqd/0
+<span class="w">     </span><span class="m">13</span><span class="w"> </span>root<span class="w">      </span>rt<span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:18.67<span class="w"> </span>migration/1
+<span class="w">   </span><span class="m">1085</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:08.40<span class="w"> </span>jbd2/mmcblk0p4-
+<span class="w">   </span><span class="m">1836</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">   </span><span class="m">25060</span><span class="w">   </span><span class="m">9744</span><span class="w">   </span><span class="m">8272</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">1</span>.0<span class="w">   </span><span class="m">5</span>:19.49<span class="w"> </span>utermd
+<span class="w">  </span><span class="m">50759</span><span class="w"> </span>root<span class="w">       </span><span class="m">5</span><span class="w"> </span>-15<span class="w">  </span><span class="m">380824</span><span class="w">  </span><span class="m">35984</span><span class="w">  </span><span class="m">22152</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">3</span>.6<span class="w">  </span><span class="m">11</span>:59.51<span class="w"> </span>dpi-flow-stats
+<span class="m">2062438</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">   </span><span class="m">14928</span><span class="w">   </span><span class="m">7312</span><span class="w">   </span><span class="m">6160</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.7<span class="w">   </span><span class="m">0</span>:01.27<span class="w"> </span>sshd
+<span class="m">2063867</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>D<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:04.59<span class="w"> </span>kworker/u4:0
+<span class="m">2079918</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">260128</span><span class="w">  </span><span class="m">16256</span><span class="w">  </span><span class="m">13864</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">1</span>.6<span class="w">   </span><span class="m">0</span>:05.55<span class="w"> </span>syslog-ng
+<span class="m">2090876</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.3<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:02.57<span class="w"> </span>kworker/u4:4
+<span class="w">      </span><span class="m">1</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">  </span><span class="m">100268</span><span class="w">  </span><span class="m">10128</span><span class="w">   </span><span class="m">7364</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">1</span>.0<span class="w">   </span><span class="m">1</span>:12.42<span class="w"> </span>systemd
+<span class="w">      </span><span class="m">2</span><span class="w"> </span>root<span class="w">      </span><span class="m">20</span><span class="w">   </span><span class="m">0</span><span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:00.11<span class="w"> </span>kthreadd
+<span class="w">      </span><span class="m">5</span><span class="w"> </span>root<span class="w">       </span><span class="m">0</span><span class="w"> </span>-20<span class="w">       </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w">      </span><span class="m">0</span><span class="w"> </span>S<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>.0<span class="w">   </span><span class="m">0</span>:00.00<span class="w"> </span>kworker/0:0H
+</code></pre></div>
+<p>So- the root cause, was due to a single OpenVPN client spamming reconnect attempts, and a DDNS client which was spamming retries.</p>
+<h2 id="next-steps-enable-snmp-on-the-uxg-lite-unsupported">Next steps? Enable SNMP on the UXG-Lite (Unsupported)<a class="headerlink" href="#next-steps-enable-snmp-on-the-uxg-lite-unsupported" title="Permanent link">&para;</a></h2>
+<div class="admonition warn">
+<p class="admonition-title">Warn</p>
+<p>Note- installing software on the UXG-lite is unsupported.
+Firmware updates will likely remove any customizations you perform.</p>
+</div>
+<p>I have <a href="https://www.librenms.org/" target="_blank">libreNMS</a> already running for every OTHER network device... EXCEPT the uxg-lite.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-packet-loss/snmp-not-supported.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing SNMP not supported" src="../../Technology/2024/assets-packet-loss/snmp-not-supported.webP" /></a></p>
+<p>But- you know what? There is nothing special about the UXG-Lite. Its just an embedded system running a customized verison of debian.</p>
+<p>Don't believe me? Look for yourself.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~
+root@UniFiNext-GenGatewayLite:~#<span class="w"> </span>cat<span class="w"> </span>/etc/os-release
+<span class="nv">PRETTY_NAME</span><span class="o">=</span><span class="s2">&quot;Debian GNU/Linux 11 (bullseye)&quot;</span>
+<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;Debian GNU/Linux&quot;</span>
+<span class="nv">VERSION_ID</span><span class="o">=</span><span class="s2">&quot;11&quot;</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="s2">&quot;11 (bullseye)&quot;</span>
+<span class="nv">VERSION_CODENAME</span><span class="o">=</span>bullseye
+<span class="nv">ID</span><span class="o">=</span>debian
+<span class="nv">HOME_URL</span><span class="o">=</span><span class="s2">&quot;https://www.debian.org/&quot;</span>
+<span class="nv">SUPPORT_URL</span><span class="o">=</span><span class="s2">&quot;https://www.debian.org/support&quot;</span>
+<span class="nv">BUG_REPORT_URL</span><span class="o">=</span><span class="s2">&quot;https://bugs.debian.org/&quot;</span>
+</code></pre></div>
+<p>So- I'm going to enable SNMP on this thing. </p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Yes- I realize SNMP is available for UDM models, and *PRO models.</p>
+<p>I'm not paying 400$ for the privilege to "enable SNMP", or to handle 10G routing, when I have a perfectly serviceable 10G Layer 3 switch already.</p>
+</div>
+<p>What is interesting- there is a snmp.conf on the base image.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span>ls<span class="w"> </span>-al
+total<span class="w"> </span><span class="m">5</span>
+drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">32</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2022</span><span class="w"> </span>./
+drwxrwxr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4096</span><span class="w"> </span>Jul<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">20</span>:31<span class="w"> </span>../
+-rw-r--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">510</span><span class="w"> </span>Aug<span class="w"> </span><span class="m">15</span><span class="w">  </span><span class="m">2022</span><span class="w"> </span>snmp.conf
+root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span>cat<span class="w"> </span>/etc/snmp/snmp.conf
+<span class="c1"># As the snmp packages come without MIB files due to license reasons, loading</span>
+<span class="c1"># of MIBs is disabled by default. If you added the MIBs you can reenable</span>
+<span class="c1"># loading them by commenting out the following line.</span>
+mibs<span class="w"> </span>:
+
+<span class="c1"># If you want to globally change where snmp libraries, commands and daemons</span>
+<span class="c1"># look for MIBS, change the line below. Note you can set this for individual</span>
+<span class="c1"># tools with the -M option or MIBDIRS environment variable.</span>
+<span class="c1">#</span>
+<span class="c1"># mibdirs /usr/share/snmp/mibs:/usr/share/snmp/mibs/iana:/usr/share/snmp/mibs/ietf</span>
+</code></pre></div>
+<p>Although, there are no snmp services, or daemons. I was unable to locate snmpd binaries either. So, I installed it.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>snmpd
+Reading<span class="w"> </span>package<span class="w"> </span>lists...<span class="w"> </span>Done
+Building<span class="w"> </span>dependency<span class="w"> </span>tree...<span class="w"> </span>Done
+Reading<span class="w"> </span>state<span class="w"> </span>information...<span class="w"> </span>Done
+Suggested<span class="w"> </span>packages:
+<span class="w">  </span>snmptrapd
+The<span class="w"> </span>following<span class="w"> </span>NEW<span class="w"> </span>packages<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>installed:
+<span class="w">  </span>snmpd
+<span class="m">0</span><span class="w"> </span>upgraded,<span class="w"> </span><span class="m">1</span><span class="w"> </span>newly<span class="w"> </span>installed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>and<span class="w"> </span><span class="m">36</span><span class="w"> </span>not<span class="w"> </span>upgraded.
+Need<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span><span class="m">56</span>.7<span class="w"> </span>kB<span class="w"> </span>of<span class="w"> </span>archives.
+After<span class="w"> </span>this<span class="w"> </span>operation,<span class="w"> </span><span class="m">142</span><span class="w"> </span>kB<span class="w"> </span>of<span class="w"> </span>additional<span class="w"> </span>disk<span class="w"> </span>space<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>used.
+Get:1<span class="w"> </span>https://deb.debian.org/debian<span class="w"> </span>bullseye/main<span class="w"> </span>arm64<span class="w"> </span>snmpd<span class="w"> </span>arm64<span class="w"> </span><span class="m">5</span>.9+dfsg-4+deb11u1<span class="w"> </span><span class="o">[</span><span class="m">56</span>.7<span class="w"> </span>kB<span class="o">]</span>
+Fetched<span class="w"> </span><span class="m">56</span>.7<span class="w"> </span>kB<span class="w"> </span><span class="k">in</span><span class="w"> </span>0s<span class="w"> </span><span class="o">(</span><span class="m">165</span><span class="w"> </span>kB/s<span class="o">)</span>
+Preconfiguring<span class="w"> </span>packages<span class="w"> </span>...
+Selecting<span class="w"> </span>previously<span class="w"> </span>unselected<span class="w"> </span>package<span class="w"> </span>snmpd.
+<span class="o">(</span>Reading<span class="w"> </span>database<span class="w"> </span>...<span class="w"> </span><span class="m">24527</span><span class="w"> </span>files<span class="w"> </span>and<span class="w"> </span>directories<span class="w"> </span>currently<span class="w"> </span>installed.<span class="o">)</span>
+Preparing<span class="w"> </span>to<span class="w"> </span>unpack<span class="w"> </span>.../snmpd_5.9+dfsg-4+deb11u1_arm64.deb<span class="w"> </span>...
+Unpacking<span class="w"> </span>snmpd<span class="w"> </span><span class="o">(</span><span class="m">5</span>.9+dfsg-4+deb11u1<span class="o">)</span><span class="w"> </span>...
+Setting<span class="w"> </span>up<span class="w"> </span>snmpd<span class="w"> </span><span class="o">(</span><span class="m">5</span>.9+dfsg-4+deb11u1<span class="o">)</span><span class="w"> </span>...
+adduser:<span class="w"> </span>Warning:<span class="w"> </span>The<span class="w"> </span>home<span class="w"> </span>directory<span class="w"> </span><span class="sb">`</span>/var/lib/snmp<span class="err">&#39;</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>belong<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>you<span class="w"> </span>are<span class="w"> </span>currently<span class="w"> </span>creating.
+Created<span class="w"> </span>symlink<span class="w"> </span>/etc/systemd/system/multi-user.target.wants/snmpd.service<span class="w"> </span>→<span class="w"> </span>/lib/systemd/system/snmpd.service.
+</code></pre></div>
+<p>After installing SNMPD, I modified the config file, and restarted the service.</p>
+<div class="highlight"><pre><span></span><code>root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span>vi<span class="w"> </span>snmpd.conf
+root@UniFiNext-GenGatewayLite:/etc/snmp#<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>snmpd.service
+</code></pre></div>
+<p>And, afterwards, I was able to add it directly into LibreNMS without any issues.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-packet-loss/uxg-lite-librenms.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing UXG lite in LIbreNMS" src="../../Technology/2024/assets-packet-loss/uxg-lite-librenms.webP" /></a></p>
+<p>Now- I can centerally report on its stats, performance, and packet loss.</p>
+<p>Sure- it might get erased during the next firmware update- but, nothing an ansible playbook can't fix automatically.</p>
+<h2 id="why-was-this-issue-so-hard-to-pinpoint">Why was this issue so hard to pinpoint?<a class="headerlink" href="#why-was-this-issue-so-hard-to-pinpoint" title="Permanent link">&para;</a></h2>
+<h3 id="reason-1-my-uxg-lite-does-not-support-snmp-to-export-data-back-to-a-central-location-have-its-data-in-librenms-would-have-made-it-much-easier-to-pinpoint-the-exact-location">Reason #1- My UXG-Lite does not "SUPPORT" snmp to export data back to a central location. Have its data, in LibreNMS, would have made it much easier to pinpoint the exact location.<a class="headerlink" href="#reason-1-my-uxg-lite-does-not-support-snmp-to-export-data-back-to-a-central-location-have-its-data-in-librenms-would-have-made-it-much-easier-to-pinpoint-the-exact-location" title="Permanent link">&para;</a></h3>
+<ul>
+<li>This- was corrected by manually installing SNMP, and configuring it.</li>
+<li>As well- I created an ansible playbook to handle automatically reinstalling, and reconfiguring it when I do firmware updates.</li>
+</ul>
+<h3 id="reason-2-i-have-a-overly-complex-network-with-7-switches-and-4-routers">Reason #2- I have a overly complex network, with 7 switches, and 4 routers.<a class="headerlink" href="#reason-2-i-have-a-overly-complex-network-with-7-switches-and-4-routers" title="Permanent link">&para;</a></h3>
+<h4 id="a-large-reason-for-this-is-performance-based">A large reason for this- is performance-based.<a class="headerlink" href="#a-large-reason-for-this-is-performance-based" title="Permanent link">&para;</a></h4>
+<ul>
+<li>1G clients can easily use the UXG as a gateway.</li>
+<li>10G clients, would limited to 1G MAX throughput by the UXG- so, their gateway is the 10G Layer 3 USW-Pro-24<ul>
+<li>Unifi's layer-3 support on switches is still, a laughable joke. Still, no IPv6 support. Can only add TWO static routes on a USW "PRO" switch. (Enterprise doesn't have this weird limitation)</li>
+</ul>
+</li>
+<li>100G clients, would also be bottlenecked when routing across the 10G. These client's use the Mikrotik for routing. It can do hardware asic routing, and can handle line-speed 100G with hardware offload.</li>
+</ul>
+<h4 id="another-reason-is-reliability-oriented">Another reason- is reliability-oriented.<a class="headerlink" href="#another-reason-is-reliability-oriented" title="Permanent link">&para;</a></h4>
+<p>One goal of mine- is even when the internet is completely out, and backup circuits are unavailable- my entire network should continue to function normally.</p>
+<p>Rather then making the internet-facing UXG-Lite router the "Center" of my network, I prefer to think of it as being just another component on the edge, and not at the core.</p>
+<h4 id="security-concerns">Security Concerns.<a class="headerlink" href="#security-concerns" title="Permanent link">&para;</a></h4>
+<p>While- the Unifi interface is nice, easy and simple. It does not have supported for getting intricuite with firewall rules.</p>
+<p>For my Security, Management, and IOT vlans, I needed a robust solution which was powerful, easy to configure and monitor, and extremely reliable. So- I decided to use my 10 year old EdgeMAX.</p>
+<p>This device- has never once failed me. Its CLI is basted on Vyatta (VyOS now), which is extremely powerful, flexible, and performs well.</p>
+<p>So- it was chosen to host the sensitive items.</p>
+<p>This- was also done- to assist in the event someone gains access into my network. By having all of the management interfaces, physical security, IOT, etc behind a seperate firewaell- it allows me to seperate those devices from the rest of my network, physically. (If- you pretend vlans on the core switch is enough seperation).</p>
+<h2 id="farewall">Farewall<a class="headerlink" href="#farewall" title="Permanent link">&para;</a></h2>
+<p>Thats it. Just sharing a brief capture of the issue that I have been trying to track down for weeks. Hopefully- you find something handy in here.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 XtremeOwnage.com
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="www.reddit.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="static.xtremeownage.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.footnote.tooltips", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.ad38c271.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.eb438620.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

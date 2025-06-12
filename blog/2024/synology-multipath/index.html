@@ -1,0 +1,2071 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Cars, Computer, and Code.">
+      
+      
+        <meta name="author" content="XtremeOwnage">
+      
+      
+        <link rel="canonical" href="https://Static.XtremeOwnage.com/blog/2024/synology-multipath/">
+      
+      
+        <link rel="prev" href="../unifi---debugging-ddns/">
+      
+      
+        <link rel="next" href="../metered-switch-pdu/">
+      
+      
+        
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14+insiders-4.53.16">
+    
+    
+      
+        <title>Synology Multipath - XtremeOwnage.com</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8cce3a28.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+   <link href="../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="grey" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#synology-multipath-smb-and-iscsi" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+  Copyright (c) 2016-2022 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Determine base classes -->
+
+
+
+
+
+<!-- Header -->
+<header class="md-header md-header--lifted" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="header.title">
+
+        <!-- Link to home -->
+        <a href="../../.." title="XtremeOwnage.com"
+            class="md-header__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+            
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+        </a>
+
+        <!-- Button to open drawer -->
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+
+        <!-- Header title -->
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">
+                        XtremeOwnage.com
+                    </span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">
+                        
+                        Synology Multipath
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color palette -->
+        
+        <form class="md-header__option" data-md-component="palette">
+            
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+                data-md-color-scheme="default"
+                data-md-color-primary="grey"
+                data-md-color-accent="orange"  aria-hidden="true"  type="radio"
+                name="__palette" id="__palette_0" />
+            
+            
+        </form>
+        
+
+
+
+        <!-- Navigation tabs (sticky) -->
+        
+        
+        
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/Projects/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Projects
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../pages/tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+        
+
+        <!-- User preference: color palette -->
+        
+        <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+        
+
+        <div class="header-social">
+            
+            <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+            </a>
+            
+            <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+            </a>
+            
+            <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+            </a>
+            
+            <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+            </a>
+            
+            <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+            </a>
+            
+        </div>
+
+        <!-- Button to open search modal -->
+        
+        <label class="md-header__button md-icon" for="__search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+
+        <!-- Search interface -->
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        <!-- Repository information -->
+        
+    </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="XtremeOwnage.com" class="md-nav__button md-logo" aria-label="XtremeOwnage.com" data-md-component="logo">
+      
+  <img src="/assets/avatar/XO.png" alt="logo">
+
+    </a>
+    XtremeOwnage.com
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/Projects/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pages/tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Archive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Archive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2025/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2024/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2024
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2023/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2023
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2022/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2022
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2021/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2021
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2020/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2020
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../archive/2019/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2019
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Categories
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Categories
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/home-improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home-Improvement
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/kubernetes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kubernetes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/misc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Misc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/shop-talk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop-Talk
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/solar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../category/technology/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technology
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WHY?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synology-network-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synology Network Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#smb-cifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMB / CIFS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SMB / CIFS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synology-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synology Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-from-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing from Windows
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Results? Success
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iscsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        iSCSI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="iSCSI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synology-configuration_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Synology Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linux Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installing packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-iscsid-to-start-at-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure iSCSId to start at boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connecting-to-iscsi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connecting to iSCSI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-multipath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring Multipath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formatting-new-mount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formatting new mount.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mount-at-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mount at boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="/assets/avatar/XO.png" alt="XtremeOwnage">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          XtremeOwnage
+                        
+                      </strong>
+                      <br>
+                      Creator
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-07-22 00:00:00+00:00" class="md-ellipsis">Jul 22, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../category/technology/">Technology</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              15 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:homelab" class="md-tag">Homelab</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../pages/tags/#tag:storage/synology" class="md-tag">Storage/Synology</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="synology-multipath-smb-and-iscsi">Synology Multipath SMB, and iSCSI<a class="headerlink" href="#synology-multipath-smb-and-iscsi" title="Permanent link">&para;</a></h1>
+<p>So... normally when you want faster networking, you can just upgrade to faster NICs (10g, 25, 40, 50, 100g.. etc...).</p>
+<p>However, in the case of my Synology DS423+, you get, two 1G ethernet ports with no expansion.</p>
+<p>You would think the best course of action, would be to leverage LACP- however that is <strong>NOT</strong> the case.</p>
+<p>Enabling Multichannel can double the amount of bandwidth per client, where as LACP, depending on hashing, only gives benefit up to the performance of one port.</p>
+<p>This post details how to enable multipath for SMB, and how to configure iSCSI on linux with multiple paths.</p>
+<!-- more -->
+
+<h2 id="why">WHY?<a class="headerlink" href="#why" title="Permanent link">&para;</a></h2>
+<p>LACP isn't perfect. With LACP, a single client's connection is typically limited to the maximum throughput of a single NIC, regardless of how many NICs you have.</p>
+<p>There are settings you can change and tweak with LACP to help mitigate this problem, HOWEVER, enable multipathing is far easier, and from my testing, is EXTREMELY effective at maximizing the amount of throughput.</p>
+<h2 id="synology-network-configuration">Synology Network Configuration<a class="headerlink" href="#synology-network-configuration" title="Permanent link">&para;</a></h2>
+<p>If, you previously had a LACP/LAGG group configured, delete it. </p>
+<p>Give each interface its own IP address.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-network-config.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing both network ports on the synology with different IP addresses" src="../../Technology/2024/assets-synology/synology-network-config.webP" /></a></p>
+<p>Once you have done this, the steps are down below for individual protocols.</p>
+<h2 id="smb-cifs">SMB / CIFS<a class="headerlink" href="#smb-cifs" title="Permanent link">&para;</a></h2>
+<h3 id="synology-configuration">Synology Configuration<a class="headerlink" href="#synology-configuration" title="Permanent link">&para;</a></h3>
+<p>Enabling SMB multi-channel on the Synology, is... pretty effortless.</p>
+<p>Navigate to <code>Control Panel -&gt; File Sharing -&gt; File Services -&gt; SMB</code></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-smb-settings.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing SMB settings" src="../../Technology/2024/assets-synology/synology-smb-settings.webP" /></a></p>
+<p>Click on "Advanced Settings"</p>
+<p>Goto the "Others" tab.</p>
+<p>Enable <code>SMB3 Multichannel</code></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-smb-multichannel-enabled.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing advanced settings, with multichannel checked." src="../../Technology/2024/assets-synology/synology-smb-multichannel-enabled.webP" /></a></p>
+<p>Thats it. Your done.</p>
+<h3 id="testing-from-windows">Testing from Windows<a class="headerlink" href="#testing-from-windows" title="Permanent link">&para;</a></h3>
+<p>From my windows test-PC, ZERO configuration was needed to take advantage.</p>
+<p>Without changing anything- just copying a file was now running close to 200MB/s</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-performance-graph.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing synology performance graph hitting 200MB/s" src="../../Technology/2024/assets-synology/synology-performance-graph.webP" /></a></p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/windows-performance-graph.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing windows performance graph averaging around 170MB/s" src="../../Technology/2024/assets-synology/windows-performance-graph.webP" /></a></p>
+<p>The MAXIMUM transfer speed for a single 1G NIC, is around 120MB/s, and realistically, you will hit 110MB/s if everything is perfect.</p>
+<p>For this test, I didn't tune anything. I enabled multichannel, and ran benchmarks. There is no jumbo frames, no tuning, etc... as well, my 4-disk array has encryption enabled... which takes a pretty heavy toll on its tiny processor.</p>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-cpu-spikes-smb.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing CPU spikes during testing " src="../../Technology/2024/assets-synology/synology-cpu-spikes-smb.webP" /></a></p>
+<h3 id="results-success">Results? Success<a class="headerlink" href="#results-success" title="Permanent link">&para;</a></h3>
+<p>With only selecting a single checkbox, I was able to basically double the performance of SMB shares. </p>
+<h2 id="iscsi">iSCSI<a class="headerlink" href="#iscsi" title="Permanent link">&para;</a></h2>
+<h3 id="synology-configuration_1">Synology Configuration<a class="headerlink" href="#synology-configuration_1" title="Permanent link">&para;</a></h3>
+<p>iSCSI, is a bit more involved then a single checkbox.</p>
+<ol>
+<li>Goto the "SAN Manager" application</li>
+<li>Goto the "iSCSI" tab. </li>
+<li>Edit your portal, and ensure both network interfaces are selected.</li>
+</ol>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-iscsi-both-nics-checked.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image showing the iscsi portal settings, with both NICs binded" src="../../Technology/2024/assets-synology/synology-iscsi-both-nics-checked.webP" /></a></p>
+<ol>
+<li>Under advanced tab, you need to Allow Multiple Sessions.</li>
+</ol>
+<p><a class="glightbox" href="../../Technology/2024/assets-synology/synology-iscsi-allow-multiple-sessions.webP" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="iSCSI -&gt; Advanced Menu, with Allow multiple sessions checked" src="../../Technology/2024/assets-synology/synology-iscsi-allow-multiple-sessions.webP" /></a></p>
+<h3 id="linux-configuration">Linux Configuration<a class="headerlink" href="#linux-configuration" title="Permanent link">&para;</a></h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you already had iSCSI running, you will need to remove the lines from <code>/etc/fstab</code>, unmount it, and log out of the portal before following these steps.</p>
+</div>
+<h4 id="installing-packages">Installing packages<a class="headerlink" href="#installing-packages" title="Permanent link">&para;</a></h4>
+<p>First- we need to install a few things.</p>
+<p><code>apt-get install multipath-tools open-iscsi</code></p>
+<ol>
+<li>open-iscsi - This allows us to connect to an iscsi target.</li>
+<li>multipath-tools - This manages the multipathing.</li>
+</ol>
+<p>After these packages are install, lets enable the units.</p>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>iscsid
+</code></pre></div>
+<p>This, will allow them to start at boot.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>iscsid
+Synchronizing<span class="w"> </span>state<span class="w"> </span>of<span class="w"> </span>iscsid.service<span class="w"> </span>with<span class="w"> </span>SysV<span class="w"> </span>service<span class="w"> </span>script<span class="w"> </span>with<span class="w"> </span>/lib/systemd/systemd-sysv-install.
+Executing:<span class="w"> </span>/lib/systemd/systemd-sysv-install<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>iscsid
+Created<span class="w"> </span>symlink<span class="w"> </span>/etc/systemd/system/sysinit.target.wants/iscsid.service<span class="w"> </span>→<span class="w"> </span>/lib/systemd/system/iscsid.service.
+root@network-test:~#<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>multipath-tools
+Synchronizing<span class="w"> </span>state<span class="w"> </span>of<span class="w"> </span>multipath-tools.service<span class="w"> </span>with<span class="w"> </span>SysV<span class="w"> </span>service<span class="w"> </span>script<span class="w"> </span>with<span class="w"> </span>/lib/systemd/systemd-sysv-install.
+Executing:<span class="w"> </span>/lib/systemd/systemd-sysv-install<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>multipath-tools
+Failed<span class="w"> </span>to<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>unit:<span class="w"> </span>Refusing<span class="w"> </span>to<span class="w"> </span>operate<span class="w"> </span>on<span class="w"> </span><span class="nb">alias</span><span class="w"> </span>name<span class="w"> </span>or<span class="w"> </span>linked<span class="w"> </span>unit<span class="w"> </span>file:<span class="w"> </span>multipath-tools.service
+</code></pre></div>
+<p>Make sure both are running.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>multipath-tools
+●<span class="w"> </span>multipathd.service<span class="w"> </span>-<span class="w"> </span>Device-Mapper<span class="w"> </span>Multipath<span class="w"> </span>Device<span class="w"> </span>Controller
+<span class="w">     </span>Loaded:<span class="w"> </span>loaded<span class="w"> </span><span class="o">(</span>/lib/systemd/system/multipathd.service<span class="p">;</span><span class="w"> </span>enabled<span class="p">;</span><span class="w"> </span>preset:<span class="w"> </span>enabled<span class="o">)</span>
+<span class="w">     </span>Active:<span class="w"> </span>active<span class="w"> </span><span class="o">(</span>running<span class="o">)</span><span class="w"> </span>since<span class="w"> </span>Tue<span class="w"> </span><span class="m">2024</span>-07-23<span class="w"> </span><span class="m">01</span>:54:37<span class="w"> </span>UTC<span class="p">;</span><span class="w"> </span>2min<span class="w"> </span>3s<span class="w"> </span>ago
+TriggeredBy:<span class="w"> </span>○<span class="w"> </span>multipathd.socket
+<span class="w">   </span>Main<span class="w"> </span>PID:<span class="w"> </span><span class="m">2048</span><span class="w"> </span><span class="o">(</span>multipathd<span class="o">)</span>
+<span class="w">     </span>Status:<span class="w"> </span><span class="s2">&quot;up&quot;</span>
+<span class="w">      </span>Tasks:<span class="w"> </span><span class="m">7</span>
+<span class="w">     </span>Memory:<span class="w"> </span><span class="m">19</span>.4M
+<span class="w">        </span>CPU:<span class="w"> </span>89ms
+<span class="w">     </span>CGroup:<span class="w"> </span>/system.slice/multipathd.service
+<span class="w">             </span>└─2048<span class="w"> </span>/sbin/multipathd<span class="w"> </span>-d<span class="w"> </span>-s
+
+Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">01</span>:54:37<span class="w"> </span>network-test<span class="w"> </span>systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span>Starting<span class="w"> </span>multipathd.service<span class="w"> </span>-<span class="w"> </span>Device-Mapper<span class="w"> </span>Multipath<span class="w"> </span>Device<span class="w"> </span>Controller...
+Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">01</span>:54:37<span class="w"> </span>network-test<span class="w"> </span>multipathd<span class="o">[</span><span class="m">2048</span><span class="o">]</span>:<span class="w"> </span>multipathd<span class="w"> </span>v0.9.4:<span class="w"> </span>start<span class="w"> </span>up
+Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">01</span>:54:37<span class="w"> </span>network-test<span class="w"> </span>multipathd<span class="o">[</span><span class="m">2048</span><span class="o">]</span>:<span class="w"> </span>reconfigure:<span class="w"> </span>setting<span class="w"> </span>up<span class="w"> </span>paths<span class="w"> </span>and<span class="w"> </span>maps
+Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">01</span>:54:37<span class="w"> </span>network-test<span class="w"> </span>systemd<span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span>Started<span class="w"> </span>multipathd.service<span class="w"> </span>-<span class="w"> </span>Device-Mapper<span class="w"> </span>Multipath<span class="w"> </span>Device<span class="w"> </span>Controller.
+root@network-test:~#<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>iscsid
+○<span class="w"> </span>iscsid.service<span class="w"> </span>-<span class="w"> </span>iSCSI<span class="w"> </span>initiator<span class="w"> </span>daemon<span class="w"> </span><span class="o">(</span>iscsid<span class="o">)</span>
+<span class="w">     </span>Loaded:<span class="w"> </span>loaded<span class="w"> </span><span class="o">(</span>/lib/systemd/system/iscsid.service<span class="p">;</span><span class="w"> </span>enabled<span class="p">;</span><span class="w"> </span>preset:<span class="w"> </span>enabled<span class="o">)</span>
+<span class="w">     </span>Active:<span class="w"> </span>inactive<span class="w"> </span><span class="o">(</span>dead<span class="o">)</span>
+TriggeredBy:<span class="w"> </span>●<span class="w"> </span>iscsid.socket
+<span class="w">       </span>Docs:<span class="w"> </span>man:iscsid<span class="o">(</span><span class="m">8</span><span class="o">)</span>
+root@network-test:~#
+</code></pre></div>
+<h4 id="configure-iscsid-to-start-at-boot">Configure iSCSId to start at boot<a class="headerlink" href="#configure-iscsid-to-start-at-boot" title="Permanent link">&para;</a></h4>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If- you forget this step, your mounts will not be automatically mounted after a reboot!</p>
+</div>
+<p>To automatically start iSCSI at boot, we need to edit <code>/etc/iscsi/iscsid.conf</code></p>
+<p>and change <code>node.startup = manual</code> to <code>node.startup = automatic</code></p>
+<p>Here- is a single command to update the file for you.</p>
+<p><code>sudo sed -i 's/^#*\s*node.startup\s*=\s*manual/node.startup = automatic/' /etc/iscsi/iscsid.conf</code></p>
+<h4 id="connecting-to-iscsi">Connecting to iSCSI<a class="headerlink" href="#connecting-to-iscsi" title="Permanent link">&para;</a></h4>
+<p>Next- lets discover the LUNs available to us.</p>
+<p>Run <code>iscsiadm -m discovery -t st -p YOUR_IP_HERE</code> against each of the IPs on your Synology.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>discovery<span class="w"> </span>-t<span class="w"> </span>st<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25
+<span class="m">10</span>.100.4.25:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70
+<span class="m">10</span>.100.4.26:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70
+root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>discovery<span class="w"> </span>-t<span class="w"> </span>st<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.26
+<span class="m">10</span>.100.4.25:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70
+<span class="m">10</span>.100.4.26:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70
+</code></pre></div>
+<p>Next, lets log into both targets using <code>iscsiadm -m node -T YOUR WWN HERE -p YOUR_IP_HERE --login</code></p>
+<p>The WWN, is the piece which looks like this: <code>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70</code></p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25<span class="w"> </span>--login
+Logging<span class="w"> </span><span class="k">in</span><span class="w"> </span>to<span class="w"> </span><span class="o">[</span>iface:<span class="w"> </span>default,<span class="w"> </span>target:<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70,<span class="w"> </span>portal:<span class="w"> </span><span class="m">10</span>.100.4.25,3260<span class="o">]</span>
+Login<span class="w"> </span>to<span class="w"> </span><span class="o">[</span>iface:<span class="w"> </span>default,<span class="w"> </span>target:<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70,<span class="w"> </span>portal:<span class="w"> </span><span class="m">10</span>.100.4.25,3260<span class="o">]</span><span class="w"> </span>successful.
+root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.26<span class="w"> </span>--login
+Logging<span class="w"> </span><span class="k">in</span><span class="w"> </span>to<span class="w"> </span><span class="o">[</span>iface:<span class="w"> </span>default,<span class="w"> </span>target:<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70,<span class="w"> </span>portal:<span class="w"> </span><span class="m">10</span>.100.4.26,3260<span class="o">]</span>
+Login<span class="w"> </span>to<span class="w"> </span><span class="o">[</span>iface:<span class="w"> </span>default,<span class="w"> </span>target:<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70,<span class="w"> </span>portal:<span class="w"> </span><span class="m">10</span>.100.4.26,3260<span class="o">]</span><span class="w"> </span>successful.
+</code></pre></div>
+<p>The commands for each of the interface addresses should return successful.</p>
+<p>IF, you run into this error, its because you didn't enable the "Allow multiple sessions" checkbox on your portal. Go back to the synology and check it.</p>
+<div class="highlight"><pre><span></span><code>iscsiadm:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>login<span class="w"> </span>to<span class="w"> </span><span class="o">[</span>iface:<span class="w"> </span>default,<span class="w"> </span>target:<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70,<span class="w"> </span>portal:<span class="w"> </span><span class="m">10</span>.100.4.26,3260<span class="o">]</span>.
+iscsiadm:<span class="w"> </span>initiator<span class="w"> </span>reported<span class="w"> </span>error<span class="w"> </span><span class="o">(</span><span class="m">19</span><span class="w"> </span>-<span class="w"> </span>encountered<span class="w"> </span>non-retryable<span class="w"> </span>iSCSI<span class="w"> </span>login<span class="w"> </span>failure<span class="o">)</span>
+iscsiadm:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>log<span class="w"> </span>into<span class="w"> </span>all<span class="w"> </span>portals
+</code></pre></div>
+<p>Finally, flag the connections to autostart.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25<span class="w"> </span>--op<span class="o">=</span>update<span class="w"> </span>-n<span class="w"> </span>node.startup<span class="w"> </span>-v<span class="w"> </span>automatic
+root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.26<span class="w"> </span>--op<span class="o">=</span>update<span class="w"> </span>-n<span class="w"> </span>node.startup<span class="w"> </span>-v<span class="w"> </span>automatic
+</code></pre></div>
+<p>Here are all of the commands used in this section:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Discover targets.</span>
+iscsiadm<span class="w"> </span>-m<span class="w"> </span>discovery<span class="w"> </span>-t<span class="w"> </span>st<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25
+
+<span class="c1"># Connect to both targets.</span>
+iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25<span class="w"> </span>--login
+iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.26<span class="w"> </span>--login
+
+<span class="c1"># Set targets to automatically start.</span>
+iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.25<span class="w"> </span>--op<span class="o">=</span>update<span class="w"> </span>-n<span class="w"> </span>node.startup<span class="w"> </span>-v<span class="w"> </span>automatic
+iscsiadm<span class="w"> </span>-m<span class="w"> </span>node<span class="w"> </span>-T<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span>-p<span class="w"> </span><span class="m">10</span>.100.4.26<span class="w"> </span>--op<span class="o">=</span>update<span class="w"> </span>-n<span class="w"> </span>node.startup<span class="w"> </span>-v<span class="w"> </span>automatic
+</code></pre></div>
+<h4 id="configuring-multipath">Configuring Multipath<a class="headerlink" href="#configuring-multipath" title="Permanent link">&para;</a></h4>
+<p>At this point, if you run <code>lsblk</code>, you will notice there are TWO devices showing for this LUN.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>lsblk
+NAME<span class="w">    </span>MAJ:MIN<span class="w"> </span>RM<span class="w">  </span>SIZE<span class="w"> </span>RO<span class="w"> </span>TYPE<span class="w"> </span>MOUNTPOINTS
+sda<span class="w">       </span><span class="m">8</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk<span class="w">   </span>&lt;--<span class="w"> </span>One<span class="w"> </span>here
+sdb<span class="w">       </span><span class="m">8</span>:16<span class="w">   </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk<span class="w">   </span>&lt;--<span class="w"> </span>One<span class="w"> </span>here<span class="w"> </span>too!
+sr0<span class="w">      </span><span class="m">11</span>:0<span class="w">    </span><span class="m">1</span><span class="w">    </span>4M<span class="w">  </span><span class="m">0</span><span class="w"> </span>rom
+vda<span class="w">     </span><span class="m">254</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>16G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─vda1<span class="w">  </span><span class="m">254</span>:1<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">15</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w"> </span>/
+├─vda14<span class="w"> </span><span class="m">254</span>:14<span class="w">   </span><span class="m">0</span><span class="w">    </span>3M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─vda15<span class="w"> </span><span class="m">254</span>:15<span class="w">   </span><span class="m">0</span><span class="w">  </span>124M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w"> </span>/boot/efi
+</code></pre></div>
+<p>If, you attempt to use both, there is a good chance you can corrupt the LUN. Instead, we need to configure multipath now.</p>
+<p>Lets go ahead and get the WWNs for our lun with this command: <code>udevadm info --query=all --name=/dev/sda | grep 'ID_WWN'</code></p>
+<p>The WWN SHOULD be the same for both. The <code>ID_WWN</code> is what we are interested in.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>udevadm<span class="w"> </span>info<span class="w"> </span>--query<span class="o">=</span>all<span class="w"> </span>--name<span class="o">=</span>/dev/sda<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;ID_WWN&#39;</span>
+E:<span class="w"> </span><span class="nv">ID_WWN_WITH_EXTENSION</span><span class="o">=</span>0x600140551aa592fd025ed4ef1da523db
+E:<span class="w"> </span><span class="nv">ID_WWN</span><span class="o">=</span>0x600140551aa592fd
+root@network-test:~#<span class="w"> </span>udevadm<span class="w"> </span>info<span class="w"> </span>--query<span class="o">=</span>all<span class="w"> </span>--name<span class="o">=</span>/dev/sdb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;ID_WWN&#39;</span>
+E:<span class="w"> </span><span class="nv">ID_WWN_WITH_EXTENSION</span><span class="o">=</span>0x600140551aa592fd025ed4ef1da523db
+E:<span class="w"> </span><span class="nv">ID_WWN</span><span class="o">=</span>0x600140551aa592fd
+</code></pre></div>
+<p>Lets make a new multipath configuration file. </p>
+<p><code>nano /etc/multpath.conf</code></p>
+<p>Make sure to update the wwid, to YOUR WWN.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you forget, or neglect to correctly set the multipaths, you will be limited to the speed of a single connection.</p>
+</div>
+<div class="highlight"><span class="filename">/etc/multpath.conf</span><pre><span></span><code>defaults {
+    user_friendly_names yes
+    find_multipaths yes
+}
+
+blacklist {
+    devnode &quot;^vda&quot;
+}
+
+multipaths {
+    multipath {
+        wwid &quot;3600140551aa592fd025ed4ef1da523db&quot;
+        alias mpath0
+    }
+}
+</code></pre></div>
+<p>After creating the above file, we need to restart multipath, using <code>systemctl restart multipath-tools</code></p>
+<p>After this is done, you can now see the multiple paths, using <code>multipath -ll</code>, and lsblk will show the new device.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>multipath-tools
+root@network-test:~#<span class="w"> </span>multipath<span class="w"> </span>-ll
+mpatha<span class="w"> </span><span class="o">(</span>3600140551aa592fd025ed4ef1da523db<span class="o">)</span><span class="w"> </span>dm-0<span class="w"> </span>SYNOLOGY,Storage
+<span class="nv">size</span><span class="o">=</span>20G<span class="w"> </span><span class="nv">features</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="nv">hwhandler</span><span class="o">=</span><span class="s1">&#39;1 alua&#39;</span><span class="w"> </span><span class="nv">wp</span><span class="o">=</span>rw
+<span class="p">|</span>-+-<span class="w"> </span><span class="nv">policy</span><span class="o">=</span><span class="s1">&#39;service-time 0&#39;</span><span class="w"> </span><span class="nv">prio</span><span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="nv">status</span><span class="o">=</span>active
+<span class="p">|</span><span class="w"> </span><span class="sb">`</span>-<span class="w"> </span><span class="m">2</span>:0:0:1<span class="w"> </span>sda<span class="w"> </span><span class="m">8</span>:0<span class="w">  </span>active<span class="w"> </span>ready<span class="w"> </span>running
+<span class="sb">`</span>-+-<span class="w"> </span><span class="nv">policy</span><span class="o">=</span><span class="s1">&#39;service-time 0&#39;</span><span class="w"> </span><span class="nv">prio</span><span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="nv">status</span><span class="o">=</span>enabled
+<span class="w">  </span><span class="sb">`</span>-<span class="w"> </span><span class="m">3</span>:0:0:1<span class="w"> </span>sdb<span class="w"> </span><span class="m">8</span>:16<span class="w"> </span>active<span class="w"> </span>ready<span class="w"> </span>running
+root@network-test:~#<span class="w"> </span>lsblk
+NAME<span class="w">     </span>MAJ:MIN<span class="w"> </span>RM<span class="w">  </span>SIZE<span class="w"> </span>RO<span class="w"> </span>TYPE<span class="w">  </span>MOUNTPOINTS
+sda<span class="w">        </span><span class="m">8</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath
+sdb<span class="w">        </span><span class="m">8</span>:16<span class="w">   </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath
+sr0<span class="w">       </span><span class="m">11</span>:0<span class="w">    </span><span class="m">1</span><span class="w">    </span>4M<span class="w">  </span><span class="m">0</span><span class="w"> </span>rom
+vda<span class="w">      </span><span class="m">254</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>16G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─vda1<span class="w">   </span><span class="m">254</span>:1<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">15</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/
+├─vda14<span class="w">  </span><span class="m">254</span>:14<span class="w">   </span><span class="m">0</span><span class="w">    </span>3M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─vda15<span class="w">  </span><span class="m">254</span>:15<span class="w">   </span><span class="m">0</span><span class="w">  </span>124M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/boot/efi
+root@network-test:~#
+</code></pre></div>
+<h4 id="formatting-new-mount">Formatting new mount.<a class="headerlink" href="#formatting-new-mount" title="Permanent link">&para;</a></h4>
+<p>(If- you are trying to enable multipath on an existing LUN, you should prob skip this step....)</p>
+<p>Format the new mount using <code>mkfs.ext4 /dev/mapper/mpatha</code></p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/mapper/mpatha
+mke2fs<span class="w"> </span><span class="m">1</span>.47.0<span class="w"> </span><span class="o">(</span><span class="m">5</span>-Feb-2023<span class="o">)</span>
+Discarding<span class="w"> </span>device<span class="w"> </span>blocks:<span class="w"> </span><span class="k">done</span>
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">5242880</span><span class="w"> </span>4k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">1310720</span><span class="w"> </span>inodes
+Filesystem<span class="w"> </span>UUID:<span class="w"> </span>199858b0-e453-4e00-8905-d9bcbe892da9
+Superblock<span class="w"> </span>backups<span class="w"> </span>stored<span class="w"> </span>on<span class="w"> </span>blocks:
+<span class="w">        </span><span class="m">32768</span>,<span class="w"> </span><span class="m">98304</span>,<span class="w"> </span><span class="m">163840</span>,<span class="w"> </span><span class="m">229376</span>,<span class="w"> </span><span class="m">294912</span>,<span class="w"> </span><span class="m">819200</span>,<span class="w"> </span><span class="m">884736</span>,<span class="w"> </span><span class="m">1605632</span>,<span class="w"> </span><span class="m">2654208</span>,
+<span class="w">        </span><span class="m">4096000</span>
+
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">32768</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
+</code></pre></div>
+<p>For this guide, we will be mounting this drive at <code>/mnt/multipath</code>. Go ahead and create an empty directory there.</p>
+<p><code>mkdir /mnt/multipath</code></p>
+<h4 id="mount-at-boot">Mount at boot<a class="headerlink" href="#mount-at-boot" title="Permanent link">&para;</a></h4>
+<p>To automatically mount this new partition, we will edit <code>/etc/fstab</code>, and add <code>/dev/mapper/mpatha /mnt/multipath ext4 _netdev 0 2</code></p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;/dev/mapper/mpatha /mnt/multipath ext4 _netdev 0 2&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
+/dev/mapper/mpatha<span class="w"> </span>/mnt/multipath<span class="w"> </span>ext4<span class="w"> </span>_netdev<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">2</span>
+
+root@network-test:~#<span class="w"> </span>cat<span class="w"> </span>/etc/fstab
+<span class="nv">PARTUUID</span><span class="o">=</span>83c1818a-868c-4c97-832b-8195e4257804<span class="w"> </span>/<span class="w"> </span>ext4<span class="w"> </span>rw,discard,errors<span class="o">=</span>remount-ro,x-systemd.growfs<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">PARTUUID</span><span class="o">=</span>d6f6a0fe-5811-483b-a7a5-a6bf5b6372e5<span class="w"> </span>/boot/efi<span class="w"> </span>vfat<span class="w"> </span>defaults<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+/dev/mapper/mpatha<span class="w"> </span>/mnt/multipath<span class="w"> </span>ext4<span class="w"> </span>_netdev<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+<p>After updating this file, run <code>systemctl daemon-reload</code></p>
+<p>Next, lets mount everything in <code>/etc/fstab</code>, using <code>mount -a</code>. After mounting, you should see the new LUN/Partition is now mounted.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>mount<span class="w"> </span>-a
+root@network-test:~#<span class="w"> </span>lsblk
+NAME<span class="w">     </span>MAJ:MIN<span class="w"> </span>RM<span class="w">  </span>SIZE<span class="w"> </span>RO<span class="w"> </span>TYPE<span class="w">  </span>MOUNTPOINTS
+sda<span class="w">        </span><span class="m">8</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath<span class="w"> </span>/mnt/multipath
+sdb<span class="w">        </span><span class="m">8</span>:16<span class="w">   </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath<span class="w"> </span>/mnt/multipath
+sr0<span class="w">       </span><span class="m">11</span>:0<span class="w">    </span><span class="m">1</span><span class="w">    </span>4M<span class="w">  </span><span class="m">0</span><span class="w"> </span>rom
+vda<span class="w">      </span><span class="m">254</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>16G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─vda1<span class="w">   </span><span class="m">254</span>:1<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">15</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/
+├─vda14<span class="w">  </span><span class="m">254</span>:14<span class="w">   </span><span class="m">0</span><span class="w">    </span>3M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─vda15<span class="w">  </span><span class="m">254</span>:15<span class="w">   </span><span class="m">0</span><span class="w">  </span>124M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/boot/efi
+</code></pre></div>
+<p>Thats, mostly it. I would recommend a reboot at this point, just to ensure it automatically remounts as expected.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~# reboot
+</code></pre></div>
+<p>If, after a reboot, <code>lsblk</code> does not show the partitions, please address the issue. The "Configure iSCSId to start at boot" section above configures this.</p>
+<p>You can use <code>iscsiadm -m session -o show</code> to determine if you have active sessions.</p>
+<p>If- after your reboot- everything looks like this, you are good to go!</p>
+<div class="highlight"><pre><span></span><code>Last<span class="w"> </span>login:<span class="w"> </span>Tue<span class="w"> </span>Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">02</span>:30:50<span class="w"> </span><span class="m">2024</span><span class="w"> </span>from<span class="w"> </span><span class="m">10</span>.100.64.2
+root@network-test:~#<span class="w"> </span>lsblk
+NAME<span class="w">     </span>MAJ:MIN<span class="w"> </span>RM<span class="w">  </span>SIZE<span class="w"> </span>RO<span class="w"> </span>TYPE<span class="w">  </span>MOUNTPOINTS
+sda<span class="w">        </span><span class="m">8</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath<span class="w"> </span>/mnt/multipath
+sdb<span class="w">        </span><span class="m">8</span>:16<span class="w">   </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+└─mpatha<span class="w"> </span><span class="m">253</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>20G<span class="w">  </span><span class="m">0</span><span class="w"> </span>mpath<span class="w"> </span>/mnt/multipath
+sr0<span class="w">       </span><span class="m">11</span>:0<span class="w">    </span><span class="m">1</span><span class="w">    </span>4M<span class="w">  </span><span class="m">0</span><span class="w"> </span>rom
+vda<span class="w">      </span><span class="m">254</span>:0<span class="w">    </span><span class="m">0</span><span class="w">   </span>16G<span class="w">  </span><span class="m">0</span><span class="w"> </span>disk
+├─vda1<span class="w">   </span><span class="m">254</span>:1<span class="w">    </span><span class="m">0</span><span class="w"> </span><span class="m">15</span>.9G<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/
+├─vda14<span class="w">  </span><span class="m">254</span>:14<span class="w">   </span><span class="m">0</span><span class="w">    </span>3M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part
+└─vda15<span class="w">  </span><span class="m">254</span>:15<span class="w">   </span><span class="m">0</span><span class="w">  </span>124M<span class="w">  </span><span class="m">0</span><span class="w"> </span>part<span class="w">  </span>/boot/efi
+root@network-test:~#<span class="w"> </span>iscsiadm<span class="w"> </span>-m<span class="w"> </span>session<span class="w"> </span>-o<span class="w"> </span>show
+tcp:<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="m">10</span>.100.4.25:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.PBS.8e935d09c70<span class="w"> </span><span class="o">(</span>non-flash<span class="o">)</span>
+tcp:<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span><span class="m">10</span>.100.4.26:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.PBS.8e935d09c70<span class="w"> </span><span class="o">(</span>non-flash<span class="o">)</span>
+tcp:<span class="w"> </span><span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span><span class="m">10</span>.100.4.26:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span><span class="o">(</span>non-flash<span class="o">)</span>
+tcp:<span class="w"> </span><span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span><span class="m">10</span>.100.4.25:3260,1<span class="w"> </span>iqn.2000-01.com.synology:NAS-2.TestTarget.8e935d09c70<span class="w"> </span><span class="o">(</span>non-flash<span class="o">)</span>
+root@network-test:~#<span class="w"> </span>multipath<span class="w"> </span>-ll
+mpatha<span class="w"> </span><span class="o">(</span>3600140551aa592fd025ed4ef1da523db<span class="o">)</span><span class="w"> </span>dm-0<span class="w"> </span>SYNOLOGY,Storage
+<span class="nv">size</span><span class="o">=</span>20G<span class="w"> </span><span class="nv">features</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="w"> </span><span class="nv">hwhandler</span><span class="o">=</span><span class="s1">&#39;1 alua&#39;</span><span class="w"> </span><span class="nv">wp</span><span class="o">=</span>rw
+<span class="p">|</span>-+-<span class="w"> </span><span class="nv">policy</span><span class="o">=</span><span class="s1">&#39;service-time 0&#39;</span><span class="w"> </span><span class="nv">prio</span><span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="nv">status</span><span class="o">=</span>active
+<span class="p">|</span><span class="w"> </span><span class="sb">`</span>-<span class="w"> </span><span class="m">4</span>:0:0:1<span class="w"> </span>sda<span class="w"> </span><span class="m">8</span>:0<span class="w">  </span>active<span class="w"> </span>ready<span class="w"> </span>running
+<span class="sb">`</span>-+-<span class="w"> </span><span class="nv">policy</span><span class="o">=</span><span class="s1">&#39;service-time 0&#39;</span><span class="w"> </span><span class="nv">prio</span><span class="o">=</span><span class="m">50</span><span class="w"> </span><span class="nv">status</span><span class="o">=</span>enabled
+<span class="w">  </span><span class="sb">`</span>-<span class="w"> </span><span class="m">5</span>:0:0:1<span class="w"> </span>sdb<span class="w"> </span><span class="m">8</span>:16<span class="w"> </span>active<span class="w"> </span>ready<span class="w"> </span>running
+root@network-test:~#
+</code></pre></div>
+<h4 id="performance-testing">Performance Testing<a class="headerlink" href="#performance-testing" title="Permanent link">&para;</a></h4>
+<p>A quick performance test with <code>fio</code></p>
+<p>Command Used: <code>fio --name=seq_read_test --directory=/mnt/multipath --rw=read --bs=1M --size=1G --numjobs=1 --time_based --runtime=60 --group_reporting --ioengine=libaio --direct=1</code></p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>fio
+Reading<span class="w"> </span>package<span class="w"> </span>lists...<span class="w"> </span>Done
+Building<span class="w"> </span>dependency<span class="w"> </span>tree...<span class="w"> </span>Done
+Reading<span class="w"> </span>state<span class="w"> </span>information...<span class="w"> </span>Done
+fio<span class="w"> </span>is<span class="w"> </span>already<span class="w"> </span>the<span class="w"> </span>newest<span class="w"> </span>version<span class="w"> </span><span class="o">(</span><span class="m">3</span>.33-3<span class="o">)</span>.
+<span class="m">0</span><span class="w"> </span>upgraded,<span class="w"> </span><span class="m">0</span><span class="w"> </span>newly<span class="w"> </span>installed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>and<span class="w"> </span><span class="m">0</span><span class="w"> </span>not<span class="w"> </span>upgraded.
+root@network-test:~#<span class="w"> </span>fio<span class="w"> </span>--name<span class="o">=</span>seq_read_test<span class="w"> </span>--directory<span class="o">=</span>/mnt/multipath<span class="w"> </span>--rw<span class="o">=</span><span class="nb">read</span><span class="w"> </span>--bs<span class="o">=</span>1M<span class="w"> </span>--size<span class="o">=</span>1G<span class="w"> </span>--numjobs<span class="o">=</span><span class="m">1</span><span class="w"> </span>--time_based<span class="w"> </span>--runtime<span class="o">=</span><span class="m">60</span><span class="w"> </span>--group_reporting<span class="w"> </span>--ioengine<span class="o">=</span>libaio<span class="w"> </span>--direct<span class="o">=</span><span class="m">1</span>
+seq_read_test:<span class="w"> </span><span class="o">(</span><span class="nv">g</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>:<span class="w"> </span><span class="nv">rw</span><span class="o">=</span>read,<span class="w"> </span><span class="nv">bs</span><span class="o">=(</span>R<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="o">(</span>W<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="o">(</span>T<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="nv">ioengine</span><span class="o">=</span>libaio,<span class="w"> </span><span class="nv">iodepth</span><span class="o">=</span><span class="m">1</span>
+fio-3.33
+Starting<span class="w"> </span><span class="m">1</span><span class="w"> </span>process
+seq_read_test:<span class="w"> </span>Laying<span class="w"> </span>out<span class="w"> </span>IO<span class="w"> </span>file<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>/<span class="w"> </span>1024MiB<span class="o">)</span>
+Jobs:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">(</span><span class="nv">f</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>:<span class="w"> </span><span class="o">[</span>f<span class="o">(</span><span class="m">1</span><span class="o">)][</span><span class="m">100</span>.0%<span class="o">][</span><span class="nv">r</span><span class="o">=</span>101MiB/s<span class="o">][</span><span class="nv">r</span><span class="o">=</span><span class="m">101</span><span class="w"> </span>IOPS<span class="o">][</span>eta<span class="w"> </span>00m:00s<span class="o">]</span>
+seq_read_test:<span class="w"> </span><span class="o">(</span><span class="nv">groupid</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">jobs</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span><span class="nv">err</span><span class="o">=</span><span class="w"> </span><span class="m">0</span>:<span class="w"> </span><span class="nv">pid</span><span class="o">=</span><span class="m">610</span>:<span class="w"> </span>Tue<span class="w"> </span>Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">02</span>:40:09<span class="w"> </span><span class="m">2024</span>
+<span class="w">  </span>read:<span class="w"> </span><span class="nv">IOPS</span><span class="o">=</span><span class="m">101</span>,<span class="w"> </span><span class="nv">BW</span><span class="o">=</span>102MiB/s<span class="w"> </span><span class="o">(</span>107MB/s<span class="o">)(</span>6114MiB/60007msec<span class="o">)</span>
+<span class="w">    </span>slat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">34</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">467</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">67</span>.39,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">30</span>.11
+<span class="w">    </span>clat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">9459</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">13308</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">9742</span>.25,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">184</span>.59
+<span class="w">     </span>lat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">9516</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">13358</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">9809</span>.64,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">201</span>.90
+<span class="w">    </span>clat<span class="w"> </span>percentiles<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:
+<span class="w">     </span><span class="p">|</span><span class="w">  </span><span class="m">1</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9503</span><span class="o">]</span>,<span class="w">  </span><span class="m">5</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9634</span><span class="o">]</span>,<span class="w"> </span><span class="m">10</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9634</span><span class="o">]</span>,<span class="w"> </span><span class="m">20</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9634</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">30</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9634</span><span class="o">]</span>,<span class="w"> </span><span class="m">40</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9634</span><span class="o">]</span>,<span class="w"> </span><span class="m">50</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9765</span><span class="o">]</span>,<span class="w"> </span><span class="m">60</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9765</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">70</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9765</span><span class="o">]</span>,<span class="w"> </span><span class="m">80</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9765</span><span class="o">]</span>,<span class="w"> </span><span class="m">90</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9896</span><span class="o">]</span>,<span class="w"> </span><span class="m">95</span>.00th<span class="o">=[</span><span class="m">10028</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">99</span>.00th<span class="o">=[</span><span class="m">10421</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.50th<span class="o">=[</span><span class="m">10683</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.90th<span class="o">=[</span><span class="m">11731</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.95th<span class="o">=[</span><span class="m">12256</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">99</span>.99th<span class="o">=[</span><span class="m">13304</span><span class="o">]</span>
+<span class="w">   </span>bw<span class="w"> </span><span class="o">(</span><span class="w">  </span>KiB/s<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">100352</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">106709</span>,<span class="w"> </span><span class="nv">per</span><span class="o">=</span><span class="m">100</span>.00%,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">104412</span>.78,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">1260</span>.34,<span class="w"> </span><span class="nv">samples</span><span class="o">=</span><span class="m">119</span>
+<span class="w">   </span>iops<span class="w">        </span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="w">   </span><span class="m">98</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="w">  </span><span class="m">104</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">101</span>.92,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.23,<span class="w"> </span><span class="nv">samples</span><span class="o">=</span><span class="m">119</span>
+<span class="w">  </span>lat<span class="w"> </span><span class="o">(</span>msec<span class="o">)</span><span class="w">   </span>:<span class="w"> </span><span class="nv">10</span><span class="o">=</span><span class="m">94</span>.29%,<span class="w"> </span><span class="nv">20</span><span class="o">=</span><span class="m">5</span>.71%
+<span class="w">  </span>cpu<span class="w">          </span>:<span class="w"> </span><span class="nv">usr</span><span class="o">=</span><span class="m">0</span>.14%,<span class="w"> </span><span class="nv">sys</span><span class="o">=</span><span class="m">0</span>.87%,<span class="w"> </span><span class="nv">ctx</span><span class="o">=</span><span class="m">6141</span>,<span class="w"> </span><span class="nv">majf</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">minf</span><span class="o">=</span><span class="m">266</span>
+<span class="w">  </span>IO<span class="w"> </span>depths<span class="w">    </span>:<span class="w"> </span><span class="nv">1</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">2</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span>submit<span class="w">    </span>:<span class="w"> </span><span class="nv">0</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span><span class="nb">complete</span><span class="w">  </span>:<span class="w"> </span><span class="nv">0</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span>issued<span class="w"> </span>rwts:<span class="w"> </span><span class="nv">total</span><span class="o">=</span><span class="m">6114</span>,0,0,0<span class="w"> </span><span class="nv">short</span><span class="o">=</span><span class="m">0</span>,0,0,0<span class="w"> </span><span class="nv">dropped</span><span class="o">=</span><span class="m">0</span>,0,0,0
+<span class="w">     </span>latency<span class="w">   </span>:<span class="w"> </span><span class="nv">target</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">window</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">percentile</span><span class="o">=</span><span class="m">100</span>.00%,<span class="w"> </span><span class="nv">depth</span><span class="o">=</span><span class="m">1</span>
+
+Run<span class="w"> </span>status<span class="w"> </span>group<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>all<span class="w"> </span><span class="nb">jobs</span><span class="o">)</span>:
+<span class="w">   </span>READ:<span class="w"> </span><span class="nv">bw</span><span class="o">=</span>102MiB/s<span class="w"> </span><span class="o">(</span>107MB/s<span class="o">)</span>,<span class="w"> </span>102MiB/s-102MiB/s<span class="w"> </span><span class="o">(</span>107MB/s-107MB/s<span class="o">)</span>,<span class="w"> </span><span class="nv">io</span><span class="o">=</span>6114MiB<span class="w"> </span><span class="o">(</span>6411MB<span class="o">)</span>,<span class="w"> </span><span class="nv">run</span><span class="o">=</span><span class="m">60007</span>-60007msec
+
+Disk<span class="w"> </span>stats<span class="w"> </span><span class="o">(</span>read/write<span class="o">)</span>:
+<span class="w">    </span>dm-0:<span class="w"> </span><span class="nv">ios</span><span class="o">=</span><span class="m">6090</span>/4,<span class="w"> </span><span class="nv">merge</span><span class="o">=</span><span class="m">0</span>/1,<span class="w"> </span><span class="nv">ticks</span><span class="o">=</span><span class="m">59297</span>/16,<span class="w"> </span><span class="nv">in_queue</span><span class="o">=</span><span class="m">59322</span>,<span class="w"> </span><span class="nv">util</span><span class="o">=</span><span class="m">98</span>.96%,<span class="w"> </span><span class="nv">aggrios</span><span class="o">=</span><span class="m">3057</span>/2,<span class="w"> </span><span class="nv">aggrmerge</span><span class="o">=</span><span class="m">0</span>/0,<span class="w"> </span><span class="nv">aggrticks</span><span class="o">=</span><span class="m">29731</span>/3,<span class="w"> </span><span class="nv">aggrin_queue</span><span class="o">=</span><span class="m">29734</span>,<span class="w"> </span><span class="nv">aggrutil</span><span class="o">=</span><span class="m">98</span>.60%
+<span class="w">  </span>sdb:<span class="w"> </span><span class="nv">ios</span><span class="o">=</span><span class="m">0</span>/0,<span class="w"> </span><span class="nv">merge</span><span class="o">=</span><span class="m">0</span>/0,<span class="w"> </span><span class="nv">ticks</span><span class="o">=</span><span class="m">0</span>/0,<span class="w"> </span><span class="nv">in_queue</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">util</span><span class="o">=</span><span class="m">0</span>.00%
+<span class="w">  </span>sda:<span class="w"> </span><span class="nv">ios</span><span class="o">=</span><span class="m">6115</span>/4,<span class="w"> </span><span class="nv">merge</span><span class="o">=</span><span class="m">0</span>/0,<span class="w"> </span><span class="nv">ticks</span><span class="o">=</span><span class="m">59462</span>/7,<span class="w"> </span><span class="nv">in_queue</span><span class="o">=</span><span class="m">59468</span>,<span class="w"> </span><span class="nv">util</span><span class="o">=</span><span class="m">98</span>.60%
+</code></pre></div>
+<p>102MiB/s, that is only a single connection! If your results resemble this, you did not correctly configure <code>/etc/multipath.conf</code></p>
+<p>In my case, it was because I forgot to add the <code>multipaths</code> section to <code>/etc/multipath.conf</code>. </p>
+<p>The benefit of reading my post- I have already went back up and added all of the wonderful steps that were missing before you got a chance to read it!</p>
+<p>AFTER fixing <code>/etc/multipath.conf</code>, a <strong>VERY</strong> respectable 240MB/s. This is perfectly saturating both gigabit ports.</p>
+<div class="highlight"><pre><span></span><code>root@network-test:~#<span class="w"> </span>fio<span class="w"> </span>--name<span class="o">=</span>seq_read_test<span class="w"> </span>--directory<span class="o">=</span>/mnt/multipath<span class="w"> </span>--rw<span class="o">=</span><span class="nb">read</span><span class="w"> </span>--bs<span class="o">=</span>1M<span class="w"> </span>--size<span class="o">=</span>1G<span class="w"> </span>--numjobs<span class="o">=</span><span class="m">1</span><span class="w"> </span>--time_based<span class="w"> </span>--runtime<span class="o">=</span><span class="m">60</span><span class="w"> </span>--group_reporting<span class="w"> </span>--ioengine<span class="o">=</span>libaio<span class="w"> </span>--direct<span class="o">=</span><span class="m">1</span>
+seq_read_test:<span class="w"> </span><span class="o">(</span><span class="nv">g</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>:<span class="w"> </span><span class="nv">rw</span><span class="o">=</span>read,<span class="w"> </span><span class="nv">bs</span><span class="o">=(</span>R<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="o">(</span>W<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="o">(</span>T<span class="o">)</span><span class="w"> </span>1024KiB-1024KiB,<span class="w"> </span><span class="nv">ioengine</span><span class="o">=</span>libaio,<span class="w"> </span><span class="nv">iodepth</span><span class="o">=</span><span class="m">1</span>
+fio-3.33
+Starting<span class="w"> </span><span class="m">1</span><span class="w"> </span>process
+seq_read_test:<span class="w"> </span>Laying<span class="w"> </span>out<span class="w"> </span>IO<span class="w"> </span>file<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>/<span class="w"> </span>1024MiB<span class="o">)</span>
+Jobs:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">(</span><span class="nv">f</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span><span class="o">[</span>R<span class="o">(</span><span class="m">1</span><span class="o">)][</span><span class="m">100</span>.0%<span class="o">][</span><span class="nv">r</span><span class="o">=</span>266MiB/s<span class="o">][</span><span class="nv">r</span><span class="o">=</span><span class="m">266</span><span class="w"> </span>IOPS<span class="o">][</span>eta<span class="w"> </span>00m:00s<span class="o">]</span>
+seq_read_test:<span class="w"> </span><span class="o">(</span><span class="nv">groupid</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">jobs</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>:<span class="w"> </span><span class="nv">err</span><span class="o">=</span><span class="w"> </span><span class="m">0</span>:<span class="w"> </span><span class="nv">pid</span><span class="o">=</span><span class="m">577</span>:<span class="w"> </span>Tue<span class="w"> </span>Jul<span class="w"> </span><span class="m">23</span><span class="w"> </span><span class="m">02</span>:50:39<span class="w"> </span><span class="m">2024</span>
+<span class="w">  </span>read:<span class="w"> </span><span class="nv">IOPS</span><span class="o">=</span><span class="m">228</span>,<span class="w"> </span><span class="nv">BW</span><span class="o">=</span>229MiB/s<span class="w"> </span><span class="o">(</span>240MB/s<span class="o">)(</span><span class="m">13</span>.4GiB/60003msec<span class="o">)</span>
+<span class="w">    </span>slat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">25</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">1448</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">66</span>.48,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">47</span>.39
+<span class="w">    </span>clat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">2458</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">50851</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">4302</span>.45,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">2230</span>.52
+<span class="w">     </span>lat<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">2485</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">50990</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">4368</span>.93,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">2245</span>.90
+<span class="w">    </span>clat<span class="w"> </span>percentiles<span class="w"> </span><span class="o">(</span>usec<span class="o">)</span>:
+<span class="w">     </span><span class="p">|</span><span class="w">  </span><span class="m">1</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">2802</span><span class="o">]</span>,<span class="w">  </span><span class="m">5</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">2999</span><span class="o">]</span>,<span class="w"> </span><span class="m">10</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3097</span><span class="o">]</span>,<span class="w"> </span><span class="m">20</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3261</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">30</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3392</span><span class="o">]</span>,<span class="w"> </span><span class="m">40</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3556</span><span class="o">]</span>,<span class="w"> </span><span class="m">50</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3720</span><span class="o">]</span>,<span class="w"> </span><span class="m">60</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">3982</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">70</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">4490</span><span class="o">]</span>,<span class="w"> </span><span class="m">80</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">5080</span><span class="o">]</span>,<span class="w"> </span><span class="m">90</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">5800</span><span class="o">]</span>,<span class="w"> </span><span class="m">95</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">6521</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">99</span>.00th<span class="o">=[</span><span class="w"> </span><span class="m">9765</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.50th<span class="o">=[</span><span class="m">19530</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.90th<span class="o">=[</span><span class="m">34341</span><span class="o">]</span>,<span class="w"> </span><span class="m">99</span>.95th<span class="o">=[</span><span class="m">43254</span><span class="o">]</span>,
+<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">99</span>.99th<span class="o">=[</span><span class="m">50070</span><span class="o">]</span>
+<span class="w">   </span>bw<span class="w"> </span><span class="o">(</span><span class="w">  </span>KiB/s<span class="o">)</span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="m">141312</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="m">292864</span>,<span class="w"> </span><span class="nv">per</span><span class="o">=</span><span class="m">100</span>.00%,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">234281</span>.77,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">35620</span>.16,<span class="w"> </span><span class="nv">samples</span><span class="o">=</span><span class="m">120</span>
+<span class="w">   </span>iops<span class="w">        </span>:<span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="w">  </span><span class="m">138</span>,<span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="w">  </span><span class="m">286</span>,<span class="w"> </span><span class="nv">avg</span><span class="o">=</span><span class="m">228</span>.59,<span class="w"> </span><span class="nv">stdev</span><span class="o">=</span><span class="m">34</span>.78,<span class="w"> </span><span class="nv">samples</span><span class="o">=</span><span class="m">120</span>
+<span class="w">  </span>lat<span class="w"> </span><span class="o">(</span>msec<span class="o">)</span><span class="w">   </span>:<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">60</span>.57%,<span class="w"> </span><span class="nv">10</span><span class="o">=</span><span class="m">38</span>.46%,<span class="w"> </span><span class="nv">20</span><span class="o">=</span><span class="m">0</span>.49%,<span class="w"> </span><span class="nv">50</span><span class="o">=</span><span class="m">0</span>.47%,<span class="w"> </span><span class="nv">100</span><span class="o">=</span><span class="m">0</span>.01%
+<span class="w">  </span>cpu<span class="w">          </span>:<span class="w"> </span><span class="nv">usr</span><span class="o">=</span><span class="m">0</span>.52%,<span class="w"> </span><span class="nv">sys</span><span class="o">=</span><span class="m">2</span>.22%,<span class="w"> </span><span class="nv">ctx</span><span class="o">=</span><span class="m">13754</span>,<span class="w"> </span><span class="nv">majf</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">minf</span><span class="o">=</span><span class="m">267</span>
+<span class="w">  </span>IO<span class="w"> </span>depths<span class="w">    </span>:<span class="w"> </span><span class="nv">1</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">2</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span>submit<span class="w">    </span>:<span class="w"> </span><span class="nv">0</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span><span class="nb">complete</span><span class="w">  </span>:<span class="w"> </span><span class="nv">0</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">4</span><span class="o">=</span><span class="m">100</span>.0%,<span class="w"> </span><span class="nv">8</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">16</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">32</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%,<span class="w"> </span>&gt;<span class="o">=</span><span class="nv">64</span><span class="o">=</span><span class="m">0</span>.0%
+<span class="w">     </span>issued<span class="w"> </span>rwts:<span class="w"> </span><span class="nv">total</span><span class="o">=</span><span class="m">13717</span>,0,0,0<span class="w"> </span><span class="nv">short</span><span class="o">=</span><span class="m">0</span>,0,0,0<span class="w"> </span><span class="nv">dropped</span><span class="o">=</span><span class="m">0</span>,0,0,0
+<span class="w">     </span>latency<span class="w">   </span>:<span class="w"> </span><span class="nv">target</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">window</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">percentile</span><span class="o">=</span><span class="m">100</span>.00%,<span class="w"> </span><span class="nv">depth</span><span class="o">=</span><span class="m">1</span>
+
+Run<span class="w"> </span>status<span class="w"> </span>group<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">(</span>all<span class="w"> </span><span class="nb">jobs</span><span class="o">)</span>:
+<span class="w">   </span>READ:<span class="w"> </span><span class="nv">bw</span><span class="o">=</span>229MiB/s<span class="w"> </span><span class="o">(</span>240MB/s<span class="o">)</span>,<span class="w"> </span>229MiB/s-229MiB/s<span class="w"> </span><span class="o">(</span>240MB/s-240MB/s<span class="o">)</span>,<span class="w"> </span><span class="nv">io</span><span class="o">=</span><span class="m">13</span>.4GiB<span class="w"> </span><span class="o">(</span><span class="m">14</span>.4GB<span class="o">)</span>,<span class="w"> </span><span class="nv">run</span><span class="o">=</span><span class="m">60003</span>-60003msec
+
+Disk<span class="w"> </span>stats<span class="w"> </span><span class="o">(</span>read/write<span class="o">)</span>:
+<span class="w">  </span>vda:<span class="w"> </span><span class="nv">ios</span><span class="o">=</span><span class="m">13803</span>/146,<span class="w"> </span><span class="nv">merge</span><span class="o">=</span><span class="m">0</span>/40,<span class="w"> </span><span class="nv">ticks</span><span class="o">=</span><span class="m">59027</span>/59,<span class="w"> </span><span class="nv">in_queue</span><span class="o">=</span><span class="m">59124</span>,<span class="w"> </span><span class="nv">util</span><span class="o">=</span><span class="m">97</span>.39%
+root@network-test:~#
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Read IOPS</strong></td>
+<td>228</td>
+</tr>
+<tr>
+<td><strong>Read Bandwidth</strong></td>
+<td>229 MiB/s (240 MB/s)</td>
+</tr>
+<tr>
+<td><strong>Total Read</strong></td>
+<td>13.4 GiB (14.4 GB)</td>
+</tr>
+<tr>
+<td><strong>Test Duration</strong></td>
+<td>60003 ms</td>
+</tr>
+<tr>
+<td><strong>Bandwidth (min)</strong></td>
+<td>141312 KiB/s</td>
+</tr>
+<tr>
+<td><strong>Bandwidth (max)</strong></td>
+<td>292864 KiB/s</td>
+</tr>
+<tr>
+<td><strong>Bandwidth (avg)</strong></td>
+<td>234281.77 KiB/s</td>
+</tr>
+<tr>
+<td><strong>Bandwidth (stdev)</strong></td>
+<td>35620.16 KiB/s</td>
+</tr>
+<tr>
+<td><strong>CPU Usage (user)</strong></td>
+<td>0.52%</td>
+</tr>
+<tr>
+<td><strong>CPU Usage (sys)</strong></td>
+<td>2.22%</td>
+</tr>
+<tr>
+<td><strong>Context Switches</strong></td>
+<td>13754</td>
+</tr>
+<tr>
+<td><strong>IO Depth</strong></td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>Disk Utilization</strong></td>
+<td>97.39%</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 XtremeOwnage.com
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs Insiders
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/XtremeOwnageDotCom" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/discord" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.reddit.com/r/HTTP_404_NotFound" target="_blank" rel="noopener" title="www.reddit.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 256C0 114.6 114.6 0 256 0s256 114.6 256 256-114.6 256-256 256H37.1c-13.7 0-20.5-16.5-10.9-26.2L75 437C28.7 390.7 0 326.7 0 256m349.6-102.4c23.6 0 42.7-19.1 42.7-42.7s-19.1-42.7-42.7-42.7c-20.6 0-37.8 14.6-41.8 34-34.5 3.7-61.4 33-61.4 68.4v.2c-37.5 1.6-71.8 12.3-99 29.1-10.1-7.8-22.8-12.5-36.5-12.5-33 0-59.8 26.8-59.8 59.8 0 24 14.1 44.6 34.4 54.1 2 69.4 77.6 125.2 170.6 125.2s168.7-55.9 170.6-125.3c20.2-9.6 34.1-30.2 34.1-54 0-33-26.8-59.8-59.8-59.8-13.7 0-26.3 4.6-36.4 12.4-27.4-17-62.1-27.7-100-29.1v-.2c0-25.4 18.9-46.5 43.4-49.9 4.4 18.8 21.3 32.8 41.5 32.8zm-172.5 93.3c16.7 0 29.5 17.6 28.5 39.3s-13.5 29.6-30.3 29.6-31.4-8.8-30.4-30.5S160.3 247 177 247zm190.1 38.3c1 21.7-13.7 30.5-30.4 30.5s-29.3-7.9-30.3-29.6 11.8-39.3 28.5-39.3 31.2 16.6 32.1 38.3zm-48.1 56.7c-10.3 24.6-34.6 41.9-63 41.9s-52.7-17.3-63-41.9c-1.2-2.9.8-6.2 3.9-6.5 18.4-1.9 38.3-2.9 59.1-2.9s40.7 1 59.1 2.9c3.1.3 5.1 3.6 3.9 6.5"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://static.xtremeownage.com/" target="_blank" rel="noopener" title="static.xtremeownage.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.4c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64h185.3c2.2 20.4 3.3 41.8 3.3 64m28.8-64h123.1c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64m112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6 78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7 10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5 11.6 26 20.9 58.2 27 94.7m-209 0H18.6c30-74.1 93.6-130.9 172-151.6-25.5 34.2-45.3 87.7-55.3 151.6M8.1 192h123.1c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64m186.6 254.6c-11.6-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.6-22.2 40.7-33.5 51.5-11.2 10.7-20.5 13.9-27.8 13.9s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6-78.4-20.7-142-77.5-172-151.6zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6 25.5-34.2 45.2-87.7 55.3-151.6h116.7z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="/feed_rss_created.xml" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64c0-17.7 14.3-32 32-32 229.8 0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7 0 64m0 352a64 64 0 1 1 128 0 64 64 0 1 1-128 0m32-256c159.1 0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7 0-32-14.3-32-32s14.3-32 32-32"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "search.share", "content.footnote.tooltips", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.ad38c271.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.eb438620.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

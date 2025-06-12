@@ -1,0 +1,43 @@
+---
+title: "TrueNAS to Unraid Migration"
+date: 2023-01-23
+categories:
+  - Technology
+tags:
+  - Homelab
+  - Networking
+---
+
+# How to migrate from TrueNAS to Unraid
+
+Step by step directions to export your existing zfs array from TrueNAS, and import into Unraid.
+
+<!-- more -->
+
+## The Process
+
+### Step 1. Create backups
+
+Take a backup of your TrueNAS configuration, and keep somewhere safe. 
+
+### Step 2. Fetch Data
+
+You will likely want...
+
+1. A list of custom users/groups you have added, along with any special attributes.
+2. Take note of any existing NFS/SMB shares you have.
+3. You will need `/etc/exports`, if you would like to present your existing NFS shares, via your existing Zpool. 
+
+
+
+
+
+
+### Re-adding your existing NFS shares.
+
+I wanted to mount my existing zpool, and re-present my NFS shares while data was copying to the new drives. To do this, you will need to...
+
+1. Add the contents of `/etc/exports` from your TrueNAS box, into `/etc/exports` on the Unraid box. 
+2. Reload NFS exports via `exportfs -ra`
+
+Thats, it. At this point, all of your NFS shares are up and working from TrueNAS.
