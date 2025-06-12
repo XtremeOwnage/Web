@@ -9,7 +9,7 @@ tags:
 
 In oct 2024, I built a table out of steel plate, and angle-iron.
 
-![A photo showing the end result.](../2024/Shop-Table/finished.png)
+![A photo showing the end result.](../2024/Shop-Table/finished.webP)
 
 Well, Today, I added a few... changes to this table. I added wheels, and solid tool mounts.
 
@@ -70,37 +70,37 @@ I'm not going to go into super-depth regarding all of the tools used, however, I
 
 First, I needed to cut some plate to bolt the feet to. I dug a piece of steel plate out of the mud, and used it.
 
-![Picture of rusty steel plate, with castor setting on top](./Shop-Table/plate-1.png)
+![Picture of rusty steel plate, with castor setting on top](./Shop-Table/plate-1.webP)
 
 I used my flap disks to remove the rust from the plate, and then traced the outline of the castors using a paint marker.
 
-![Rusty plate cleaned up and sanded down, with outlines traces for the four casters](./Shop-Table/plate-2.png)
+![Rusty plate cleaned up and sanded down, with outlines traces for the four casters](./Shop-Table/plate-2.webP)
 
 With, the plate cleaned up, I used my homemade plasma guide to start cutting each of the pieces out.
 
-![Photo of rusty homemade plasma guide used to cut the feet mounts.](./Shop-Table/plate-3.png)
+![Photo of rusty homemade plasma guide used to cut the feet mounts.](./Shop-Table/plate-3.webP)
 
-![Photo showing half of the pads cut out, using homemade plasma guide](./Shop-Table/plate-4.png)
+![Photo showing half of the pads cut out, using homemade plasma guide](./Shop-Table/plate-4.webP)
 
 And, after a while.... I had 4 flaming hot steel pads ready to go.
 
-![Photo showing the 4 pieces of steel plate sitting in the driveway](./Shop-Table/plate-5.png)
+![Photo showing the 4 pieces of steel plate sitting in the driveway](./Shop-Table/plate-5.webP)
 
 Not pictured- I used my spring-loaded center punch to mark where I needed to drill the holes to mount the feet.
 
 After marking each of the plates, I brought them over to the drill press and started drilling out the holes.
 
-![Photo showing drill press used to drill holes in plate](./Shop-Table/plate-6.png)
+![Photo showing drill press used to drill holes in plate](./Shop-Table/plate-6.webP)
 
 Note- the oil can. Keep your drill bits cool and lubricated, and they will last a lot longer.
 
 Next, I welded the feet onto the table. E-7018 was used here.
 
-![Picture showing the pad welded to the table's leg, and the caster mounted](./Shop-Table/feet-1.png)
+![Picture showing the pad welded to the table's leg, and the caster mounted](./Shop-Table/feet-1.webP)
 
 And.... kept welding.... until all four pads were securely attached.
 
-![In this photo, all four pads are welded on, with two of the casters mounted](./Shop-Table/feet-2.png)
+![In this photo, all four pads are welded on, with two of the casters mounted](./Shop-Table/feet-2.webP)
 
 There SHOULD be a finished image here, However, I originally did not plan on writing a blog post for upgrades to my shop table, or even building the shop table.
 
@@ -118,7 +118,7 @@ Then- I measured a section for the hitch, and cut it out using the plasma torch.
 
 Here is a photo showing the hitch test-fitted. 
 
-![Vertical receiver hitch test fit](./Shop-Table/v-mount-1.png)
+![Vertical receiver hitch test fit](./Shop-Table/v-mount-1.webP)
 
 The piece of rusty tube here was used to level the mount. 
 
@@ -126,7 +126,7 @@ The table was completely leveled earlier (not pictured), and then I added the pi
 
 Next, I welded the hitch into plate.
 
-![Vertical hitch welded into plate](./Shop-Table/v-mount-2.png)
+![Vertical hitch welded into plate](./Shop-Table/v-mount-2.webP)
 
 As a note, you can see two of my magnetic levels in this photo. I have a total of four of these.
 
@@ -136,7 +136,7 @@ The hammer seen, is a [2lb Crescent Engineer Hammer](https://www.crescenttool.co
 
 Finally, after a bit more grinding and sanding, I added a thin coat of paint.
 
-![New vertical tool post finished](./Shop-Table/v-mount-3.png)
+![New vertical tool post finished](./Shop-Table/v-mount-3.webP)
 
 ## Adapting vise to vertical mount
 
@@ -152,65 +152,65 @@ Sadly- I did not have a before picture... but, I will note, I had no idea it was
 
 So- I used my pressure washer to blast most of the grime off.
 
-![The new vise after being pressure washed](./Shop-Table/vise-1.png)
+![The new vise after being pressure washed](./Shop-Table/vise-1.webP)
 
 I then decided to fully disassemble the vise, clean it out, and re-grease it.
 
-![After removing the claw from the vise- the inside was pretty nasty still](./Shop-Table/vise-2.png)
+![After removing the claw from the vise- the inside was pretty nasty still](./Shop-Table/vise-2.webP)
 
 One interesting feature about this vise- It had a hardened steel "top" running full length.
 
 This- feature will come in quite handy for a few of my projects.
 
-![Photo showing full-length hardened steel top](./Shop-Table/vise-3.png)
+![Photo showing full-length hardened steel top](./Shop-Table/vise-3.webP)
 
 After fully disassembling, everything was again pressure washed, and left to dry in the sun.
 
-![Photo showing vise completely disassembled, and cleaned](./Shop-Table/vise-4.png)
+![Photo showing vise completely disassembled, and cleaned](./Shop-Table/vise-4.webP)
 
-![Another angle](./Shop-Table/vise-5.png)
+![Another angle](./Shop-Table/vise-5.webP)
 
 I did, find the bolt which holds the vise nut in plate, was compromised/broken. I replaced this with a new grade 8 bolt.
 
-![Photo showing the broken bolt used to hold the vise nut.](./Shop-Table/vise-6.png)
+![Photo showing the broken bolt used to hold the vise nut.](./Shop-Table/vise-6.webP)
 
 ### Fabricating a vise mount
 
 To make the base plate, I used the same rusty piece of plate I pulled out the mud earlier that day. I traced an outline of the vises base onto it using the paint marker.
 
-![Outline of the vise's base traced onto rusty plate](./Shop-Table/vise-mount-1.png)
+![Outline of the vise's base traced onto rusty plate](./Shop-Table/vise-mount-1.webP)
 
 Next, I used my plasma cutter to cut the plate.
 
-![The plate metal, with the outline of the vise cut out](./Shop-Table/vise-mount-2.png)
+![The plate metal, with the outline of the vise cut out](./Shop-Table/vise-mount-2.webP)
 
 Afterwards, I did a bit of basic grinding and smoothing, and put the vise's base onto the plate.
 
-![The base of the vise setting on the new piece of plate](./Shop-Table/vise-mount-3.png)
+![The base of the vise setting on the new piece of plate](./Shop-Table/vise-mount-3.webP)
 
 Not pictured- I used my spring-loaded center punch to mark where I needed to drill the holes.
 
 Since.... the plate did not exactly fit the cross-slide vise on my drill press, I used clamps to hold it onto a piece of wood while drilling. Again, make sure to keep those drill bits lubed up!
 
-![Photo showing the holes being drilled for the vise base plate](./Shop-Table/vise-mount-4.png)
+![Photo showing the holes being drilled for the vise base plate](./Shop-Table/vise-mount-4.webP)
 
 With the plate drilled, I test-fitted a piece of square tubing, and slide it into the table mount.
 
-![The plate with holes drilled, with a piece of square tubing, being test fit into the new mount](./Shop-Table/vise-mount-5.png)
+![The plate with holes drilled, with a piece of square tubing, being test fit into the new mount](./Shop-Table/vise-mount-5.webP)
 
 And, a quick test fit.
 
-![Photo showing the vise being test-fit onto the new mounting system](./Shop-Table/vise-mount-6.png)  
+![Photo showing the vise being test-fit onto the new mounting system](./Shop-Table/vise-mount-6.webP)  
 
 ### Finishing the Vise Mount
 
 Next up, I ran a weld around the inside of the plate to join the base to the square tubing
 
-![Base plate with square tubing welded in the center](./Shop-Table/vf-1.png)
+![Base plate with square tubing welded in the center](./Shop-Table/vf-1.webP)
 
 I DID need the vise to sit flush on top of the table. While, two of the nuts/bolts wouldn't interfere, the third would. 
 
-![Photo showing the plate mounted to the tube, installed in the vertical post.](./Shop-Table/vf-2.png)
+![Photo showing the plate mounted to the tube, installed in the vertical post.](./Shop-Table/vf-2.webP)
 
 To, work around this, I decided to weld studs into the plate to ensure there would not be interference.
 
@@ -220,27 +220,27 @@ I then, cut the head off of the bolts, leaving just a threaded insert. I used a 
 
 The nuts / thread were installed onto the vise, and the vise was clamped to the base-plate before welding in the studs.
 
-![Photo showing the studs after being welded](./Shop-Table/vf-3.png)
+![Photo showing the studs after being welded](./Shop-Table/vf-3.webP)
 
 After welding, I used flap disks to grind down the welds to a flat finish.
 
 Not pictured- I also ran a bit of weld on the bottom side of the plate. I was careful to not go overly thick here, as it may cause interference issues.
 
-![PHoto showing the bottom of the mounting plate after sanding and grinding everything flat](./Shop-Table/vf-4.png)
+![PHoto showing the bottom of the mounting plate after sanding and grinding everything flat](./Shop-Table/vf-4.webP)
 
 Here is the top side of the mounting plate. 
 
-![Photo showing the top of the vise mounting plate](./Shop-Table/vf-5.png)
+![Photo showing the top of the vise mounting plate](./Shop-Table/vf-5.webP)
 
 I gave the mount a quick coat of spray paint.
 
-![The vise mount with a coating of spray paint](./Shop-Table/vf-6.png)
+![The vise mount with a coating of spray paint](./Shop-Table/vf-6.webP)
 
 At this point, the vise mount is basically completed.
 
 Here, is a photo showing it laying on the ground.
 
-![Picture of the finished vise assembly laying on the ground](./Shop-Table/vf-7.png)
+![Picture of the finished vise assembly laying on the ground](./Shop-Table/vf-7.webP)
 
 ### Adding set screw
 
@@ -248,7 +248,7 @@ I did notice, there was a bit of wobble from the receiver hitch. I did want to a
 
 To make this, I used a piece of rusty rebar, along with threaded rod (a bolt with the head chopped off), and a nut.
 
-![A piece of rebar sitting on a threaded rod, mounted in the vise](./Shop-Table/ss-1.png)
+![A piece of rebar sitting on a threaded rod, mounted in the vise](./Shop-Table/ss-1.webP)
 
 The rebar was welded to the threaded rod.
 
@@ -256,15 +256,15 @@ The threaded rod was sized so that it could be easily turned.
 
 Here is the temporary mock up, before welding.
 
-![New set-screw mocked up](./Shop-Table/ss-2.png)
+![New set-screw mocked up](./Shop-Table/ss-2.webP)
 
 For mocking this, I used an additional nut inside of the hitch to hold everything steady.
 
-![Top-down view of the set-screw assembly mocked up](./Shop-Table/ss-3.png)
+![Top-down view of the set-screw assembly mocked up](./Shop-Table/ss-3.webP)
 
 And, finally, the nut was welded onto the receiver hitch, and everything was tightened up, and given a coating of black rust-paint.
 
-![Finished set screw assembly](./Shop-Table/ss-4.png)
+![Finished set screw assembly](./Shop-Table/ss-4.webP)
 
 While this was a very simple solution, I can confirm, it removed ALL of the wobble from the vise mount.
 
@@ -280,11 +280,11 @@ With my 2nd receiver hitch, I decided to mount it horizontal under the table top
 
 I used my paint marker to trace lines where to cut.
 
-![Mocking up the position of the horizontal mount.](./Shop-Table/hm-1.png)
+![Mocking up the position of the horizontal mount.](./Shop-Table/hm-1.webP)
 
 And, with the angle-iron cut, the mount fits quite nicely.
 
-![Angle iron cut from table, mount mocked into place](./Shop-Table/hm-2.png)
+![Angle iron cut from table, mount mocked into place](./Shop-Table/hm-2.webP)
 
 Not pictured- The table was turned upside down, and the mount was welded into place.
 
@@ -296,43 +296,43 @@ Since the horizontal mount was now welded in, the next task was to develop a mou
 
 I decided to use a piece of 1-ft plate for the base. The same square tube as earlier will be used as well.
 
-![Photo showing the bench grinder sitting on top of the place used to make its base](./Shop-Table/bg-1.png)
+![Photo showing the bench grinder sitting on top of the place used to make its base](./Shop-Table/bg-1.webP)
 
 I disassembled the grinder, to remove the base. With the base removed, I was able to use my spring-loaded center-punch to mark where to drill holes.
 
-![Photo showing center punch, being used to mark the holes](./Shop-Table/bg-2.png)
+![Photo showing center punch, being used to mark the holes](./Shop-Table/bg-2.webP)
 
 (Not Pictured), After marking the holes, The holes were drilled, and the base was mounted to the plate.
 
-![The base of the bench grinder bolted to the plate](./Shop-Table/bg-3.png)
+![The base of the bench grinder bolted to the plate](./Shop-Table/bg-3.webP)
 
 Next, I laid the plate onto the square tube, to start mocking up a good position for it.
 
 The bench grinder is NOT flush against the table by design. This allows the cord to more gracefully come down.
 
-![Photo showing the grinders position being mocked up](./Shop-Table/bg-4.png)
+![Photo showing the grinders position being mocked up](./Shop-Table/bg-4.webP)
 
 The grinders base was unbolted, and then a line was drawn where to cut the square tubing.
 
-![With the base of the grinder removed, A line was drawn where to cut the square tubing](./Shop-Table/bg-5.png)
+![With the base of the grinder removed, A line was drawn where to cut the square tubing](./Shop-Table/bg-5.webP)
 
 The square tubing was cut using my chop saw. I also used the chopsaw to clean up the edges of the plate slightly.
 
-![Plate slightly cleaned up, square tube cut. Everything ready for welding](./Shop-Table/bg-6.png)
+![Plate slightly cleaned up, square tube cut. Everything ready for welding](./Shop-Table/bg-6.webP)
 
 After, everything was welded together, and given a coating of black rustoleam
 
-![Photo of bench grinder mount, welding done, with coat of black paint.](./Shop-Table/bg-7.png)
+![Photo of bench grinder mount, welding done, with coat of black paint.](./Shop-Table/bg-7.webP)
 
 And, voila. My bench grinder is now securely mounted to the table.
 
 (Also- not pictured- A hole was drilled through the square tubing, allowing a bolt to hold the square tube to the receiver hitch.)
 
-![Photo showing the bench grinder successfully mounted.](./Shop-Table/bg-8.png)
+![Photo showing the bench grinder successfully mounted.](./Shop-Table/bg-8.webP)
 
 Here is a photo of the backside. Note the gap, which allows the cord room.
 
-![Photo showing the rear of the bench grinder mounted](./Shop-Table/bg-9.png)
+![Photo showing the rear of the bench grinder mounted](./Shop-Table/bg-9.webP)
 
 ## Conclusion
 

@@ -11,7 +11,7 @@ Part one of my shop-table project. This occurred in Oct 2024.
 
 Here is the end result. A simple, sturdy table.
 
-![A photo showing the end result.](./Shop-Table/finished.png)
+![A photo showing the end result.](./Shop-Table/finished.webP)
 
 <!-- more -->
 
@@ -23,23 +23,23 @@ Occasionally I enjoy going to property auctions. I can generally pick up a good 
 
 One of these auctions, was a farm, where I obtained a decent trailer full of metal scrap, and a few tools.
 
-![Photo showing the trailer leaving the auction full of scrap metal.](./Shop-Table/auction-trailer.png)
+![Photo showing the trailer leaving the auction full of scrap metal.](./Shop-Table/auction-trailer.webP)
 
 There WAS a table auctioned off at the site, however, when its bidding price went above 600$, I stopped bidding. The table was bigger then I was looking for, and required... a forklift to be moved.
 
-![Sturdy steel table being auctioned](./Shop-Table/auction-table.png)
+![Sturdy steel table being auctioned](./Shop-Table/auction-table.webP)
 
 However, I did leave with a healthy assortment of angle-iron, and flat plate.
 
-![Some of the metal I gathered during the auction](./Shop-Table/auction-metal-1.png)
+![Some of the metal I gathered during the auction](./Shop-Table/auction-metal-1.webP)
 
 Here is another view of some of the materials I collected from this auction.
 
-![A photo showing my metal stash in the yard](./Shop-Table/auction-metal-2.png)
+![A photo showing my metal stash in the yard](./Shop-Table/auction-metal-2.webP)
 
 I did also pick up a solid steel I-beam for 15$.
 
-![Picture of the I-beam I acquired at the auction.](./Shop-Table/auction-beam.png)
+![Picture of the I-beam I acquired at the auction.](./Shop-Table/auction-beam.webP)
 
 ### The Goal
 
@@ -91,19 +91,19 @@ I'm not going to go into super-depth regarding all of the tools used, however, I
 
 I started this, by cutting the steel plate into three sections to get my desired length and width.
 
-![Image showing steel plate cut into sections](./Shop-Table/plate-cut.png)
+![Image showing steel plate cut into sections](./Shop-Table/plate-cut.webP)
 
 Since, I knew I had quite a few of these cuts to do, and drawing straight lines is hard, I did fabricate a small.... "guide" for my tig torch.
 
-![Image showing my homemade torch guide](./Shop-Table/tig-guide.png)
+![Image showing my homemade torch guide](./Shop-Table/tig-guide.webP)
 
 More or less, you put the torch in, and slide it against a board or piece of metal. And, you get a straight cut.
 
-![Image showing a line cut into the plate using the homemade torch guide](./Shop-Table/tig-guide-2.png)
+![Image showing a line cut into the plate using the homemade torch guide](./Shop-Table/tig-guide-2.webP)
 
 With, the plate cut, I started building a frame using 1/4" angle-iron.
 
-![Image showing the outer frame, constructed of 1/4" angle-iron](./Shop-Table/frame-1.png)
+![Image showing the outer frame, constructed of 1/4" angle-iron](./Shop-Table/frame-1.webP)
 
 One important detail here- I intended on the flat side of the angle iron to be on the OUTSIDE of the table.
 
@@ -111,21 +111,21 @@ The reason- It makes it much easier to use clamps on the outside perimeter of th
 
 For cutting the angle-iron, I used my chop-saw.
 
-![Photo showing angle-iron being cut with dewalt chop-saw](./Shop-Table/cutting-angle.png)
+![Photo showing angle-iron being cut with dewalt chop-saw](./Shop-Table/cutting-angle.webP)
 
 I did, trim the edges with my torch.
 
 After this was done, I cut a few pieces of angle-iron to make ribs across the middle.
 
-![Image showing angle-iron frame onto of the steel plate, with reinforcing ribs in the middle](./Shop-Table/frame-2.png)
+![Image showing angle-iron frame onto of the steel plate, with reinforcing ribs in the middle](./Shop-Table/frame-2.webP)
 
 Here is a close-up picture of how the edges will be aligned. Nothing has been welded at this point. 
 
-![Closeup image of the frame under the table](./Shop-Table/frame-3.png)
+![Closeup image of the frame under the table](./Shop-Table/frame-3.webP)
 
 With everything cut, at this point, I started welding all of the seams... My welds here, are less then ideal.
 
-![Photo showing my horrible welds](./Shop-Table/welding-1.png)
+![Photo showing my horrible welds](./Shop-Table/welding-1.webP)
 
 !!! warn
     I did- make a critical mistake during this process. 
@@ -136,19 +136,19 @@ Most of the welding was done using 6011/7018 welding electrodes.
 
 For the legs, I used 2 3/8 drill-string. 
 
-![Picture showing the first leg being attached](./Shop-Table/legs-1.png)
+![Picture showing the first leg being attached](./Shop-Table/legs-1.webP)
 
 And, after a bit of leveling, measuring, clamping and welding... I had all four legs attached.
 
-![Photo showing the table, with all four legs welded on.](./Shop-Table/legs-2.png)
+![Photo showing the table, with all four legs welded on.](./Shop-Table/legs-2.webP)
 
 After the welding was done, I used flap-disks and my angle-grinder to smooth out the welds, and remove any remaining rust. I then added a coat of rustoleam rust-reformer primer.
 
-![Photo showing the table with a coat of black primer](./Shop-Table/painted-1.png)
+![Photo showing the table with a coat of black primer](./Shop-Table/painted-1.webP)
 
 And.... after a day of work, I had a functional table.
 
-![A photo showing the end result.](./Shop-Table/finished.png)
+![A photo showing the end result.](./Shop-Table/finished.webP)
 
 ## Next Steps?
 
