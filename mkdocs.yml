@@ -87,6 +87,7 @@ plugins:
         - Home-Automation
         - Home-Improvement
         - Technology
+        - Shop-Talk
         - Solar
       pagination: true
       pagination_per_page: 20
